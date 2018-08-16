@@ -7,7 +7,7 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PrepareUpdateCategoryAdminCommand implements BaseCommand {
+public class PreparationUpdateCategoryAdminCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
 

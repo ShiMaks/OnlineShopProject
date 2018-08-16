@@ -8,7 +8,7 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteCategoryAdminCommand implements BaseCommand {
+public class DeleteCategoryAdminCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
 

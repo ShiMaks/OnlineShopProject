@@ -10,7 +10,7 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class PrepareCategoriesAdminCommand implements BaseCommand {
+public class PreparationCategoriesAdminCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
 

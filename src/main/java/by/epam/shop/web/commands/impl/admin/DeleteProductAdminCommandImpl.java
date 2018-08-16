@@ -8,7 +8,7 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteProductAdminCommand implements BaseCommand {
+public class DeleteProductAdminCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
 

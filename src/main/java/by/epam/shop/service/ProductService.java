@@ -16,4 +16,6 @@ public interface ProductService {
     Product getProduct(int id) throws ServiceException;
 
     List<Product>  getProducts() throws ServiceException;
+
+    List<Product> getProductsByCategory(int idCategory);
 }

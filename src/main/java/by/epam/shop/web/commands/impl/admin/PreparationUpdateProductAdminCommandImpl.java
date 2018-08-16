@@ -10,7 +10,7 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class PrepareUpdateProductAdminCommand implements BaseCommand {
+public class PreparationUpdateProductAdminCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
     private CategoryService categoryService = ServiceFactory.getCategoryService();

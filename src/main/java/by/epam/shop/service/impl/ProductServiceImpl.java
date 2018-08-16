@@ -61,4 +61,11 @@ public class ProductServiceImpl implements ProductService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public List<Product> getProductsByCategory(int idCategory) {
+        return null;
+    }
+
+
 }

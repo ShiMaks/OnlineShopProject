@@ -7,18 +7,17 @@ import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
-public class DisplayCategoryProductsCommandImpl implements BaseCommand {
+public class DisplayingProductInfoCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         //execute parametr check
-        int idCategory = Integer.parseInt(request.getParameter("idCategory"));
-        List<Product> products = productService.getProductsByCategory(idCategory);
-        request.setAttribute("products", products);
+        int idProduct = Integer.parseInt(request.getParameter("idProduct"));
+        Product product = productService.getProduct(idProduct);
+        request.setAttribute("product", product);
         return null;
     }
 }

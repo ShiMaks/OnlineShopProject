@@ -22,7 +22,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
         try (Connection connection = connect.getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_PRODUCT);){
             statement.setString(1, product.getName());
-            statement.setInt(2, product.getIdCatrgory());
+            statement.setInt(2, product.getIdCategory());
             statement.setString(3, product.getDescription());
             statement.setBoolean(3, product.isInStock());
             statement.setInt(3, product.getPrice());
@@ -45,7 +45,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             if(result.next()) {
                 product.setId(result.getInt("ID"));
                 product.setName(result.getString("NAME"));
-                product.setIdCatrgory(result.getInt("ID_CATEGORY"));
+                product.setIdCategory(result.getInt("ID_CATEGORY"));
                 product.setPrice(result.getInt("PRICE"));
                 product.setPicture(result.getString("PICTURE"));
             }
@@ -58,10 +58,10 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     @Override
     public void update(Product product) throws DaoException {
         try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement( UPDATE_PRODUCT);){
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT);){
             statement.setString(1, product.getName());
             statement.setInt(2, product.getPrice());
-            statement.setInt(2, product.getIdCatrgory());
+            statement.setInt(2, product.getIdCategory());
             statement.setString(2, product.getPicture());
             statement.setInt(2, product.getId());
             statement.executeUpdate();

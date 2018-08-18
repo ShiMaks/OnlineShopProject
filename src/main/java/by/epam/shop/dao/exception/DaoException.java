@@ -1,9 +1,10 @@
 package by.epam.shop.dao.exception;
 
 
-import by.epam.shop.web.exception.CommandException;
+import by.epam.shop.service.exception.ServiceException;
 
-public class DaoException extends CommandException {
+
+public class DaoException extends ServiceException {
 
     public  DaoException(){
         super();

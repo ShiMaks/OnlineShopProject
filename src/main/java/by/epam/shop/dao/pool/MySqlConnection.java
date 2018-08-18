@@ -10,7 +10,7 @@ public class MySqlConnection implements AutoCloseable {
 
     public Connection getConnection() throws SQLException {
 
-        String url = "jdbc:mysql://localhost:3306/Shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+        String url = "jdbc:mysql://localhost:3306/shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
         String user = "root";
         String pass = "root";
         String driver = "com.mysql.cj.jdbc.Driver";
@@ -23,8 +23,6 @@ public class MySqlConnection implements AutoCloseable {
             throw new SQLException("Driver not loaded", e);
         } catch (InstantiationException  | IllegalAccessException e) {
             e.printStackTrace();
-            // TODO logging
-            // TODO throw something
         }
         return connect;
     }

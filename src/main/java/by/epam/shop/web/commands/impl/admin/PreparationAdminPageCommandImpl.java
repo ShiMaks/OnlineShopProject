@@ -16,6 +16,6 @@ public class PreparationAdminPageCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
 
-        return null;
+        return "/jsp/admin.jsp";
     }
 }

@@ -16,13 +16,13 @@ public class PreparationProductsAdminCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        List<Product> products;
-        try {
-            products = productService.getProducts();
-            request.setAttribute("productsAdmin", products);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
-        return null;
+//        List<Product> products;
+//        try {
+//            products = productService.getProducts();
+//            request.setAttribute("productsAdmin", products);
+//        } catch (ServiceException e) {
+//            throw new CommandException(e);
+//        }
+        return "/jsp/productsAdmin.jsp";
     }
 }

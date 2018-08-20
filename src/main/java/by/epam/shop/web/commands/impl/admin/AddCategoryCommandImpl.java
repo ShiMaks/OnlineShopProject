@@ -24,6 +24,6 @@ public class AddCategoryCommandImpl implements BaseCommand {
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return null;
+        return "/jsp/categoryAdmin.jsp";
     }
 }

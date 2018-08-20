@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_products">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_categories">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -121,7 +121,7 @@
                 </div>
 
                 <form action="FrontController" method="GET">
-                    <input type="hidden" name="command" value="create_category" />
+                    <input type="hidden" name="command" value="prepare_create_category" />
                     <input type="submit" value="Create Category" class="btn btn-outline btn-default"/>
                 </form>        
 
@@ -143,13 +143,14 @@
                                                     <th>Delete</th>
                                                 </thead>
                                                 <tbody>
+                                                    <c:forEach items="${categoriesAdmin}" var="category" >
                                                     <tr>
-                                                      <c:forEach items="${categoriesAdmin}" var="category" >
+
                                                         <td>${category.getId()}</td>
                                                         <td>${category.getName()}</td>
                                                         <td>
-                                                            <form action="FrontController" method="POST">
-                                                                 <input type="hidden" name="command" value="update_category" />
+                                                            <form action="FrontController" method="GET">
+                                                                 <input type="hidden" name="command" value="prepare_update_category" />
                                                                  <input type="hidden" name="category_id" value="${category.getId()}" />
                                                                  <input type="submit" value="Update" class="btn btn-outline btn-default"/>
                                                             </form>
@@ -161,8 +162,8 @@
                                                                 <input type="submit" value="Delete" class="btn btn-outline btn-default"/>
                                                              </form>
                                                         </td>
-                                                       </c:forEach>
                                                     </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
 

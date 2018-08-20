@@ -28,6 +28,6 @@ public class UpdateCategoryAdminCommandImpl implements BaseCommand {
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return null;
+        return "/jsp/admin.jsp";
     }
 }

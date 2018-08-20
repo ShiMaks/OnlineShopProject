@@ -16,12 +16,11 @@ public class DeleteCategoryAdminCommandImpl implements BaseCommand {
     public String executeCommand(HttpServletRequest request) throws CommandException {
         //execute parameter check
         int idCategory = Integer.parseInt(request.getParameter("category_id"));
-
         try {
             categoryService.deleteCategory(idCategory);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return null;
+        return "/jsp/admin.jsp";
     }
 }

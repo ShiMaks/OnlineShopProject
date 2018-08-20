@@ -16,13 +16,13 @@ public class PreparationCategoriesAdminCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-//        List<Category> categories;
-//        try {
-//            categories = categoryService.getCategories();
-//            request.setAttribute("categoriesAdmin", categories);
-//        } catch (ServiceException e) {
-//            throw new CommandException(e);
-//        }
+        List<Category> categories;
+        try {
+            categories = categoryService.getCategories();
+            request.setAttribute("categoriesAdmin", categories);
+        } catch (ServiceException e) {
+            throw new CommandException(e);
+        }
         return "/jsp/categoryAdmin.jsp";
     }
 }

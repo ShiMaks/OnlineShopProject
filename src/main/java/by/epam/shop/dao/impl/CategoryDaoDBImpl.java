@@ -11,11 +11,11 @@ import java.util.List;
 
 public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
 
-    private static final String CREATE_CATEGORY = "";
-    private static final String READ_CATEGORY_BY_ID = "";
-    private static final String UPDATE_CATEGORY = "";
-    private static final String DELETE_CATEGORY_BY_ID = "";
-    private static final String READ_ALL_CATEGORIES = "";
+    private static final String CREATE_CATEGORY = "INSERT INTO category (name) VALUES (?)";
+    private static final String READ_CATEGORY_BY_ID = "SELECT id, name FROM category WHERE id = ?";
+    private static final String UPDATE_CATEGORY = "UPDATE category SET name = ? WHERE id = ?";
+    private static final String DELETE_CATEGORY_BY_ID = "DELETE FROM category WHERE id = ?";
+    private static final String READ_ALL_CATEGORIES = "SELECT id, name FROM category";
 
     @Override
     public void create(Category entity) throws DaoException {
@@ -30,19 +30,28 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
 
     @Override
     public Category read(int id) throws DaoException {
-        Category category = null;
+        Category category = new Category();
+        ResultSet result = null;
 
         try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_CATEGORY_BY_ID);
-             ResultSet result = statement.executeQuery();){
+             PreparedStatement statement = connection.prepareStatement(READ_CATEGORY_BY_ID);){
 
             statement.setInt(1, id);
-
+            result = statement.executeQuery();
             if(result.next()) {
-                category.setName(result.getString("Name"));
+                category.setId(result.getInt("id"));
+                category.setName(result.getString("name"));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
+        }finally {
+            if(result!=null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return category;
     }
@@ -80,7 +89,8 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
             resultSet = statement.executeQuery(READ_ALL_CATEGORIES);
             while(resultSet.next()) {
                 Category category = new Category();
-                category.setName(resultSet.getString("Name"));
+                category.setId(resultSet.getInt("id"));
+                category.setName(resultSet.getString("name"));
                 categories.add(category);
             }
         } catch (SQLException e) {

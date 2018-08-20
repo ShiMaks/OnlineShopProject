@@ -15,24 +15,24 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/recources/assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet"/>
-    <link href="assets/css/sb-admin-2.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/recources/assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/recources/assets/css/sb-admin-2.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/recources/assets/css/paper-dashboard.css" rel="stylesheet"/>
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/recources/assets/css/demo.css" rel="stylesheet" />
 
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/recources/assets/css/themify-icons.css" rel="stylesheet">
 
 </head>
 <body>
@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_products">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_categories">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_categories">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -142,14 +142,14 @@
                 </div>
                 <div class="row">
                     <form name="updaCategory" action="FrontController" method="POST">
-	                        <input type="hidden" name="command" value="updateCategory" />
-                            <input type="hidden" name="categoryId" value = <c:out value="${idCategory}"/>
+	                        <input type="hidden" name="command" value="update_category" />
+                            <input type="hidden" name="categoryId" value = <c:out value="${category.getId()}"/>
                           <legend><strong >Update Category</strong></legend>
                           <label >Name:</label>
-                              <input type="text" name="nameCategory" placeholder="New name category…">
+                              <input type="text" name="nameCategory" value="<c:out value="${category.getName()}"/>">
                               <span class="help-block"></span>
                                                 
-                           <input type="submit" class="btn btn-outline btn-default" value="Create">	 
+                           <input type="submit" class="btn btn-outline btn-default" value="Update">
                           <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
                         </form>	
                                             
@@ -167,26 +167,26 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/recources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-checkbox-radio.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+	<script src="${pageContext.request.contextPath}/recources/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+    <script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="assets/js/paper-dashboard.js"></script>
+	<script src="${pageContext.request.contextPath}/recources/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<script src="${pageContext.request.contextPath}/recources/assets/js/demo.js"></script>
 
 	
 

@@ -23,7 +23,6 @@ public class CategoryServiceImpl implements CategoryService {
         } catch (DaoException e) {
             throw  new ServiceException(e);
         }
-
     }
 
     @Override

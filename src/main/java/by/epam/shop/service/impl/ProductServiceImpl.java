@@ -63,8 +63,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsByCategory(int idCategory) {
-        return null;
+    public List<Product> getProductsByCategory(int idCategory) throws ServiceException {
+        try {
+            return productDao.getProductsByCategory(idCategory);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
 

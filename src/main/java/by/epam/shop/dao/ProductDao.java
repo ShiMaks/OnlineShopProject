@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductDao extends BaseDao<Product> {
 
     List<Product> readAll() throws DaoException;
+    List<Product> getProductsByCategory(int id) throws DaoException;
 }

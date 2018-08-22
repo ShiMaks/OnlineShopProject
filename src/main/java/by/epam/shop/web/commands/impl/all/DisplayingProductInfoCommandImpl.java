@@ -15,9 +15,9 @@ public class DisplayingProductInfoCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         //execute parametr check
-        int idProduct = Integer.parseInt(request.getParameter("idProduct"));
+        int idProduct = Integer.parseInt(request.getParameter("product_id"));
         Product product = productService.getProduct(idProduct);
         request.setAttribute("product", product);
-        return null;
+        return "/jsp/pages/shop-detail.jsp";
     }
 }

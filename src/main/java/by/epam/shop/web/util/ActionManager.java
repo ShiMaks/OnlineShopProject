@@ -2,6 +2,9 @@ package by.epam.shop.web.util;
 
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.commands.impl.admin.*;
+import by.epam.shop.web.commands.impl.all.DisplayCategoryProdCommandImpl;
+import by.epam.shop.web.commands.impl.all.DisplayingProductInfoCommandImpl;
+import by.epam.shop.web.commands.impl.all.StartPageCommandImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,8 +19,11 @@ public class ActionManager {
         String inputCommand =  request.getParameter("command");
         switch(inputCommand) {
             case "start_page":
-                command = new PreparationAdminPageCommandImpl();
+                command = new StartPageCommandImpl();
                 break;
+//            case "start_page":
+//                command = new PreparationAdminPageCommandImpl();
+//                break;
             case "to_products":
                 command = new PreparationProductsAdminCommandImpl();
                 break;
@@ -41,6 +47,18 @@ public class ActionManager {
                 break;
             case "update_category":
                 command = new UpdateCategoryAdminCommandImpl();
+                break;
+            case "delete_product":
+                command = new DeleteProductAdminCommandImpl();
+                break;
+            case "prepare_update_product":
+                command = new PreparationUpdateProductAdminCommandImpl();
+                break;
+            case "show_products_category":
+                command = new DisplayCategoryProdCommandImpl();
+                break;
+            case "show_products_info":
+                command = new DisplayingProductInfoCommandImpl();
                 break;
             default:
                 //command = new StartPageCommandImpl();

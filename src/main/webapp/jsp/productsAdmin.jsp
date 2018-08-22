@@ -4,8 +4,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/recources/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/recources/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Admin</title>
@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_categories">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_orders">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -120,7 +120,10 @@
                    
                 </div>
 
-                <button type="button" class="btn btn-outline btn-default">Create Product</button>    
+                <form action="FrontController" method="GET">
+                    <input type="hidden" name="command" value="prepare_create_product" />
+                    <input type="submit" value="Create Product" class="btn btn-outline btn-default"/>
+                </form>
 
                 <div class="content">
                         
@@ -142,29 +145,29 @@
                                                     <th>Delete</th>
                                                 </thead>
                                                 <tbody>
+                                                <c:forEach items="${productsAdmin}" var="product" >
                                                     <tr>
-                                                        <c:forEach items="${productsAdmin}" var="product" >
+
                                                         <td>${product.getId()}</td>
                                                         <td>${product.getName()}</td>
-                                                        <td>${product.getQuatity()}</td>
-                                                        <td>${product.getPrice()}$</td>
+                                                        <td>${product.getQuantity()}</td>
+                                                        <td>${product.getPrice()}</td>
                                                         <td>
-                                                            <form action="FrontController" method="POST">
-                                                                <input type="hidden" name="command" value="update_product" />
+                                                            <form action="FrontController" method="GET">
+                                                                <input type="hidden" name="command" value="prepare_update_product" />
                                                                 <input type="hidden" name="product_id" value="${product.getId()}" />
                                                                 <input type="submit" value="Update" class="btn btn-outline btn-default"/>
                                                             </form>
                                                         </td>
                                                         <td>
                                                             <form action="FrontController" method="POST">
-                                                                <input type="hidden" name="command" value="delete_category" />
-                                                                <input type="hidden" name="product_id" value="${category.getId()}" />
+                                                                <input type="hidden" name="command" value="delete_product" />
+                                                                <input type="hidden" name="product_id" value="${product.getId()}" />
                                                                 <input type="submit" value="Delete" class="btn btn-outline btn-default"/>
                                                             </form>
                                                         </td>
-                                                        </c:forEach>
                                                     </tr>
-
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
             

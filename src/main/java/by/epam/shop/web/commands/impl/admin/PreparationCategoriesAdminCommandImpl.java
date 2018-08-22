@@ -10,6 +10,9 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_CATEGORY_ADMIN;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_CATEGORIES_ADMIN;
+
 public class PreparationCategoriesAdminCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
@@ -19,10 +22,10 @@ public class PreparationCategoriesAdminCommandImpl implements BaseCommand {
         List<Category> categories;
         try {
             categories = categoryService.getCategories();
-            request.setAttribute("categoriesAdmin", categories);
+            request.setAttribute(REQUEST_PARAM_LIST_CATEGORIES_ADMIN, categories);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return "/jsp/categoryAdmin.jsp";
+        return PAGE_CATEGORY_ADMIN;
     }
 }

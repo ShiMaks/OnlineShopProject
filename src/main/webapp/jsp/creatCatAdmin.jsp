@@ -145,7 +145,7 @@
                         <input type="hidden" name="command" value="create_category" />
                           <legend><strong >Create Category</strong></legend>
                           <label >Name:</label>
-                              <input type="text" name="name" placeholder="Name category…">
+                              <input type="text" name="name_category" placeholder="Name category…">
                               <span class="help-block"></span>
                                                 
                            <input type="submit" class="btn btn-outline btn-default" value="Create">	 

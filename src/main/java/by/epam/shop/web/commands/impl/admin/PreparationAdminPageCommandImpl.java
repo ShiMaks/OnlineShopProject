@@ -8,6 +8,8 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
+
 public class PreparationAdminPageCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
@@ -16,6 +18,6 @@ public class PreparationAdminPageCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
 
-        return "/jsp/admin.jsp";
+        return PAGE_ADMIN;
     }
 }

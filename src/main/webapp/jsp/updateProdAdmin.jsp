@@ -161,7 +161,7 @@
                                                 <label >Category:</label>
                                                 <select name="idCategory" class="form-control">
                                                     <option selected value="<c:out value="${product.getIdCategory()}"/>">${product.getName()}</option>
-                                                    <c:forEach items="${listCategory}" var="category">
+                                                    <c:forEach items="${categoriesAdmin}" var="category">
                                                         <option value="${category.getId()}">${category.getName()}</option>
                                                     </c:forEach>
                                                 </select>

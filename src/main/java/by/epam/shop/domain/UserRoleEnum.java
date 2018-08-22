@@ -1,4 +1,4 @@
-package by.epam.shop.web.util;
+package by.epam.shop.domain;
 
 public enum UserRoleEnum {
 

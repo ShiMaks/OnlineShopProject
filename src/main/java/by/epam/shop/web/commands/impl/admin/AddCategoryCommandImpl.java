@@ -9,6 +9,9 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_CATEGORY_ADMIN;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_NAME_CATEGORY;
+
 public class AddCategoryCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
@@ -16,7 +19,7 @@ public class AddCategoryCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         //execute parameter check
-        String nameCategory = request.getParameter("name");
+        String nameCategory = request.getParameter(REQUEST_PARAM_NAME_CATEGORY);
         Category category = new Category();
         category.setName(nameCategory);
         try {
@@ -24,6 +27,6 @@ public class AddCategoryCommandImpl implements BaseCommand {
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return "/jsp/categoryAdmin.jsp";
+        return PAGE_CATEGORY_ADMIN;
     }
 }

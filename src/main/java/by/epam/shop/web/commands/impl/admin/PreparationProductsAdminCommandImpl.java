@@ -10,6 +10,9 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_PRODUCTS_ADMIN;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_PRODUCTS_ADMIN;
+
 public class PreparationProductsAdminCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
@@ -19,10 +22,10 @@ public class PreparationProductsAdminCommandImpl implements BaseCommand {
         List<Product> products;
         try {
             products = productService.getProducts();
-            request.setAttribute("productsAdmin", products);
+            request.setAttribute(REQUEST_PARAM_LIST_PRODUCTS_ADMIN, products);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return "/jsp/productsAdmin.jsp";
+        return PAGE_PRODUCTS_ADMIN;
     }
 }

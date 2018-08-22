@@ -5,9 +5,11 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_CREATE_CATEGORY;
+
 public class PreparationCreateCategoryAdminImpl implements BaseCommand{
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        return "/jsp/creatCatAdmin.jsp";
+        return PAGE_CREATE_CATEGORY;
     }
 }

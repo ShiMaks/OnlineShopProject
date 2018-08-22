@@ -143,10 +143,10 @@
                 <div class="row">
                     <form name="updaCategory" action="FrontController" method="POST">
 	                        <input type="hidden" name="command" value="update_category" />
-                            <input type="hidden" name="categoryId" value = <c:out value="${category.getId()}"/>
+                            <input type="hidden" name="category_id" value = <c:out value="${category.getId()}"/>
                           <legend><strong >Update Category</strong></legend>
                           <label >Name:</label>
-                              <input type="text" name="nameCategory" value="<c:out value="${category.getName()}"/>">
+                              <input type="text" name="name_category" value="<c:out value="${category.getName()}"/>">
                               <span class="help-block"></span>
                                                 
                            <input type="submit" class="btn btn-outline btn-default" value="Update">

@@ -22,6 +22,6 @@ public class StartPageCommandImpl implements BaseCommand {
         List<Product> products = productService.getProducts();
         request.setAttribute("listCategory", categories);
         request.setAttribute("listProduct", products);
-        return "/jsp/pages/start_page.jsp";
+        return "/jsp/pages/styleUser.jsp";
     }
 }

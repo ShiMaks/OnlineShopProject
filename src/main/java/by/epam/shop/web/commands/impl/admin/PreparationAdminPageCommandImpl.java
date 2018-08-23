@@ -17,7 +17,6 @@ public class PreparationAdminPageCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-
         return PAGE_ADMIN;
     }
 }

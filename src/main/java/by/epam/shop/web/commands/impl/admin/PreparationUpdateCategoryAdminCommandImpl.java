@@ -8,7 +8,9 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_UPDATE_CATEGORY;
+import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY_ID;
 
@@ -18,10 +20,13 @@ public class PreparationUpdateCategoryAdminCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        //execute parameter check
-        int idCategory = Integer.parseInt(request.getParameter(REQUEST_PARAM_CATEGORY_ID));
-        Category category = categoryService.getCategory(idCategory);
-        request.setAttribute(REQUEST_PARAM_CATEGORY, category);
-        return PAGE_UPDATE_CATEGORY;
+        String idCategory = request.getParameter(REQUEST_PARAM_CATEGORY_ID);
+        if(validatePositiveInt(idCategory)) {
+            Category category = categoryService.getCategory(Integer.parseInt(idCategory));
+            request.setAttribute(REQUEST_PARAM_CATEGORY, category);
+            return PAGE_UPDATE_CATEGORY;
+        } else {
+            return PAGE_ERROR;
+        }
     }
 }

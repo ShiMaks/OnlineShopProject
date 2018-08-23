@@ -40,6 +40,8 @@ public class RequestParamValidator {
      * Pattern.CASE_INSENSITIVE
      */
 
+    private static final String POSITIVE_NUMBER_REGEX = "([1-9])([0-9]*)";
+
     private  RequestParamValidator(){
         throw new IllegalStateException("Utility class");
     }
@@ -85,5 +87,19 @@ public class RequestParamValidator {
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(input);
         return m.matches();
+    }
+
+    public static boolean validatePositiveInt(String value) throws ValidateNullRequestParamException {
+        validateParamNotNull(value);
+        if (matchToRegex(value, POSITIVE_NUMBER_REGEX)) {
+            try {
+                Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                return false;
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

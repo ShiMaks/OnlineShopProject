@@ -20,12 +20,8 @@ public class PreparationProductsAdminCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         List<Product> products;
-        try {
-            products = productService.getProducts();
-            request.setAttribute(REQUEST_PARAM_LIST_PRODUCTS_ADMIN, products);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
+        products = productService.getProducts();
+        request.setAttribute(REQUEST_PARAM_LIST_PRODUCTS_ADMIN, products);
         return PAGE_PRODUCTS_ADMIN;
     }
 }

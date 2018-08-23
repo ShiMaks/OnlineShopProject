@@ -9,6 +9,8 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
 
 public class DeleteProductAdminCommandImpl implements BaseCommand {
@@ -17,14 +19,12 @@ public class DeleteProductAdminCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        //execute parameter check
-        int idProduct = Integer.parseInt(request.getParameter(REQUEST_PARAM_PRODUCT_ID));
-
-        try {
-            productService.deleteProduct(idProduct);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
+        String idProduct = request.getParameter(REQUEST_PARAM_PRODUCT_ID);
+        if(validatePositiveInt(idProduct)) {
+            productService.deleteProduct(Integer.parseInt(idProduct));
+            return PAGE_ADMIN;
+        } else {
+            return PAGE_ERROR;
         }
-        return PAGE_ADMIN;
     }
 }

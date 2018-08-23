@@ -10,6 +10,9 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
+import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY_ID;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_NAME_CATEGORY;
 
@@ -19,19 +22,17 @@ public class UpdateCategoryAdminCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        //execute parameter check
-        int idCategory = Integer.parseInt(request.getParameter(REQUEST_PARAM_CATEGORY_ID));
+        String idCategory = request.getParameter(REQUEST_PARAM_CATEGORY_ID);
         String nameCategory = request.getParameter(REQUEST_PARAM_NAME_CATEGORY);
-
-        Category category = new Category();
-        category.setId(idCategory);
-        category.setName(nameCategory);
-
-        try {
+        validateParamNotNull(nameCategory);
+        if(validatePositiveInt(idCategory)) {
+            Category category = new Category();
+            category.setId(Integer.parseInt(idCategory));
+            category.setName(nameCategory);
             categoryService.updateCategoryInfo(category);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
+            return PAGE_ADMIN;
+        } else {
+            return PAGE_ERROR;
         }
-        return PAGE_ADMIN;
     }
 }

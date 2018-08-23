@@ -18,6 +18,6 @@ public class DisplayingProductInfoCommandImpl implements BaseCommand {
         int idProduct = Integer.parseInt(request.getParameter("product_id"));
         Product product = productService.getProduct(idProduct);
         request.setAttribute("product", product);
-        return "/jsp/pages/shop-detail.jsp";
+        return "/jsp/pages/shop-item.jsp";
     }
 }

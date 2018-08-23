@@ -20,12 +20,8 @@ public class PreparationCategoriesAdminCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         List<Category> categories;
-        try {
-            categories = categoryService.getCategories();
-            request.setAttribute(REQUEST_PARAM_LIST_CATEGORIES_ADMIN, categories);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
+        categories = categoryService.getCategories();
+        request.setAttribute(REQUEST_PARAM_LIST_CATEGORIES_ADMIN, categories);
         return PAGE_CATEGORY_ADMIN;
     }
 }

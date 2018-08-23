@@ -20,6 +20,10 @@ public class WebConstantDeclaration {
     public static final String REQUEST_PARAM_LIST_PRODUCTS_ADMIN = "productsAdmin";
     public static final String REQUEST_PARAM_PRODUCT = "product";
 
-    
+    public static final String REQUEST_PARAM_USER = "user";
+
+
+    public static final String REQUEST_PARAM_COMMAND = "command";
+
 
 }

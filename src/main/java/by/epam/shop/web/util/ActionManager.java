@@ -8,6 +8,8 @@ import by.epam.shop.web.commands.impl.all.StartPageCommandImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.CommandDeclaration.*;
+
 public class ActionManager {
 
     private ActionManager(){
@@ -24,34 +26,34 @@ public class ActionManager {
 //            case "start_page":
 //                command = new PreparationAdminPageCommandImpl();
 //                break;
-            case "to_products":
+            case COMMAND_TO_PRODUCTS:
                 command = new PreparationProductsAdminCommandImpl();
                 break;
-            case "to_orders":
+            case COMMAND_TO_ORDERS:
                 command = null;
                 break;
-            case "to_categories":
+            case COMMAND_TO_CATEGORIES:
                 command = new PreparationCategoriesAdminCommandImpl();
                 break;
-            case "prepare_create_category":
+            case COMMAND_PREPARE_CREATE_CATEGORY:
                 command = new PreparationCreateCategoryAdminImpl();
                 break;
-            case "create_category":
+            case COMMAND_CREATE_CATEGORY:
                 command = new AddCategoryCommandImpl();
                 break;
-            case "delete_category":
+            case COMMAND_DELETE_CATEGORY:
                 command = new DeleteCategoryAdminCommandImpl();
                 break;
-            case "prepare_update_category":
+            case COMMAND_PREPARE_UPDATE_CATEGORY:
                 command = new PreparationUpdateCategoryAdminCommandImpl();
                 break;
-            case "update_category":
+            case COMMAND_UPDATE_CATEGORY:
                 command = new UpdateCategoryAdminCommandImpl();
                 break;
-            case "delete_product":
+            case COMMAND_DELETE_PRODUCT:
                 command = new DeleteProductAdminCommandImpl();
                 break;
-            case "prepare_update_product":
+            case COMMAND_PREPARE_UPDATE_PRODUCT:
                 command = new PreparationUpdateProductAdminCommandImpl();
                 break;
             case "show_products_category":

@@ -1,14 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/recources/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/recources/assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Paper Dashboard by Creative Tim</title>
+	<title>Admin</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -116,37 +116,43 @@
                             </a>
                         </div>
                     </div>
-                                      
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">#</div>
+                                        <div>Orders</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/shop/FrontController?command=to_categories">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                   
                 </div>
                 <div class="row">
-                    
-                    <div class="content table-responsive table-full-width">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>ID</th>
-                                <th>Client</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Coast</th>
-                                <th>Update</th>
-                            </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                    <td>Oud-Turnhout</td>
-                                    <td><button type="button" class="btn btn-outline btn-default">Details</button></td>
-                                   
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                    
+                    <form name="updaCategory" action="FrontController" method="POST">
+	                        <input type="hidden" name="command" value="update_category" />
+                            <input type="hidden" name="category_id" value = <c:out value="${category.getId()}"/>
+                          <legend><strong >Update Category</strong></legend>
+                          <label >Name:</label>
+                              <input type="text" name="name_category" value="<c:out value="${category.getName()}"/>">
+                              <span class="help-block"></span>
+                                                
+                           <input type="submit" class="btn btn-outline btn-default" value="Update">
+                          <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
+                        </form>	
+                                            
                 </div>
                 
             </div>

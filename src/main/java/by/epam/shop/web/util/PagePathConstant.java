@@ -15,4 +15,5 @@ public class PagePathConstant {
     public static final String PAGE_UPDATE_CATEGORY = "/jsp/updateCatAdmin.jsp";
     public static final String PAGE_PRODUCTS_ADMIN = "/jsp/productsAdmin.jsp";
     public static final String PAGE_UPDATE_PRODUCT = "/jsp/updateProdAdmin.jsp";
+    public static final String PAGE_ERROR = "/jsp/error.jsp";
 }

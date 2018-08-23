@@ -9,8 +9,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for working with the category table from database
+ *
+ * @author Shilvian Maksim
+ */
 public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
 
+    /**
+     * SQL-statements
+     */
     private static final String CREATE_CATEGORY = "INSERT INTO category (name) VALUES (?)";
     private static final String READ_CATEGORY_BY_ID = "SELECT id, name FROM category WHERE id = ?";
     private static final String UPDATE_CATEGORY = "UPDATE category SET name = ? WHERE id = ?";

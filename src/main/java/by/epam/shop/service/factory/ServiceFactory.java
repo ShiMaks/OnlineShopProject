@@ -7,6 +7,12 @@ import by.epam.shop.service.impl.CategoryServiceImpl;
 import by.epam.shop.service.impl.ProductServiceImpl;
 import by.epam.shop.service.impl.UserServiceImpl;
 
+/**
+ * Class that provides instances of Service objects
+ *
+ * @author Maksim Shilvian
+ *
+ */
 public class ServiceFactory {
 
     private ServiceFactory(){

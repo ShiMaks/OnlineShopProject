@@ -9,8 +9,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for working with the order table from database
+ *
+ * @author Shilvian Maksim
+ */
 public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
 
+    /**
+     * SQL-statements
+     */
     private static final String CREATE_ORDER = "";
     private static final String READ_ORDER_BY_ID = "";
     private static final String UPDATE_ORDER = "";

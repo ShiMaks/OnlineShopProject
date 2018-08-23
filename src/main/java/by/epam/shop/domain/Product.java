@@ -1,13 +1,47 @@
 package by.epam.shop.domain;
 
+/**
+ * Class describing Product entity from database
+ *
+ * @author Maksim Shilvian
+ */
 public class Product extends Entity {
 
+    /**
+     * Name of product
+     */
     private String name;
+
+    /**
+     * Id of product
+     */
     private int idCategory;
+
+    /**
+     * Description of product
+     */
     private String description;
+
+    /**
+     * Variable to check
+     * the availability of goods
+     */
     private boolean inStock;
+
+    /**
+     * Quantity of product
+     * that is available
+     */
     private int quantity;
+
+    /**
+     * Price of product
+     */
     private int price;
+
+    /**
+     * Link to product photo
+     */
     private String picture;
 
     public Product(){

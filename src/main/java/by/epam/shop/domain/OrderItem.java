@@ -1,10 +1,30 @@
 package by.epam.shop.domain;
 
+/**
+ * Class describing OrderItem entity from database
+ *
+ * @author Maksim Shilvian
+ */
 public class OrderItem extends Entity {
 
+    /**
+     * Id of order in which enter a product
+     */
     private int idOrder;
+
+    /**
+     * Id of product
+     */
     private int idProduct;
+
+    /**
+     * Quantity of product
+     */
     private int quantity;
+
+    /**
+     * Price of product
+     */
     private int price;
 
     public OrderItem(){

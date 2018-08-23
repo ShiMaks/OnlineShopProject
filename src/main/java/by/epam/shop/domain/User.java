@@ -1,12 +1,40 @@
 package by.epam.shop.domain;
 
+/**
+ * Class describing User entity from database
+ *
+ * @author Maksim Shilvian
+ */
 public class User extends Entity {
 
+    /**
+     * Login of user
+     */
     private String login;
+
+    /**
+     * Password of user
+     */
     private String password;
+
+    /**
+     * Name of user
+     */
     private String name;
+
+    /**
+     * Surname of user
+     */
     private String surname;
+
+    /**
+     * Email of user
+     */
     private String email;
+
+    /**
+     * Variable that shows the role of user
+     */
     private boolean isAdmin;
 
     public User() {}

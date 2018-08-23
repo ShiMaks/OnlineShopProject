@@ -1,8 +1,15 @@
 package by.epam.shop.domain;
 
-
+/**
+ * Class describing Category entity from database
+ *
+ * @author Maksim Shilvian
+ */
 public class Category extends Entity {
 
+    /**
+     * Name of category
+     */
     private  String name;
 
     public Category(){

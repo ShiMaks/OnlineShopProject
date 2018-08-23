@@ -9,8 +9,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for working with the product table from database
+ *
+ * @author Shilvian Maksim
+ */
 public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
 
+    /**
+     * SQL-statements
+     */
     private static final String CREATE_PRODUCT = "INSERT INTO product (name, category_id, description, inStock, price, picture)" +
             " VALUES (?, ?, ?, ?, ?, ?)";
     private static final String READ_PRODUCT_BY_ID = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +

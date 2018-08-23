@@ -2,6 +2,13 @@ package by.epam.shop.service.exception;
 
 import by.epam.shop.web.exception.CommandException;
 
+/**
+ * @author Maksim Shilvian
+ *         <code>ServiceException</code>
+ *         <p/>
+ *         Exception class created specifically to describe the exceptional
+ *         situation arises in the service layer application.
+ */
 public class ServiceException extends CommandException {
 
     public ServiceException() {

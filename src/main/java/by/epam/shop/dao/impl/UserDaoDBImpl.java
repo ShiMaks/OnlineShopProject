@@ -10,8 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class for working with the user table from database
+ *
+ * @author Shilvian Maksim
+ */
 public class UserDaoDBImpl extends AbstractDao implements UserDao {
 
+    /**
+     * SQL-statements
+     */
     private static final String CREATE_USER = "";
     private static final String READ_USER_BY_ID = "";
     private static final String UPDATE_USER = "";

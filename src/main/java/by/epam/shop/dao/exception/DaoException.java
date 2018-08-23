@@ -1,9 +1,14 @@
 package by.epam.shop.dao.exception;
 
-
 import by.epam.shop.service.exception.ServiceException;
 
-
+/**
+ * @author Maksim Shilvian
+ *         <code>DAOException</code>
+ *         <p/>
+ *         Exception class created specifically to describe the exceptional
+ *         situation arises in the DAO layer application.
+ */
 public class DaoException extends ServiceException {
 
     public  DaoException(){

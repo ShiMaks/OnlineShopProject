@@ -1,11 +1,15 @@
 package by.epam.shop.domain;
 
+/**
+ * Class parent for all  application entities
+ *
+ * @author Maksim Shilvian
+ */
 public abstract class Entity {
 
     /**
      * Common ID field for all entities
      */
-
     private int id;
 
     public Entity() {

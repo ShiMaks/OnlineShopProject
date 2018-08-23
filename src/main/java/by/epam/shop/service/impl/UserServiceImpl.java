@@ -39,8 +39,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Product getUser(int id) throws ServiceException {
-        userDao.read(id);
+    public User getUser(int id) throws ServiceException {
+        return userDao.read(id);
+    }
+
+    @Override
+    public User getUserByLoginPassword(String login, String password) {
         return null;
     }
 

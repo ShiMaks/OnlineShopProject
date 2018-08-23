@@ -14,7 +14,9 @@ public interface UserService {
 
     void deleteUser(int id) throws ServiceException;
 
-    Product getUser(int id) throws ServiceException;
+    User getUser(int id) throws ServiceException;
+
+    User getUserByLoginPassword(String login, String password);
 
     List<User> getUsers() throws ServiceException;
 }

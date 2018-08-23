@@ -11,7 +11,6 @@ public class WebConstantDeclaration {
     public static final String REQUEST_PARAM_LIST_CATEGORIES_ADMIN = "categoriesAdmin";
     public static final String REQUEST_PARAM_CATEGORY = "category";
 
-
     public static final String REQUEST_PARAM_PRODUCT_NAME = "brand_name";
     public static final String REQUEST_PARAM_PRODUCT_ID = "product_id";
     public static final String REQUEST_PARAM_TYPE = "category";
@@ -21,10 +20,22 @@ public class WebConstantDeclaration {
     public static final String REQUEST_PARAM_USER = "user";
     public static final String REQUEST_PARAM_PASS = "password";
     public static final String REQUEST_PARAM_LOGIN = "login";
+    public static final String REQUEST_PARAM_NAME = "name";
+    public static final String REQUEST_PARAM_SURNAME = "surname";
+    public static final String REQUEST_PARAM_EMAIL = "email";
     public static final String REQUEST_PARAM_USER_ROLE = "user_type";
+    public static final String REQUEST_PARAM_NEW_USER = "new_user";
 
 
     public static final String REQUEST_PARAM_COMMAND = "command";
+
+    public static final String REQUEST_PARAM_DUPLICATE_MESSAGE = "dup_message";
+
+    public static final String REQUEST_PARAM_INVALID_LOGIN = "invalid_login";
+    public static final String REQUEST_PARAM_INVALID_PASS = "invalid_password";
+    public static final String REQUEST_PARAM_INVALID_NAME = "invalid_name";
+    public static final String REQUEST_PARAM_INVALID_SURNAME = "invalid_surname";
+    public static final String REQUEST_PARAM_INVALID_EMAIL = "invalid_email";
 
 
 }

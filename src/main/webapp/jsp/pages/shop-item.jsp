@@ -141,16 +141,12 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
           <!-- BEGIN SIDEBAR -->
+          <h1><span>  Categories:</span></h1>
           <div class="sidebar col-md-3 col-sm-5">
             <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Electronics</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home &amp; Garden</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
+              <c:forEach items="${listCategory}" var="category">
+                <li class="list-group-item clearfix"><a href=""><i class="fa fa-angle-right"></i> ${category.getName()}</a></li>
+              </c:forEach>
             </ul>
 
             
@@ -185,7 +181,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
                     </div>
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
+                    <form name = "addProductCart" action="FrontController" method="GET">
+                      <input type="hidden" name="command" value="add_product_to_cart" />
+                      <input type="submit" class="btn btn-primary" value="Add to cart">
+                    </form>
                   </div>
                   
                   

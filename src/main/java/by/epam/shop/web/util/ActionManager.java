@@ -2,6 +2,7 @@ package by.epam.shop.web.util;
 
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.commands.impl.admin.*;
+import by.epam.shop.web.commands.impl.all.AddProductToCartCommandImpl;
 import by.epam.shop.web.commands.impl.all.DisplayCategoryProdCommandImpl;
 import by.epam.shop.web.commands.impl.all.DisplayingProductInfoCommandImpl;
 import by.epam.shop.web.commands.impl.all.StartPageCommandImpl;
@@ -62,6 +63,9 @@ public class ActionManager {
             case "show_products_info":
                 command = new DisplayingProductInfoCommandImpl();
                 break;
+            case "add_product_to_cart":
+               command = new AddProductToCartCommandImpl();
+               break;
             default:
                 //command = new StartPageCommandImpl();
                 break;

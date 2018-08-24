@@ -10,6 +10,7 @@ public class PagePathConstant {
     public static final String PAGE_INDEX = "/jsp/index.jsp";
     public static final String PAGE_SIGN_IN = "";
     public static final String PAGE_REGISTRATION = "";
+    public static final String PAGE_CART = "";
 
     public static final String PAGE_CATEGORY_ADMIN = "/jsp/categoryAdmin.jsp";
     public static final String PAGE_ADMIN = "/jsp/admin.jsp";

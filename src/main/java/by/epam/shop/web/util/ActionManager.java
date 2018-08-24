@@ -61,7 +61,10 @@ public class ActionManager {
                 command = new ShowDetailOrderCommandImpl();
                 break;
             case "update_order":
-                command = new ShowDetailOrderCommandImpl();
+                command = new UpdateOrderAdminCommandImpl();
+                break;
+            case "sort_order_by_status":
+                command = new SortOrderByStatusAdnibCommandImpl();
                 break;
             case "show_products_category":
                 command = new DisplayCategoryProdCommandImpl();

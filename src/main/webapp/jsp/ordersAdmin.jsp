@@ -34,6 +34,13 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
 
+    <style type="text/css">
+        body {font-size:14px;}
+        label {float:left; padding-right:10px;}
+        .field {clear:both; text-align:right; line-height:25px;}
+        .main {float:left;}
+    </style>
+
 </head>
 <body>
 
@@ -119,7 +126,24 @@
                                       
                 </div>
                 <div class="row">
-                    
+                    <div class="main">     
+                        <form name="sortOrder" action="FrontController" method="GET">
+                                <input type="hidden" name="command" value="sort_order_by_status" />  
+                            <div class="field">                   
+                              <label >Sort by status:</label>
+                                    <select name="order_status">
+                                        <option disabled>Select a status</option>
+                                        <c:forEach items="<%= by.epam.shop.domain.OrderStatusEnum.values() %>" var="status">
+                                            <option value="${status}">${status}</option>
+                                        </c:forEach>
+                                    </select> 
+                                    <span class="help-block"></span>                                         
+                               <input type="submit" class="btn btn-outline btn-default" value="Show orders">
+                            </div>  
+                        </form>
+                    </div>
+                    <br>
+                    <br>  
                     <div class="content table-responsive table-full-width">
                         <table class="table table-striped">
                             <thead>

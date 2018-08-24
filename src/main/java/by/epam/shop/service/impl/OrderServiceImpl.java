@@ -38,4 +38,9 @@ public class OrderServiceImpl implements OrderService {
         System.out.println(idOrder);
         return orderDao.getProductsOfOrder(idOrder);
     }
+
+    @Override
+    public List<Order> getOrdersByStatus(String status) throws ServiceException {
+        return orderDao.getOrdersByStatus(status);
+    }
 }

@@ -32,6 +32,8 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     private static final String READ_ALL_ORDERS = "SELECT id, client_id, status, dataOrder, price FROM shop_order";
     private static final String READ_PRODUCTS_OF_ORDER = "SELECT order_id, product_id, quantity, price FROM order_item " +
             "WHERE order_id = ?";
+    private static final String READ_ORDER_BY_STATUS = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
+            "WHERE status = ?";
 
     @Override
     public void create(Order order) throws DaoException {
@@ -150,6 +152,39 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
             throw new DaoException(e);
         }
         return orderItems;
+    }
+
+    @Override
+    public List<Order> getOrdersByStatus(String status) throws DaoException {
+        List<Order> orders = new ArrayList<>();
+        ResultSet result = null;
+        try (Connection connection = connect.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_STATUS);){
+
+            statement.setString(1, status);
+            result = statement.executeQuery();
+
+            while(result.next()) {
+                Order order = new Order();
+                order.setId(result.getInt("id"));
+                order.setIdClient(result.getInt("client_id"));
+                order.setStatus(valueOf(result.getString("status")));
+                order.setDataOrder(result.getDate("dataOrder"));
+                order.setOrderCost(result.getInt("price"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }finally {
+            if(result!=null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return orders;
     }
 
     private OrderStatusEnum valueOf(String value){

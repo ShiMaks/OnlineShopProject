@@ -29,4 +29,13 @@ public interface ProductDao extends BaseDao<Product> {
      * @throws DaoException
      */
     List<Product> getProductsByCategory(int id) throws DaoException;
+
+    /**
+     * Gets products for one page
+     *
+     * @param  startPosition
+     * @return List of products
+     * @throws DaoException
+     */
+    List<Product> getProductsForPage(int startPosition) throws DaoException;
 }

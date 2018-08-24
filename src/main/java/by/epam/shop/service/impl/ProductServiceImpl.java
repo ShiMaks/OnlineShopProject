@@ -71,5 +71,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public List<Product> getProductForPage(int startPosition) throws ServiceException {
+        return productDao.getProductsForPage(startPosition);
+    }
+
 
 }

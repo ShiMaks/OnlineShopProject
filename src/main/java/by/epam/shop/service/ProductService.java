@@ -61,4 +61,13 @@ public interface ProductService {
      * @throws ServiceException
      */
     List<Product> getProductsByCategory(int idCategory) throws ServiceException;
+
+    /**
+     * Gets list of products for category
+     *
+     * @param  startPosition
+     * @return List of products
+     * @throws ServiceException
+     */
+    List<Product> getProductForPage(int startPosition) throws ServiceException;
 }

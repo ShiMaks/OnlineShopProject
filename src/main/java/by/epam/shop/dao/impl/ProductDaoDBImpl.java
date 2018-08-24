@@ -30,6 +30,8 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             "FROM product";
     private static final String READ_PRODUCTS_BY_CATEGORY = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
             "FROM product WHERE category_id = ?";
+    private static final String READ_PRODUCTS_FOR_PAGE = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
+            " FROM product LIMIT ?, 9";
 
     @Override
     public void create(Product product) throws DaoException {
@@ -150,6 +152,42 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
              PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_BY_CATEGORY);){
 
             statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+
+            while(resultSet.next()) {
+                Product product = new Product();
+                product.setId(resultSet.getInt("id"));
+                product.setName(resultSet.getString("name"));
+                product.setDescription(resultSet.getString("description"));
+                product.setIdCategory(resultSet.getInt("category_id"));
+                product.setPrice(resultSet.getInt("price"));
+                product.setPicture(resultSet.getString("picture"));
+                product.setQuantity(resultSet.getInt("quantity"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            if(resultSet!=null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> getProductsForPage(int startPosition) throws DaoException {
+        List<Product> products = new ArrayList<>();
+        ResultSet resultSet = null;
+
+        try (Connection connection = connect.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_FOR_PAGE);){
+
+            statement.setInt(1, startPosition);
             resultSet = statement.executeQuery();
 
             while(resultSet.next()) {

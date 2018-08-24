@@ -27,8 +27,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
             "VALUES (?, ?, ?, ?)";
     private static final String READ_ORDER_BY_ID = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
             "WHERE id = ?";
-    private static final String UPDATE_ORDER = "UPDATE shop_order SET client_id = ?, status = ?, dataOrder = ?, " +
-            "price = ? WHERE id = ?";
+    private static final String UPDATE_ORDER = "UPDATE shop_order SET status = ? WHERE id = ?";
     private static final String DELETE_ORDER_BY_ID = "DELETE FROM shop_order WHERE id  = ?";
     private static final String READ_ALL_ORDERS = "SELECT id, client_id, status, dataOrder, price FROM shop_order";
     private static final String READ_PRODUCTS_OF_ORDER = "SELECT order_id, product_id, quantity, price FROM order_item " +
@@ -80,7 +79,8 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     public void update(Order order) throws DaoException {
         try (Connection connection = connect.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER);){
-            // filling satetement
+            statement.setString(1, order.getStatus().toString());
+            statement.setInt(2, order.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

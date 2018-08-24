@@ -60,6 +60,9 @@ public class ActionManager {
             case "show_detail_order":
                 command = new ShowDetailOrderCommandImpl();
                 break;
+            case "update_order":
+                command = new ShowDetailOrderCommandImpl();
+                break;
             case "show_products_category":
                 command = new DisplayCategoryProdCommandImpl();
                 break;

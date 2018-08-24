@@ -20,6 +20,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void updateStatusOrder(Order order) throws ServiceException {
+        orderDao.update(order);
+    }
+
+    @Override
     public List<Order> getAllOrders() throws ServiceException {
         try {
             return orderDao.readAll();

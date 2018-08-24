@@ -39,10 +39,9 @@ public class ShowDetailOrderCommandImpl implements BaseCommand{
     }
 
     private List<Product> getProducts(List<OrderItem> orderItems) throws ServiceException {
-        System.out.println("Enter the method");
         List<Product> products = new ArrayList<>();
         for(OrderItem orderItem: orderItems){
-            Product product = new Product();
+            Product product;
             int idProduct = orderItem.getIdProduct();
             product = productService.getProduct(idProduct);
             products.add(product);

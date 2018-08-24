@@ -34,6 +34,14 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
 
+    <style type="text/css">
+        body {font-size:14px;}
+        label {float:left; padding-right:10px;}
+        .field {clear:both; text-align:right; line-height:25px;}
+        .main {float:left;}
+    </style>
+        
+
 </head>
 <body>
 
@@ -140,21 +148,28 @@
                     </div>
                    
                 </div>
-                <div class="row">
-                       
+                <div class="row">   
+                    <div class="main"> 
+                        <div class="field">       
                               <legend><strong >Order Details:</strong></legend>
                               <label >Client Name:</label>
                                   <input type="text" name="name_client" value="<c:out value="${order.getIdClient()}"/>">
                                   <span class="help-block"></span>
+                        </div>
+                        <div class="field">          
                               <label >Date order:</label>
                                   <input type="text" name="date_order" value="<c:out value="${order.getDataOrder()}"/>">
                                   <span class="help-block"></span>
+                        </div>
+                        <div class="field">          
                               <label >Cost:</label>
                                   <input type="text" name="order_cost" value="<c:out value="${order.getOrderCost()}"/>">
                                   <span class="help-block"></span>
+                        </div>       
                           <form name="updateOrder" action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="update_order" />
-                                <input type="hidden" name="order_id" value = <c:out value="${order.getId()}"/>         
+                                <input type="hidden" name="order_id" value = <c:out value="${order.getId()}"/>  
+                            <div class="field">                   
                               <label >Status:</label>
                                     <select name="order_status">
                                         <option selected="selected" value="<c:out value="${order.getStatus()}"/>">${order.getStatus()}</option>
@@ -162,9 +177,11 @@
                                             <option value="${status}">${status}</option>
                                         </c:forEach>
                                     </select> 
-                                    <span class="help-block"></span>                                   
+                                    <span class="help-block"></span>                                         
                                <input type="submit" class="btn btn-outline btn-default" value="Update status">
-                        </form>	
+                            </div>  
+                        </form>
+                    </div>    	
 
 
                             <div class="content table-responsive table-full-width">

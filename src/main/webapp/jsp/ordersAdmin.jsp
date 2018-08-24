@@ -4,8 +4,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/recources/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/recources/assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/resources/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Paper Dashboard by Creative Tim</title>
@@ -15,24 +15,24 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/animate.min.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/recources/assets/css/sb-admin-2.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/paper-dashboard.css" rel="stylesheet"/>
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/demo.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/assets/css/demo.css" rel="stylesheet" />
 
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="${pageContext.request.contextPath}/recources/assets/css/themify-icons.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
 
 </head>
 <body>
@@ -128,20 +128,24 @@
                                 <th>Date</th>
                                 <th>Status</th>
                                 <th>Coast</th>
-                                <th>Update</th>
                             </thead>
                             <tbody>
-
+                                <c:forEach items="${listOrders}" var="order">
                                 <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                    <td>Oud-Turnhout</td>
-                                    <td><button type="button" class="btn btn-outline btn-default">Details</button></td>
-                                   
+                                    <td>${order.getId()}</td>
+                                    <td>${order.getIdClient()}</td>
+                                    <td>${order.getDataOrder()}</td>
+                                    <td>${order.getStatus()}</td>
+                                    <td>${order.getOrderCost()}$</td>
+                                    <td>
+                                    <form action="FrontController" method="GET">
+                                        <input type="hidden" name="command" value="show_detail_order" />
+                                        <input type="hidden" name="order_id" value="${order.getId()}" />
+                                        <input type="submit" value="Details" class="btn btn-outline btn-default"/>
+                                    </form>
+                                    </td>
                                 </tr>
-
+                                </c:forEach>
                             </tbody>
                         </table>
 
@@ -161,26 +165,26 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="${pageContext.request.contextPath}/recources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-checkbox-radio.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-checkbox-radio.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/chartist.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-notify.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/paper-dashboard.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/demo.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>
 
 	
 

@@ -21,17 +21,17 @@ public class ActionManager {
         BaseCommand command = null;
         String inputCommand =  request.getParameter("command");
         switch(inputCommand) {
-            case "start_page":
-                command = new StartPageCommandImpl();
-                break;
 //            case "start_page":
-//                command = new PreparationAdminPageCommandImpl();
+//                command = new StartPageCommandImpl();
 //                break;
+            case "start_page":
+                command = new PreparationAdminPageCommandImpl();
+                break;
             case COMMAND_TO_PRODUCTS:
                 command = new PreparationProductsAdminCommandImpl();
                 break;
             case COMMAND_TO_ORDERS:
-                command = null;
+                command = new PreparationOrdersAdminCommandImpl();
                 break;
             case COMMAND_TO_CATEGORIES:
                 command = new PreparationCategoriesAdminCommandImpl();
@@ -56,6 +56,9 @@ public class ActionManager {
                 break;
             case COMMAND_PREPARE_UPDATE_PRODUCT:
                 command = new PreparationUpdateProductAdminCommandImpl();
+                break;
+            case "show_detail_order":
+                command = new ShowDetailOrderCommandImpl();
                 break;
             case "show_products_category":
                 command = new DisplayCategoryProdCommandImpl();

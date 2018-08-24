@@ -17,7 +17,7 @@ public class Order extends Entity {
     /**
      * Status of order
      */
-    private String status;
+    private OrderStatusEnum status;
 
     /**
      * Date of order
@@ -41,11 +41,11 @@ public class Order extends Entity {
         this.idClient = idClient;
     }
 
-    public String getStatus() {
+    public OrderStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatusEnum status) {
         this.status = status;
     }
 

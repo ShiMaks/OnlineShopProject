@@ -35,7 +35,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderItem> getProductsOfOrder(int idOrder) throws ServiceException {
-        System.out.println(idOrder);
         return orderDao.getProductsOfOrder(idOrder);
     }
 

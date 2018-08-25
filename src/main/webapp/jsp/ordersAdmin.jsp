@@ -132,7 +132,7 @@
                             <div class="field">                   
                               <label >Sort by status:</label>
                                     <select name="order_status">
-                                        <option disabled>Select a status</option>
+                                        <option selected="selected">Select a status</option>
                                         <c:forEach items="<%= by.epam.shop.domain.OrderStatusEnum.values() %>" var="status">
                                             <option value="${status}">${status}</option>
                                         </c:forEach>

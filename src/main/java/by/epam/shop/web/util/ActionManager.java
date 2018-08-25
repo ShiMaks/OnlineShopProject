@@ -5,7 +5,6 @@ import by.epam.shop.web.commands.impl.admin.*;
 import by.epam.shop.web.commands.impl.all.AddProductToCartCommandImpl;
 import by.epam.shop.web.commands.impl.all.DisplayCategoryProdCommandImpl;
 import by.epam.shop.web.commands.impl.all.DisplayingProductInfoCommandImpl;
-import by.epam.shop.web.commands.impl.all.StartPageCommandImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,6 +55,15 @@ public class ActionManager {
                 break;
             case COMMAND_PREPARE_UPDATE_PRODUCT:
                 command = new PreparationUpdateProductAdminCommandImpl();
+                break;
+            case "update_product": //admin
+                command = new UpdateProductAdminCommandImpl();
+                break;
+            case "prepare_create_product": //admin
+                command = new PageCreateProductCommandImpl();
+                break;
+            case "create_product": //admin
+                command = new AddProductCommandImpl();
                 break;
             case "show_detail_order": //admin
                 command = new ShowDetailOrderCommandImpl();

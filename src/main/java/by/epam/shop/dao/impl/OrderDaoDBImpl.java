@@ -133,7 +133,6 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
 
     @Override
     public List<OrderItem> getProductsOfOrder(int idOrder) throws DaoException {
-        System.out.println("DAO:" + idOrder);
         List<OrderItem> orderItems = new ArrayList<>();
 
         try ( Connection connection = connect.getConnection();

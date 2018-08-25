@@ -4,8 +4,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/recources/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/recources/assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/resources/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Admin</title>
@@ -15,24 +15,31 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/animate.min.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/recources/assets/css/sb-admin-2.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/paper-dashboard.css" rel="stylesheet"/>
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/demo.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/assets/css/demo.css" rel="stylesheet" />
 
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="${pageContext.request.contextPath}/recources/assets/css/themify-icons.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
+
+    <style type="text/css">
+        body {font-size:14px;}
+        label {float:left; padding-right:10px;}
+        .field {clear:both; text-align:right; line-height:25px;}
+        .main {float:left;}
+    </style>
 
 </head>
 <body>
@@ -141,43 +148,52 @@
                    
                 </div>
                 <div class="row">
-                    <form name = "createBook" action="SimpleServlet" method="POST">
-                        <input type="hidden" name="command" value="createBook" />
-                          <legend><strong >Create Category</strong></legend>
-                          <label >Name:</label>
-                              <input type="text" name="title" placeholder="Title book…">
-                              <span class="help-block"></span>
-                          <label >Category:</label>
-                            <select name="name">
-                                <option value="Books">Laptop</option>
-                                <option value="Users">Smatrphone</option>
-                                <option selected value="-">-</option>
-                            </select>
-                              <span class="help-block"></span>     
-                          <label >Description:</label>
-                              <input type="text" name="title" placeholder="Title book…">
-                              <span class="help-block"></span> 
-                          <label >Quantity:</label>
-                              <input type="text" name="title" placeholder="Title book…">
-                              <span class="help-block"></span>        
-                          <label >Price:</label>
-                              <input type="text" name="title" placeholder="Title book…">
-                              <span class="help-block"></span> 
-                          <label >Picture:</label>
-                              <input type="text" name="title" placeholder="Title book…">
-                              <span class="help-block"></span>                         
-
-                           <input type="submit" class="btn btn-outline btn-default" value="Create">	 
-                          <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
+                    <div class="main"> 
+                        <legend><strong >Create Category</strong></legend>
+                        <form name = "createProduct" action="FrontController" method="POST">
+                            <input type="hidden" name="command" value="create_product" />
+                            <div class="field">
+                                <label >Name:</label>
+                                    <input type="text" name="product_name" placeholder="Name of product…">
+                                    <span class="help-block"></span>
+                            </div>
+                            <div class="field">        
+                                    <label >Category:</label>
+                                    <select name="category_id">
+                                        <option selected>Select a category</option>
+                                        <c:forEach items="${categoriesAdmin}" var="category">
+                                            <option value="${category.getId()}">${category.getName()}</option>
+                                        </c:forEach>
+                                    </select>
+                            </div>  
+                            <div class="field">          
+                                <label >Description:</label>
+                                    <input type="text" name="description" placeholder="Description of product…">
+                                    <span class="help-block"></span>
+                            </div>    
+                            <div class="field">     
+                                <label >Quantity:</label>
+                                    <input type="text" name="quantity" placeholder="Quantity…">
+                                    <span class="help-block"></span>
+                            </div>   
+                            <div class="field">             
+                                <label >Price:</label>
+                                    <input type="text" name="price" placeholder="Price…">
+                                    <span class="help-block"></span> 
+                            </div>
+                            <div class="field">        
+                                <label >Picture:</label>
+                                    <input type="text" name="picture" placeholder="Picture…">
+                                    <span class="help-block"></span>                         
+                            </div>
+                            <input type="submit" class="btn btn-outline btn-default" value="Create product">	 
+                            <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
                         </form>	
-                                            
+                    </div>                        
                 </div>
                 
             </div>
         </div>
-
-
-
     </div>
 </div>
 
@@ -185,27 +201,25 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="${pageContext.request.contextPath}/recources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-checkbox-radio.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-checkbox-radio.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/chartist.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-notify.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/paper-dashboard.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/demo.js"></script>
-
-	
+	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>	
 
 </html>

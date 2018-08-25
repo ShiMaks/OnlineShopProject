@@ -26,7 +26,6 @@ public class ShowDetailOrderCommandImpl implements BaseCommand{
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         String idOrder = request.getParameter("order_id");
-        System.out.println(idOrder);
         if(validatePositiveInt(idOrder)) {
             List<OrderItem> orderItems = orderService.getProductsOfOrder(Integer.parseInt(idOrder));
             Order order = orderService.getOrder(Integer.parseInt(idOrder));

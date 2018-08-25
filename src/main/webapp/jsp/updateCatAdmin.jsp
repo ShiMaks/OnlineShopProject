@@ -4,8 +4,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/resources/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Admin</title>
@@ -15,24 +15,24 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/animate.min.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/recources/assets/css/sb-admin-2.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/assets/css/paper-dashboard.css" rel="stylesheet"/>
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="${pageContext.request.contextPath}/recources/assets/css/demo.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/assets/css/demo.css" rel="stylesheet" />
 
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="${pageContext.request.contextPath}/recources/assets/css/themify-icons.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
 
 </head>
 <body>
@@ -167,26 +167,26 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="${pageContext.request.contextPath}/recources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-checkbox-radio.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-checkbox-radio.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/chartist.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="${pageContext.request.contextPath}/recources/assets/js/bootstrap-notify.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/paper-dashboard.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="${pageContext.request.contextPath}/recources/assets/js/demo.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>
 
 	
 

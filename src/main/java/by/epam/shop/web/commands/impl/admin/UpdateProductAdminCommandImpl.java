@@ -9,6 +9,9 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_PRODUCT_URL;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
+
 public class UpdateProductAdminCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
@@ -16,22 +19,28 @@ public class UpdateProductAdminCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         //execute parameter check
-        int idProduct = Integer.parseInt(request.getParameter("productId"));
-        int idCategory = Integer.parseInt(request.getParameter("category"));
-        String description = request.getParameter("description");
-        String name = request.getParameter("name");
+        int idProduct = Integer.parseInt(request.getParameter(REQUEST_PARAM_PRODUCT_ID));
+        int idCategory = Integer.parseInt(request.getParameter(REQUEST_PARAM_CATEGORY_ID));
+        int quantity = Integer.parseInt(request.getParameter(REQUEST_PARAM_QUANTITY));
+        int price = Integer.parseInt((request.getParameter(REQUEST_PARAM_PRODUCT_PRICE)));
+        String description = request.getParameter(REQUEST_PARAM_DESCRIPTION);
+        String nameProduct = request.getParameter(REQUEST_PARAM_PRODUCT_NAME);
+        String picture = request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE);
 
         Product product  = new Product();
-        product.setName(name);
+        product.setName(nameProduct);
         product.setIdCategory(idCategory);
         product.setId(idProduct);
         product.setDescription(description);
+        product.setQuantity(quantity);
+        product.setPrice(price);
+        product.setPicture(picture);
 
         try {
             productService.updateProductInfo(product);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return null;
+        return REDIRECT_ADMIN_PRODUCT_URL;
     }
 }

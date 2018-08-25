@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_PRODUCT_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
 
@@ -22,7 +23,7 @@ public class DeleteProductAdminCommandImpl implements BaseCommand {
         String idProduct = request.getParameter(REQUEST_PARAM_PRODUCT_ID);
         if(validatePositiveInt(idProduct)) {
             productService.deleteProduct(Integer.parseInt(idProduct));
-            return PAGE_ADMIN;
+            return REDIRECT_ADMIN_PRODUCT_URL;
         } else {
             return PAGE_ERROR;
         }

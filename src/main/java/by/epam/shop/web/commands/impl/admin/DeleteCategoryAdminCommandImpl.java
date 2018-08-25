@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_CATEGORY_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY_ID;
 
@@ -22,7 +23,7 @@ public class DeleteCategoryAdminCommandImpl implements BaseCommand {
         String idCategory = request.getParameter(REQUEST_PARAM_CATEGORY_ID);
         if(validatePositiveInt(idCategory)) {
             categoryService.deleteCategory(Integer.parseInt(idCategory));
-            return PAGE_ADMIN;
+            return REDIRECT_ADMIN_CATEGORY_URL;
         } else {
             return PAGE_ERROR;
         }

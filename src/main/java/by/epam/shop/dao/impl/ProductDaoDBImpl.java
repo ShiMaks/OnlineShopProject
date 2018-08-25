@@ -19,8 +19,8 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     /**
      * SQL-statements
      */
-    private static final String CREATE_PRODUCT = "INSERT INTO product (name, category_id, description, inStock, price, picture)" +
-            " VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String CREATE_PRODUCT = "INSERT INTO product (name, category_id, description, inStock, price, picture, quantity)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String READ_PRODUCT_BY_ID = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
             "FROM product WHERE id = ?";
     private static final String UPDATE_PRODUCT = "UPDATE product SET name = ?, category_id = ?, description = ?, inStock = ?," +
@@ -40,9 +40,10 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             statement.setString(1, product.getName());
             statement.setInt(2, product.getIdCategory());
             statement.setString(3, product.getDescription());
-            statement.setBoolean(3, product.isInStock());
-            statement.setInt(3, product.getPrice());
-            statement.setString(3, product.getPicture());
+            statement.setBoolean(4, product.isInStock());
+            statement.setInt(5, product.getPrice());
+            statement.setString(6, product.getPicture());
+            statement.setInt(7, product.getQuantity());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

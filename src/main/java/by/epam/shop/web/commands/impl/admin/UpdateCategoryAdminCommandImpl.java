@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_CATEGORY_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY_ID;
@@ -30,7 +31,7 @@ public class UpdateCategoryAdminCommandImpl implements BaseCommand {
             category.setId(Integer.parseInt(idCategory));
             category.setName(nameCategory);
             categoryService.updateCategoryInfo(category);
-            return PAGE_ADMIN;
+            return REDIRECT_ADMIN_CATEGORY_URL;
         } else {
             return PAGE_ERROR;
         }

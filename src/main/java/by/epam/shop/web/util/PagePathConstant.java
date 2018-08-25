@@ -2,7 +2,7 @@ package by.epam.shop.web.util;
 
 public class PagePathConstant {
 
-    public PagePathConstant(){
+    private PagePathConstant(){
         throw new IllegalStateException("Utility class");
     }
 
@@ -18,9 +18,13 @@ public class PagePathConstant {
     public static final String PAGE_UPDATE_CATEGORY = "/jsp/updateCatAdmin.jsp";
     public static final String PAGE_PRODUCTS_ADMIN = "/jsp/productsAdmin.jsp";
     public static final String PAGE_UPDATE_PRODUCT = "/jsp/updateProdAdmin.jsp";
+    public static final String PAGE_CREATE_PRODUCT = "/jsp/creatProdAdmin.jsp";
     public static final String PAGE_ERROR = "/jsp/error.jsp";
 
-    public static final String REDIRECT_ADMIN_URL = "/FrontController?command=redirect_admin";
+    public static final String REDIRECT_ADMIN_PRODUCT_URL = "/FrontController?command=to_products";
+    public static final String REDIRECT_ADMIN_URL = "/FrontController?command=to_products";
+    public static final String REDIRECT_ADMIN_CATEGORY_URL = "/FrontController?command=to_categories";
+    public static final String REDIRECT_ADMIN_ORDER_URL = "/FrontController?command=to_orders";
     public static final String REDIRECT_USER_URL = "/FrontController?command=redirect_user";
     public static final String REDIRECT_GUEST_URL = "/FrontController?command=redirect_guest";
 }

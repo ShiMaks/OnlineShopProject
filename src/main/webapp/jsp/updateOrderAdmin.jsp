@@ -151,17 +151,17 @@
                         <legend><strong >Order Details:</strong></legend>
                         <div class="field">        
                               <label >Client Name:</label>
-                                  <input type="text" name="name_client" value="<c:out value="${order.getIdClient()}"/>">
+                                  <input type="text" name="name_client" disabled value="<c:out value="${order.getIdClient()}"/>">
                                   <span class="help-block"></span>
                         </div>
                         <div class="field">          
                               <label >Date order:</label>
-                                  <input type="text" name="date_order" value="<c:out value="${order.getDataOrder()}"/>">
+                                  <input type="text" name="date_order" disabled value="<c:out value="${order.getDataOrder()}"/>">
                                   <span class="help-block"></span>
                         </div>
                         <div class="field">          
                               <label >Cost:</label>
-                                  <input type="text" name="order_cost" value="<c:out value="${order.getOrderCost()}"/>">
+                                  <input type="text" name="order_cost" disabled value="<c:out value="${order.getOrderCost()}"/>">
                                   <span class="help-block"></span>
                         </div>       
                           <form name="updateOrder" action="FrontController" method="POST">
@@ -196,7 +196,7 @@
                                             <c:forEach items="${listProducts}" var="product">
                                             <tr>
                                                 <td>${product.getId()}</td>
-                                                <td><img src="${product.getPicture()}" width="190" height="230" alt="Product"></td>
+                                                <td><img src="${product.getPicture()}" width="190" height="220" alt="Product"></td>
                                                 <td>${product.getName()}</td>
                                                 <td>${product.getDescription()}</td>
                                                 <td>${product.isInStock()}</td>

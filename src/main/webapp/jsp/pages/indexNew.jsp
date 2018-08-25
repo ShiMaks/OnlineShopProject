@@ -179,7 +179,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
           <div class="sidebar col-md-3 col-sm-5">
             <ul class="list-group margin-bottom-25 sidebar-menu">
                 <c:forEach items="${listCategory}" var="category">
-                    <li class="list-group-item clearfix"><a href=""><i class="fa fa-angle-right"></i> ${category.getName()}</a></li>
+                    <li class="list-group-item clearfix"><a href="/shop/FrontController?command=show_products_category&category_id=${category.getId()}"><i class="fa fa-angle-right"></i> ${category.getName()}</a></li>
                 </c:forEach>
             </ul>
             </ul>
@@ -194,7 +194,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="product-item">
                 <div class="pi-img-wrapper">
-                  <img src="${product.getPicture()}" class="img-fluid image1" alt="Berry Lace Dress">
+                  <img src="${product.getPicture()}" class="img-fluid image1"  width="189" height="255" alt="Berry Lace Dress">
                   <div>
                     <a href="${product.getPicture()}" class="btn btn-default fancybox-button">Zoom</a>
                   </div>

@@ -28,10 +28,10 @@ public class ShowDetailOrderCommandImpl implements BaseCommand{
         String idOrder = request.getParameter("order_id");
         System.out.println(idOrder);
         if(validatePositiveInt(idOrder)) {
-           // List<OrderItem> orderItems = orderService.getProductsOfOrder(Integer.parseInt(idOrder));
-         //   Order order = orderService.getOrder(Integer.parseInt(idOrder));
-          //  request.setAttribute("listProducts", getProducts(orderItems));
-          //  request.setAttribute("order", order);
+            List<OrderItem> orderItems = orderService.getProductsOfOrder(Integer.parseInt(idOrder));
+            Order order = orderService.getOrder(Integer.parseInt(idOrder));
+            request.setAttribute("listProducts", getProducts(orderItems));
+            request.setAttribute("order", order);
             return "jsp/updateOrderAdmin.jsp";
         } else {
             return PAGE_ERROR;

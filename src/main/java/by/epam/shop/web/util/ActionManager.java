@@ -21,7 +21,7 @@ public class ActionManager {
         BaseCommand command = null;
         String inputCommand =  request.getParameter("command");
         switch(inputCommand) {
-//            case "start_page":
+//            case "start_page": //all
 //                command = new StartPageCommandImpl();
 //                break;
             case "start_page":
@@ -57,22 +57,22 @@ public class ActionManager {
             case COMMAND_PREPARE_UPDATE_PRODUCT:
                 command = new PreparationUpdateProductAdminCommandImpl();
                 break;
-            case "show_detail_order":
+            case "show_detail_order": //admin
                 command = new ShowDetailOrderCommandImpl();
                 break;
-            case "update_order":
+            case "update_order": //admin
                 command = new UpdateOrderAdminCommandImpl();
                 break;
-            case "sort_order_by_status":
+            case "sort_order_by_status": //admin
                 command = new SortOrderByStatusAdnibCommandImpl();
                 break;
-            case "show_products_category":
+            case "show_products_category": //all
                 command = new DisplayCategoryProdCommandImpl();
                 break;
-            case "show_products_info":
+            case "show_products_info": //all
                 command = new DisplayingProductInfoCommandImpl();
                 break;
-            case "add_product_to_cart":
+            case "add_product_to_cart": //all
                command = new AddProductToCartCommandImpl();
                break;
             default:

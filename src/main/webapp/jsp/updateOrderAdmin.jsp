@@ -61,16 +61,14 @@
                             <a class="navbar-brand" href="#">Admin</a>
                         </div>
                         <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                
+                            <ul class="nav navbar-nav navbar-right"> 
                                 <li>
                                     <a href="#">
                                         <i class="ti-settings"></i>
-                                        <p>Settings</p>
+                                        <p>LogOut</p>
                                     </a>
                                 </li>
                             </ul>
-        
                         </div>
                     </div>
                 </nav>
@@ -150,8 +148,8 @@
                 </div>
                 <div class="row">   
                     <div class="main"> 
-                        <div class="field">       
-                              <legend><strong >Order Details:</strong></legend>
+                        <legend><strong >Order Details:</strong></legend>
+                        <div class="field">        
                               <label >Client Name:</label>
                                   <input type="text" name="name_client" value="<c:out value="${order.getIdClient()}"/>">
                                   <span class="help-block"></span>
@@ -198,23 +196,20 @@
                                             <c:forEach items="${listProducts}" var="product">
                                             <tr>
                                                 <td>${product.getId()}</td>
-                                                <td><img src="${product.getPicture()}" width="189" height="255" alt="Product"></td>
+                                                <td><img src="${product.getPicture()}" width="190" height="230" alt="Product"></td>
+                                                <td>${product.getName()}</td>
                                                 <td>${product.getDescription()}</td>
-                                                <td>${order.isInStock()}</td>
-                                                <td>${order.getPrice()}$</td>
+                                                <td>${product.isInStock()}</td>
+                                                <td>${product.getPrice()}$</td>
                                                 <td></td>
                                             </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
                             </div>                                            
-                </div>
-                
+                </div>  
             </div>
         </div>
-
-
-
     </div>
 </div>
 

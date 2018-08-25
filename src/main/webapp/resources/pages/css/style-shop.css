@@ -356,9 +356,7 @@ Header and header elements
 	width: 63px;
 	height: 63px;
 }
-.sticker-sale {
-	background: url(../../pages/img/sale.png) no-repeat;
-}
+
 .sticker-new {
 	background: url(../../pages/img/new.png) no-repeat;
 	left: auto;

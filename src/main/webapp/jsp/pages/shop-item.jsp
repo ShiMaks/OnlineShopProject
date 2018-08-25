@@ -181,7 +181,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
                     </div>
-                    <form name = "addProductCart" action="FrontController" method="GET">
+                    <form name = "addProductToCart" action="FrontController" method="GET">
                       <input type="hidden" name="command" value="add_product_to_cart" />
                       <input type="submit" class="btn btn-primary" value="Add to cart">
                     </form>

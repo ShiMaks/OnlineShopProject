@@ -22,8 +22,8 @@ public class DisplayCategoryProdCommandImpl implements BaseCommand {
         int idCategory = Integer.parseInt(request.getParameter("category_id"));
         List<Product> products = productService.getProductsByCategory(idCategory);
         List<Category> categories = categoryService.getCategories();
-       request.setAttribute("products", products);
-        request.setAttribute("categories", categories);
-        return "/jsp/pages/category.jsp";
+       request.setAttribute("listProduct", products);
+        request.setAttribute("listCategory", categories);
+        return "/jsp/pages/indexNew.jsp";
     }
 }

@@ -65,7 +65,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="ti-settings"></i>
-                                        <p>Settings</p>
+                                        <p>LogOut</p>
                                     </a>
                                 </li>
                             </ul>

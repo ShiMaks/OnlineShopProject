@@ -23,9 +23,9 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
      */
     private static final String CREATE_ORDER = "INSERT INTO shop_order (client_id, status, dataOrder, price) " +
             "VALUES (?, ?, ?, ?)";
-    private static final String CREATE_ORDER_ITEM ="INSERT INTO order_item (order_id, product_id, quantity, price)" +
+    private static final String CREATE_ORDER_ITEM ="INSERT INTO order_item (order_id, product_id, quantity, price) " +
             "VALUES (?, ?, ?, ?)";
-    private static final String READ_ORDER_BY_ID = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
+    private static final String READ_ORDER_BY_ID = "SELECT id, client_id, status, dataOrder, price FROM shop_order " +
             "WHERE id = ?";
     private static final String UPDATE_ORDER = "UPDATE shop_order SET status = ? WHERE id = ?";
     private static final String DELETE_ORDER_BY_ID = "DELETE FROM shop_order WHERE id  = ?";

@@ -53,7 +53,7 @@ public interface UserService {
      * @param password of user
      * @return User entity
      */
-    User getUserByLoginPassword(String login, String password);
+    User getUserByLoginPassword(String login, String password) throws ServiceException;
 
     /**
      * Gets full list of users

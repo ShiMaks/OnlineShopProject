@@ -25,6 +25,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     private static final String UPDATE_USER = "";
     private static final String DELETE_USER_BY_ID = "";
     private static final String READ_ALL_USERS = "";
+    private static final String READ_USER_BY_LOGIN_PASS = "SELECT id, login, password, isAdmin FROM user " +
+            "WHERE login = ? AND password = ?";
 
     @Override
     public void create(User user) throws DaoException {
@@ -75,5 +77,37 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    @Override
+    public User getUserByLoginPassword(String login, String password) throws DaoException {
+        User user = null;
+        ResultSet result = null;
+        try (Connection connection = connect.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_USER_BY_LOGIN_PASS);){
+
+            statement.setString(1, login);
+            statement.setString(2, password);
+            result = statement.executeQuery();
+
+            if(result.next()) {
+                user = new User();
+                user.setId(result.getInt("id"));
+                user.setAdmin(result.getBoolean("isAdmin"));
+                user.setLogin(result.getString("login"));
+                user.setPassword(result.getString("password"));
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            if(result!=null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return user;
     }
 }

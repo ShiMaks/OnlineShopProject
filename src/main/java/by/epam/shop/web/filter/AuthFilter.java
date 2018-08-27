@@ -46,6 +46,7 @@ public class AuthFilter implements Filter {
                 if (security.getRoles(inputCommand) == UserRoleEnum.ALL) {
                     chain.doFilter(request, response);
                 } else {
+                    //session.setAttribute("message", "You need to register");
                     request.getRequestDispatcher(PAGE_ERROR).forward(request, response);
                 }
             }

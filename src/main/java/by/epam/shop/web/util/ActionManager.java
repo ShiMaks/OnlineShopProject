@@ -2,9 +2,7 @@ package by.epam.shop.web.util;
 
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.commands.impl.admin.*;
-import by.epam.shop.web.commands.impl.all.AddProductToCartCommandImpl;
-import by.epam.shop.web.commands.impl.all.DisplayCategoryProdCommandImpl;
-import by.epam.shop.web.commands.impl.all.DisplayingProductInfoCommandImpl;
+import by.epam.shop.web.commands.impl.all.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,10 +18,10 @@ public class ActionManager {
         BaseCommand command = null;
         String inputCommand =  request.getParameter("command");
         switch(inputCommand) {
-//            case "start_page": //all
-//                command = new StartPageCommandImpl();
-//                break;
-            case "start_page":
+            case "start_page": //all
+                command = new StartPageCommandImpl();
+                break;
+            case "start_page_admin":
                 command = new PreparationAdminPageCommandImpl();
                 break;
             case COMMAND_TO_PRODUCTS:
@@ -74,13 +72,22 @@ public class ActionManager {
             case "sort_order_by_status": //admin
                 command = new SortOrderByStatusAdnibCommandImpl();
                 break;
+            case COMMAND_TO_LOG_IN: //all
+                command = new SingInPageCommandImpl();
+                break;
+            case "log_in": //all
+                command = new AuthorizationCommandImpl();
+                break;
+            case "to_log_out": //all
+                command = new LogOutCommandImpl();
+                break;
             case "show_products_category": //all
                 command = new DisplayCategoryProdCommandImpl();
                 break;
             case "show_products_info": //all
                 command = new DisplayingProductInfoCommandImpl();
                 break;
-            case "add_product_to_cart": //all
+            case "add_product_to_cart": //user
                command = new AddProductToCartCommandImpl();
                break;
             default:

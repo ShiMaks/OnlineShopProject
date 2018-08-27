@@ -1,19 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<!--
-Template: Metronic Frontend Freebie - Responsive HTML Template Based On Twitter Bootstrap 3.3.4
-Version: 1.0.0
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
+
 <html lang="en">
 <!--<![endif]-->
 
@@ -94,7 +82,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <li><a href="shop-account.html">My Account</a></li>
                         <li><a href="shop-wishlist.html">My Wishlist</a></li>
                         <li><a href="shop-checkout.html">Checkout</a></li>
-                        <li><a href="page-login.html">Log In</a></li>
+                        <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -153,15 +141,13 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <div class="carousel-inner" role="listbox">
                 <!-- First slide -->
                 <div class="item carousel-item-eight active">
-                    <img src="${pageContext.request.contextPath}/resources/pages/img/frontend-slider/bg9.jpg" align="right">
+                    <img src="${pageContext.request.contextPath}/resources/pages/img/frontend-slider/bg9.jpg" align="center">
                     <div class="container">
                         <div class="carousel-position-six text-uppercase text-center">
                             <h2 class="margin-bottom-20 animate-delay carousel-title-v5" data-animation="animated fadeInDown">
-                                Expore the power <br/>
+                                <font color="#0C2A75">Simplify your life</font> <br/>
                                 <span class="carousel-title-normal">of Metronic</span>
                             </h2>
-                            <p class="carousel-subtitle-v5 border-top-bottom margin-bottom-30" data-animation="animated fadeInDown">This is what you were looking for</p>
-                            <a class="carousel-btn-green" href="#" data-animation="animated fadeInUp">Purchase Now!</a>
                         </div>
                     </div>
                   </div>              

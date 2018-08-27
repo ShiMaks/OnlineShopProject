@@ -56,7 +56,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 
                                 <li>
-                                    <a href="#">
+                                    <a href="/shop/FrontController?command=to_log_out">
                                         <i class="ti-settings"></i>
                                         <p>LogOut</p>
                                     </a>

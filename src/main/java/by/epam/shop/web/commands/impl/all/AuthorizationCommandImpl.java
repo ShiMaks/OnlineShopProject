@@ -27,10 +27,10 @@ public class AuthorizationCommandImpl implements BaseCommand {
         validateParamNotNull(login);
         validateParamNotNull(pass);
         User user = userService.getUserByLoginPassword(login, pass);
-        return checkRecievedUser(user, request);
+        return checkRecivedUser(user, request);
     }
 
-    private String checkRecievedUser(User user, HttpServletRequest request) {
+    private String checkRecivedUser(User user, HttpServletRequest request) {
         if (user != null) {
             request.getSession().setAttribute(REQUEST_PARAM_USER, user);
             return identifyUserRole(user, request);

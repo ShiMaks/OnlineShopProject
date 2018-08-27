@@ -10,7 +10,7 @@ public class PagePathConstant {
     public static final String PAGE_INDEX = "/jsp/index.jsp";
     public static final String PAGE_SIGN_IN = "/jsp/pages/page-login.jsp";
     public static final String PAGE_REGISTRATION = "";
-    public static final String PAGE_CART = "";
+    public static final String PAGE_CART = "/jsp/pages/shop-cart.jsp";
     public static final String PAGE_ERROR = "/jsp/pages/error.jsp";
 
     public static final String PAGE_CATEGORY_ADMIN = "/jsp/categoryAdmin.jsp";
@@ -26,6 +26,6 @@ public class PagePathConstant {
     public static final String REDIRECT_ADMIN_URL = "/FrontController?command=start_page_admin";
     public static final String REDIRECT_ADMIN_CATEGORY_URL = "/FrontController?command=to_categories";
     public static final String REDIRECT_ADMIN_ORDER_URL = "/FrontController?command=to_orders";
-    public static final String REDIRECT_USER_URL = "/FrontController?command=redirect_user";
+    public static final String REDIRECT_USER_URL = "/FrontController?command=start_page";
     public static final String REDIRECT_GUEST_URL = "/FrontController?command=redirect_guest";
 }

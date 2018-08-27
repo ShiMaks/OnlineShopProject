@@ -3,6 +3,7 @@ package by.epam.shop.web.util;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.commands.impl.admin.*;
 import by.epam.shop.web.commands.impl.all.*;
+import by.epam.shop.web.commands.impl.user.AddProductToCartCommandImpl;
 
 import javax.servlet.http.HttpServletRequest;
 

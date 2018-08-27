@@ -1,5 +1,6 @@
 package by.epam.shop.web.commands.impl.all;
 
+import by.epam.shop.domain.ShopCart;
 import by.epam.shop.domain.User;
 import by.epam.shop.domain.UserRoleEnum;
 import by.epam.shop.service.UserService;
@@ -33,6 +34,7 @@ public class AuthorizationCommandImpl implements BaseCommand {
     private String checkRecivedUser(User user, HttpServletRequest request) {
         if (user != null) {
             request.getSession().setAttribute(REQUEST_PARAM_USER, user);
+            request.getSession().setAttribute("shopCart", new ShopCart());
             return identifyUserRole(user, request);
         } else {
             return PAGE_SIGN_IN;

@@ -56,8 +56,10 @@ public class ShopCart {
      */
     public int getTotalCost(){
         int totalCost = 0;
-        for(Product product: products.keySet()){
-            totalCost =+ product.getPrice();
+        for(Map.Entry<Product, Integer> entry : products.entrySet()){
+            int quantity = (int) entry.getValue();
+            Product product = (Product) entry.getKey();
+            totalCost = totalCost + (product.getPrice()*quantity);
         }
         return totalCost;
     }

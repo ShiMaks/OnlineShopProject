@@ -62,7 +62,7 @@
                 <!-- BEGIN TOP BAR LEFT PART -->
                 <div class="col-md-6 col-sm-6 additional-shop-info">
                     <ul class="list-unstyled list-inline">
-                        <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
+                        <li><i class="fa fa-phone"></i><span>+375(29) 764-80-65</span></li>
                         
                         <!-- BEGIN LANGS -->
                         <li class="langs-block">
@@ -80,9 +80,8 @@
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
                         <li><a href="shop-account.html">My Account</a></li>
-                        <li><a href="shop-wishlist.html">My Wishlist</a></li>
-                        <li><a href="shop-checkout.html">Checkout</a></li>
                         <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
+                        <li><a href="shop-checkout.html">Registration</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -94,38 +93,23 @@
     <!-- BEGIN HEADER -->
     <div class="header">
       <div class="container">
-        <a class="site-logo" href="shop-index.html"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="shop-index.html"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
         <!-- BEGIN CART -->
         <div class="top-cart-block">
-          
-          <a href="shop-shopping-cart.html"><i class="fa fa-shopping-cart"></i></a>
-                        
-                     
+            <div class="top-cart-info">
+                <a href="#" class="top-cart-info-count">3 items</a>
+                <a href="#" class="top-cart-info-value">$1260</a>
+              </div>
+          <a href="shop-shopping-cart.html"><i class="fa fa-shopping-cart"></i></a>                        
         </div>
         <!--END CART -->
 
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation">
           <ul>
-            <!-- BEGIN TOP SEARCH -->
-            <li class="menu-search">
-              <span class="sep"></span>
-              <i class="fa fa-search search-btn"></i>
-              <div class="search-box">
-                <form action="#">
-                  <div class="input-group">
-                    <input type="text" placeholder="Search" class="form-control">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary" type="submit">Search</button>
-                    </span>
-                  </div>
-                </form>
-              </div> 
-            </li>
-            <!-- END TOP SEARCH -->
           </ul>
         </div>
         <!-- END NAVIGATION -->

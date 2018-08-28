@@ -4,6 +4,7 @@ import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.commands.impl.admin.*;
 import by.epam.shop.web.commands.impl.all.*;
 import by.epam.shop.web.commands.impl.user.AddProductToCartCommandImpl;
+import by.epam.shop.web.commands.impl.user.CreateOrderCommandImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -91,6 +92,9 @@ public class ActionManager {
             case "add_product_to_cart": //user
                command = new AddProductToCartCommandImpl();
                break;
+            case "сheckout": //user
+                command = new CreateOrderCommandImpl();
+                break;
             default:
                 //command = new StartPageCommandImpl();
                 break;

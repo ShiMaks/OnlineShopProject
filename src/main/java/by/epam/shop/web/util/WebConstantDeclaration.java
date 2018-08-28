@@ -20,6 +20,7 @@ public class WebConstantDeclaration {
     public static final String REQUEST_PARAM_QUANTITY = "quantity";
     public static final String REQUEST_PARAM_PRODUCT_PRICE = "price";
     public static final String REQUEST_PARAM_PRODUCT_PICTURE = "picture";
+    public static final String REQUEST_PARAM_SHOPPING_CART = "shopCart";
 
 
     public static final String REQUEST_PARAM_USER = "user";

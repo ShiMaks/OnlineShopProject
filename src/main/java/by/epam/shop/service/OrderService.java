@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface OrderService {
 
+    void createOrder(Order order, List<OrderItem> orderItems) throws ServiceException;
+
     Order getOrder(int idOrder) throws ServiceException;
 
     void updateStatusOrder(Order order) throws ServiceException;

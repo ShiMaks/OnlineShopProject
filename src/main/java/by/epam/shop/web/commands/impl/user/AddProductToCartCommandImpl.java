@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_CART;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_SHOPPING_CART;
 
 public class AddProductToCartCommandImpl implements BaseCommand{
 
@@ -22,10 +23,10 @@ public class AddProductToCartCommandImpl implements BaseCommand{
         String idProduct = request.getParameter("product_id");
         if(validatePositiveInt(idProduct)){
             Product product = productService.getProduct(Integer.parseInt(idProduct));
-            ShopCart cart = (ShopCart) request.getSession().getAttribute("shopCart");
+            ShopCart cart = (ShopCart) request.getSession().getAttribute(REQUEST_PARAM_SHOPPING_CART);
             // add quantity product
             cart.addProduct(product, 1);
-            request.getSession().setAttribute("shopCart", cart);
+            request.getSession().setAttribute(REQUEST_PARAM_SHOPPING_CART, cart);
             return PAGE_CART;
         } else {
             return PAGE_ERROR;

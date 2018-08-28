@@ -3,6 +3,7 @@ package by.epam.shop.service;
 import by.epam.shop.domain.User;
 import by.epam.shop.service.exception.ServiceException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**

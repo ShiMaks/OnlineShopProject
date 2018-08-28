@@ -37,13 +37,23 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
 
     @Override
     public void create(Order order) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_ORDER);){
-                //filling statement
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
+        int id = 0;
+//    }
+//        Connection connection = null;
+//        try {
+//            connection = connect.getConnection();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            connection.setAutoCommit(false);
+//            try (PreparedStatement orderStatement = connection.prepareStatement(CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
+//                 PreparedStatement orderItemStatement = connection.prepareStatement(CREATE_ORDER_ITEM)){
+//                orderItemStatement.set
+//                statement.executeUpdate();
+//            } catch (SQLException e) {
+//                throw new DaoException(e);
+//            }
     }
 
     @Override

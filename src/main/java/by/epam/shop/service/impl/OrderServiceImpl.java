@@ -15,6 +15,11 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao = DaoFactory.getOrderDAO();
 
     @Override
+    public void createOrder(Order order, List<OrderItem> orderItems) throws ServiceException {
+
+    }
+
+    @Override
     public Order getOrder(int idOrder) throws ServiceException {
         return orderDao.read(idOrder);
     }

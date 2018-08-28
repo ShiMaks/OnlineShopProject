@@ -34,7 +34,7 @@ public class AuthorizationCommandImpl implements BaseCommand {
     private String checkRecivedUser(User user, HttpServletRequest request) {
         if (user != null) {
             request.getSession().setAttribute(REQUEST_PARAM_USER, user);
-            request.getSession().setAttribute("shopCart", new ShopCart());
+            request.getSession().setAttribute(REQUEST_PARAM_SHOPPING_CART, new ShopCart());
             return identifyUserRole(user, request);
         } else {
             return PAGE_SIGN_IN;

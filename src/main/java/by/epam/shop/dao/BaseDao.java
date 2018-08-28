@@ -3,6 +3,8 @@ package by.epam.shop.dao;
 import by.epam.shop.dao.exception.DaoException;
 import by.epam.shop.domain.Entity;
 
+import java.sql.SQLException;
+
 /**
  *Interface that provides CRUD methods to access data
  * from database.

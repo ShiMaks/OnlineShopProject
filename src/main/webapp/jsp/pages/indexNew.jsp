@@ -81,7 +81,7 @@
                     <ul class="list-unstyled list-inline pull-right">
                         <li><a href="shop-account.html">My Account</a></li>
                         <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
-                        <li><a href="shop-checkout.html">Registration</a></li>
+                        <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->

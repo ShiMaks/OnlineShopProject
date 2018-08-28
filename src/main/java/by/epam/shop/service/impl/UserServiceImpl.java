@@ -8,6 +8,7 @@ import by.epam.shop.domain.User;
 import by.epam.shop.service.UserService;
 import by.epam.shop.service.exception.ServiceException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static by.epam.shop.service.util.ServiceInputParamNullValidator.validateInputParamNotNull;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao = DaoFactory.getUserDAO();
 
     @Override
-    public void createUser(User user) throws ServiceException {
+    public void createUser(User user) throws ServiceException{
         validateInputParamNotNull(user);
         userDao.create(user);
     }

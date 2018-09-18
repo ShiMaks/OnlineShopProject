@@ -25,4 +25,6 @@ public interface OrderService {
     List<OrderItem> getProductsOfOrder(int idOrder) throws ServiceException;
 
     List<Order> getOrdersByStatus(String status) throws ServiceException;
+
+    List<Order> getUserOrders(int idUser)  throws ServiceException;
 }

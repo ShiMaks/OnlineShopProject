@@ -47,4 +47,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersByStatus(String status) throws ServiceException {
         return orderDao.getOrdersByStatus(status);
     }
+
+    @Override
+    public List<Order> getUserOrders(int idUser) throws ServiceException {
+        return null;
+    }
 }

@@ -32,7 +32,7 @@
 
   <!-- Global styles START -->          
   <link href="${pageContext.request.contextPath}/resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Global styles END --> 
    
   <!-- Page level plugin styles START -->
@@ -49,6 +49,7 @@
   <link href="${pageContext.request.contextPath}/resources/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
   <link href="${pageContext.request.contextPath}/resources/corporate/css/custom.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style.css">
   <!-- Theme styles END -->
 </head>
 <!-- Head END -->
@@ -140,67 +141,38 @@
     </div>
     <!-- END SLIDER -->
 
-    <div class="main">
-      <div class="container">
-      <!-- BEGIN SIDEBAR & CONTENT -->
-      <div class="row margin-bottom-40">
-        <!-- BEGIN SIDEBAR -->
-        <h1><span>  Categories:</span></h1>
-          <div class="sidebar col-md-3 col-sm-5">
-            <ul class="list-group margin-bottom-25 sidebar-menu">
-                <c:forEach items="${listCategory}" var="category">
-                    <li class="list-group-item clearfix"><a href="/shop/FrontController?command=show_products_category&category_id=${category.getId()}"><i class="fa fa-angle-right"></i> ${category.getName()}</a></li>
-                </c:forEach>
-            </ul>
-            </ul>
-         </div>
-        <!-- END SIDEBAR -->
-        <!-- BEGIN CONTENT -->
-        <div class="col-md-9 col-sm-7">
-          <!-- BEGIN PRODUCT LIST -->
-          <div class="row product-list">
-            <!-- PRODUCT ITEM START -->
-            <c:forEach items="${listProduct}" var="product">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <div class="product-item">
-                <div class="pi-img-wrapper">
-                  <img src="${product.getPicture()}" class="img-fluid image1"  width="189" height="255" alt="Berry Lace Dress">
-                  <div>
-                    <a href="${product.getPicture()}" class="btn btn-default fancybox-button">Zoom</a>
-                  </div>
+    <div class="container content">
+      <div class="row">
+        <div class="col-md-4">
+          <h1><span>  Categories:</span></h1>
+          <div class="list-group">
+              <c:forEach items="${listCategory}" var="category">
+                  <a href="/shop/FrontController?command=show_products_category&category_id=${category.getId()}" class="list-group-item">${category.getName()}</a>
+              </c:forEach>
+          </div>
+        </div>
+        <div class="col-md-8 products">
+          <div class="row">
+           <c:forEach items="${listProduct}" var="product"> 
+            <div class="col-sm-4">
+              <div class="product">
+                <div class="product-img">
+                  <a href="#"><img src="${product.getPicture()}" alt=""></a>
                 </div>
-                <h3><a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}">${product.getName()}</a></h3>
-                <div class="pi-price">${product.getPrice()}$</div>
-                <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                <p class="product-title">
+                  <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}">${product.getName()}</a>
+                </p>
+                <p class="product-desc">${product.getDescription()}</p>
+                <p class="product-price">Price: € ${product.getPrice()}</p>
               </div>
             </div>
-            </c:forEach>
-            <!-- PRODUCT ITEM END -->
-            
+           </c:forEach> 
           </div>
-          <!-- END PRODUCT LIST -->
-          <!-- BEGIN PAGINATOR -->
-          <div class="row">
-            <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
-            <div class="col-md-8 col-sm-8">
-              <ul class="pagination pull-right">
-                <li><a href="javascript:;">&laquo;</a></li>
-                <li><a href="javascript:;">1</a></li>
-                <li><span>2</span></li>
-                <li><a href="javascript:;">3</a></li>
-                <li><a href="javascript:;">4</a></li>
-                <li><a href="javascript:;">5</a></li>
-                <li><a href="javascript:;">&raquo;</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- END PAGINATOR -->
         </div>
-        <!-- END CONTENT -->
       </div>
-      <!-- END SIDEBAR & CONTENT -->
     </div>
-    </div>
+
+    
 
     <!-- BEGIN FOOTER -->
     <div class="footer">

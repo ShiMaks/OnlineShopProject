@@ -20,11 +20,14 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     /**
      * SQL-statements
      */
-    private static final String CREATE_USER = "";
-    private static final String READ_USER_BY_ID = "";
-    private static final String UPDATE_USER = "";
-    private static final String DELETE_USER_BY_ID = "";
-    private static final String READ_ALL_USERS = "";
+    private static final String CREATE_USER = "INSERT INTO user (name, surname, email, phone, login, password, isAdmin) " +
+            "VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String READ_USER_BY_ID = "SELECT id, name, surname, email, phone, login FROM user" +
+            " WHERE id = ?";
+    private static final String UPDATE_USER = "UPDATE user SET name = ?, surname = ?, phone = ?, email = ?" +
+            " WHERE id = ?";
+    private static final String DELETE_USER_BY_ID = "DELETE FROM user WHERE id  = ?";
+    private static final String READ_ALL_USERS = "SELECT id, name, surname, email, phone, login FROM user";
     private static final String READ_USER_BY_LOGIN_PASS = "SELECT id, login, password, isAdmin FROM user " +
             "WHERE login = ? AND password = ?";
 

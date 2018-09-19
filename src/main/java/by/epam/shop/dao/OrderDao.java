@@ -41,4 +41,13 @@ public interface OrderDao extends BaseDao<Order> {
      */
     List<Order> getOrdersByStatus(String status) throws DaoException;
 
+    /**
+     * Gets all orders of the user
+     *
+     * @param idUser
+     * @return List of order
+     * @throws DaoException
+     */
+    List<Order> getUserOrders(int idUser) throws DaoException;
+
 }

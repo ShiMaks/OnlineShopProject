@@ -22,6 +22,6 @@ public class PageUserOrdersCommandImpl implements BaseCommand {
         User user = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
         List<Order> userOrders = orderService.getUserOrders(user.getId());
         request.setAttribute("userOrders", userOrders);
-        return null;
+        return "/jsp/pages/shop-account.jsp";
     }
 }

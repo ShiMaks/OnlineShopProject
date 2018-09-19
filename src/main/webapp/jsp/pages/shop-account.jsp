@@ -16,22 +16,22 @@
   <!-- Fonts END -->
 
   <!-- Global styles START -->          
-  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Global styles END --> 
    
   <!-- Page level plugin styles START -->
-  <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
-  <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
   <!-- Page level plugin styles END -->
 
   <!-- Theme styles START -->
-  <link href="assets/pages/css/components.css" rel="stylesheet">
-  <link href="assets/corporate/css/style.css" rel="stylesheet">
-  <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
-  <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
-  <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
-  <link href="assets/corporate/css/custom.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/pages/css/components.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/style.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/style-responsive.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/custom.css" rel="stylesheet">
   <!-- Theme styles END -->
 </head>
 <!-- Head END -->
@@ -64,7 +64,7 @@
             <!-- BEGIN TOP BAR MENU -->
             <div class="col-md-6 col-sm-6 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
-                    <li><a href="shop-account.html">My Account</a></li>
+                    <li><a href="/shop/FrontController?command=to_my_account">My Account</a></li>
                     <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
                     <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
                 </ul>
@@ -110,79 +110,52 @@
           <!-- BEGIN SIDEBAR -->
           <div class="sidebar col-md-3 col-sm-3">
             <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Login/Register</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Restore Password</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> My account</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Address book</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Wish list</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Returns</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Newsletter</a></li>
+              <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_account"><i class="fa fa-angle-right"></i> My Orders</a></li>
+              <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_change_password"><i class="fa fa-angle-right"></i> Change Password</a></li>
+              <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_information"><i class="fa fa-angle-right"></i> My Information</a></li>
             </ul>
           </div>
           <!-- END SIDEBAR -->
 
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-8">
-            <h1>My Account Page</h1>
+            <h1>My Orders:</h1>
             <div class="content-page">
               <div class="col-12">
                   <div class="card">
                       <div class="card-body">
-                          <h4 class="card-title">Orders:</h4>
+                          
                       </div>
                       <div class="table-responsive">
                           <table class="table table-hover">
                               <thead>
                                   <tr>
-                                      <th class="border-top-0">NAME</th>
+                                      <th class="border-top-0">№ ORDER</th>
                                       <th class="border-top-0">STATUS</th>
                                       <th class="border-top-0">DATE</th>
                                       <th class="border-top-0">PRICE</th>
                                   </tr>
                               </thead>
                               <tbody>
+                                <c:forEach items="${userOrders}" var="order">
                                   <tr>
                                       
-                                      <td class="txt-oflo">Elite admin</td>
-                                      <td><span class="label label-success label-rounded">SALE</span> </td>
-                                      <td class="txt-oflo">April 18, 2017</td>
-                                      <td><span class="font-medium">$24</span></td>
+                                      <td class="txt-oflo"># ${order.getId()}</td>
+                                      <c:choose>
+                                            <c:when test="${order.getStatus() == 'NEW'}">
+                                                    <td><span class="label label-danger label-rounded">${order.getStatus()}</span></td>
+                                            </c:when>
+                                            <c:when test="${order.getStatus() == 'DELIVERED'}">
+                                                    <td><span class="label label-success label-rounded">${order.getStatus()}</span></td>
+                                            </c:when>
+                                            <c:when test="${order.getStatus() == 'PAYED'}">
+                                                    <td><span class="label label-info label-rounded">${order.getStatus()}</span></td>
+                                            </c:when>
+                                      </c:choose>
+                                      <td class="txt-oflo">${order.getDataOrder()}</td>
+                                      <td><span class="font-medium">${order.getOrderCost()}</span></td>
                                   </tr>
-                                  <tr>
-                                      
-                                      <td class="txt-oflo">Real Homes WP Theme</td>
-                                      <td><span class="label label-info label-rounded">EXTENDED</span></td>
-                                      <td class="txt-oflo">April 19, 2017</td>
-                                      <td><span class="font-medium">$1250</span></td>
-                                  </tr>
-                                  <tr>
-                                      
-                                      <td class="txt-oflo">Ample Admin</td>
-                                      <td><span class="label label-purple label-rounded">Tax</span></td>
-                                      <td class="txt-oflo">April 19, 2017</td>
-                                      <td><span class="font-medium">$1250</span></td>
-                                  </tr>
-                                  <tr>
-                                      
-                                      <td class="txt-oflo">Medical Pro WP Theme</td>
-                                      <td><span class="label label-success label-rounded">Sale</span></td>
-                                      <td class="txt-oflo">April 20, 2017</td>
-                                      <td><span class="font-medium">-$24</span></td>
-                                  </tr>
-                                  <tr>
-                                      
-                                      <td class="txt-oflo">Hosting press html</td>
-                                      <td><span class="label label-success label-rounded">SALE</span></td>
-                                      <td class="txt-oflo">April 21, 2017</td>
-                                      <td><span class="font-medium">$24</span></td>
-                                  </tr>
-                                  <tr>
-                                      
-                                      <td class="txt-oflo">Digital Agency PSD</td>
-                                      <td><span class="label label-danger label-rounded">Tax</span> </td>
-                                      <td class="txt-oflo">April 23, 2017</td>
-                                      <td><span class="font-medium">-$14</span></td>
-                                  </tr>
+                                </c:forEach>  
                               </tbody>
                           </table>
                       </div>
@@ -223,18 +196,18 @@
     <!--[if lt IE 9]>
     <script src="assets/plugins/respond.min.js"></script>  
     <![endif]-->  
-    <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-    <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+    <script src="${pageContext.request.contextPath}/resources/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
 
     <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-    <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-    <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
 
-    <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/corporate/scripts/layout.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Layout.init();    

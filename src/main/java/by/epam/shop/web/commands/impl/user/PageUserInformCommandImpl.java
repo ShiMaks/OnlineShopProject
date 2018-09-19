@@ -16,10 +16,15 @@ public class PageUserInformCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
+
         User sessionUser = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
 
+        System.out.println(sessionUser.getId());
+
         User user = userService.getUser(sessionUser.getId());
-        request.setAttribute("", user);
-        return null;
+
+        System.out.println(user.getId());
+        request.setAttribute("userInform", user);
+        return "/jsp/pages/profile-account.jsp";
     }
 }

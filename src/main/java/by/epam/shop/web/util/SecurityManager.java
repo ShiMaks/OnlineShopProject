@@ -23,6 +23,7 @@ public class SecurityManager {
         accessRights.put(COMMAND_DELETE_PRODUCT,UserRoleEnum.ADMIN);
         accessRights.put(COMMAND_PREPARE_UPDATE_PRODUCT,UserRoleEnum.ADMIN);
         accessRights.put("add_product_to_cart",UserRoleEnum.USER);
+        accessRights.put(COMMAND_TO_MY_ACCOUNT, UserRoleEnum.USER);
     }
 
     public SecurityManager(){

@@ -28,6 +28,11 @@ public class User extends Entity {
     private String surname;
 
     /**
+     * Phone of user
+     */
+    private String phone;
+
+    /**
      * Email of user
      */
     private String email;
@@ -100,6 +105,14 @@ public class User extends Entity {
         isAdmin = admin;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,6 +126,7 @@ public class User extends Entity {
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
         if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
+        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
         return email != null ? email.equals(user.email) : user.email == null;
     }
 
@@ -123,6 +137,7 @@ public class User extends Entity {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (isAdmin ? 1 : 0);
         return result;

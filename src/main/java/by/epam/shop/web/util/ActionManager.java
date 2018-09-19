@@ -3,8 +3,7 @@ package by.epam.shop.web.util;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.commands.impl.admin.*;
 import by.epam.shop.web.commands.impl.all.*;
-import by.epam.shop.web.commands.impl.user.AddProductToCartCommandImpl;
-import by.epam.shop.web.commands.impl.user.CreateOrderCommandImpl;
+import by.epam.shop.web.commands.impl.user.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -92,6 +91,15 @@ public class ActionManager {
             case "add_product_to_cart": //user
                command = new AddProductToCartCommandImpl();
                break;
+            case COMMAND_TO_MY_ACCOUNT:
+                command = new PageUserOrdersCommandImpl();
+                break;
+            case "to_change_password": //user
+                command = new PageChangePassCommandInformation();
+                break;
+            case "to_my_information": //user
+                command = new PageUserInformCommandImpl();
+                break;
             case "сheckout": //user
                 command = new CreateOrderCommandImpl();
                 break;

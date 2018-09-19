@@ -34,6 +34,8 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
             "WHERE order_id = ?";
     private static final String READ_ORDER_BY_STATUS = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
             "WHERE status = ?";
+    private static final String READ_ALL_ORDERS_USER = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
+            " WHERE client_id = ?";
 
     @Override
     public void create(Order order) throws DaoException {
@@ -196,6 +198,40 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
         return orders;
     }
 
+    @Override
+    public List<Order> getUserOrders(int idUser) throws DaoException {
+        List<Order> orders = new ArrayList<>();
+        ResultSet result = null;
+        try (Connection connection = connect.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_ALL_ORDERS_USER);){
+
+            statement.setInt(1, idUser);
+            result = statement.executeQuery();
+
+            while(result.next()) {
+                Order order = new Order();
+                order.setId(result.getInt("id"));
+                order.setIdClient(result.getInt("client_id"));
+                order.setStatus(valueOf(result.getString("status")));
+                order.setDataOrder(result.getDate("dataOrder"));
+                order.setOrderCost(result.getInt("price"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }finally {
+            if(result!=null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return orders;
+    }
+
+
     private OrderStatusEnum valueOf(String value){
         if(value.toUpperCase().equals(OrderStatusEnum.NEW.toString())){
             return OrderStatusEnum.NEW;
@@ -203,7 +239,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
             return OrderStatusEnum.CANCELLED;
         } else if(value.toUpperCase().equals(OrderStatusEnum.PAYED.toString())){
             return OrderStatusEnum.PAYED;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.DELIVERED)){
+        } else if(value.toUpperCase().equals(OrderStatusEnum.DELIVERED.toString())){
             return OrderStatusEnum.DELIVERED;
         } else {
             return null;

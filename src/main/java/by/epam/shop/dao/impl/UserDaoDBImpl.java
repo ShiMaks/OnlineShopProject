@@ -45,17 +45,32 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     @Override
     public User read(int id) throws DaoException {
         User user = null;
+        ResultSet result = null;
         try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_USER_BY_ID);
-             ResultSet result = statement.executeQuery();){
+             PreparedStatement statement = connection.prepareStatement(READ_USER_BY_ID);){
 
             statement.setInt(1, id);
+            result = statement.executeQuery();
 
             if(result.next()) {
-                //filling in an order
+                user = new User();
+                user.setId(result.getInt("id"));
+                user.setName(result.getString("name"));
+                user.setSurname(result.getString("surname"));
+                user.setLogin(result.getString("login"));
+                user.setEmail(result.getString("email"));
+                user.setPhone(result.getString("phone"));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            if(result!=null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return user;
     }

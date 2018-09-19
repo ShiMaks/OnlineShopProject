@@ -50,6 +50,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getUserOrders(int idUser) throws ServiceException {
-        return null;
+        return orderDao.getUserOrders(idUser);
     }
 }

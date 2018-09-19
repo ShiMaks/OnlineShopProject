@@ -80,7 +80,7 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li><a href="shop-account.html">My Account</a></li>
+                        <li><a href="/shop/FrontController?command=to_my_account">My Account</a></li>
                         <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
                         <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
                     </ul>

@@ -9,6 +9,7 @@ public class CommandDeclaration {
     public static final String COMMAND_TO_START_PAGE = "start_page";
     public static final String COMMAND_TO_PRODUCTS = "to_products";
     public static final String COMMAND_TO_ORDERS = "to_orders";
+    public static final String COMMAND_TO_MY_ACCOUNT = "to_my_account";
     public static final String COMMAND_TO_CATEGORIES = "to_categories";
     public static final String COMMAND_TO_LOG_IN = "to_log_in";
     public static final String COMMAND_PREPARE_CREATE_CATEGORY = "prepare_create_category";

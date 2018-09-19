@@ -16,22 +16,22 @@
   <!-- Fonts END -->
 
   <!-- Global styles START -->          
-  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Global styles END --> 
    
   <!-- Page level plugin styles START -->
-  <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
-  <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
   <!-- Page level plugin styles END -->
 
   <!-- Theme styles START -->
-  <link href="assets/pages/css/components.css" rel="stylesheet">
-  <link href="assets/corporate/css/style.css" rel="stylesheet">
-  <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
-  <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
-  <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
-  <link href="assets/corporate/css/custom.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/pages/css/components.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/style.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/style-responsive.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+  <link href="${pageContext.request.contextPath}/resources/corporate/css/custom.css" rel="stylesheet">
   <!-- Theme styles END -->
 </head>
 <!-- Head END -->
@@ -109,13 +109,9 @@
           <!-- BEGIN SIDEBAR -->
           <div class="sidebar col-md-3 col-sm-3">
             <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Login/Register</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Restore Password</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> My account</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Address book</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Wish list</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Returns</a></li>
-              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Newsletter</a></li>
+                    <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_account"><i class="fa fa-angle-right"></i> My Orders</a></li>
+                    <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_change_password"><i class="fa fa-angle-right"></i> Change Password</a></li>
+                    <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_information"><i class="fa fa-angle-right"></i> My Information</a></li>
             </ul>
           </div>
           <!-- END SIDEBAR -->
@@ -127,28 +123,30 @@
                     <div class="card">
                         <div class="card-body">
                             <form class="form-horizontal form-material" name="updateUserUnform" action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="update_user_inform" />
+                                <input type="hidden" name="user_id" value = <c:out value="${userInform.getId()}"/>  
                                 <div class="form-group">
                                     <label class="col-md-12">Name</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="user_name" value="<c:out value="${product.getName()}"/>">
+                                        <input type="text" class="form-control form-control-line" name="user_name" value="<c:out value="${userInform.getName()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Surname</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="user_surname" value="<c:out value="${product.getName()}"/>">
+                                        <input type="text" class="form-control form-control-line" name="user_surname" value="<c:out value="${userInform.getSurname()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" class="form-control form-control-line" id="example-email" name="user_email" value="<c:out value="${product.getName()}"/>">
+                                        <input type="email" class="form-control form-control-line" id="example-email" name="user_email" value="<c:out value="${userInform.getEmail()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Phone No</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="user_phone" value="<c:out value="${product.getName()}"/>">
+                                        <input type="text" class="form-control form-control-line" name="user_phone" value="<c:out value="${userInform.getPhone()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -185,18 +183,18 @@
     <!-- Load javascripts at bottom, this will reduce page load time -->
     <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
 
-    <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-    <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+    <script src="${pageContext.request.contextPath}/resources/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
 
     <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-    <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-    <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
 
-    <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/corporate/scripts/layout.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Layout.init();    

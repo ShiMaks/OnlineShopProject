@@ -6,6 +6,8 @@ import by.epam.shop.dao.exception.DaoException;
 import by.epam.shop.domain.Order;
 import by.epam.shop.domain.OrderItem;
 import by.epam.shop.domain.OrderStatusEnum;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.List;
  * @author Shilvian Maksim
  */
 public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
+
+    private static final Logger LOGGER = LogManager.getLogger(OrderDaoDBImpl.class);
 
     /**
      * SQL-statements

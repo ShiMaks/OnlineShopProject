@@ -1,6 +1,6 @@
 package by.epam.shop.web.util;
 
-public class PagePathConstant {
+public final class PagePathConstant {
 
     private PagePathConstant(){
         throw new IllegalStateException("Utility class");

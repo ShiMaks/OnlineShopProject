@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_CREATE_CATEGORY;
 
-public class PreparationCreateCategoryAdminImpl implements BaseCommand{
+public class PageCreateCategoryAdminImpl implements BaseCommand{
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         return PAGE_CREATE_CATEGORY;

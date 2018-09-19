@@ -47,8 +47,8 @@
                 <!-- BEGIN TOP BAR LEFT PART -->
                 <div class="col-md-6 col-sm-6 additional-shop-info">
                     <ul class="list-unstyled list-inline">
-                        <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
-                        <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
+                        <li><i class="fa fa-phone"></i><span>+375(29) 764-80-65</span></li>
+                        
                     </ul>
                 </div>
                 <!-- END TOP BAR LEFT PART -->
@@ -67,7 +67,7 @@
     <!-- BEGIN HEADER -->
     <div class="header">
       <div class="container">
-        <a class="site-logo" href="index.html"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-corp-red.png" alt="Metronic FrontEnd"></a>
+          <a class="site-logo" href="shop-index.html"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -88,8 +88,8 @@
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form">
-                    <form name = "LogIn" action="FrontController" method="POST">
+                  
+                    <form name = "LogIn" action="FrontController" method="POST" class="form-horizontal form-without-legend">
                       <input type="hidden" name="command" value="log_in" />
                       <div class="form-group">
                         <label for="text" class="col-lg-4 control-label">Login <span class="require">*</span></label>
@@ -104,17 +104,13 @@
                         </div>
                       </div>
                       <div class="row">
-                      
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                          <input type="submit" class="btn btn-primary" value="Login">
-                        </div>
+                        
+                          <input type="submit" class="btn btn-primary" align="right" value="Login">
+                        
                       </div>
                     </form>  
-                      <div class="row">  
-                    </div>
-                  </form>
+                  </div>
+          
                 </div>
                 
               </div>

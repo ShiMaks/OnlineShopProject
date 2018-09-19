@@ -1,6 +1,6 @@
 package by.epam.shop.web.util;
 
-public class WebConstantDeclaration {
+public final class WebConstantDeclaration {
 
     private WebConstantDeclaration() {
         throw new IllegalStateException("Utility class");

@@ -13,7 +13,7 @@ import java.util.List;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_PRODUCTS_ADMIN;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_PRODUCTS_ADMIN;
 
-public class PreparationProductsAdminCommandImpl implements BaseCommand {
+public class PageProductsAdminCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
 

@@ -3,6 +3,8 @@ package by.epam.shop.web.controller;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 import by.epam.shop.web.util.ActionManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +17,8 @@ import static by.epam.shop.web.util.PagePathConstant.*;
 
 
 public class FrontController extends HttpServlet {
+
+    private static final Logger LOGGER = LogManager.getLogger(FrontController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -47,6 +51,7 @@ public class FrontController extends HttpServlet {
             }
         } catch (CommandException e) {
             request.getRequestDispatcher(PAGE_ERROR).forward(request, response);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 }

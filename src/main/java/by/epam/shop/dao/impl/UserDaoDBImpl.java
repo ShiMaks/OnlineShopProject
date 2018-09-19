@@ -4,6 +4,8 @@ import by.epam.shop.dao.AbstractDao;
 import by.epam.shop.dao.UserDao;
 import by.epam.shop.dao.exception.DaoException;
 import by.epam.shop.domain.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +18,8 @@ import java.sql.SQLException;
  * @author Shilvian Maksim
  */
 public class UserDaoDBImpl extends AbstractDao implements UserDao {
+
+    private static final Logger LOGGER = LogManager.getLogger(UserDaoDBImpl.class);
 
     /**
      * SQL-statements

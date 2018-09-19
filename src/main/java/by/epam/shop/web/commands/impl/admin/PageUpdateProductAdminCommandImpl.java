@@ -18,7 +18,7 @@ import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_CA
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
 
-public class PreparationUpdateProductAdminCommandImpl implements BaseCommand {
+public class PageUpdateProductAdminCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
     private CategoryService categoryService = ServiceFactory.getCategoryService();

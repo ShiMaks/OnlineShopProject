@@ -13,7 +13,7 @@ import java.util.List;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_CATEGORY_ADMIN;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_CATEGORIES_ADMIN;
 
-public class PreparationCategoriesAdminCommandImpl implements BaseCommand {
+public class PageCategoriesAdminCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
 

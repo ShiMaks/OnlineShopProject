@@ -23,19 +23,19 @@ public class ActionManager {
                 command = new StartPageCommandImpl();
                 break;
             case "start_page_admin":
-                command = new PreparationAdminPageCommandImpl();
+                command = new PageAdminCommandImpl();
                 break;
             case COMMAND_TO_PRODUCTS:
-                command = new PreparationProductsAdminCommandImpl();
+                command = new PageProductsAdminCommandImpl();
                 break;
             case COMMAND_TO_ORDERS:
-                command = new PreparationOrdersAdminCommandImpl();
+                command = new PageOrdersAdminCommandImpl();
                 break;
             case COMMAND_TO_CATEGORIES:
-                command = new PreparationCategoriesAdminCommandImpl();
+                command = new PageCategoriesAdminCommandImpl();
                 break;
             case COMMAND_PREPARE_CREATE_CATEGORY:
-                command = new PreparationCreateCategoryAdminImpl();
+                command = new PageCreateCategoryAdminImpl();
                 break;
             case COMMAND_CREATE_CATEGORY:
                 command = new AddCategoryCommandImpl();
@@ -44,7 +44,7 @@ public class ActionManager {
                 command = new DeleteCategoryAdminCommandImpl();
                 break;
             case COMMAND_PREPARE_UPDATE_CATEGORY:
-                command = new PreparationUpdateCategoryAdminCommandImpl();
+                command = new PageUpdateCategoryAdminCommandImpl();
                 break;
             case COMMAND_UPDATE_CATEGORY:
                 command = new UpdateCategoryAdminCommandImpl();
@@ -53,7 +53,7 @@ public class ActionManager {
                 command = new DeleteProductAdminCommandImpl();
                 break;
             case COMMAND_PREPARE_UPDATE_PRODUCT:
-                command = new PreparationUpdateProductAdminCommandImpl();
+                command = new PageUpdateProductAdminCommandImpl();
                 break;
             case "update_product": //admin
                 command = new UpdateProductAdminCommandImpl();

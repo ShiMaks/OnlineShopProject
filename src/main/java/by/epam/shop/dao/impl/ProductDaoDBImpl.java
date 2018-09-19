@@ -4,10 +4,14 @@ import by.epam.shop.dao.AbstractDao;
 import by.epam.shop.dao.ProductDao;
 import by.epam.shop.dao.exception.DaoException;
 import by.epam.shop.domain.Product;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static by.epam.shop.dao.util.TablesColumnNamesDeclaration.*;
 
 /**
  * Class for working with the product table from database
@@ -15,6 +19,8 @@ import java.util.List;
  * @author Shilvian Maksim
  */
 public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
+
+    private static final Logger LOGGER = LogManager.getLogger(ProductDaoDBImpl.class);
 
     /**
      * SQL-statements
@@ -61,13 +67,13 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             result = statement.executeQuery();
 
             if(result.next()) {
-                product.setId(result.getInt("id"));
-                product.setName(result.getString("name"));
-                product.setIdCategory(result.getInt("category_id"));
-                product.setPrice(result.getInt("price"));
-                product.setPicture(result.getString("picture"));
-                product.setDescription(result.getString("description"));
-                product.setQuantity(result.getInt("quantity"));
+                product.setId(result.getInt(PRODUCT_COLUMN_ID));
+                product.setName(result.getString(PRODUCT_COLUMN_NAME));
+                product.setIdCategory(result.getInt(PRODUCT_COLUMN_CATEGORY_ID));
+                product.setPrice(result.getInt(PRODUCT_COLUMN_PRICE));
+                product.setPicture(result.getString(PRODUCT_COLUMN_PICTURE));
+                product.setDescription(result.getString(PRODUCT_COLUMN_DESCRIPTION));
+                product.setQuantity(result.getInt(PRODUCT_COLUMN_QUANTITY));
             }
         } catch (SQLException e) {
             throw new DaoException(e);

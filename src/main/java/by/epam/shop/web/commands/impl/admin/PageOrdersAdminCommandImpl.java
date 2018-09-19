@@ -9,7 +9,7 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class PreparationOrdersAdminCommandImpl implements BaseCommand {
+public class PageOrdersAdminCommandImpl implements BaseCommand {
 
     private OrderService orderService = ServiceFactory.getOrderService();
 

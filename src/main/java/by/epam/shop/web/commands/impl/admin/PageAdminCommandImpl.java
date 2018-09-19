@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
 
-public class PreparationAdminPageCommandImpl implements BaseCommand {
+public class PageAdminCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
     private CategoryService categoryService = ServiceFactory.getCategoryService();

@@ -4,6 +4,8 @@ import by.epam.shop.dao.AbstractDao;
 import by.epam.shop.dao.CategoryDao;
 import by.epam.shop.dao.exception.DaoException;
 import by.epam.shop.domain.Category;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.List;
  * @author Shilvian Maksim
  */
 public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
+
+    private static final Logger LOGGER = LogManager.getLogger(CategoryDaoDBImpl.class);
 
     /**
      * SQL-statements

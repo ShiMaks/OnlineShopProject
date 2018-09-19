@@ -14,7 +14,7 @@ import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY_ID;
 
-public class PreparationUpdateCategoryAdminCommandImpl implements BaseCommand {
+public class PageUpdateCategoryAdminCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
 

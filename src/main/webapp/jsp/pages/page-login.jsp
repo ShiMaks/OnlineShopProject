@@ -10,7 +10,6 @@
   <meta charset="utf-8">
   <title>Login</title>
 
-  
 
   <link rel="shortcut icon" href="favicon.ico">
 
@@ -100,7 +99,7 @@
                       <div class="form-group">
                         <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" name="password" class="form-control" id="password">
+                          <input type="password" name="password" class="form-control" id="password">
                         </div>
                       </div>
                       <div class="row">

@@ -36,6 +36,7 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
             statement.setString(1, entity.getName());
             statement.executeUpdate();
         } catch (SQLException e) {
+
             throw new DaoException(e);
         }
     }

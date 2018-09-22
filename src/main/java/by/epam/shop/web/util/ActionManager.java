@@ -88,11 +88,20 @@ public class ActionManager {
             case "show_products_info": //all
                 command = new DisplayingProductInfoCommandImpl();
                 break;
+            case "to_cart": //user
+                command = new PageShopCartCommandImpl();
+                break;
             case "add_product_to_cart": //user
                command = new AddProductToCartCommandImpl();
                break;
+            case "remove_from_cart": //user
+                command = new DeleteProductFromCartCommandImpl();
+                break;
             case COMMAND_TO_MY_ACCOUNT:
                 command = new PageUserOrdersCommandImpl();
+                break;
+            case "show_details": //user
+                command = new PageUserOrderDetailsCommandImpl();
                 break;
             case "to_change_password": //user
                 command = new PageChangePassCommandInformation();

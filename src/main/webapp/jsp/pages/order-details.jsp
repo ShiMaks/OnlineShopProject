@@ -119,41 +119,30 @@
 
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-8">
-            <h1>My Orders:</h1>
+            <h1>Order Details:</h1>
             <div class="content-page">
               <div class="col-12">
                   <div class="card">
                       <div class="card-body">
-                          
+                          <h4>№ order: ${order.getId()}</h4>
                       </div>
                       <div class="table-responsive">
                           <table class="table table-hover">
                               <thead>
                                   <tr>
-                                      <th class="border-top-0">№ ORDER</th>
-                                      <th class="border-top-0">STATUS</th>
-                                      <th class="border-top-0">DATE</th>
-                                      <th class="border-top-0">PRICE</th>
+                                      <th class="border-top-0">Picture</th>
+                                      <th class="border-top-0">Product Name</th>
+                                      <th class="border-top-0">Description</th>
+                                      <th class="border-top-0">Price</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                <c:forEach items="${userOrders}" var="order">
+                                  <c:forEach items="${listProducts}" var="product">
                                   <tr>
-                                      
-                                      <td class="txt-oflo"><a href="/shop/FrontController?command=show_details&order_id=${order.getId()}"># ${order.getId()}</a></td>
-                                      <c:choose>
-                                            <c:when test="${order.getStatus() == 'NEW'}">
-                                                    <td><span class="label label-danger label-rounded">${order.getStatus()}</span></td>
-                                            </c:when>
-                                            <c:when test="${order.getStatus() == 'DELIVERED'}">
-                                                    <td><span class="label label-success label-rounded">${order.getStatus()}</span></td>
-                                            </c:when>
-                                            <c:when test="${order.getStatus() == 'PAYED'}">
-                                                    <td><span class="label label-info label-rounded">${order.getStatus()}</span></td>
-                                            </c:when>
-                                      </c:choose>
-                                      <td class="txt-oflo">${order.getDataOrder()}</td>
-                                      <td><span class="font-medium">${order.getOrderCost()}</span></td>
+                                      <td><img src="${product.getPicture()}" width="190" height="220" alt="Product"></td>
+                                      <td>${product.getName()}</td>
+                                      <td>${product.getDescription()}</td>
+                                      <td>${product.getPrice()}$</td>
                                   </tr>
                                 </c:forEach>  
                               </tbody>

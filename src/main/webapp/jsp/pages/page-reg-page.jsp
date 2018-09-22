@@ -109,7 +109,7 @@
                       <div class="form-group">
                         <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" class="form-control" id="password">
+                          <input type="password" class="form-control" id="password">
                         </div>
                       </div>
                       <div class="form-group">

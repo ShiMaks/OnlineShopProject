@@ -168,7 +168,7 @@
                             </div>  
                             <div class="field">          
                                 <label >Description:</label>
-                                    <input type="text" name="description" placeholder="Description of product…">
+                                    <textarea type="text" name="description" placeholder="Description of product…"></textarea>
                                     <span class="help-block"></span>
                             </div>    
                             <div class="field">     

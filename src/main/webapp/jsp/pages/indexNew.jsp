@@ -104,7 +104,7 @@
                 <a href="#" class="top-cart-info-count">3 items</a>
                 <a href="#" class="top-cart-info-value">$1260</a>
               </div>
-          <a href="shop-shopping-cart.html"><i class="fa fa-shopping-cart"></i></a>                        
+          <a href="/shop/FrontController?command=to_cart"><i class="fa fa-shopping-cart"></i></a>                        
         </div>
         <!--END CART -->
 

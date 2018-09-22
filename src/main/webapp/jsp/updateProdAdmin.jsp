@@ -168,7 +168,7 @@
                                     <span class="help-block"></span>
                               
                                     <label >Description:</label>
-                                    <input type="text" name="description" value="<c:out value="${product.getDescription()}"/>">
+                                    <textarea type="text" name="description" value="<c:out value="${product.getDescription()}"/>"></textarea>
                                     <span class="help-block"></span>
                                
                                     <label >Quantity:</label>

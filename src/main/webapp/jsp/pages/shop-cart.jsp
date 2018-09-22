@@ -137,7 +137,11 @@
                         <strong><span>$</span>${entry.key.getPrice()}</strong>
                       </td>
                       <td class="del-goods-col">
-                        <a class="del-goods" href="javascript:;">&nbsp;</a>
+                          <form action="FrontController" method="POST">
+                              <input type="hidden" name="command" value="remove_from_cart" />
+                              <input type="hidden" name="product_id" value="${entry.key.getId()}" />
+                              <input type="submit" value="" class="del-goods"/>
+                          </form>                      
                       </td>
                     </tr>
                   </c:forEach>

@@ -9,7 +9,7 @@ public final class PagePathConstant {
     public static final String PAGE_START_PAGE = "/WEB-INF/start_page.jsp";
     public static final String PAGE_INDEX = "/jsp/index.jsp";
     public static final String PAGE_SIGN_IN = "/jsp/pages/page-login.jsp";
-    public static final String PAGE_REGISTRATION = "";
+    public static final String PAGE_REGISTRATION = "/jsp/pages/page-reg-page.jsp";
     public static final String PAGE_CART = "/jsp/pages/shop-cart.jsp";
     public static final String PAGE_ERROR = "/jsp/pages/error.jsp";
 

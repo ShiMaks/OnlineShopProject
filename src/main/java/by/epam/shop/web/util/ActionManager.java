@@ -79,14 +79,17 @@ public class ActionManager {
             case "log_in": //all
                 command = new AuthorizationCommandImpl();
                 break;
+            case "to_registration": //all
+                command = new PageRegistrationCommandImpl();
+                break;
             case "to_log_out": //all
                 command = new LogOutCommandImpl();
                 break;
             case "show_products_category": //all
-                command = new DisplayCategoryProdCommandImpl();
+                command = new PageCategoryProductsCommandImpl();
                 break;
             case "show_products_info": //all
-                command = new DisplayingProductInfoCommandImpl();
+                command = new PageProductInfoCommandImpl();
                 break;
             case "to_cart": //user
                 command = new PageShopCartCommandImpl();

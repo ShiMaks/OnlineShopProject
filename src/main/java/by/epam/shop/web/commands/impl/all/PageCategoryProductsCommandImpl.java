@@ -11,7 +11,7 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class DisplayCategoryProdCommandImpl implements BaseCommand {
+public class PageCategoryProductsCommandImpl implements BaseCommand {
 
     private ProductService productService = ServiceFactory.getProductService();
     private CategoryService categoryService = ServiceFactory.getCategoryService();

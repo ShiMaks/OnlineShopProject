@@ -35,12 +35,8 @@ public class FrontController extends HttpServlet {
         String path = null;
         try {
             path = command.executeCommand(request);
-            if (path.equals(REDIRECT_ADMIN_PRODUCT_URL)) {
-                response.sendRedirect(request.getContextPath() + REDIRECT_ADMIN_PRODUCT_URL);
-            } else if (path.equals(REDIRECT_ADMIN_CATEGORY_URL)) {
-                response.sendRedirect(request.getContextPath() + REDIRECT_ADMIN_CATEGORY_URL);
-            } else if (path.equals(REDIRECT_ADMIN_ORDER_URL)) {
-                response.sendRedirect(request.getContextPath() + REDIRECT_ADMIN_ORDER_URL);
+            if (path.equals(REDIRECT_ADMIN_URL)) {
+                response.sendRedirect(request.getContextPath() + REDIRECT_ADMIN_URL);
             } else if (path.equals(REDIRECT_USER_URL)) {
                 response.sendRedirect(request.getContextPath() + REDIRECT_USER_URL);
             } else if (path.equals(REDIRECT_GUEST_URL)) {

@@ -9,10 +9,11 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static by.epam.shop.web.util.PagePathConstant.PAGE_CATEGORY_ADMIN;
-import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_CATEGORY_URL;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
+import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_ADMIN_CATEGORY;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_NAME_CATEGORY;
+import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
 
 public class AddCategoryCommandImpl implements BaseCommand {
 
@@ -26,9 +27,10 @@ public class AddCategoryCommandImpl implements BaseCommand {
         category.setName(nameCategory);
         try {
             categoryService.addCategoryToShop(category);
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_CATEGORY);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return REDIRECT_ADMIN_CATEGORY_URL;
+        return REDIRECT_ADMIN_URL;
     }
 }

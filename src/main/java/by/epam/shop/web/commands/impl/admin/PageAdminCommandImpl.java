@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_USERS;
 
 public class PageAdminCommandImpl implements BaseCommand {
 
@@ -21,7 +22,7 @@ public class PageAdminCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         List<User> users = userService.getUsers();
-        request.setAttribute("users", users);
+        request.setAttribute(REQUEST_PARAM_USERS, users);
         return PAGE_ADMIN;
     }
 }

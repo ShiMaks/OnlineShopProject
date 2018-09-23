@@ -2,14 +2,13 @@ package by.epam.shop.web.commands.impl.admin;
 
 import by.epam.shop.domain.Product;
 import by.epam.shop.service.ProductService;
-import by.epam.shop.service.exception.ServiceException;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_PRODUCT_URL;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_URL;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class UpdateProductAdminCommandImpl implements BaseCommand {
@@ -36,11 +35,9 @@ public class UpdateProductAdminCommandImpl implements BaseCommand {
         product.setPrice(price);
         product.setPicture(picture);
 
-        try {
-            productService.updateProductInfo(product);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
-        return REDIRECT_ADMIN_PRODUCT_URL;
+        productService.updateProductInfo(product);
+        request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
+
+        return REDIRECT_ADMIN_URL;
     }
 }

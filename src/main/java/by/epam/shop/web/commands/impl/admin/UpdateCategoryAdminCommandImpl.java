@@ -2,20 +2,16 @@ package by.epam.shop.web.commands.impl.admin;
 
 import by.epam.shop.domain.Category;
 import by.epam.shop.service.CategoryService;
-import by.epam.shop.service.exception.ServiceException;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
-import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
-import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_CATEGORY_URL;
+import static by.epam.shop.web.util.PagePathConstant.*;
 import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_CATEGORY_ID;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_NAME_CATEGORY;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class UpdateCategoryAdminCommandImpl implements BaseCommand {
 
@@ -31,7 +27,8 @@ public class UpdateCategoryAdminCommandImpl implements BaseCommand {
             category.setId(Integer.parseInt(idCategory));
             category.setName(nameCategory);
             categoryService.updateCategoryInfo(category);
-            return REDIRECT_ADMIN_CATEGORY_URL;
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_CATEGORY);
+            return REDIRECT_ADMIN_URL;
         } else {
             return PAGE_ERROR;
         }

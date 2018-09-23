@@ -32,6 +32,7 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_PHONE = "phone";
     public static final String REQUEST_PARAM_USER_ROLE = "user_type";
     public static final String REQUEST_PARAM_NEW_USER = "new_user";
+    public static final String REQUEST_PARAM_USERS = "users";
 
 
     public static final String REQUEST_PARAM_COMMAND = "command";
@@ -44,5 +45,10 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_INVALID_SURNAME = "invalid_surname";
     public static final String REQUEST_PARAM_INVALID_EMAIL = "invalid_email";
 
+    public static final String SESSION_PAGE_TYPE = "session_page_type";
+    public static final String PAGE_TYPE_ADMIN_CATEGORY = "categories_page";
+    public static final String PAGE_TYPE_ADMIN_PRODUCT = "products_page";
+    public static final String PAGE_TYPE_ADMIN_ORDERS = "orders_page";
+    public static final String PAGE_TYPE_ADMIN = "main_admin_page";
 
 }

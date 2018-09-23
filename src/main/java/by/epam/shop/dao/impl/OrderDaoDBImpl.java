@@ -37,7 +37,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     private static final String READ_PRODUCTS_OF_ORDER = "SELECT order_id, product_id, quantity, price FROM order_item " +
             "WHERE order_id = ?";
     private static final String READ_ORDER_BY_STATUS = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
-            "WHERE status = ?";
+            " WHERE status = ?";
     private static final String READ_ALL_ORDERS_USER = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
             " WHERE client_id = ?";
 

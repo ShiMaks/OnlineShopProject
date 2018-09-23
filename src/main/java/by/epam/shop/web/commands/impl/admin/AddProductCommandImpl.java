@@ -8,7 +8,7 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_PRODUCT_URL;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_URL;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class AddProductCommandImpl implements BaseCommand {
@@ -34,6 +34,7 @@ public class AddProductCommandImpl implements BaseCommand {
         product.setPicture(picture);
 
         productService.addProductToShop(product);
-        return REDIRECT_ADMIN_PRODUCT_URL;
+        request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
+        return REDIRECT_ADMIN_URL;
     }
 }

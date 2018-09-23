@@ -1,18 +1,17 @@
 package by.epam.shop.web.commands.impl.admin;
 
 import by.epam.shop.service.ProductService;
-import by.epam.shop.service.exception.ServiceException;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static by.epam.shop.web.util.PagePathConstant.PAGE_ADMIN;
-import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
-import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_PRODUCT_URL;
+import static by.epam.shop.web.util.PagePathConstant.*;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
+import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_ADMIN_PRODUCT;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
+import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
 
 public class DeleteProductAdminCommandImpl implements BaseCommand {
 
@@ -23,7 +22,8 @@ public class DeleteProductAdminCommandImpl implements BaseCommand {
         String idProduct = request.getParameter(REQUEST_PARAM_PRODUCT_ID);
         if(validatePositiveInt(idProduct)) {
             productService.deleteProduct(Integer.parseInt(idProduct));
-            return REDIRECT_ADMIN_PRODUCT_URL;
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
+            return REDIRECT_ADMIN_URL;
         } else {
             return PAGE_ERROR;
         }

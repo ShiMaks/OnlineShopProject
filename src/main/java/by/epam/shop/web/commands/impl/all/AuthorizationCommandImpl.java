@@ -44,6 +44,7 @@ public class AuthorizationCommandImpl implements BaseCommand {
     private String identifyUserRole(User user, HttpServletRequest request) {
         if (user.isAdmin()) {
             request.getSession().setAttribute(REQUEST_PARAM_USER_ROLE, UserRoleEnum.ADMIN);
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN);
             return REDIRECT_ADMIN_URL;
         } else {
             request.getSession().setAttribute(REQUEST_PARAM_USER_ROLE, UserRoleEnum.USER);

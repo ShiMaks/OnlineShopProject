@@ -151,9 +151,24 @@
                         <legend><strong >Order Details:</strong></legend>
                         <div class="field">        
                               <label >Client Name:</label>
-                                  <input type="text" name="name_client" disabled value="<c:out value="${order.getIdClient()}"/>">
+                                  <input type="text" name="name_client" disabled value="<c:out value="${user.getName()}"/>">
                                   <span class="help-block"></span>
                         </div>
+                        <div class="field">        
+                                <label >Client Last Name:</label>
+                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getSurname()}"/>">
+                                    <span class="help-block"></span>
+                        </div>
+                        <div class="field">        
+                                <label >Email:</label>
+                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getEmail()}"/>">
+                                    <span class="help-block"></span>
+                        </div>  
+                        <div class="field">        
+                                <label >Phone:</label>
+                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getPhone()}"/>">
+                                    <span class="help-block"></span>
+                        </div>  
                         <div class="field">          
                               <label >Date order:</label>
                                   <input type="text" name="date_order" disabled value="<c:out value="${order.getDataOrder()}"/>">

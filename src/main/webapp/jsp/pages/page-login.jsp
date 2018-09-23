@@ -54,8 +54,8 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li><a href="page-login.html">Log In</a></li>
-                        <li><a href="page-reg-page.html">Registration</a></li>
+                        <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
+                        <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -66,7 +66,7 @@
     <!-- BEGIN HEADER -->
     <div class="header">
       <div class="container">
-          <a class="site-logo" href="shop-index.html"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
+          <a class="site-logo" href="/shop/FrontController?command=start_page"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 

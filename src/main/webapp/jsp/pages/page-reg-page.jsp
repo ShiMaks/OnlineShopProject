@@ -45,7 +45,7 @@
               <div class="col-md-6 col-sm-6 additional-shop-info">
                   <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+375(29) 764-80-65</span></li>
-                      <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
+                      
                   </ul>
               </div>
               <!-- END TOP BAR LEFT PART -->
@@ -64,7 +64,7 @@
   <!-- BEGIN HEADER -->
   <div class="header">
     <div class="container">
-      <a class="site-logo" href="shop-index.html"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
+      <a class="site-logo" href="/shop/FrontController?command=start_page"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
 
       <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 

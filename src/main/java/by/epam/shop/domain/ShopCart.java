@@ -63,4 +63,12 @@ public class ShopCart {
         }
         return totalCost;
     }
+
+    public int getQuantityProducts(){
+        int quantity = 0;
+        for(Map.Entry<Product, Integer> entry : products.entrySet()){
+            quantity = quantity + (int) entry.getValue();
+        }
+        return quantity;
+    }
 }

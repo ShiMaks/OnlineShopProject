@@ -7,7 +7,7 @@
 <!-- Head BEGIN -->
 <head>
   <meta charset="utf-8">
-  <title>My Account</title>
+  <title>My Account: Change Password</title>
 
   
 
@@ -66,9 +66,10 @@
             <!-- BEGIN TOP BAR MENU -->
             <div class="col-md-6 col-sm-6 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
-                    <li><a href="shop-account.html">My Account</a></li>
+                    <li><a href="/shop/FrontController?command=to_my_account">My Account</a></li>
                     <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
                     <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
+                    <li><a href="/shop/FrontController?command=to_log_out">LogOut</a></li>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -80,17 +81,25 @@
 <!-- BEGIN HEADER -->
 <div class="header">
   <div class="container">
-    <a class="site-logo" href="shop-index.html"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
+    <a class="site-logo" href="/shop/FrontController?command=start_page"><img src="${pageContext.request.contextPath}/resources/corporate/img/logos/logo-shop-red.png" alt="e-Shop"></a>
 
     <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
     <!-- BEGIN CART -->
     <div class="top-cart-block">
         <div class="top-cart-info">
-            <a href="#" class="top-cart-info-count">3 items</a>
-            <a href="#" class="top-cart-info-value">$1260</a>
+            <c:choose>
+                <c:when test="${sessionScope.shopCart != null}">
+                    <a href="#" class="top-cart-info-count">${sessionScope.shopCart.getQuantityProducts()} items</a>
+                    <a href="#" class="top-cart-info-value">$ ${sessionScope.shopCart.getTotalCost()}</a>
+                </c:when>
+                <c:when test="${sessionScope.shopCart == null}">
+                    <a href="#" class="top-cart-info-count">0 items</a>
+                    <a href="#" class="top-cart-info-value">$ 0</a>
+                </c:when>    
+                </c:choose>
           </div>
-      <a href="shop-shopping-cart.html"><i class="fa fa-shopping-cart"></i></a>                        
+      <a href="/shop/FrontController?command=to_cart"><i class="fa fa-shopping-cart"></i></a>                        
     </div>
     <!--END CART -->
 

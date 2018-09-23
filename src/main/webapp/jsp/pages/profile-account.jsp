@@ -137,25 +137,25 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Name</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="user_name" value="<c:out value="${userInform.getName()}"/>">
+                                        <input type="text" class="form-control form-control-line" name="name" value="<c:out value="${userInform.getName()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Surname</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="user_surname" value="<c:out value="${userInform.getSurname()}"/>">
+                                        <input type="text" class="form-control form-control-line" name="surname" value="<c:out value="${userInform.getSurname()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" class="form-control form-control-line" id="example-email" name="user_email" value="<c:out value="${userInform.getEmail()}"/>">
+                                        <input type="email" class="form-control form-control-line" id="example-email" name="email" value="<c:out value="${userInform.getEmail()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Phone No</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="user_phone" value="<c:out value="${userInform.getPhone()}"/>">
+                                        <input type="text" class="form-control form-control-line" name="phone" value="<c:out value="${userInform.getPhone()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">

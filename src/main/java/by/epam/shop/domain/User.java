@@ -57,6 +57,14 @@ public class User extends Entity {
         this.email = email;
     }
 
+    public User(String phone, String name, String surname, String email) {
+        super();
+        this.phone = phone;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
+
     public String getLogin() {
         return login;
     }

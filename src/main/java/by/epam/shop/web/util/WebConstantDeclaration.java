@@ -29,6 +29,7 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_NAME = "name";
     public static final String REQUEST_PARAM_SURNAME = "surname";
     public static final String REQUEST_PARAM_EMAIL = "email";
+    public static final String REQUEST_PARAM_PHONE = "phone";
     public static final String REQUEST_PARAM_USER_ROLE = "user_type";
     public static final String REQUEST_PARAM_NEW_USER = "new_user";
 

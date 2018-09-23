@@ -149,7 +149,7 @@
                 </div>
                 <div class="row">
                     <div class="main"> 
-                        <legend><strong >Create Category</strong></legend>
+                        <legend><strong >Create Product</strong></legend>
                         <form name = "createProduct" action="FrontController" method="POST">
                             <input type="hidden" name="command" value="create_product" />
                             <div class="field">

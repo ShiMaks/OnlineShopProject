@@ -103,67 +103,81 @@
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
           <!-- BEGIN CONTENT -->
-          <div class="col-md-12 col-sm-12">
-            <h1>Shopping cart</h1>
-            <div class="goods-page">
-              <div class="goods-data clearfix">
-                <div class="table-wrapper-responsive">
-                <table summary="Shopping cart">
-                  <tr>
-                    <th class="goods-page-image">Image</th>
-                    <th class="goods-page-description">Description</th>
-                    <th class="goods-page-quantity">Quantity</th>
-                    <th class="goods-page-price">Unit price</th>
-                    <th class="goods-page-total" colspan="2">Total</th>
-                  </tr>
-                  <c:forEach items="${sessionScope.shopCart.getProducts()}" var="entry">
-                    <tr>
-                      <td class="goods-page-image">
-                        <a href="#"><img src="${entry.key.getPicture()}" alt="Berry Lace Dress"></a>
-                      </td>
-                      <td class="goods-page-description">
-                        <h3><a href="javascript:;">${entry.key.getName()}</a></h3>
-                        <p><strong></strong></p>
-                        <em></em>
-                      </td>
-                      <td class="goods-page-quantity">
-                        <div class="product-quantity">
-                            <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-                        </div>
-                      </td>
-                      <td class="goods-page-price">
-                        <strong><span>$</span>${entry.key.getPrice()}</strong>
-                      </td>
-                      <td class="goods-page-total">
-                        <strong><span>$</span>${entry.key.getPrice()}</strong>
-                      </td>
-                      <td class="del-goods-col">
-                          <form action="FrontController" method="POST">
-                              <input type="hidden" name="command" value="remove_from_cart" />
-                              <input type="hidden" name="product_id" value="${entry.key.getId()}" />
-                              <input type="submit" value="" class="del-goods"/>
-                          </form>                      
-                      </td>
-                    </tr>
-                  </c:forEach>
-                </table>
-                </div>
-
-                <div class="shopping-total">
-                  <ul> 
-                    <li class="shopping-total-price">
-                      <em>Total</em>
-                      <strong class="price"><span>$</span>${sessionScope.shopCart.getTotalCost()}</strong>
-                    </li>
-                  </ul>
+          <c:choose> 
+            <c:when test="${sessionScope.shopCart.getQuantityProducts() == 0}">
+              <div class="col-md-12 col-sm-12">
+                <h1>Shopping cart</h1>
+                <div class="shopping-cart-page">
+                  <div class="shopping-cart-data clearfix">
+                    <p>Your shopping cart is empty!</p>
+                  </div>
                 </div>
               </div>
-              <form action="FrontController" method="POST">
-                  <input type="hidden" name="command" value="сheckout" />
-                  <input type="submit" value="Checkout" class="btn btn-primary"/>
-               </form>  
+            </c:when>
+            <c:when test="${sessionScope.shopCart.getQuantityProducts() != 0}">
+            <div class="col-md-12 col-sm-12">
+              <h1>Shopping cart</h1>
+              <div class="goods-page">
+                <div class="goods-data clearfix">
+                  <div class="table-wrapper-responsive">
+                  <table summary="Shopping cart">
+                    <tr>
+                      <th class="goods-page-image">Image</th>
+                      <th class="goods-page-description">Description</th>
+                      <th class="goods-page-quantity">Quantity</th>
+                      <th class="goods-page-price">Unit price</th>
+                      <th class="goods-page-total" colspan="2">Total</th>
+                    </tr>
+                    <c:forEach items="${sessionScope.shopCart.getProducts()}" var="entry">
+                      <tr>
+                        <td class="goods-page-image">
+                          <a href="#"><img src="${entry.key.getPicture()}" alt="Berry Lace Dress"></a>
+                        </td>
+                        <td class="goods-page-description">
+                          <h3><a href="javascript:;">${entry.key.getName()}</a></h3>
+                          <p><strong></strong></p>
+                          <em></em>
+                        </td>
+                        <td class="goods-page-quantity">
+                          <div class="product-quantity">
+                              <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+                          </div>
+                        </td>
+                        <td class="goods-page-price">
+                          <strong><span>$</span>${entry.key.getPrice()}</strong>
+                        </td>
+                        <td class="goods-page-total">
+                          <strong><span>$</span>${entry.key.getPrice()}</strong>
+                        </td>
+                        <td class="del-goods-col">
+                            <form action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="remove_from_cart" />
+                                <input type="hidden" name="product_id" value="${entry.key.getId()}" />
+                                <input type="submit" value="" class="del-goods"/>
+                            </form>                      
+                        </td>
+                      </tr>
+                    </c:forEach>
+                  </table>
+                  </div>
+
+                  <div class="shopping-total">
+                    <ul> 
+                      <li class="shopping-total-price">
+                        <em>Total</em>
+                        <strong class="price"><span>$</span>${sessionScope.shopCart.getTotalCost()}</strong>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <form action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="сheckout" />
+                    <input type="submit" value="Checkout" class="btn btn-primary"/>
+                </form>  
+              </div>
             </div>
-          </div>
+            </c:when>
+          </c:choose>  
           <!-- END CONTENT -->
         </div>
         <!-- END SIDEBAR & CONTENT --> 

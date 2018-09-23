@@ -21,11 +21,11 @@ public class AddProductToCartCommandImpl implements BaseCommand{
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         String idProduct = request.getParameter("product_id");
-        if(validatePositiveInt(idProduct)){
+        String quantity = request.getParameter("quantity");
+        if(validatePositiveInt(quantity)){
             Product product = productService.getProduct(Integer.parseInt(idProduct));
             ShopCart cart = (ShopCart) request.getSession().getAttribute(REQUEST_PARAM_SHOPPING_CART);
-            // add quantity product
-            cart.addProduct(product, 1);
+            cart.addProduct(product, Integer.parseInt(quantity));
             request.getSession().setAttribute(REQUEST_PARAM_SHOPPING_CART, cart);
             return PAGE_CART;
         } else {

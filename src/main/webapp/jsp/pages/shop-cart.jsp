@@ -134,20 +134,20 @@
                           <a href="#"><img src="${entry.key.getPicture()}" alt="Berry Lace Dress"></a>
                         </td>
                         <td class="goods-page-description">
-                          <h3><a href="javascript:;">${entry.key.getName()}</a></h3>
+                          <h3><a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()};">${entry.key.getName()}</a></h3>
                           <p><strong></strong></p>
                           <em></em>
                         </td>
                         <td class="goods-page-quantity">
                           <div class="product-quantity">
-                              <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+                              <strong><span></span>${sessionScope.shopCart.getQuantityProducts()}</strong>
                           </div>
                         </td>
                         <td class="goods-page-price">
                           <strong><span>$</span>${entry.key.getPrice()}</strong>
                         </td>
                         <td class="goods-page-total">
-                          <strong><span>$</span>${entry.key.getPrice()}</strong>
+                          <strong><span>$</span>${entry.key.getPrice()*sessionScope.shopCart.getQuantityProducts()}</strong>
                         </td>
                         <td class="del-goods-col">
                             <form action="FrontController" method="POST">

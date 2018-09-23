@@ -150,21 +150,19 @@
                     <div class="price">
                       <strong><span>$</span><c:out value="${product.getPrice()}"/></strong>
                     </div>
-                    <div class="availability">
-                      Availability: <strong>In Stock</strong>
-                    </div>
+                  
                   </div>
                   <div class="description">
                     <p><c:out value="${product.getDescription()}"/></p>
                   </div>
-                  
+                  <form name = "addProductToCart" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="add_product_to_cart" />
+                    <input type="hidden" name="product_id" value="${product.getId()}" />
+
                   <div class="product-page-cart">
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" name="quantity" value="1" class="form-control input-sm">
-                    </div>
-                    <form name = "addProductToCart" action="FrontController" method="GET">
-                      <input type="hidden" name="command" value="add_product_to_cart" />
-                      <input type="hidden" name="product_id" value="${product.getId()}" />
+                    </div> 
                       <input type="submit" class="btn btn-primary" value="Add to cart">
                     </form>
                   </div>

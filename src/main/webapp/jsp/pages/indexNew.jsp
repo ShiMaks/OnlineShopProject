@@ -166,7 +166,7 @@
             <div class="col-sm-4">
               <div class="product">
                 <div class="product-img">
-                  <a href="#"><img src="${product.getPicture()}" alt=""></a>
+                  <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}"><img src="${product.getPicture()}" alt=""></a>
                 </div>
                 <p class="product-title">
                   <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}">${product.getName()}</a>

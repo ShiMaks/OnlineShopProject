@@ -147,16 +147,24 @@
                         <table class="table table-striped">
                             <thead>
                                 <th>ID</th>
+                                <th>Login</th>
                                 <th>Name</th>
+                                <th>Surname</th>
                                 <th>eMail</th>
+                                <th>Phone</th>
                             </thead>
                             <tbody>
+                              <c:forEach items="${users}" var="user" >    
                                 <tr>
-                                    <td>1</td>
-                                    <td>User</td>
-                                    <td>eMail</td>
+                                    <td>${user.getId()}</td>
+                                    <td>${user.getLogin()}</td>
+                                    <td>${user.getName()}</td>
+                                    <td>${user.getSurname()}</td>
+                                    <td>${user.getEmail()}</td>
+                                    <td>${user.getPhone()}</td>
                                     <td><button type="button" class="btn btn-outline btn-default">Details</button></td>
                                 </tr>
+                              </c:forEach>  
                             </tbody>
                         </table>
                     </div>

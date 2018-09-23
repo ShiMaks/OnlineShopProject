@@ -7,10 +7,9 @@ import by.epam.shop.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for working with the user table from database
@@ -31,7 +30,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     private static final String UPDATE_USER = "UPDATE user SET name = ?, surname = ?, phone = ?, email = ?" +
             " WHERE id = ?";
     private static final String DELETE_USER_BY_ID = "DELETE FROM user WHERE id  = ?";
-    private static final String READ_ALL_USERS = "SELECT id, name, surname, email, phone, login FROM user";
+    private static final String READ_ALL_USERS = "SELECT id, name, surname, email, phone, login FROM user" +
+            " WHERE isAdmin = 0";
     private static final String READ_USER_BY_LOGIN_PASS = "SELECT id, login, password, isAdmin FROM user " +
             "WHERE login = ? AND password = ?";
 
@@ -101,6 +101,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
         }
     }
 
+
+
     @Override
     public User getUserByLoginPassword(String login, String password) throws DaoException {
         User user = null;
@@ -131,5 +133,37 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
             }
         }
         return user;
+    }
+
+    @Override
+    public List<User> readAll() throws DaoException {
+        List<User> users = new ArrayList<>();
+        ResultSet resultSet = null;
+
+        try (Connection connection = connect.getConnection(); Statement statement = connection.createStatement();) {
+
+            resultSet = statement.executeQuery(READ_ALL_USERS);
+            while(resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setLogin(resultSet.getString("login"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            if(resultSet!=null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return users;
     }
 }

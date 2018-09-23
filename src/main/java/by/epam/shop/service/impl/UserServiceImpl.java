@@ -55,6 +55,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsers() throws ServiceException {
-        return null;
+        return userDao.readAll();
     }
 }

@@ -80,8 +80,8 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Products</div>
+                                        <div class="huge">Products</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
@@ -102,8 +102,8 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Categories</div>
+                                        <div class="huge">Categories</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
@@ -124,8 +124,8 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Orders</div>
+                                        <div class="huge">Orders</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>

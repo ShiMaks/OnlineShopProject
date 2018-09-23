@@ -8,7 +8,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Admin</title>
+	<title>Admin: Create product</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -63,9 +63,9 @@
                             <ul class="nav navbar-nav navbar-right">
                                 
                                 <li>
-                                    <a href="#">
+                                    <a href="/shop/FrontController?command=to_log_out">
                                         <i class="ti-settings"></i>
-                                        <p>Settings</p>
+                                        <p>LogOut</p>
                                     </a>
                                 </li>
                             </ul>
@@ -87,12 +87,12 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Products</div>
+                                        <div class="huge">Products</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_products">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -109,12 +109,12 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Categories</div>
+                                        <div class="huge">Categories</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_categories">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -131,12 +131,12 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Orders</div>
+                                        <div class="huge">Orders</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/shop/FrontController?command=to_orders">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

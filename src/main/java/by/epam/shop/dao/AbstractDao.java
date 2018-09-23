@@ -5,7 +5,7 @@ import by.epam.shop.dao.pool.MySqlConnection;
 
 public abstract class AbstractDao {
 
-//    protected ConnectionPool dataBaseConnection = ConnectionPool.getInstance();
+//    protected ConnectionPool dataBaseConnection;
 //
 //    public AbstractDao(ConnectionPool connectionPool){
 //        this.dataBaseConnection = connectionPool;

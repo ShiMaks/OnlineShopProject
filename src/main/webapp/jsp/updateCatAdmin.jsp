@@ -8,7 +8,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Admin</title>
+	<title>Admin: Update category</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -34,6 +34,13 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
 
+    <style type="text/css">
+        body {font-size:14px;}
+        label {float:left; padding-right:10px;}
+        .field {clear:both; text-align:right; line-height:25px;}
+        .main {float:left;}
+    </style>
+
 </head>
 <body>
 
@@ -56,9 +63,9 @@
                             <ul class="nav navbar-nav navbar-right">
                                 
                                 <li>
-                                    <a href="#">
+                                    <a href="/shop/FrontController?command=to_log_out">
                                         <i class="ti-settings"></i>
-                                        <p>Settings</p>
+                                        <p>LogOut</p>
                                     </a>
                                 </li>
                             </ul>
@@ -80,8 +87,8 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Products</div>
+                                        <div class="huge">Products</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
@@ -102,8 +109,8 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Categories</div>
+                                        <div class="huge">Categories</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
@@ -124,12 +131,12 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">#</div>
-                                        <div>Orders</div>
+                                        <div class="huge">Orders</div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="/shop/FrontController?command=to_categories">
+                            <a href="/shop/FrontController?command=to_orders">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -141,18 +148,20 @@
                    
                 </div>
                 <div class="row">
-                    <form name="updaCategory" action="FrontController" method="POST">
-	                        <input type="hidden" name="command" value="update_category" />
-                            <input type="hidden" name="category_id" value = <c:out value="${category.getId()}"/>
-                          <legend><strong >Update Category</strong></legend>
-                          <label >Name:</label>
-                              <input type="text" name="name_category" value="<c:out value="${category.getName()}"/>">
-                              <span class="help-block"></span>
-                                                
-                           <input type="submit" class="btn btn-outline btn-default" value="Update">
-                          <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
+                    <div class="main">
+                        <form name="updaCategory" action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="update_category" />
+                                <input type="hidden" name="category_id" value = <c:out value="${category.getId()}"/>
+                            <legend><strong >Update Category</strong></legend>
+                            <div class="field">
+                            <label >Name:</label>
+                                <input type="text" name="name_category" value="<c:out value="${category.getName()}"/>">
+                                <span class="help-block"></span>
+                            </div>                        
+                            <input type="submit" class="btn btn-outline btn-default" value="Update">
+                            <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
                         </form>	
-                                            
+                    </div>                        
                 </div>
                 
             </div>

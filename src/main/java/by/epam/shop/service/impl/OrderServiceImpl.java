@@ -21,7 +21,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrder(int idOrder) throws ServiceException {
-        return orderDao.read(idOrder);
+        try {
+            return orderDao.read(idOrder);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

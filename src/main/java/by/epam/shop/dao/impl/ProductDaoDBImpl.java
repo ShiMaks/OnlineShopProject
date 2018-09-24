@@ -3,6 +3,7 @@ package by.epam.shop.dao.impl;
 import by.epam.shop.dao.AbstractDao;
 import by.epam.shop.dao.ProductDao;
 import by.epam.shop.dao.exception.DaoException;
+import by.epam.shop.dao.pool.ConnectionPool;
 import by.epam.shop.domain.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,10 +40,14 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     private static final String READ_PRODUCTS_FOR_PAGE = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
             " FROM product LIMIT ?, 9";
 
+    public ProductDaoDBImpl(ConnectionPool connectionPool) {
+        super(connectionPool);
+    }
+
     @Override
     public void create(Product product) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_PRODUCT);){
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(CREATE_PRODUCT)){
             statement.setString(1, product.getName());
             statement.setInt(2, product.getIdCategory());
             statement.setString(3, product.getDescription());
@@ -53,6 +58,8 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
@@ -60,12 +67,10 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     public Product read(int id) throws DaoException {
         Product product = new Product();
         ResultSet result = null;
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_PRODUCT_BY_ID);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_PRODUCT_BY_ID)){
             statement.setInt(1, id);
             result = statement.executeQuery();
-
             if(result.next()) {
                 product.setId(result.getInt(PRODUCT_COLUMN_ID));
                 product.setName(result.getString(PRODUCT_COLUMN_NAME));
@@ -78,21 +83,15 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }finally {
-            if(result!=null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return product;
     }
 
     @Override
     public void update(Product product) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT);){
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)){
             statement.setString(1, product.getName());
             statement.setInt(2, product.getIdCategory());
             statement.setString(3, product.getDescription());
@@ -103,17 +102,21 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
     @Override
     public void delete(int id) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_BY_ID);) {
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_BY_ID)) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
@@ -121,9 +124,8 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     public List<Product> readAll() throws DaoException {
         List<Product> products = new ArrayList<>();
         ResultSet resultSet = null;
-
-        try (Connection connection = connect.getConnection(); Statement statement = connection.createStatement();) {
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (Statement statement = connection.createStatement()) {
             resultSet = statement.executeQuery(READ_ALL_PRODUCTS);
             while(resultSet.next()) {
                 Product product = new Product();
@@ -139,13 +141,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(resultSet!=null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return products;
     }
@@ -154,13 +150,10 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     public List<Product> getProductsByCategory(int id) throws DaoException {
         List<Product> products = new ArrayList<>();
         ResultSet resultSet = null;
-
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_BY_CATEGORY);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_BY_CATEGORY)){
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-
             while(resultSet.next()) {
                 Product product = new Product();
                 product.setId(resultSet.getInt("id"));
@@ -175,13 +168,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(resultSet!=null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return products;
     }
@@ -190,13 +177,10 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     public List<Product> getProductsForPage(int startPosition) throws DaoException {
         List<Product> products = new ArrayList<>();
         ResultSet resultSet = null;
-
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_FOR_PAGE);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_FOR_PAGE)){
             statement.setInt(1, startPosition);
             resultSet = statement.executeQuery();
-
             while(resultSet.next()) {
                 Product product = new Product();
                 product.setId(resultSet.getInt("id"));
@@ -211,13 +195,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(resultSet!=null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return products;
     }

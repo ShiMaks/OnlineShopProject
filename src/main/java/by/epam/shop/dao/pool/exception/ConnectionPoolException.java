@@ -1,8 +1,10 @@
 package by.epam.shop.dao.pool.exception;
 
-public class ConnectionPoolException extends Exception {
+import by.epam.shop.dao.exception.DaoException;
 
-    public ConnectionPoolException() {
+public class ConnectionPoolException extends DaoException {
+
+    public ConnectionPoolException()  {
     }
 
     public ConnectionPoolException(String message, Throwable cause, boolean enableSuppression,

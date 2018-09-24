@@ -3,6 +3,7 @@ package by.epam.shop.dao.impl;
 import by.epam.shop.dao.AbstractDao;
 import by.epam.shop.dao.CategoryDao;
 import by.epam.shop.dao.exception.DaoException;
+import by.epam.shop.dao.pool.ConnectionPool;
 import by.epam.shop.domain.Category;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,15 +30,20 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
     private static final String DELETE_CATEGORY_BY_ID = "DELETE FROM category WHERE id = ?";
     private static final String READ_ALL_CATEGORIES = "SELECT id, name FROM category";
 
+    public CategoryDaoDBImpl(ConnectionPool connectionPool) {
+        super(connectionPool);
+    }
+
     @Override
     public void create(Category entity) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_CATEGORY);){
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(CREATE_CATEGORY)){
             statement.setString(1, entity.getName());
             statement.executeUpdate();
         } catch (SQLException e) {
-
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
@@ -45,10 +51,8 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
     public Category read(int id) throws DaoException {
         Category category = new Category();
         ResultSet result = null;
-
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_CATEGORY_BY_ID);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_CATEGORY_BY_ID)){
             statement.setInt(1, id);
             result = statement.executeQuery();
             if(result.next()) {
@@ -58,37 +62,35 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }finally {
-            if(result!=null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return category;
     }
 
     @Override
     public void update(Category entity) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_CATEGORY);){
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_CATEGORY)){
             statement.setString(1, entity.getName());
             statement.setInt(2, entity.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
     @Override
     public void delete(int id) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_CATEGORY_BY_ID);) {
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_CATEGORY_BY_ID)) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
@@ -96,9 +98,8 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
     public List<Category> readAll() throws DaoException {
         List<Category> categories = new ArrayList<>();
         ResultSet resultSet = null;
-
-        try (Connection connection = connect.getConnection(); Statement statement = connection.createStatement();) {
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (Statement statement = connection.createStatement()) {
             resultSet = statement.executeQuery(READ_ALL_CATEGORIES);
             while(resultSet.next()) {
                 Category category = new Category();
@@ -109,13 +110,7 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(resultSet!=null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return categories;
     }

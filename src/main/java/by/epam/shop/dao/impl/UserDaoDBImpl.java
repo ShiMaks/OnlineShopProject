@@ -3,6 +3,7 @@ package by.epam.shop.dao.impl;
 import by.epam.shop.dao.AbstractDao;
 import by.epam.shop.dao.UserDao;
 import by.epam.shop.dao.exception.DaoException;
+import by.epam.shop.dao.pool.ConnectionPool;
 import by.epam.shop.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,14 +36,20 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     private static final String READ_USER_BY_LOGIN_PASS = "SELECT id, login, password, isAdmin FROM user " +
             "WHERE login = ? AND password = ?";
 
+    public UserDaoDBImpl(ConnectionPool connectionPool) {
+        super(connectionPool);
+    }
+
     @Override
     public void create(User user) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_USER);){
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(CREATE_USER)){
             //filling statement
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
@@ -50,12 +57,10 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     public User read(int id) throws DaoException {
         User user = null;
         ResultSet result = null;
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_USER_BY_ID);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_USER_BY_ID)){
             statement.setInt(1, id);
             result = statement.executeQuery();
-
             if(result.next()) {
                 user = new User();
                 user.setId(result.getInt("id"));
@@ -68,36 +73,34 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(result!=null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return user;
     }
 
     @Override
     public void update(User user) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_USER);){
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER)){
             // filling satetement
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
     @Override
     public void delete(int id) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_USER_BY_ID);) {
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_USER_BY_ID)) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
@@ -107,13 +110,11 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     public User getUserByLoginPassword(String login, String password) throws DaoException {
         User user = null;
         ResultSet result = null;
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_USER_BY_LOGIN_PASS);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_USER_BY_LOGIN_PASS)){
             statement.setString(1, login);
             statement.setString(2, password);
             result = statement.executeQuery();
-
             if(result.next()) {
                 user = new User();
                 user.setId(result.getInt("id"));
@@ -124,13 +125,7 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(result!=null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return user;
     }
@@ -139,9 +134,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     public List<User> readAll() throws DaoException {
         List<User> users = new ArrayList<>();
         ResultSet resultSet = null;
-
-        try (Connection connection = connect.getConnection(); Statement statement = connection.createStatement();) {
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (Statement statement = connection.createStatement()) {
             resultSet = statement.executeQuery(READ_ALL_USERS);
             while(resultSet.next()) {
                 User user = new User();
@@ -156,13 +150,7 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(resultSet!=null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return users;
     }

@@ -3,6 +3,7 @@ package by.epam.shop.dao.impl;
 import by.epam.shop.dao.AbstractDao;
 import by.epam.shop.dao.OrderDao;
 import by.epam.shop.dao.exception.DaoException;
+import by.epam.shop.dao.pool.ConnectionPool;
 import by.epam.shop.domain.Order;
 import by.epam.shop.domain.OrderItem;
 import by.epam.shop.domain.OrderStatusEnum;
@@ -41,37 +42,71 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     private static final String READ_ALL_ORDERS_USER = "SELECT id, client_id, status, dataOrder, price FROM shop_order" +
             " WHERE client_id = ?";
 
+    public OrderDaoDBImpl(ConnectionPool connectionPool) {
+        super(connectionPool);
+    }
+
     @Override
     public void create(Order order) throws DaoException {
-        int id = 0;
-//    }
-//        Connection connection = null;
+//        int id = 0;
 //        try {
-//            connection = connect.getConnection();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        try {
+//            Connection connection = dataBaseConnection.getConnection();
 //            connection.setAutoCommit(false);
-//            try (PreparedStatement orderStatement = connection.prepareStatement(CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
-//                 PreparedStatement orderItemStatement = connection.prepareStatement(CREATE_ORDER_ITEM)){
-//                orderItemStatement.set
-//                statement.executeUpdate();
+//            try (PreparedStatement customerPreparedStatement = connection.prepareStatement(ADD_CUSTOMER_PERSONAL_DATA,
+//                    Statement.RETURN_GENERATED_KEYS);
+//                 PreparedStatement orderPreparedStatement = connection.prepareStatement(ADD_ORDER,
+//                         Statement.RETURN_GENERATED_KEYS)) {
+//                customerPreparedStatement.setString(1, entity.getCustomer().getName());
+//                customerPreparedStatement.setString(2, entity.getCustomer().getSurname());
+//                customerPreparedStatement.setString(3, entity.getCustomer().getPassportNumb());
+//                customerPreparedStatement.setString(4, entity.getCustomer().getDateOfBirth().toString());
+//                customerPreparedStatement.setInt(5, entity.getCustomer().getDrivingExp());
+//                customerPreparedStatement.executeUpdate();
+//                ResultSet resultSet = customerPreparedStatement.getGeneratedKeys();
+//                if (resultSet.next()) {
+//                    entity.getCustomer().setId(resultSet.getInt(1));
+//                }
+//
+//                orderPreparedStatement.setString(1, entity.getStatus().toString());
+//                orderPreparedStatement.setString(2, entity.getOrderDate().toString());
+//                orderPreparedStatement.setInt(3, entity.getUserId());
+//                orderPreparedStatement.setInt(4, entity.getCarId());
+//                orderPreparedStatement.setString(5, entity.getStartDate().toString());
+//                orderPreparedStatement.setString(6, entity.getEndDate().toString());
+//                orderPreparedStatement.setInt(7, entity.getCustomer().getId());
+//                orderPreparedStatement.setInt(8, entity.getTotalPrice());
+//                orderPreparedStatement.setBoolean(9, entity.isInsurance());
+//                orderPreparedStatement.executeUpdate();
+//                resultSet = orderPreparedStatement.getGeneratedKeys();
+//                if (resultSet.next()) {
+//                    id = resultSet.getInt(1);
+//                }
+//                connection.commit();
 //            } catch (SQLException e) {
-//                throw new DaoException(e);
+//                connection.rollback();
+//                throw new DAOException(ERROR_IN_CREATE_ORDER, e);
+//            } finally {
+//                connection.setAutoCommit(true);
 //            }
+//        } catch (SQLException e) {
+//            throw new DAOException(ERROR_IN_CREATE_ORDER, e);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (DAOException daoException) {
+//            daoException.printStackTrace();
+//        } finally {
+//            dataBaseConnection.closeConnection(connection);
+//        }
     }
 
     @Override
     public Order read(int id) throws DaoException {
         Order order = new Order();
         ResultSet result = null;
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_ID);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_ID)){
             statement.setInt(1, id);
             result = statement.executeQuery();
-
             if(result.next()) {
                 order.setId(result.getInt("id"));
                 order.setIdClient(result.getInt("client_id"));
@@ -82,37 +117,35 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(result!=null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return order;
     }
 
     @Override
     public void update(Order order) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER);){
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER);){
             statement.setString(1, order.getStatus().toString());
             statement.setInt(2, order.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
     @Override
     public void delete(int id) throws DaoException {
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_ORDER_BY_ID);) {
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_ORDER_BY_ID)) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
     }
 
@@ -120,9 +153,8 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     public List<Order> readAll() throws DaoException {
         List<Order> orders = new ArrayList<>();
         ResultSet resultSet = null;
-
-        try (Connection connection = connect.getConnection(); Statement statement = connection.createStatement();) {
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (Statement statement = connection.createStatement()) {
             resultSet = statement.executeQuery(READ_ALL_ORDERS);
             while(resultSet.next()) {
                 Order order = new Order();
@@ -136,13 +168,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            if(resultSet!=null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    throw new DaoException(e);
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return orders;
     }
@@ -150,13 +176,10 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     @Override
     public List<OrderItem> getProductsOfOrder(int idOrder) throws DaoException {
         List<OrderItem> orderItems = new ArrayList<>();
-
-        try ( Connection connection = connect.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(READ_PRODUCTS_OF_ORDER);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_PRODUCTS_OF_ORDER);){
             preparedStatement.setInt(1, idOrder);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             while(resultSet.next()) {
                 OrderItem orderItem = new OrderItem();
                 orderItem.setIdProduct(resultSet.getInt("product_id"));
@@ -165,6 +188,8 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
         }
         return orderItems;
     }
@@ -173,12 +198,10 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     public List<Order> getOrdersByStatus(String status) throws DaoException {
         List<Order> orders = new ArrayList<>();
         ResultSet result = null;
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_STATUS);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_STATUS)){
             statement.setString(1, status);
             result = statement.executeQuery();
-
             while(result.next()) {
                 Order order = new Order();
                 order.setId(result.getInt("id"));
@@ -191,13 +214,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }finally {
-            if(result!=null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
         return orders;
     }
@@ -206,12 +223,10 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     public List<Order> getUserOrders(int idUser) throws DaoException {
         List<Order> orders = new ArrayList<>();
         ResultSet result = null;
-        try (Connection connection = connect.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_ALL_ORDERS_USER);){
-
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(READ_ALL_ORDERS_USER)){
             statement.setInt(1, idUser);
             result = statement.executeQuery();
-
             while(result.next()) {
                 Order order = new Order();
                 order.setId(result.getInt("id"));
@@ -224,15 +239,8 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }finally {
-            if(result!=null) {
-                try {
-                    result.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            dataBaseConnection.returnConnection(connection);
         }
-
 
 //        OrderStatusEnum.valueOf("sdfsdf".toUpperCase());
         return orders;

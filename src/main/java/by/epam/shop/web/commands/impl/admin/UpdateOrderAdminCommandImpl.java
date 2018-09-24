@@ -44,7 +44,7 @@ public class UpdateOrderAdminCommandImpl implements BaseCommand{
             return OrderStatusEnum.CANCELLED;
         } else if(value.toUpperCase().equals(OrderStatusEnum.PAYED.toString())){
             return OrderStatusEnum.PAYED;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.DELIVERED)){
+        } else if(value.toUpperCase().equals(OrderStatusEnum.DELIVERED.toString())){
             return OrderStatusEnum.DELIVERED;
         } else {
             return null;

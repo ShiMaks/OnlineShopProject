@@ -83,30 +83,37 @@
               <div class="row">
                 <div class="col-md-7 col-sm-7">
                   <form name="registration" action="FrontController" method="POST" class="form-horizontal" role="form">
+                    <input type="hidden" name="command" value="register" />
                     <fieldset>
                       <legend>Your personal details</legend>
                       <div class="form-group">
                           <label for="login" class="col-lg-4 control-label">Login <span class="require">*</span></label>
                           <div class="col-lg-8">
-                            <input type="text" name="user_login" class="form-control" id="email">
+                            <input type="text" name="login" class="form-control" id="email">
                           </div>
                       </div>
                       <div class="form-group">
                         <label for="firstname" class="col-lg-4 control-label">First Name <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" name="user_name" class="form-control" id="firstname">
+                          <input type="text" name="name" class="form-control" id="firstname">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="lastname" class="col-lg-4 control-label">Last Name <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" name="user_surname" class="form-control" id="lastname">
+                          <input type="text" name="surname" class="form-control" id="lastname">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="text" name="user_email" class="form-control" id="email">
+                          <input type="text" name="email" class="form-control" id="email">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="email" class="col-lg-4 control-label">Phone <span class="require">*</span></label>
+                        <div class="col-lg-8">
+                          <input type="text" name="phone" class="form-control" id="email">
                         </div>
                       </div>
                       
@@ -116,7 +123,7 @@
                       <div class="form-group">
                         <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                         <div class="col-lg-8">
-                          <input type="password" name="user_password" class="form-control" id="password">
+                          <input type="password" name="password" class="form-control" id="password">
                         </div>
                       </div>
                       <div class="form-group">

@@ -18,9 +18,10 @@ public interface UserService {
      * Adds user in base
      *
      * @param user
+     * @return String message
      * @throws ServiceException
      */
-    void createUser(User user) throws ServiceException;
+    String createUser(User user) throws ServiceException;
 
     /**
      * Update info about certain user

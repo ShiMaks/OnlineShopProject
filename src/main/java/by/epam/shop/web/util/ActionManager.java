@@ -85,6 +85,9 @@ public class ActionManager {
             case "to_registration": //all
                 command = new PageRegistrationCommandImpl();
                 break;
+            case "register": //all
+                command = new RegisterCommandImpl();
+                break;
             case "to_log_out": //all
                 command = new LogOutCommandImpl();
                 break;

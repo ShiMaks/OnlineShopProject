@@ -11,35 +11,36 @@ public class RequestParamValidator {
     private static final String LOGIN_REGEX = "[0-9a-zA-Z_@$]{5,}"; /* мин 5 символов из тех что в скобках */
 
     private static final String PASS_REGEX = "(?=.*[a-zA-z])(?=.*[0-9]).{5,}";
-    /*
-     * минимум 5 символов, мин одна лат
-     * буква и одно число и любые другие
-     * символы
-     */
+                                                                                /*
+                                                                                 * минимум 5 символов, мин одна лат
+                                                                                 * буква и одно число и любые другие
+                                                                                 * символы
+                                                                                 */
 
     private static final String NAME_REGEX = "^[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{1,50}";
-    /*
-     * латин и кирил мин 2 буквы, первая
-     * заглавная
-     */
+                                                                                /*
+                                                                                 * латин и кирил мин 2 буквы, первая
+                                                                                 * заглавная
+                                                                                 */
 
     private static final String SURNAME_REGEX = "(^[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,50})([\\-]?)([A-Za-zА-Яа-яЁё]{0,50})";
-    /*
-     * возможно
-     * двойная
-     * фамилия
-     * через
-     * дефис
-     * (первая
-     * буква
-     * заглвная)
-     */
+                                                                                                                        /*
+                                                                                                                         * возможно
+                                                                                                                         * двойная
+                                                                                                                         * фамилия
+                                                                                                                         * через
+                                                                                                                         * дефис
+                                                                                                                         * (первая
+                                                                                                                         * буква
+                                                                                                                         * заглвная)
+                                                                                                                         */
 
     private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-    /*
-     * Pattern.CASE_INSENSITIVE
-     */
+                                                                                            /*
+                                                                                             * Pattern.CASE_INSENSITIVE
+                                                                                             */
 
+    private static final String PHONE_REGEX = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$";
     private static final String POSITIVE_NUMBER_REGEX = "([1-9])([0-9]*)";
 
     private  RequestParamValidator(){
@@ -75,6 +76,11 @@ public class RequestParamValidator {
     public static boolean validateEmail(String email) throws ValidateNullRequestParamException {
         validateParamNotNull(email);
         return matchToRegexCaseIns(email, EMAIL_REGEX);
+    }
+
+    public static boolean validatePhone(String phone) throws ValidateNullRequestParamException {
+        validateParamNotNull(phone);
+        return matchToRegexCaseIns(phone, PHONE_REGEX);
     }
 
     private static boolean matchToRegex(String input, String regex) {

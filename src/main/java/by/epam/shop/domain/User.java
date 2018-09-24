@@ -48,8 +48,9 @@ public class User extends Entity {
         super(id);
     }
 
-    public User(String login, String password, String name, String surname, String email) {
+    public User(String login, String password, String name, String surname, String email, String phone) {
         super();
+        this.phone = phone;
         this.login = login;
         this.password = password;
         this.name = name;

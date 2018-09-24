@@ -22,6 +22,13 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger(UserDaoDBImpl.class);
 
     /**
+     * Fields to identify SQL error type
+     */
+    private static final int ER_DUP_ENTRY_CODE = 1062;
+    private static final String ENDS_WITH_LOGIN = "key 'login'";
+    private static final String ENDS_WITH_EMAIL = "key 'email'";
+
+    /**
      * SQL-statements
      */
     private static final String CREATE_USER = "INSERT INTO user (name, surname, email, phone, login, password, isAdmin) " +
@@ -36,21 +43,51 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     private static final String READ_USER_BY_LOGIN_PASS = "SELECT id, login, password, isAdmin FROM user " +
             "WHERE login = ? AND password = ?";
 
+    /**
+     * Error causes fields
+     */
+    private static final String ERROR_IN_CREATE_USER = "Error while adding user to database";
+    private static final String ERROR_IN_READ_USER = "Error while getting user from database";
+    private static final String ERROR_IN_UPDATE_USER = "Error while trying to update user in database";
+    private static final String ERROR_IN_DELETE_USER = "Error while deleting user from database";
+    private static final String ERROR_IN_LOGIN_METHOD = "Error while authorization";
+    private static final String ERROR_IN_UPDATE_PASS = "Error while updating user password";
+    private static final String ERROR_IN_UPDATE_BALANCE = "Error while updating user balance";
+    private static final String ERROR_IN_READ_ALL_USERS = "Error while getting user list from database";
+    private static final String ERROR_IN_READ_PASS = "Error while getting user's password from database";
+
     public UserDaoDBImpl(ConnectionPool connectionPool) {
         super(connectionPool);
     }
 
     @Override
-    public void create(User user) throws DaoException {
+    public int createUser(User user) throws DaoException {
+        int code = 0;
         Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(CREATE_USER)){
-            //filling statement
-            statement.executeUpdate();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USER)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getPhone());
+            preparedStatement.setString(5, user.getLogin());
+            preparedStatement.setString(6, user.getPassword());
+            preparedStatement.setBoolean(7, false);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException(e);
+            if (e.getErrorCode() == ER_DUP_ENTRY_CODE) {
+                code = identifyDuplicateField(e.getMessage());
+            } else {
+                throw new DaoException(ERROR_IN_CREATE_USER, e);
+            }
         } finally {
             dataBaseConnection.returnConnection(connection);
         }
+        return code;
+    }
+
+    @Override
+    public void create(User entity) throws DaoException {
+
     }
 
     @Override
@@ -153,5 +190,15 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
             dataBaseConnection.returnConnection(connection);
         }
         return users;
+    }
+
+    private int identifyDuplicateField(String excMessage) {
+        if (excMessage.endsWith(ENDS_WITH_LOGIN)) {
+            return 1;
+        } else if (excMessage.endsWith(ENDS_WITH_EMAIL)) {
+            return 2;
+        } else {
+            return 0;
+        }
     }
 }

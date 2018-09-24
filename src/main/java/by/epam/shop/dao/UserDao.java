@@ -11,4 +11,6 @@ public interface UserDao extends BaseDao<User> {
 
     List<User> readAll() throws DaoException;
 
+    int createUser(User user) throws DaoException;
+
 }

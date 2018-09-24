@@ -121,6 +121,9 @@ public class ActionManager {
             case "update_user_inform": //user
                 command = new UpdateUserInfoCommandImpl();
                 break;
+            case "update_user_password": //user
+                command = new ChangePasswordCommandImpl();
+                break;
             case "create_order": //user
                 command = new CreateOrderCommandImpl();
                 break;

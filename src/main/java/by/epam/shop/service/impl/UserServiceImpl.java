@@ -68,4 +68,15 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() throws ServiceException {
         return userDao.readAll();
     }
+
+    @Override
+    public String getUserPassword(int idUser) throws ServiceException {
+        return userDao.readUserPassword(idUser);
+    }
+
+    @Override
+    public void changeUserPassword(User user) throws ServiceException {
+        userDao.updateUserPassword(user);
+    }
+
 }

@@ -13,4 +13,8 @@ public interface UserDao extends BaseDao<User> {
 
     int createUser(User user) throws DaoException;
 
+    String readUserPassword(int idUser) throws DaoException;
+
+    void updateUserPassword(User user) throws DaoException;
+
 }

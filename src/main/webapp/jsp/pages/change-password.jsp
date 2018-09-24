@@ -123,7 +123,7 @@
             <ul class="list-group margin-bottom-25 sidebar-menu">
                 <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_account"><i class="fa fa-angle-right"></i> My Orders</a></li>
                 <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_change_password"><i class="fa fa-angle-right"></i> Change Password</a></li>
-                <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_information"><i class="fa fa-angle-right"></i> My Information</a></li>group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Newsletter</a></li>
+                <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_information"><i class="fa fa-angle-right"></i> My Information</a></li>
             </ul>
           </div>
           <!-- END SIDEBAR -->
@@ -134,33 +134,33 @@
             <div class="content-form-page">
                 <div class="row">
                   <div class="col-md-7 col-sm-7">
-                    <form class="form-horizontal" role="form">
-                  
+                    <form class="form-horizontal form-material" name="updateUserPassword" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="update_user_password" />
                       <fieldset>
                         <legend>Your password</legend>
                         <div class="form-group">
                             <label for="password" class="col-lg-4 control-label">Old Password <span class="require">*</span></label>
                             <div class="col-lg-8">
-                              <input type="text" class="form-control" id="password">
+                              <input type="password" name="old_password" class="form-control" id="password">
                             </div>
                           </div>
                         <div class="form-group">
                           <label for="password" class="col-lg-4 control-label">New Password <span class="require">*</span></label>
                           <div class="col-lg-8">
-                            <input type="text" class="form-control" id="password">
+                            <input type="password"  name="new_password"class="form-control" id="password">
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="confirm-password" class="col-lg-4 control-label">Conf password <span class="require">*</span></label>
                           <div class="col-lg-8">
-                            <input type="text" class="form-control" id="confirm-password">
+                            <input type="password" name="confirm_password" class="form-control" id="confirm-password">
                           </div>
                         </div>
                       </fieldset>
                       
                       <div class="row">
-                        <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                          <button type="submit" class="btn btn-primary">Update password</button>
+                        <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+                          <input type="submit" class="btn btn-primary" value="Update password">                        
                         </div>
                       </div>
                     </form>

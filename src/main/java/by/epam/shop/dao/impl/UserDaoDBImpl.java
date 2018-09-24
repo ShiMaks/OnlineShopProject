@@ -42,6 +42,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
             " WHERE isAdmin = 0";
     private static final String READ_USER_BY_LOGIN_PASS = "SELECT id, login, password, isAdmin FROM user " +
             "WHERE login = ? AND password = ?";
+    private static final String READ_USER_PASS = "SELECT password FROM user WHERE id = ?";
+    private static final String UPDATE_USER_PASS = "UPDATE user SET password = ? WHERE id = ?";
 
     /**
      * Error causes fields
@@ -83,6 +85,38 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
             dataBaseConnection.returnConnection(connection);
         }
         return code;
+    }
+
+    @Override
+    public String readUserPassword(int idUser) throws DaoException {
+        String pass = null;
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_USER_PASS)) {
+            preparedStatement.setInt(1, idUser);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                pass = resultSet.getString("password");
+            }
+        } catch (SQLException e) {
+            throw new DaoException(ERROR_IN_READ_PASS, e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
+        }
+        return pass;
+    }
+
+    @Override
+    public void updateUserPassword(User user) throws DaoException {
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_PASS)) {
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setInt(2, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(ERROR_IN_UPDATE_PASS, e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
+        }
     }
 
     @Override
@@ -194,6 +228,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
         }
         return users;
     }
+
+
 
     private int identifyDuplicateField(String excMessage) {
         if (excMessage.endsWith(ENDS_WITH_LOGIN)) {

@@ -58,7 +58,7 @@ public class User extends Entity {
         this.email = email;
     }
 
-    public User(String phone, String name, String surname, String email) {
+    public User(String phone, String name, String surname) {
         super();
         this.phone = phone;
         this.name = name;

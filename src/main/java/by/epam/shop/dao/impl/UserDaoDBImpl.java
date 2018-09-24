@@ -35,7 +35,7 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
             "VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String READ_USER_BY_ID = "SELECT id, name, surname, email, phone, login FROM user" +
             " WHERE id = ?";
-    private static final String UPDATE_USER = "UPDATE user SET name = ?, surname = ?, phone = ?, email = ?" +
+    private static final String UPDATE_USER = "UPDATE user SET name = ?, surname = ?, phone = ?" +
             " WHERE id = ?";
     private static final String DELETE_USER_BY_ID = "DELETE FROM user WHERE id  = ?";
     private static final String READ_ALL_USERS = "SELECT id, name, surname, email, phone, login FROM user" +
@@ -119,7 +119,10 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
     public void update(User user) throws DaoException {
         Connection connection = dataBaseConnection.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER)){
-            // filling satetement
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getSurname());
+            statement.setString(3, user.getPhone());
+            statement.setInt(4, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

@@ -135,6 +135,12 @@
                                 <input type="hidden" name="command" value="update_user_inform" />
                                 <input type="hidden" name="user_id" value = <c:out value="${userInform.getId()}"/>  
                                 <div class="form-group">
+                                    <label class="col-md-12">Login</label>
+                                    <div class="col-md-12">
+                                        <input type="text" disabled="disabled" class="form-control form-control-line" name="surname" value="<c:out value="${userInform.getLogin()}"/>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-12">Name</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="name" value="<c:out value="${userInform.getName()}"/>">
@@ -149,7 +155,7 @@
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" class="form-control form-control-line" id="example-email" name="email" value="<c:out value="${userInform.getEmail()}"/>">
+                                        <input type="email" disabled="disabled" class="form-control form-control-line" id="example-email" name="email" value="<c:out value="${userInform.getEmail()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -157,6 +163,8 @@
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="phone" value="<c:out value="${userInform.getPhone()}"/>">
                                     </div>
+                                </div>
+                                <div class="form-group">
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">

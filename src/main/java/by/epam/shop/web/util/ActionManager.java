@@ -118,6 +118,9 @@ public class ActionManager {
             case "to_my_information": //user
                 command = new PageUserInformCommandImpl();
                 break;
+            case "update_user_inform": //user
+                command = new UpdateUserInfoCommandImpl();
+                break;
             case "create_order": //user
                 command = new CreateOrderCommandImpl();
                 break;

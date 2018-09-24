@@ -132,10 +132,14 @@
             <div class="content-page">
               <div class="col-12">
                   <div class="card">
-                      <div class="card-body">
-                          
+                      <div class="card-body">   
                       </div>
                       <div class="table-responsive">
+                        <c:choose>
+                          <c:when test="${userOrders.size() == 0}">
+                            <p>Your order list is empty!</p>
+                          </c:when>
+                          <c:when test="${userOrders.size() != 0}">
                           <table class="table table-hover">
                               <thead>
                                   <tr>
@@ -167,6 +171,8 @@
                                 </c:forEach>  
                               </tbody>
                           </table>
+                          </c:when>
+                        </c:choose>  
                       </div>
                   </div>
               </div>

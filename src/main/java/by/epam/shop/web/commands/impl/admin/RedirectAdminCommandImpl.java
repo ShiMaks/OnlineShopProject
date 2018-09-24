@@ -39,6 +39,8 @@ public class RedirectAdminCommandImpl implements BaseCommand{
                List<Product> products;
                products = productService.getProducts();
                request.setAttribute(REQUEST_PARAM_LIST_PRODUCTS_ADMIN, products);
+               String message = (String) request.getSession().getAttribute(REQUEST_PARAM_MESSAGE);
+               request.setAttribute(REQUEST_PARAM_MESSAGE, message);
                return PAGE_PRODUCTS_ADMIN;
             case PAGE_TYPE_ADMIN_ORDERS:
                List<Order> orders = orderService.getAllOrders();

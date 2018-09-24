@@ -46,7 +46,7 @@ public class RegisterCommandImpl implements BaseCommand {
         if (SUCCESS.equals(message)) {
             return "/jsp/pages/indexNew.jsp";
         } else {
-            request.setAttribute(REQUEST_PARAM_DUPLICATE_MESSAGE, message);
+//            request.setAttribute(REQUEST_PARAM_DUPLICATE_MESSAGE, message);
             return PAGE_REGISTRATION;
         }
     }

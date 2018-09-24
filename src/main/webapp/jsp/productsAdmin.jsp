@@ -120,6 +120,12 @@
                    
                 </div>
 
+                <c:if test="${message != null}">
+                    <div class="alert alert-success" role="alert">
+                        <h6>${message}</h6>
+                    </div>
+                </c:if>
+
                 <form action="FrontController" method="GET">
                     <input type="hidden" name="command" value="prepare_create_product" />
                     <input type="submit" value="Create Product" class="btn btn-outline btn-default"/>

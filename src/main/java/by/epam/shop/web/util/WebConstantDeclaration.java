@@ -40,7 +40,7 @@ public final class WebConstantDeclaration {
 
     public static final String REQUEST_PARAM_COMMAND = "command";
 
-    public static final String REQUEST_PARAM_DUPLICATE_MESSAGE = "dup_message";
+    public static final String REQUEST_PARAM_MESSAGE = "message";
 
     public static final String REQUEST_PARAM_INVALID_LOGIN = "invalid_login";
     public static final String REQUEST_PARAM_INVALID_PASS = "invalid_password";

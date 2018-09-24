@@ -148,46 +148,49 @@
                    
                 </div>
                 <div class="row">
-                        <div class="main">
+                        <div class="container">
                             <legend><strong >Update Product</strong></legend>
                                     
                             <form name="updateProduct" action="FrontController" method="POST">
                                     <input type="hidden" name="command" value="update_product" />
                                     <input type="hidden" name="product_id" value = <c:out value="${product.getId()}"/>  
-                                    <div class="field">
-                                        <label>Name</label>
-                                        <input type="text" name="product_name" value="<c:out value="${product.getName()}"/>">
+                                    <div class="field" style="margin: 0px auto; text-align: left;">
+                                <table>  
+                                    <tr> 
+                                        <td align="right"><label>Name</label></td>
+                                        <td align="left"><input type="text" name="product_name" value="<c:out value="${product.getName()}"/>"></td>
                                         <span class="help-block"></span>
-                                    </div>
-                                    <div class="field">
-                                        <label >Category:</label>
-                                        <select name="category_id">
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label >Category:</label></td>
+                                        <td align="left"><select name="category_id">
                                             <option selected value="<c:out value="${product.getIdCategory()}"/>">${product.getName()}</option>
                                             <c:forEach items="${categoriesAdmin}" var="category">
                                                 <option value="${category.getId()}">${category.getName()}</option>
                                             </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div class="field">
-                                        <label >Description:</label>
-                                        <textarea type="text" name="description" value="<c:out value="${product.getDescription()}"/>"></textarea>
+                                        </select></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label >Description:</label></td>
+                                        <td align="left"><textarea type="text" name="description" value="<c:out value="${product.getDescription()}"/>"></textarea></td>
                                         <span class="help-block"></span>
-                                    </div>
-                                    <div class="field">
-                                        <label >Quantity:</label>
-                                        <input type="text" name="quantity" value="<c:out value="${product.getQuantity()}"/>">
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label >Quantity:</label></td>
+                                        <td align="left"><input type="text" name="quantity" value="<c:out value="${product.getQuantity()}"/>"></td>
                                         <span class="help-block"></span>
-                                    </div>
-                                    <div class="field">
-                                        <label >Picture:</label>
-                                        <input type="text" name="picture" value="<c:out value="${product.getPicture()}"/>">
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label >Picture:</label></td>
+                                        <td align="left"><input type="text" name="picture" value="<c:out value="${product.getPicture()}"/>"></td>
                                         <span class="help-block"></span>
-                                    </div>
-                                    <div class="field">
-                                        <label >Price:</label>
-                                        <input type="text" name="price" value="<c:out value="${product.getPrice()}"/>">
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label >Price:</label></td>
+                                        <td align="left"><input type="text" name="price" value="<c:out value="${product.getPrice()}"/>"></td>
                                         <span class="help-block"></span>
-                                    </div>
+                                    </tr>
+                                </table>
                                <input type="submit" class="btn btn-outline btn-default" value="Update">
                               <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
                             </form>	

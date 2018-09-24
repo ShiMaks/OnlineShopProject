@@ -16,7 +16,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(Order order, List<OrderItem> orderItems) throws ServiceException {
-
+        orderDao.createOrder(order, orderItems);
     }
 
     @Override

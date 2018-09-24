@@ -115,7 +115,7 @@ public class ActionManager {
             case "to_my_information": //user
                 command = new PageUserInformCommandImpl();
                 break;
-            case "сheckout": //user
+            case "create_order": //user
                 command = new CreateOrderCommandImpl();
                 break;
             default:

@@ -11,6 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,56 +50,51 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
     }
 
     @Override
-    public void create(Order order) throws DaoException {
-//        int id = 0;
-//        try {
-//            Connection connection = dataBaseConnection.getConnection();
-//            connection.setAutoCommit(false);
-//            try (PreparedStatement customerPreparedStatement = connection.prepareStatement(ADD_CUSTOMER_PERSONAL_DATA,
-//                    Statement.RETURN_GENERATED_KEYS);
-//                 PreparedStatement orderPreparedStatement = connection.prepareStatement(ADD_ORDER,
-//                         Statement.RETURN_GENERATED_KEYS)) {
-//                customerPreparedStatement.setString(1, entity.getCustomer().getName());
-//                customerPreparedStatement.setString(2, entity.getCustomer().getSurname());
-//                customerPreparedStatement.setString(3, entity.getCustomer().getPassportNumb());
-//                customerPreparedStatement.setString(4, entity.getCustomer().getDateOfBirth().toString());
-//                customerPreparedStatement.setInt(5, entity.getCustomer().getDrivingExp());
-//                customerPreparedStatement.executeUpdate();
-//                ResultSet resultSet = customerPreparedStatement.getGeneratedKeys();
-//                if (resultSet.next()) {
-//                    entity.getCustomer().setId(resultSet.getInt(1));
-//                }
-//
-//                orderPreparedStatement.setString(1, entity.getStatus().toString());
-//                orderPreparedStatement.setString(2, entity.getOrderDate().toString());
-//                orderPreparedStatement.setInt(3, entity.getUserId());
-//                orderPreparedStatement.setInt(4, entity.getCarId());
-//                orderPreparedStatement.setString(5, entity.getStartDate().toString());
-//                orderPreparedStatement.setString(6, entity.getEndDate().toString());
-//                orderPreparedStatement.setInt(7, entity.getCustomer().getId());
-//                orderPreparedStatement.setInt(8, entity.getTotalPrice());
-//                orderPreparedStatement.setBoolean(9, entity.isInsurance());
-//                orderPreparedStatement.executeUpdate();
-//                resultSet = orderPreparedStatement.getGeneratedKeys();
-//                if (resultSet.next()) {
-//                    id = resultSet.getInt(1);
-//                }
-//                connection.commit();
-//            } catch (SQLException e) {
-//                connection.rollback();
-//                throw new DAOException(ERROR_IN_CREATE_ORDER, e);
-//            } finally {
-//                connection.setAutoCommit(true);
-//            }
-//        } catch (SQLException e) {
-//            throw new DAOException(ERROR_IN_CREATE_ORDER, e);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (DAOException daoException) {
-//            daoException.printStackTrace();
-//        } finally {
-//            dataBaseConnection.closeConnection(connection);
-//        }
+    public void createOrder(Order order, List<OrderItem> orderItems) throws DaoException {
+        int id = 0;
+        Connection connection = dataBaseConnection.getConnection();
+        try {
+            connection.setAutoCommit(false);
+            try (PreparedStatement orderPreparedStatement = connection.prepareStatement(CREATE_ORDER,
+                    Statement.RETURN_GENERATED_KEYS);
+                 PreparedStatement orderItemPreparedStatement = connection.prepareStatement(CREATE_ORDER_ITEM,
+                         Statement.RETURN_GENERATED_KEYS)) {
+                orderPreparedStatement.setInt(1, order.getIdClient());
+                orderPreparedStatement.setString(2, order.getStatus().toString());
+                orderPreparedStatement.setString(3, getDateTime(order.getDataOrder()));
+                orderPreparedStatement.setInt(4, order.getOrderCost());
+                orderPreparedStatement.executeUpdate();
+                ResultSet resultSet = orderPreparedStatement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                }
+
+                for(OrderItem orderItem: orderItems) {
+                    orderItemPreparedStatement.setInt(1, id);
+                    orderItemPreparedStatement.setInt(2, orderItem.getIdProduct());
+                    orderItemPreparedStatement.setInt(3, orderItem.getQuantity());
+                    orderItemPreparedStatement.setInt(4, orderItem.getPrice());
+                    orderItemPreparedStatement.executeUpdate();
+                }
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                throw new DaoException(e);
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } catch (DaoException daoException) {
+            daoException.printStackTrace();
+        } finally {
+            dataBaseConnection.returnConnection(connection);
+        }
+    }
+
+    @Override
+    public void create(Order entity) throws DaoException {
+
     }
 
     @Override
@@ -259,5 +257,10 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
         } else {
             return null;
         }
+    }
+
+    private String getDateTime(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return dateFormat.format(date);
     }
 }

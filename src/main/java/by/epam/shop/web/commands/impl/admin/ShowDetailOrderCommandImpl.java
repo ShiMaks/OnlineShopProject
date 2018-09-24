@@ -44,6 +44,7 @@ public class ShowDetailOrderCommandImpl implements BaseCommand{
             Product product;
             int idProduct = orderItem.getIdProduct();
             product = productService.getProduct(idProduct);
+            product.setQuantity(orderItem.getQuantity());
             products.add(product);
         }
         return products;

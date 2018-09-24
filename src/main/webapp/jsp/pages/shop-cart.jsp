@@ -140,14 +140,14 @@
                         </td>
                         <td class="goods-page-quantity">
                           <div class="product-quantity">
-                              <strong><span></span>${sessionScope.shopCart.getQuantityProducts()}</strong>
+                              <strong><span></span>${entry.getValue()}</strong>
                           </div>
                         </td>
                         <td class="goods-page-price">
                           <strong><span>$</span>${entry.key.getPrice()}</strong>
                         </td>
                         <td class="goods-page-total">
-                          <strong><span>$</span>${entry.key.getPrice()*sessionScope.shopCart.getQuantityProducts()}</strong>
+                          <strong><span>$</span>${entry.key.getPrice()*entry.getValue()}</strong>
                         </td>
                         <td class="del-goods-col">
                             <form action="FrontController" method="POST">
@@ -170,9 +170,9 @@
                     </ul>
                   </div>
                 </div>
-                <form action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="сheckout" />
-                    <input type="submit" value="Checkout" class="btn btn-primary"/>
+                <form name = "сheckout" action="FrontController" method="GET">
+                  <input type="hidden" name="command" value="create_order" />
+                  <input type="submit" value="Checkout" class="btn btn-primary"/>
                 </form>  
               </div>
             </div>

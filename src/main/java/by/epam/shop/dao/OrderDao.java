@@ -50,4 +50,6 @@ public interface OrderDao extends BaseDao<Order> {
      */
     List<Order> getUserOrders(int idUser) throws DaoException;
 
+    void createOrder(Order order, List<OrderItem> orderItemLis) throws DaoException;
+
 }

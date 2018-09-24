@@ -204,7 +204,7 @@
                                             <th>Picture</th>
                                             <th>Product Name</th>
                                             <th>Description</th>
-                                            <th>InStok</th>
+                                            <th>Quantity</th>
                                             <th>Price</th>
                                         </thead>
                                         <tbody>
@@ -214,7 +214,7 @@
                                                 <td><img src="${product.getPicture()}" width="190" height="220" alt="Product"></td>
                                                 <td>${product.getName()}</td>
                                                 <td>${product.getDescription()}</td>
-                                                <td>${product.isInStock()}</td>
+                                                <td>${product.getQuantity()}</td>
                                                 <td>${product.getPrice()}$</td>
                                                 <td></td>
                                             </tr>

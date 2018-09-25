@@ -5,10 +5,17 @@ import by.epam.shop.service.ProductService;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
+import by.epam.shop.web.exception.ValidateNullRequestParamException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static by.epam.shop.web.util.PagePathConstant.PAGE_CREATE_PRODUCT;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_URL;
+import static by.epam.shop.web.util.RequestParamValidator.*;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class AddProductCommandImpl implements BaseCommand {
@@ -17,24 +24,69 @@ public class AddProductCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        //execute parameter check
-        int idCategory = Integer.parseInt(request.getParameter(REQUEST_PARAM_CATEGORY_ID));
-        int quantity = Integer.parseInt(request.getParameter(REQUEST_PARAM_QUANTITY));
-        int price = Integer.parseInt((request.getParameter(REQUEST_PARAM_PRODUCT_PRICE)));
-        String description = request.getParameter(REQUEST_PARAM_DESCRIPTION);
-        String nameProduct = request.getParameter(REQUEST_PARAM_PRODUCT_NAME);
-        String picture = request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE);
+        String idCategory = request.getParameter(REQUEST_PARAM_CATEGORY_ID);
+        if (!validatePositiveInt(idCategory)) {
+            return PAGE_ERROR;
+        }
+        if(validateProductInputData(request)){
+            Product product = createProduct(getRequestProductParamsMap(request));
+            productService.addProductToShop(product);
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
+            return REDIRECT_ADMIN_URL;
+        } else {
+            return PAGE_CREATE_PRODUCT;
+        }
+    }
 
+    private boolean validateProductInputData(HttpServletRequest request) throws ValidateNullRequestParamException {
+
+        boolean result = true;
+        if (!validateProductNameOrCategory(request.getParameter(REQUEST_PARAM_PRODUCT_NAME))) {
+           result = false;
+            System.out.println("error name");
+        } else {
+
+        }
+        if (!validatePositiveInt(request.getParameter(REQUEST_PARAM_QUANTITY))) {
+           result = false;
+            System.out.println("error quantity");
+        } else {
+
+        }
+        if (!validatePrice(request.getParameter(REQUEST_PARAM_PRODUCT_PRICE))) {
+            result = false;
+        } else {
+
+        }
+        if (!validateImageLink(request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE))) {
+            result = false;
+            System.out.println("error picture");
+        } else {
+
+        }
+        return result;
+    }
+
+    private Product createProduct(Map<String, String> productParam){
         Product product  = new Product();
-        product.setName(nameProduct);
-        product.setIdCategory(idCategory);
-        product.setDescription(description);
-        product.setQuantity(quantity);
-        product.setPrice(price);
-        product.setPicture(picture);
+        product.setName(productParam.get(REQUEST_PARAM_PRODUCT_NAME));
+        product.setDescription(productParam.get(REQUEST_PARAM_DESCRIPTION));
+        product.setIdCategory(Integer.parseInt(productParam.get(REQUEST_PARAM_CATEGORY_ID)));
+        product.setQuantity(Integer.parseInt(productParam.get(REQUEST_PARAM_QUANTITY)));
+        product.setPrice(Integer.parseInt(productParam.get(REQUEST_PARAM_PRODUCT_PRICE)));
+        product.setPicture(productParam.get(REQUEST_PARAM_PRODUCT_PICTURE));
+        product.setInStock(true);
+        return product;
+    }
 
-        productService.addProductToShop(product);
-        request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
-        return REDIRECT_ADMIN_URL;
+    private Map<String, String> getRequestProductParamsMap(HttpServletRequest request) {
+        Map<String, String> requestParams = new HashMap<>();
+        requestParams.put(REQUEST_PARAM_QUANTITY, request.getParameter(REQUEST_PARAM_QUANTITY));
+        requestParams.put(REQUEST_PARAM_PRODUCT_PRICE, request.getParameter(REQUEST_PARAM_PRODUCT_PRICE));
+        requestParams.put(REQUEST_PARAM_DESCRIPTION, request.getParameter(REQUEST_PARAM_DESCRIPTION));
+        requestParams.put(REQUEST_PARAM_PRODUCT_NAME, request.getParameter(REQUEST_PARAM_PRODUCT_NAME));
+        requestParams.put(REQUEST_PARAM_PRODUCT_PICTURE, request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE));
+        requestParams.put(REQUEST_PARAM_CATEGORY_ID, request.getParameter(REQUEST_PARAM_CATEGORY_ID));
+        return requestParams;
     }
 }

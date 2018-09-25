@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ORDER_DETAIL;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 
 public class ShowDetailOrderCommandImpl implements BaseCommand{
@@ -32,7 +33,7 @@ public class ShowDetailOrderCommandImpl implements BaseCommand{
             request.setAttribute("listProducts", getProducts(orderItems));
             request.setAttribute("order", order);
             request.setAttribute("user", user);
-            return "jsp/updateOrderAdmin.jsp";
+            return PAGE_ORDER_DETAIL;
         } else {
             return PAGE_ERROR;
         }

@@ -10,7 +10,7 @@ public class RequestParamValidator {
 
     private static final String LOGIN_REGEX = "[0-9a-zA-Z_@$]{5,}"; /* мин 5 символов из тех что в скобках */
 
-    private static final String PRODUCTNAME_REGEX = "([\\wА-Яа-яЁё]{1,50})([\\-\\s]?)([\\wА-Яа-яЁё]{0,50})";
+    private static final String PRODUCT_NAME_REGEX = "([\\wА-Яа-яЁё]{1,50})([\\-\\s]?)([\\wА-Яа-яЁё]{0,50})";
 
     private static final String PASS_REGEX = "(?=.*[a-zA-z])(?=.*[0-9]).{5,}";
                                                                                 /*
@@ -44,6 +44,8 @@ public class RequestParamValidator {
 
     private static final String PHONE_REGEX = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$";
     private static final String POSITIVE_NUMBER_REGEX = "([1-9])([0-9]*)";
+    private static final String IMAGE_LINK_REGEX = "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
+    private static final String PRICE_REGEX = "^([0-9]{0,2}((.)[0-9]{0,2}))$";
 
     private  RequestParamValidator(){
         throw new IllegalStateException("Utility class");
@@ -57,7 +59,7 @@ public class RequestParamValidator {
 
     public static boolean validateProductNameOrCategory(String branNameOrModel) throws ValidateNullRequestParamException {
         validateParamNotNull(branNameOrModel);
-        return matchToRegex(branNameOrModel, PRODUCTNAME_REGEX);
+        return matchToRegex(branNameOrModel, PRODUCT_NAME_REGEX);
     }
 
     public static boolean validateLogin(String login) throws ValidateNullRequestParamException {
@@ -88,6 +90,15 @@ public class RequestParamValidator {
     public static boolean validatePhone(String phone) throws ValidateNullRequestParamException {
         validateParamNotNull(phone);
         return matchToRegexCaseIns(phone, PHONE_REGEX);
+    }
+
+    public static boolean validateImageLink(String imageLink) throws ValidateNullRequestParamException {
+        validateParamNotNull(imageLink);
+        return matchToRegex(imageLink, IMAGE_LINK_REGEX);
+    }
+    public static boolean validatePrice(String price) throws ValidateNullRequestParamException {
+        validateParamNotNull(price);
+        return matchToRegex(price, PRICE_REGEX);
     }
 
     private static boolean matchToRegex(String input, String regex) {

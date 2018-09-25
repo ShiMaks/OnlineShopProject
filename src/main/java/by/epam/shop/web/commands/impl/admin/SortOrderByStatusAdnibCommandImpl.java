@@ -8,6 +8,8 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ORDERS_ADMIN;
 import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
 
 
@@ -21,6 +23,6 @@ public class SortOrderByStatusAdnibCommandImpl implements BaseCommand{
         validateParamNotNull(status);
         List<Order> orders = orderService.getOrdersByStatus(status);
         request.setAttribute("listOrders", orders);
-        return "jsp/ordersAdmin.jsp";
+        return PAGE_ORDERS_ADMIN;
     }
 }

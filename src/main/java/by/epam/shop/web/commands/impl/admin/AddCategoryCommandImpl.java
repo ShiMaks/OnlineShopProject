@@ -6,11 +6,14 @@ import by.epam.shop.service.exception.ServiceException;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
+import by.epam.shop.web.exception.ValidateNullRequestParamException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_CREATE_CATEGORY;
 import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
+import static by.epam.shop.web.util.RequestParamValidator.validateProductNameOrCategory;
 import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_ADMIN_CATEGORY;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_NAME_CATEGORY;
 import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
@@ -22,15 +25,27 @@ public class AddCategoryCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         String nameCategory = request.getParameter(REQUEST_PARAM_NAME_CATEGORY);
-        validateParamNotNull(nameCategory);
-        Category category = new Category();
-        category.setName(nameCategory);
-        try {
+        if(validateCategoryInputData(nameCategory)) {
+            Category category = new Category();
+            category.setName(nameCategory);
             categoryService.addCategoryToShop(category);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_CATEGORY);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
+            return REDIRECT_ADMIN_URL;
+        } else {
+            return PAGE_CREATE_CATEGORY;
         }
-        return REDIRECT_ADMIN_URL;
+    }
+
+    private boolean validateCategoryInputData(String nameCategory) throws ValidateNullRequestParamException {
+        boolean result = true;
+        if (!validateProductNameOrCategory(nameCategory)) {
+            System.out.println("error name");
+            result = false;
+        } else {
+
+        }
+        return result;
     }
 }
+
+

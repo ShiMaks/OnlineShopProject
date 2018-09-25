@@ -9,6 +9,8 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_ORDERS_ADMIN;
+
 public class PageOrdersAdminCommandImpl implements BaseCommand {
 
     private OrderService orderService = ServiceFactory.getOrderService();
@@ -17,6 +19,6 @@ public class PageOrdersAdminCommandImpl implements BaseCommand {
     public String executeCommand(HttpServletRequest request) throws CommandException {
         List<Order> orders = orderService.getAllOrders();
         request.setAttribute("listOrders", orders);
-        return "/jsp/ordersAdmin.jsp";
+        return PAGE_ORDERS_ADMIN;
     }
 }

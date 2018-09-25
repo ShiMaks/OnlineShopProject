@@ -19,7 +19,7 @@ import static by.epam.shop.dao.util.TablesColumnNamesDeclaration.*;
  *
  * @author Shilvian Maksim
  */
-public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
+public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao {
 
     private static final Logger LOGGER = LogManager.getLogger(ProductDaoDBImpl.class);
 
@@ -45,6 +45,23 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
     }
 
     @Override
+    protected Product mapRow(ResultSet resultSet) throws DaoException {
+        Product product = new Product();
+        try{
+            product.setId(resultSet.getInt("id"));
+            product.setName(resultSet.getString("name"));
+            product.setDescription(resultSet.getString("description"));
+            product.setIdCategory(resultSet.getInt("category_id"));
+            product.setPrice(resultSet.getInt("price"));
+            product.setPicture(resultSet.getString("picture"));
+            product.setQuantity(resultSet.getInt("quantity"));
+        } catch(SQLException e){
+            throw new DaoException(e);
+        }
+        return product;
+    }
+
+    @Override
     public void create(Product product) throws DaoException {
         Connection connection = dataBaseConnection.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(CREATE_PRODUCT)){
@@ -65,27 +82,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
 
     @Override
     public Product read(int id) throws DaoException {
-        Product product = new Product();
-        ResultSet result = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(READ_PRODUCT_BY_ID)){
-            statement.setInt(1, id);
-            result = statement.executeQuery();
-            if(result.next()) {
-                product.setId(result.getInt(PRODUCT_COLUMN_ID));
-                product.setName(result.getString(PRODUCT_COLUMN_NAME));
-                product.setIdCategory(result.getInt(PRODUCT_COLUMN_CATEGORY_ID));
-                product.setPrice(result.getInt(PRODUCT_COLUMN_PRICE));
-                product.setPicture(result.getString(PRODUCT_COLUMN_PICTURE));
-                product.setDescription(result.getString(PRODUCT_COLUMN_DESCRIPTION));
-                product.setQuantity(result.getInt(PRODUCT_COLUMN_QUANTITY));
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return product;
+        return read(id, READ_PRODUCT_BY_ID);
     }
 
     @Override
@@ -109,41 +106,12 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
 
     @Override
     public void delete(int id) throws DaoException {
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_BY_ID)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
+        delete(id, DELETE_PRODUCT_BY_ID);
     }
 
     @Override
     public List<Product> readAll() throws DaoException {
-        List<Product> products = new ArrayList<>();
-        ResultSet resultSet = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (Statement statement = connection.createStatement()) {
-            resultSet = statement.executeQuery(READ_ALL_PRODUCTS);
-            while(resultSet.next()) {
-                Product product = new Product();
-                product.setId(resultSet.getInt("id"));
-                product.setName(resultSet.getString("name"));
-                product.setDescription(resultSet.getString("description"));
-                product.setIdCategory(resultSet.getInt("category_id"));
-                product.setPrice(resultSet.getInt("price"));
-                product.setPicture(resultSet.getString("picture"));
-                product.setQuantity(resultSet.getInt("quantity"));
-                products.add(product);
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return products;
+        return readAll(READ_ALL_PRODUCTS);
     }
 
     @Override
@@ -155,15 +123,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
             while(resultSet.next()) {
-                Product product = new Product();
-                product.setId(resultSet.getInt("id"));
-                product.setName(resultSet.getString("name"));
-                product.setDescription(resultSet.getString("description"));
-                product.setIdCategory(resultSet.getInt("category_id"));
-                product.setPrice(resultSet.getInt("price"));
-                product.setPicture(resultSet.getString("picture"));
-                product.setQuantity(resultSet.getInt("quantity"));
-                products.add(product);
+                products.add(mapRow(resultSet));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -182,15 +142,7 @@ public class ProductDaoDBImpl extends AbstractDao implements ProductDao {
             statement.setInt(1, startPosition);
             resultSet = statement.executeQuery();
             while(resultSet.next()) {
-                Product product = new Product();
-                product.setId(resultSet.getInt("id"));
-                product.setName(resultSet.getString("name"));
-                product.setDescription(resultSet.getString("description"));
-                product.setIdCategory(resultSet.getInt("category_id"));
-                product.setPrice(resultSet.getInt("price"));
-                product.setPicture(resultSet.getString("picture"));
-                product.setQuantity(resultSet.getInt("quantity"));
-                products.add(product);
+                products.add(mapRow(resultSet));
             }
         } catch (SQLException e) {
             throw new DaoException(e);

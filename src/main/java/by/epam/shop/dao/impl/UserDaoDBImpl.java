@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Shilvian Maksim
  */
-public class UserDaoDBImpl extends AbstractDao implements UserDao {
+public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
 
     private static final Logger LOGGER = LogManager.getLogger(UserDaoDBImpl.class);
 
@@ -60,6 +60,22 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
 
     public UserDaoDBImpl(ConnectionPool connectionPool) {
         super(connectionPool);
+    }
+
+    @Override
+    protected User mapRow(ResultSet resultSet) throws DaoException {
+        User user = new User();
+        try{
+            user.setId(resultSet.getInt("id"));
+            user.setName(resultSet.getString("name"));
+            user.setSurname(resultSet.getString("surname"));
+            user.setLogin(resultSet.getString("login"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhone(resultSet.getString("phone"));
+        } catch(SQLException e){
+            throw new DaoException(e);
+        }
+        return user;
     }
 
     @Override
@@ -126,27 +142,7 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
 
     @Override
     public User read(int id) throws DaoException {
-        User user = null;
-        ResultSet result = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(READ_USER_BY_ID)){
-            statement.setInt(1, id);
-            result = statement.executeQuery();
-            if(result.next()) {
-                user = new User();
-                user.setId(result.getInt("id"));
-                user.setName(result.getString("name"));
-                user.setSurname(result.getString("surname"));
-                user.setLogin(result.getString("login"));
-                user.setEmail(result.getString("email"));
-                user.setPhone(result.getString("phone"));
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return user;
+        return read(id, READ_USER_BY_ID);
     }
 
     @Override
@@ -167,18 +163,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
 
     @Override
     public void delete(int id) throws DaoException {
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(DELETE_USER_BY_ID)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
+        delete(id, DELETE_USER_BY_ID);
     }
-
-
 
     @Override
     public User getUserByLoginPassword(String login, String password) throws DaoException {
@@ -206,30 +192,8 @@ public class UserDaoDBImpl extends AbstractDao implements UserDao {
 
     @Override
     public List<User> readAll() throws DaoException {
-        List<User> users = new ArrayList<>();
-        ResultSet resultSet = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (Statement statement = connection.createStatement()) {
-            resultSet = statement.executeQuery(READ_ALL_USERS);
-            while(resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPhone(resultSet.getString("phone"));
-                user.setLogin(resultSet.getString("login"));
-                users.add(user);
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return users;
+        return readAll(READ_ALL_USERS);
     }
-
-
 
     private int identifyDuplicateField(String excMessage) {
         if (excMessage.endsWith(ENDS_WITH_LOGIN)) {

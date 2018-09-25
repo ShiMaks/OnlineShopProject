@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Shilvian Maksim
  */
-public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
+public class CategoryDaoDBImpl extends AbstractDao<Category> implements CategoryDao {
 
     private static final Logger LOGGER = LogManager.getLogger(CategoryDaoDBImpl.class);
 
@@ -35,6 +35,18 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
     }
 
     @Override
+    protected Category mapRow(ResultSet resultSet) throws DaoException {
+        Category category = new Category();
+        try{
+            category.setId(resultSet.getInt("id"));
+            category.setName(resultSet.getString("name"));
+        } catch(SQLException e){
+            throw new DaoException(e);
+        }
+        return category;
+    }
+
+    @Override
     public void create(Category entity) throws DaoException {
         Connection connection = dataBaseConnection.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(CREATE_CATEGORY)){
@@ -49,22 +61,7 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
 
     @Override
     public Category read(int id) throws DaoException {
-        Category category = new Category();
-        ResultSet result = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(READ_CATEGORY_BY_ID)){
-            statement.setInt(1, id);
-            result = statement.executeQuery();
-            if(result.next()) {
-                category.setId(result.getInt("id"));
-                category.setName(result.getString("name"));
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return category;
+        return read(id, READ_CATEGORY_BY_ID);
     }
 
     @Override
@@ -83,35 +80,11 @@ public class CategoryDaoDBImpl extends AbstractDao implements CategoryDao {
 
     @Override
     public void delete(int id) throws DaoException {
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(DELETE_CATEGORY_BY_ID)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
+        delete(id, DELETE_CATEGORY_BY_ID);
     }
 
     @Override
     public List<Category> readAll() throws DaoException {
-        List<Category> categories = new ArrayList<>();
-        ResultSet resultSet = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (Statement statement = connection.createStatement()) {
-            resultSet = statement.executeQuery(READ_ALL_CATEGORIES);
-            while(resultSet.next()) {
-                Category category = new Category();
-                category.setId(resultSet.getInt("id"));
-                category.setName(resultSet.getString("name"));
-                categories.add(category);
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return categories;
+        return readAll(READ_ALL_CATEGORIES);
     }
 }

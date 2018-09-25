@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author Shilvian Maksim
  */
-public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
+public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
 
     private static final Logger LOGGER = LogManager.getLogger(OrderDaoDBImpl.class);
 
@@ -47,6 +47,21 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
 
     public OrderDaoDBImpl(ConnectionPool connectionPool) {
         super(connectionPool);
+    }
+
+    @Override
+    protected Order mapRow(ResultSet resultSet) throws DaoException {
+        Order order = new Order();
+        try{
+            order.setId(resultSet.getInt("id"));
+            order.setIdClient(resultSet.getInt("client_id"));
+            order.setStatus(OrderStatusEnum.valueOf(resultSet.getString("status").toUpperCase()));
+            order.setDataOrder(resultSet.getDate("dataOrder"));
+            order.setOrderCost(resultSet.getInt("price"));
+        } catch(SQLException e){
+            throw new DaoException(e);
+        }
+        return order;
     }
 
     @Override
@@ -99,25 +114,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
 
     @Override
     public Order read(int id) throws DaoException {
-        Order order = new Order();
-        ResultSet result = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_ID)){
-            statement.setInt(1, id);
-            result = statement.executeQuery();
-            if(result.next()) {
-                order.setId(result.getInt("id"));
-                order.setIdClient(result.getInt("client_id"));
-                order.setStatus(valueOf(result.getString("status")));
-                order.setDataOrder(result.getDate("dataOrder"));
-                order.setOrderCost(result.getInt("price"));
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return order;
+        return read(id, READ_ORDER_BY_ID);
     }
 
     @Override
@@ -136,39 +133,12 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
 
     @Override
     public void delete(int id) throws DaoException {
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(DELETE_ORDER_BY_ID)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
+        delete(id, DELETE_ORDER_BY_ID);
     }
 
     @Override
     public List<Order> readAll() throws DaoException {
-        List<Order> orders = new ArrayList<>();
-        ResultSet resultSet = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (Statement statement = connection.createStatement()) {
-            resultSet = statement.executeQuery(READ_ALL_ORDERS);
-            while(resultSet.next()) {
-                Order order = new Order();
-                order.setId(resultSet.getInt("id"));
-                order.setIdClient(resultSet.getInt("client_id"));
-                order.setStatus(valueOf(resultSet.getString("status")));
-                order.setDataOrder(resultSet.getDate("dataOrder"));
-                order.setOrderCost(resultSet.getInt("price"));
-                orders.add(order);
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-        }
-        return orders;
+        return readAll(READ_ALL_ORDERS);
     }
 
     @Override
@@ -201,13 +171,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
             statement.setString(1, status);
             result = statement.executeQuery();
             while(result.next()) {
-                Order order = new Order();
-                order.setId(result.getInt("id"));
-                order.setIdClient(result.getInt("client_id"));
-                order.setStatus(valueOf(result.getString("status")));
-                order.setDataOrder(result.getDate("dataOrder"));
-                order.setOrderCost(result.getInt("price"));
-                orders.add(order);
+                orders.add(mapRow(result));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -226,13 +190,7 @@ public class OrderDaoDBImpl extends AbstractDao implements OrderDao {
             statement.setInt(1, idUser);
             result = statement.executeQuery();
             while(result.next()) {
-                Order order = new Order();
-                order.setId(result.getInt("id"));
-                order.setIdClient(result.getInt("client_id"));
-                order.setStatus(valueOf(result.getString("status")));
-                order.setDataOrder(result.getDate("dataOrder"));
-                order.setOrderCost(result.getInt("price"));
-                orders.add(order);
+                orders.add(mapRow(result));
             }
         } catch (SQLException e) {
             throw new DaoException(e);

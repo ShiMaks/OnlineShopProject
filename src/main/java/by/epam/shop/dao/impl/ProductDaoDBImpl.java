@@ -48,13 +48,13 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
     protected Product mapRow(ResultSet resultSet) throws DaoException {
         Product product = new Product();
         try{
-            product.setId(resultSet.getInt("id"));
-            product.setName(resultSet.getString("name"));
-            product.setDescription(resultSet.getString("description"));
-            product.setIdCategory(resultSet.getInt("category_id"));
-            product.setPrice(resultSet.getInt("price"));
-            product.setPicture(resultSet.getString("picture"));
-            product.setQuantity(resultSet.getInt("quantity"));
+            product.setId(resultSet.getInt(PRODUCT_COLUMN_ID));
+            product.setName(resultSet.getString(PRODUCT_COLUMN_NAME));
+            product.setDescription(resultSet.getString(PRODUCT_COLUMN_DESCRIPTION));
+            product.setIdCategory(resultSet.getInt(PRODUCT_COLUMN_CATEGORY_ID));
+            product.setPrice(resultSet.getInt(PRODUCT_COLUMN_PRICE));
+            product.setPicture(resultSet.getString(PRODUCT_COLUMN_PICTURE));
+            product.setQuantity(resultSet.getInt(PRODUCT_COLUMN_QUANTITY));
         } catch(SQLException e){
             throw new DaoException(e);
         }
@@ -129,6 +129,7 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
+            closeResultSet(resultSet);
         }
         return products;
     }
@@ -148,6 +149,7 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
+            closeResultSet(resultSet);
         }
         return products;
     }

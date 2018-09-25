@@ -30,6 +30,7 @@ public abstract class AbstractDao<E extends Entity> {
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
+            closeResultSet(resultSet);
         }
         return null;
     }

@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.epam.shop.dao.util.TablesColumnNamesDeclaration.*;
+
 /**
  * Class for working with the order table from database
  *
@@ -53,11 +55,11 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
     protected Order mapRow(ResultSet resultSet) throws DaoException {
         Order order = new Order();
         try{
-            order.setId(resultSet.getInt("id"));
-            order.setIdClient(resultSet.getInt("client_id"));
-            order.setStatus(OrderStatusEnum.valueOf(resultSet.getString("status").toUpperCase()));
-            order.setDataOrder(resultSet.getDate("dataOrder"));
-            order.setOrderCost(resultSet.getInt("price"));
+            order.setId(resultSet.getInt(ORDER_ID));
+            order.setIdClient(resultSet.getInt(ORDER_CLIENT_ID));
+            order.setStatus(OrderStatusEnum.valueOf(resultSet.getString(ORDER_STATUS).toUpperCase()));
+            order.setDataOrder(resultSet.getDate(ORDER_DATE));
+            order.setOrderCost(resultSet.getInt(ORDER_PRICE));
         } catch(SQLException e){
             throw new DaoException(e);
         }
@@ -83,7 +85,6 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
                 if (resultSet.next()) {
                     id = resultSet.getInt(1);
                 }
-
                 for(OrderItem orderItem: orderItems) {
                     orderItemPreparedStatement.setInt(1, id);
                     orderItemPreparedStatement.setInt(2, orderItem.getIdProduct());
@@ -150,8 +151,8 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
                 OrderItem orderItem = new OrderItem();
-                orderItem.setIdProduct(resultSet.getInt("product_id"));
-                orderItem.setQuantity(resultSet.getInt("quantity"));
+                orderItem.setIdProduct(resultSet.getInt(ORDER_PRODUCT_ID));
+                orderItem.setQuantity(resultSet.getInt(ORDER_PRODUCT_QUANTITY));
                 orderItems.add(orderItem);
             }
         } catch (SQLException e) {
@@ -177,6 +178,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
             throw new DaoException(e);
         }finally {
             dataBaseConnection.returnConnection(connection);
+            closeResultSet(result);
         }
         return orders;
     }
@@ -196,8 +198,8 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
             throw new DaoException(e);
         }finally {
             dataBaseConnection.returnConnection(connection);
+            closeResultSet(result);
         }
-
 //        OrderStatusEnum.valueOf("sdfsdf".toUpperCase());
         return orders;
     }

@@ -12,6 +12,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.epam.shop.dao.util.TablesColumnNamesDeclaration.CATEGORY_COLUMN_ID;
+import static by.epam.shop.dao.util.TablesColumnNamesDeclaration.CATEGORY_COLUMN_NAME;
+
 /**
  * Class for working with the category table from database
  *
@@ -38,8 +41,8 @@ public class CategoryDaoDBImpl extends AbstractDao<Category> implements Category
     protected Category mapRow(ResultSet resultSet) throws DaoException {
         Category category = new Category();
         try{
-            category.setId(resultSet.getInt("id"));
-            category.setName(resultSet.getString("name"));
+            category.setId(resultSet.getInt(CATEGORY_COLUMN_ID));
+            category.setName(resultSet.getString(CATEGORY_COLUMN_NAME));
         } catch(SQLException e){
             throw new DaoException(e);
         }

@@ -12,6 +12,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.epam.shop.dao.util.TablesColumnNamesDeclaration.*;
+
 /**
  * Class for working with the user table from database
  *
@@ -66,12 +68,12 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
     protected User mapRow(ResultSet resultSet) throws DaoException {
         User user = new User();
         try{
-            user.setId(resultSet.getInt("id"));
-            user.setName(resultSet.getString("name"));
-            user.setSurname(resultSet.getString("surname"));
-            user.setLogin(resultSet.getString("login"));
-            user.setEmail(resultSet.getString("email"));
-            user.setPhone(resultSet.getString("phone"));
+            user.setId(resultSet.getInt(USER_COLUMN_ID));
+            user.setName(resultSet.getString(USER_COLUMN_NAME));
+            user.setSurname(resultSet.getString(USER_COLUMN_SURNAME));
+            user.setLogin(resultSet.getString(USER_COLUMN_LOGIN));
+            user.setEmail(resultSet.getString(USER_COLUMN_EMAIL));
+            user.setPhone(resultSet.getString(USER_COLUMN_PHONE));
         } catch(SQLException e){
             throw new DaoException(e);
         }
@@ -111,7 +113,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
             preparedStatement.setInt(1, idUser);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                pass = resultSet.getString("password");
+                pass = resultSet.getString(USER_COLUMN_PASSWORD);
             }
         } catch (SQLException e) {
             throw new DaoException(ERROR_IN_READ_PASS, e);
@@ -177,15 +179,16 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
             result = statement.executeQuery();
             if(result.next()) {
                 user = new User();
-                user.setId(result.getInt("id"));
-                user.setAdmin(result.getBoolean("isAdmin"));
-                user.setLogin(result.getString("login"));
-                user.setPassword(result.getString("password"));
+                user.setId(result.getInt(USER_COLUMN_ID));
+                user.setAdmin(result.getBoolean(USER_COLUMN_IS_ADMIN));
+                user.setLogin(result.getString(USER_COLUMN_LOGIN));
+                user.setPassword(result.getString(USER_COLUMN_PASSWORD));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
+            closeResultSet(result);
         }
         return user;
     }

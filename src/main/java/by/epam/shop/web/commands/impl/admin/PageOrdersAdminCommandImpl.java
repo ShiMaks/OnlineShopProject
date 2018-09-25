@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ORDERS_ADMIN;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_ORDERS;
 
 public class PageOrdersAdminCommandImpl implements BaseCommand {
 
@@ -18,7 +19,7 @@ public class PageOrdersAdminCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         List<Order> orders = orderService.getAllOrders();
-        request.setAttribute("listOrders", orders);
+        request.setAttribute(REQUEST_PARAM_LIST_ORDERS, orders);
         return PAGE_ORDERS_ADMIN;
     }
 }

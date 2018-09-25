@@ -44,8 +44,8 @@ public class RedirectAdminCommandImpl implements BaseCommand{
                return PAGE_PRODUCTS_ADMIN;
             case PAGE_TYPE_ADMIN_ORDERS:
                List<Order> orders = orderService.getAllOrders();
-               request.setAttribute("listOrders", orders);
-               return "/jsp/ordersAdmin.jsp";
+               request.setAttribute(REQUEST_PARAM_LIST_ORDERS, orders);
+               return PAGE_ORDERS_ADMIN;
             case PAGE_TYPE_ADMIN:
                List<User> users = userService.getUsers();
                request.setAttribute(REQUEST_PARAM_USERS, users);

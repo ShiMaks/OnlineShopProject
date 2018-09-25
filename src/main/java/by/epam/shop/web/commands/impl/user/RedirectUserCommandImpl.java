@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-import static by.epam.shop.web.util.PagePathConstant.PAGE_CART;
-import static by.epam.shop.web.util.PagePathConstant.PAGE_INDEX;
+import static by.epam.shop.web.util.PagePathConstant.*;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class RedirectUserCommandImpl implements BaseCommand{
@@ -35,21 +34,21 @@ public class RedirectUserCommandImpl implements BaseCommand{
                 User user = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
                 List<Order> userOrders;
                 userOrders = orderService.getUserOrders(user.getId());
-                request.setAttribute("userOrders", userOrders);
-                return "/jsp/pages/shop-account.jsp";
+                request.setAttribute(REQUEST_PARAM_USER_ORDER, userOrders);
+                return PAGE_SHOP_ACCOUNT;
             case PAGE_TYPE_USER_CART:
                 return PAGE_CART;
             case PAGE_TYPE_USER_INFO:
                 User sessionUser = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
                 User userInfo = userService.getUser(sessionUser.getId());
-                request.setAttribute("userInform", userInfo);
-                return "/jsp/pages/profile-account.jsp";
+                request.setAttribute(REQUEST_PARAM_USERS_INFO, userInfo);
+                return PAGE_SHOP_USER_INFORMATION;
             case PAGE_TYPE_USER_MAIN:
                 List<Category> categories = categoryService.getCategories();
                 List<Product> products = productService.getProducts();
-                request.setAttribute("listCategory", categories);
-                request.setAttribute("listProduct", products);
-                return "/jsp/pages/indexNew.jsp";
+                request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
+                request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
+                return PAGE_SHOP_MAIN_PAGE;
             default:
                 return PAGE_INDEX;
         }

@@ -9,10 +9,9 @@ import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SHOP_USER_INFORMATION;
 import static by.epam.shop.web.util.PagePathConstant.REDIRECT_USER_URL;
-import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_USER_ORDERS;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_USER;
-import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class PageUserInformCommandImpl implements BaseCommand {
 
@@ -24,8 +23,8 @@ public class PageUserInformCommandImpl implements BaseCommand {
         try{
             User user = userService.getUser(sessionUser.getId());
             System.out.println(user.getId());
-            request.setAttribute("userInform", user);
-            return "/jsp/pages/profile-account.jsp";
+            request.setAttribute(REQUEST_PARAM_USERS_INFO, user);
+            return PAGE_SHOP_USER_INFORMATION;
         } catch (ServiceException e){
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_ORDERS);
             return REDIRECT_USER_URL;

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_CART;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_SHOPPING_CART;
 
 public class DeleteProductFromCartCommandImpl implements BaseCommand {
@@ -20,7 +21,7 @@ public class DeleteProductFromCartCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        String idProduct = request.getParameter("product_id");
+        String idProduct = request.getParameter(REQUEST_PARAM_PRODUCT_ID);
         if(validatePositiveInt(idProduct)){
             Product product = productService.getProduct(Integer.parseInt(idProduct));
             ShopCart shopCart = (ShopCart) request.getSession().getAttribute(REQUEST_PARAM_SHOPPING_CART);

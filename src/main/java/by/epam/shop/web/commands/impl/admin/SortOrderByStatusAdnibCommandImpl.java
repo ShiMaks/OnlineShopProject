@@ -11,6 +11,8 @@ import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ORDERS_ADMIN;
 import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_ORDERS;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_ORDER_STATUS;
 
 
 public class SortOrderByStatusAdnibCommandImpl implements BaseCommand{
@@ -19,10 +21,10 @@ public class SortOrderByStatusAdnibCommandImpl implements BaseCommand{
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        String status = request.getParameter("order_status");
+        String status = request.getParameter(REQUEST_PARAM_ORDER_STATUS);
         validateParamNotNull(status);
         List<Order> orders = orderService.getOrdersByStatus(status);
-        request.setAttribute("listOrders", orders);
+        request.setAttribute(REQUEST_PARAM_LIST_ORDERS, orders);
         return PAGE_ORDERS_ADMIN;
     }
 }

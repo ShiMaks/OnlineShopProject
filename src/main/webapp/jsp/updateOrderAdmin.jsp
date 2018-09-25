@@ -208,7 +208,7 @@
                                             <th>Price</th>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${listProducts}" var="product">
+                                            <c:forEach items="${listProduct}" var="product">
                                             <tr>
                                                 <td>${product.getId()}</td>
                                                 <td><img src="${product.getPicture()}" width="190" height="220" alt="Product"></td>

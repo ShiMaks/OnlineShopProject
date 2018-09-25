@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_CART;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_QUANTITY;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_SHOPPING_CART;
 
 public class AddProductToCartCommandImpl implements BaseCommand{
@@ -20,8 +22,8 @@ public class AddProductToCartCommandImpl implements BaseCommand{
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        String idProduct = request.getParameter("product_id");
-        String quantity = request.getParameter("quantity");
+        String idProduct = request.getParameter(REQUEST_PARAM_PRODUCT_ID);
+        String quantity = request.getParameter(REQUEST_PARAM_QUANTITY);
         if(validatePositiveInt(quantity)){
             Product product = productService.getProduct(Integer.parseInt(idProduct));
             ShopCart cart = (ShopCart) request.getSession().getAttribute(REQUEST_PARAM_SHOPPING_CART);

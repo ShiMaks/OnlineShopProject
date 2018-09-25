@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SHOP_ACCOUNT;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_USER;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_USER_ORDER;
 
 public class PageUserOrdersCommandImpl implements BaseCommand {
 
@@ -21,7 +23,7 @@ public class PageUserOrdersCommandImpl implements BaseCommand {
     public String executeCommand(HttpServletRequest request) throws CommandException {
         User user = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
         List<Order> userOrders = orderService.getUserOrders(user.getId());
-        request.setAttribute("userOrders", userOrders);
-        return "/jsp/pages/shop-account.jsp";
+        request.setAttribute(REQUEST_PARAM_USER_ORDER, userOrders);
+        return PAGE_SHOP_ACCOUNT;
     }
 }

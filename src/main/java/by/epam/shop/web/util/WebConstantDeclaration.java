@@ -34,9 +34,16 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_USER_ROLE = "user_type";
     public static final String REQUEST_PARAM_NEW_USER = "new_user";
     public static final String REQUEST_PARAM_USERS = "users";
+    public static final String REQUEST_PARAM_USERS_INFO = "userInform";
     public static final String REQUEST_PARAM_OLD_PASS = "old_password";
     public static final String REQUEST_PARAM_NEW_PASS = "new_password";
     public static final String REQUEST_PARAM_CONFIRM_NEW_PASS = "confirm_password";
+
+    public static final String REQUEST_PARAM_ORDER = "order";
+    public static final String REQUEST_PARAM_ORDER_ID = "order_id";
+    public static final String REQUEST_PARAM_ORDER_STATUS = "order_status";
+    public static final String REQUEST_PARAM_USER_ORDER = "userOrders";
+    public static final String REQUEST_PARAM_LIST_ORDERS = "listOrders";
 
 
     public static final String REQUEST_PARAM_COMMAND = "command";

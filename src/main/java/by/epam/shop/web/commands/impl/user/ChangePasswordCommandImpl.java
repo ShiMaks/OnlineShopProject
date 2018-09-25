@@ -10,6 +10,8 @@ import by.epam.shop.web.exception.ValidateNullRequestParamException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SHOP_CHANGE_PASSWORD;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SIGN_IN;
 import static by.epam.shop.web.util.RequestParamValidator.validatePassword;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
@@ -25,7 +27,7 @@ public class ChangePasswordCommandImpl implements BaseCommand{
         if (validateNewPassword(newPass, request)) {
             return changePassMainLogic(oldPass, newPass, confirmNewPass, request);
         } else {
-            return "/jsp/pages/change-password.jsp";
+            return PAGE_SHOP_CHANGE_PASSWORD;
         }
     }
 
@@ -50,9 +52,9 @@ public class ChangePasswordCommandImpl implements BaseCommand{
             request.getSession().invalidate();
 //            request.getSession().setAttribute(SESSION_ATR_SESSION_MESSAGE,
 //                    Resource.getStrLocale(MESSAGE_PASS_CHANGED, request));
-            return "/jsp/pages/page-login.jsp";
+            return PAGE_SIGN_IN;
         } else {
-            return "/jsp/pages/change-password.jsp";
+            return PAGE_SHOP_CHANGE_PASSWORD;
         }
 
     }

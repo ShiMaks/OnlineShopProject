@@ -11,6 +11,10 @@ import by.epam.shop.web.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SHOP_MAIN_PAGE;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_CATEGORY;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_PRODUCT;
+
 public class StartPageCommandImpl implements BaseCommand {
 
     private CategoryService categoryService = ServiceFactory.getCategoryService();
@@ -20,8 +24,8 @@ public class StartPageCommandImpl implements BaseCommand {
     public String executeCommand(HttpServletRequest request) throws CommandException {
         List<Category> categories = categoryService.getCategories();
         List<Product> products = productService.getProducts();
-        request.setAttribute("listCategory", categories);
-        request.setAttribute("listProduct", products);
-        return "/jsp/pages/indexNew.jsp";
+        request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
+        request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
+        return PAGE_SHOP_MAIN_PAGE;
     }
 }

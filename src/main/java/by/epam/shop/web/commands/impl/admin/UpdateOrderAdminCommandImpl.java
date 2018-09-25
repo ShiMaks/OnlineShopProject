@@ -13,8 +13,7 @@ import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.PagePathConstant.REDIRECT_ADMIN_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
-import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_ADMIN_ORDERS;
-import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class UpdateOrderAdminCommandImpl implements BaseCommand{
 
@@ -22,8 +21,8 @@ public class UpdateOrderAdminCommandImpl implements BaseCommand{
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        String idOrder = request.getParameter("order_id");
-        String status =request.getParameter("order_status");
+        String idOrder = request.getParameter(REQUEST_PARAM_ORDER);
+        String status =request.getParameter(REQUEST_PARAM_ORDER_STATUS);
         validateParamNotNull(status);
         if(validatePositiveInt(idOrder)) {
             Order order = new Order();

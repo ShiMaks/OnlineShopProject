@@ -14,6 +14,10 @@ public final class PagePathConstant {
     public static final String PAGE_ERROR = "/jsp/pages/error.jsp";
     public static final String PAGE_SHOP_ITEM = "/jsp/pages/shop-item.jsp";
     public static final String PAGE_SHOP_MAIN_PAGE = "/jsp/pages/indexNew.jsp";
+    public static final String PAGE_SHOP_CHANGE_PASSWORD = "/jsp/pages/change-password.jsp";
+    public static final String PAGE_SHOP_USER_INFORMATION = "/jsp/pages/profile-account.jsp";
+    public static final String PAGE_SHOP_USER_ORDER_DETAIL = "/jsp/pages/order-details.jsp";
+    public static final String PAGE_SHOP_ACCOUNT = "/jsp/pages/shop-account.jsp";
 
     public static final String PAGE_CATEGORY_ADMIN = "/jsp/categoryAdmin.jsp";
     public static final String PAGE_ADMIN = "/jsp/admin.jsp";

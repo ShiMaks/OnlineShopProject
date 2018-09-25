@@ -10,6 +10,7 @@ import by.epam.shop.web.exception.ValidateNullRequestParamException;
 import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_REGISTRATION;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SHOP_MAIN_PAGE;
 import static by.epam.shop.web.util.PagePathConstant.REDIRECT_GUEST_URL;
 import static by.epam.shop.web.util.RequestParamValidator.*;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
@@ -44,7 +45,7 @@ public class RegisterCommandImpl implements BaseCommand {
 
     private String resultPage(String message, User user, HttpServletRequest request) {
         if (SUCCESS.equals(message)) {
-            return "/jsp/pages/indexNew.jsp";
+            return PAGE_SHOP_MAIN_PAGE;
         } else {
 //            request.setAttribute(REQUEST_PARAM_DUPLICATE_MESSAGE, message);
             return PAGE_REGISTRATION;

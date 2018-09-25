@@ -16,6 +16,7 @@ import java.util.List;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ORDER_DETAIL;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class ShowDetailOrderCommandImpl implements BaseCommand{
 
@@ -25,14 +26,14 @@ public class ShowDetailOrderCommandImpl implements BaseCommand{
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        String idOrder = request.getParameter("order_id");
+        String idOrder = request.getParameter(REQUEST_PARAM_ORDER_ID);
         if(validatePositiveInt(idOrder)) {
             List<OrderItem> orderItems = orderService.getProductsOfOrder(Integer.parseInt(idOrder));
             Order order = orderService.getOrder(Integer.parseInt(idOrder));
             User user = getUser(order.getIdClient());
-            request.setAttribute("listProducts", getProducts(orderItems));
-            request.setAttribute("order", order);
-            request.setAttribute("user", user);
+            request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, getProducts(orderItems));
+            request.setAttribute(REQUEST_PARAM_ORDER, order);
+            request.setAttribute(REQUEST_PARAM_USER, user);
             return PAGE_ORDER_DETAIL;
         } else {
             return PAGE_ERROR;

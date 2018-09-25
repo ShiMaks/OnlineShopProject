@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SHOP_USER_ORDER_DETAIL;
 import static by.epam.shop.web.util.PagePathConstant.REDIRECT_USER_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
-import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_USER_ORDERS;
-import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class PageUserOrderDetailsCommandImpl implements BaseCommand {
 
@@ -27,13 +27,13 @@ public class PageUserOrderDetailsCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        String idOrder = request.getParameter("order_id");
+        String idOrder = request.getParameter(REQUEST_PARAM_ORDER_ID);
         if(validatePositiveInt(idOrder)) {
             List<OrderItem> orderItems = orderService.getProductsOfOrder(Integer.parseInt(idOrder));
             Order order = orderService.getOrder(Integer.parseInt(idOrder));
-            request.setAttribute("listProducts", getProducts(orderItems));
-            request.setAttribute("order", order);
-            return "/jsp/pages/order-details.jsp";
+            request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, getProducts(orderItems));
+            request.setAttribute(REQUEST_PARAM_ORDER, order);
+            return PAGE_SHOP_USER_ORDER_DETAIL;
         } else {
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_ORDERS);
             return REDIRECT_USER_URL;

@@ -12,6 +12,8 @@ public final class PagePathConstant {
     public static final String PAGE_REGISTRATION = "/jsp/pages/page-reg-page.jsp";
     public static final String PAGE_CART = "/jsp/pages/shop-cart.jsp";
     public static final String PAGE_ERROR = "/jsp/pages/error.jsp";
+    public static final String PAGE_SHOP_ITEM = "/jsp/pages/shop-item.jsp";
+    public static final String PAGE_SHOP_MAIN_PAGE = "/jsp/pages/indexNew.jsp";
 
     public static final String PAGE_CATEGORY_ADMIN = "/jsp/categoryAdmin.jsp";
     public static final String PAGE_ADMIN = "/jsp/admin.jsp";

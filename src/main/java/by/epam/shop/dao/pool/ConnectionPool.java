@@ -11,12 +11,24 @@ import java.util.ResourceBundle;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Maksim Shulvian
+ *         <p/>
+ *         The class <code>ConnectionPool</code>
+ *         provides connections to the database.
+ */
 public class ConnectionPool {
 
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
+    /**
+     * Singleton instance
+     */
     private static volatile ConnectionPool instance;
 
+    /**
+     * Configuration constants for the need to create a pool
+     */
     private static final String DB_CONNECT_PROPERTY = "db_config";
     private static final String RESOURCE_DRIVER_NAME = "db.driver.name";
     private static final String RESOURCE_URL = "db.url";
@@ -40,6 +52,11 @@ public class ConnectionPool {
 
     private LinkedBlockingQueue<Connection> freeСonnection = new LinkedBlockingQueue<Connection>();
 
+    /**
+     * Singleton of connection pool
+     *
+     * @return instance
+     */
     public static ConnectionPool getInstance() {
         if (instance == null) {
             synchronized (ConnectionPool.class) {
@@ -51,7 +68,10 @@ public class ConnectionPool {
         return instance;
     }
 
-
+    /**
+     * The constructor creates an instance of the pool.
+     * Initializes a constant number of connections = 10.
+     */
     private ConnectionPool() {
         try {
             Class.forName(driverName);
@@ -69,7 +89,12 @@ public class ConnectionPool {
         }
     }
 
-
+    /**
+     * The method provides the user with a copy of connection from pool
+     *
+     * @return Connection
+     * @throws ConnectionPoolException
+     */
     public Connection getConnection() throws ConnectionPoolException {
 
         Connection connection = null;
@@ -86,6 +111,13 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * The method return the connection back to the pool
+     * when you are finished work with him.
+     *
+     * @param connection
+     * @throws ConnectionPoolException
+     */
     public void returnConnection(Connection connection) throws ConnectionPoolException {
         try {
             freeСonnection.put(connection);
@@ -95,6 +127,11 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * The method closes all open connections
+     *
+     * @throws ConnectionPoolException
+     */
     public void stop() throws ConnectionPoolException {
         for (int i = 0; i < CONNECTION_COUNT; i++) {
             try {

@@ -23,6 +23,6 @@ public final class PagePathConstant {
 
 
     public static final String REDIRECT_ADMIN_URL = "/FrontController?command=redirect_admin";
-    public static final String REDIRECT_USER_URL = "/FrontController?command=start_page";
+    public static final String REDIRECT_USER_URL = "/FrontController?command=redirect_user";
     public static final String REDIRECT_GUEST_URL = "/FrontController?command=redirect_guest";
 }

@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_USER_URL;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
+import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_USER_ORDERS;
+import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
 
 public class PageUserOrderDetailsCommandImpl implements BaseCommand {
 
@@ -32,7 +35,8 @@ public class PageUserOrderDetailsCommandImpl implements BaseCommand {
             request.setAttribute("order", order);
             return "/jsp/pages/order-details.jsp";
         } else {
-            return PAGE_ERROR;
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_ORDERS);
+            return REDIRECT_USER_URL;
         }
     }
 

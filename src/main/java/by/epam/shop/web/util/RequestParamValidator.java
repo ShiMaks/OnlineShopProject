@@ -10,6 +10,8 @@ public class RequestParamValidator {
 
     private static final String LOGIN_REGEX = "[0-9a-zA-Z_@$]{5,}"; /* мин 5 символов из тех что в скобках */
 
+    private static final String PRODUCTNAME_REGEX = "([\\wА-Яа-яЁё]{1,50})([\\-\\s]?)([\\wА-Яа-яЁё]{0,50})";
+
     private static final String PASS_REGEX = "(?=.*[a-zA-z])(?=.*[0-9]).{5,}";
                                                                                 /*
                                                                                  * минимум 5 символов, мин одна лат
@@ -51,6 +53,11 @@ public class RequestParamValidator {
         if (s == null) {
             throw new ValidateNullRequestParamException(ERROR_REQUEST_PARAMETER_IS_NULL);
         }
+    }
+
+    public static boolean validateProductNameOrCategory(String branNameOrModel) throws ValidateNullRequestParamException {
+        validateParamNotNull(branNameOrModel);
+        return matchToRegex(branNameOrModel, PRODUCTNAME_REGEX);
     }
 
     public static boolean validateLogin(String login) throws ValidateNullRequestParamException {

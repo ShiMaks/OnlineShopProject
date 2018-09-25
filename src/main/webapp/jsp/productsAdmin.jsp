@@ -122,7 +122,7 @@
 
                 <c:if test="${message != null}">
                     <div class="alert alert-success" role="alert">
-                        <h6>${message}</h6>
+                        <h6><c:out value="${message}" /></h6>
                     </div>
                 </c:if>
 

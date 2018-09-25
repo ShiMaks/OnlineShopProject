@@ -2,6 +2,7 @@ package by.epam.shop.web.commands.impl.user;
 
 import by.epam.shop.domain.*;
 import by.epam.shop.service.OrderService;
+import by.epam.shop.service.exception.ServiceException;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.util.*;
 
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_SHOPPING_CART;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_USER;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_USER_URL;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class CreateOrderCommandImpl implements BaseCommand{
 
@@ -23,9 +24,15 @@ public class CreateOrderCommandImpl implements BaseCommand{
         ShopCart shopCart = (ShopCart) request.getSession().getAttribute(REQUEST_PARAM_SHOPPING_CART);
         List<OrderItem> orderItems = getOrderItems(shopCart);
         Order order = createOrder(shopCart, user);
-        orderService.createOrder(order, orderItems);
-        shopCart.cleanCart();
-        return "/jsp/pages/shop-account.jsp";
+        try{
+            orderService.createOrder(order, orderItems);
+            shopCart.cleanCart();
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_ORDERS);
+            return REDIRECT_USER_URL;
+        } catch (ServiceException e){
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_CART);
+            return REDIRECT_USER_URL;
+        }
     }
 
     private List<OrderItem> getOrderItems(ShopCart cart){

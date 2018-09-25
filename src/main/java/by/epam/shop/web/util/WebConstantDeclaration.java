@@ -54,4 +54,8 @@ public final class WebConstantDeclaration {
     public static final String PAGE_TYPE_ADMIN_ORDERS = "orders_page";
     public static final String PAGE_TYPE_ADMIN = "main_admin_page";
 
+    public static final String PAGE_TYPE_USER_ORDERS = "user_orders_page";
+    public static final String PAGE_TYPE_USER_CART = "user_cart_page";
+    public static final String PAGE_TYPE_USER_INFO = "user_info_page";
+    public static final String PAGE_TYPE_USER_MAIN = "user_main_page";
 }

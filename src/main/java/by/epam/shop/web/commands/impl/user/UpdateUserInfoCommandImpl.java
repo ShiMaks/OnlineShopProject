@@ -10,6 +10,7 @@ import by.epam.shop.web.exception.ValidateNullRequestParamException;
 import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_REGISTRATION;
+import static by.epam.shop.web.util.PagePathConstant.REDIRECT_USER_URL;
 import static by.epam.shop.web.util.RequestParamValidator.*;
 import static by.epam.shop.web.util.RequestParamValidator.validateEmail;
 import static by.epam.shop.web.util.RequestParamValidator.validatePhone;
@@ -26,10 +27,11 @@ public class UpdateUserInfoCommandImpl implements BaseCommand{
         User user = updateUser(request);
         if (validateNewUser(user, request)) {
             userService.updateUserInfo(user);
-            return "/jsp/pages/indexNew.jsp";
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_INFO);
+            return REDIRECT_USER_URL;
         } else {
-            request.setAttribute(REQUEST_PARAM_NEW_USER, user);
-            return PAGE_REGISTRATION;
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_INFO);
+            return REDIRECT_USER_URL;
         }
     }
 

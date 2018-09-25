@@ -28,6 +28,9 @@ public class ActionManager {
             case "redirect_admin":
                 command = new RedirectAdminCommandImpl();
                 break;
+            case "redirect_user":
+                command = new RedirectUserCommandImpl();
+                break;
             case COMMAND_TO_PRODUCTS:
                 command = new PageProductsAdminCommandImpl();
                 break;

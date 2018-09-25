@@ -47,9 +47,10 @@ public class ChangePasswordCommandImpl implements BaseCommand{
             User user = new User(sessionUser.getId());
             user.setPassword(newPass);
             userService.changeUserPassword(user);
+            request.getSession().invalidate();
 //            request.getSession().setAttribute(SESSION_ATR_SESSION_MESSAGE,
 //                    Resource.getStrLocale(MESSAGE_PASS_CHANGED, request));
-            return "/jsp/pages/indexNew.jsp";
+            return "/jsp/pages/page-login.jsp";
         } else {
             return "/jsp/pages/change-password.jsp";
         }

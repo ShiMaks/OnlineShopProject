@@ -48,6 +48,7 @@ public class AuthorizationCommandImpl implements BaseCommand {
             return REDIRECT_ADMIN_URL;
         } else {
             request.getSession().setAttribute(REQUEST_PARAM_USER_ROLE, UserRoleEnum.USER);
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_MAIN);
             return REDIRECT_USER_URL;
         }
     }

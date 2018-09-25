@@ -37,7 +37,7 @@ public class UpdateProductAdminCommandImpl implements BaseCommand {
 
         productService.updateProductInfo(product);
         request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
-        request.setAttribute(REQUEST_PARAM_MESSAGE, "Product successfully updated");
+        request.getSession().setAttribute(REQUEST_PARAM_MESSAGE, "Product successfully updated");
         return REDIRECT_ADMIN_URL;
     }
 }

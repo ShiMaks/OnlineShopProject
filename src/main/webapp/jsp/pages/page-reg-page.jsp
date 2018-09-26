@@ -1,8 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="Resource"/>
 
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <!-- Head BEGIN -->
 <head>
@@ -39,26 +42,34 @@
 <body class="corporate">    
   <!-- BEGIN TOP BAR -->
   <div class="pre-header">
-      <div class="container">
-          <div class="row">
-              <!-- BEGIN TOP BAR LEFT PART -->
-              <div class="col-md-6 col-sm-6 additional-shop-info">
-                  <ul class="list-unstyled list-inline">
+    <div class="container">
+        <div class="row">
+            <!-- BEGIN TOP BAR LEFT PART -->
+            <div class="col-md-6 col-sm-6 additional-shop-info">
+                <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+375(29) 764-80-65</span></li>
-                      
-                  </ul>
-              </div>
-              <!-- END TOP BAR LEFT PART -->
-              <!-- BEGIN TOP BAR MENU -->
-              <div class="col-md-6 col-sm-6 additional-nav">
-                  <ul class="list-unstyled list-inline pull-right">
-                      <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
-                      <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
-                  </ul>
-              </div>
-              <!-- END TOP BAR MENU -->
-          </div>
-      </div>        
+                    
+                    <!-- BEGIN LANGS -->
+                    <li class="langs-block">
+                        <a href="/shop/FrontController?command=change_locale&locale=en" class="current"><fmt:message key="en_language" /> </a>
+                        <div class="langs-block-others-wrapper"><div class="langs-block-others">
+                          <a href="/shop/FrontController?command=change_locale&locale=ru"><fmt:message key="ru_language" /></a>
+                        </div></div>
+                    </li>
+                    <!-- END LANGS -->
+                </ul>
+            </div>
+            <!-- END TOP BAR LEFT PART -->
+            <!-- BEGIN TOP BAR MENU -->
+            <div class="col-md-6 col-sm-6 additional-nav">
+                <ul class="list-unstyled list-inline pull-right">
+                  <li><a href="/shop/FrontController?command=to_log_in"><fmt:message key="log_in" /></a></li>
+                  <li><a href="/shop/FrontController?command=to_registration"><fmt:message key="registr" /></a></li>
+                </ul>
+            </div>
+            <!-- END TOP BAR MENU -->
+        </div>
+    </div>        
   </div>
   <!-- END TOP BAR -->
   <!-- BEGIN HEADER -->
@@ -78,40 +89,39 @@
         
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-9">
-            <h1>Create an account</h1>
+            <h1><fmt:message key="create_account" /></h1>
             <div class="content-form-page">
               <div class="row">
                 <div class="col-md-7 col-sm-7">
                   <form name="registration" action="FrontController" method="POST" class="form-horizontal" role="form">
-                    <input type="hidden" name="command" value="register" />
                     <fieldset>
-                      <legend>Your personal details</legend>
+                      <legend><fmt:message key="personal_details" /></legend>
                       <div class="form-group">
-                          <label for="login" class="col-lg-4 control-label">Login <span class="require">*</span></label>
+                          <label for="login" class="col-lg-4 control-label"><fmt:message key="login" /> <span class="require">*</span></label>
                           <div class="col-lg-8">
                             <input type="text" name="login" class="form-control" id="email">
                           </div>
                       </div>
                       <div class="form-group">
-                        <label for="firstname" class="col-lg-4 control-label">First Name <span class="require">*</span></label>
+                        <label for="firstname" class="col-lg-4 control-label"><fmt:message key="name" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="name" class="form-control" id="firstname">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="lastname" class="col-lg-4 control-label">Last Name <span class="require">*</span></label>
+                        <label for="lastname" class="col-lg-4 control-label"><fmt:message key="surname" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="surname" class="form-control" id="lastname">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
+                        <label for="email" class="col-lg-4 control-label"><fmt:message key="email" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="email" class="form-control" id="email">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="email" class="col-lg-4 control-label">Phone <span class="require">*</span></label>
+                        <label for="email" class="col-lg-4 control-label"><fmt:message key="phone" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="phone" class="form-control" id="email">
                         </div>
@@ -119,15 +129,15 @@
                       
                     </fieldset>
                     <fieldset>
-                      <legend>Your password</legend>
+                      <legend><fmt:message key="your_password" /> </legend>
                       <div class="form-group">
-                        <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
+                        <label for="password" class="col-lg-4 control-label"><fmt:message key="password" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="password" name="password" class="form-control" id="password">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="confirm-password" class="col-lg-4 control-label">Confirm password <span class="require">*</span></label>
+                        <label for="confirm-password" class="col-lg-4 control-label"><fmt:message key="confirm_password" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="password" name="confirm_password" class="form-control" id="confirm-password">
                         </div>
@@ -136,7 +146,9 @@
                     
                     <div class="row">
                       <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20"> 
-                        <input type="submit" class="btn btn-primary" value="Create an account">                     
+                        <button class="btn btn-primary" type="submit" name="command" value="register">
+                          <fmt:message key="create_account" />
+                        </button>                    
                       </div>
                     </div>
                   </form>

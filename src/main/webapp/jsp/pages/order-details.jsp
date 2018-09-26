@@ -1,7 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="Resource"/>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <!--<![endif]-->
 
 <!-- Head BEGIN -->
@@ -51,10 +55,9 @@
                     
                     <!-- BEGIN LANGS -->
                     <li class="langs-block">
-                        <a href="javascript:void(0);" class="current">English </a>
+                        <a href="/shop/FrontController?command=change_locale&locale=en" class="current"><fmt:message key="en_language" /> </a>
                         <div class="langs-block-others-wrapper"><div class="langs-block-others">
-                          <a href="javascript:void(0);">Russian</a>
-                    
+                          <a href="/shop/FrontController?command=change_locale&locale=ru"><fmt:message key="ru_language" /></a>
                         </div></div>
                     </li>
                     <!-- END LANGS -->
@@ -64,10 +67,10 @@
             <!-- BEGIN TOP BAR MENU -->
             <div class="col-md-6 col-sm-6 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
-                    <li><a href="/shop/FrontController?command=to_my_account">My Account</a></li>
-                    <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
-                    <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
-                    <li><a href="/shop/FrontController?command=to_log_out">LogOut</a></li>
+                    <li><a href="/shop/FrontController?command=to_my_account"><fmt:message key="my_account" /></a></li>
+                    <li><a href="/shop/FrontController?command=to_log_in"><fmt:message key="log_in" /></a></li>
+                    <li><a href="/shop/FrontController?command=to_registration"><fmt:message key="registr" /></a></li>
+                    <li><a href="/shop/FrontController?command=to_log_out"><fmt:message key="log_out" /></a></li>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -87,16 +90,16 @@
     <div class="top-cart-block">
         <div class="top-cart-info">
             <c:choose>
-                <c:when test="${sessionScope.shopCart != null}">
-                    <a href="#" class="top-cart-info-count">${sessionScope.shopCart.getQuantityProducts()} items</a>
-                    <a href="#" class="top-cart-info-value">$ ${sessionScope.shopCart.getTotalCost()}</a>
-                </c:when>
-                <c:when test="${sessionScope.shopCart == null}">
-                    <a href="#" class="top-cart-info-count">0 items</a>
-                    <a href="#" class="top-cart-info-value">$ 0</a>
-                </c:when>    
+            <c:when test="${sessionScope.shopCart != null}">
+                <a href="#" class="top-cart-info-count">${sessionScope.shopCart.getQuantityProducts()} <fmt:message key="items" /></a>
+                <a href="#" class="top-cart-info-value">$ ${sessionScope.shopCart.getTotalCost()}</a>
+            </c:when>
+            <c:when test="${sessionScope.shopCart == null}">
+                <a href="#" class="top-cart-info-count">0 <fmt:message key="items" /></a>
+                <a href="#" class="top-cart-info-value">$ 0</a>
+            </c:when>    
             </c:choose>
-        </div>
+          </div>
       <a href="/shop/FrontController?command=to_cart"><i class="fa fa-shopping-cart"></i></a>                        
     </div>
     <!--END CART -->
@@ -119,30 +122,30 @@
           <!-- BEGIN SIDEBAR -->
           <div class="sidebar col-md-3 col-sm-3">
             <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_account"><i class="fa fa-angle-right"></i> My Orders</a></li>
-              <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_change_password"><i class="fa fa-angle-right"></i> Change Password</a></li>
-              <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_information"><i class="fa fa-angle-right"></i> My Information</a></li>
+                <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_account"><i class="fa fa-angle-right"></i> <fmt:message key="my_orders" /></a></li>
+                <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_change_password"><i class="fa fa-angle-right"></i> <fmt:message key="change_password" /></a></li>
+                <li class="list-group-item clearfix"><a href="/shop/FrontController?command=to_my_information"><i class="fa fa-angle-right"></i> <fmt:message key="my_information" /></a></li>
             </ul>
           </div>
           <!-- END SIDEBAR -->
 
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-8">
-            <h1>Order Details:</h1>
+            <h1><fmt:message key="order_details" />:</h1>
             <div class="content-page">
               <div class="col-12">
                   <div class="card">
                       <div class="card-body">
-                          <h4>№ order: ${order.getId()}</h4>
+                          <h4><fmt:message key="no_order" />: ${order.getId()}</h4>
                       </div>
                       <div class="table-responsive">
                           <table class="table table-hover">
                               <thead>
                                   <tr>
-                                      <th class="border-top-0">Picture</th>
-                                      <th class="border-top-0">Product Name</th>
-                                      <th class="border-top-0">Description</th>
-                                      <th class="border-top-0">Price</th>
+                                      <th class="border-top-0"><fmt:message key="picture" /></th>
+                                      <th class="border-top-0"><fmt:message key="entity_name" /></th>
+                                      <th class="border-top-0"><fmt:message key="description" /></th>
+                                      <th class="border-top-0"><fmt:message key="price" /></th>
                                   </tr>
                               </thead>
                               <tbody>

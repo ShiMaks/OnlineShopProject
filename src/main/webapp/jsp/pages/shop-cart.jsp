@@ -1,7 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="Resource"/>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <!--<![endif]-->
 
 <!-- Head BEGIN -->
@@ -45,37 +49,36 @@
     
   <!-- BEGIN TOP BAR -->
   <div class="pre-header">
-      <div class="container">
-          <div class="row">
-              <!-- BEGIN TOP BAR LEFT PART -->
-              <div class="col-md-6 col-sm-6 additional-shop-info">
-                  <ul class="list-unstyled list-inline">
-                      <li><i class="fa fa-phone"></i><span>+375(29) 764-80-65</span></li>
-                      
-                      <!-- BEGIN LANGS -->
-                      <li class="langs-block">
-                          <a href="javascript:void(0);" class="current">English </a>
-                          <div class="langs-block-others-wrapper"><div class="langs-block-others">
-                            <a href="javascript:void(0);">Russian</a>
-                      
-                          </div></div>
-                      </li>
-                      <!-- END LANGS -->
-                  </ul>
-              </div>
-              <!-- END TOP BAR LEFT PART -->
-              <!-- BEGIN TOP BAR MENU -->
-              <div class="col-md-6 col-sm-6 additional-nav">
-                <ul class="list-unstyled list-inline pull-right">
-                  <li><a href="/shop/FrontController?command=to_my_account">My Account</a></li>
-                  <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
-                  <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
-                  <li><a href="/shop/FrontController?command=to_log_out">LogOut</a></li>
+    <div class="container">
+        <div class="row">
+            <!-- BEGIN TOP BAR LEFT PART -->
+            <div class="col-md-6 col-sm-6 additional-shop-info">
+                <ul class="list-unstyled list-inline">
+                    <li><i class="fa fa-phone"></i><span>+375(29) 764-80-65</span></li>
+                    
+                    <!-- BEGIN LANGS -->
+                    <li class="langs-block">
+                        <a href="/shop/FrontController?command=change_locale&locale=en" class="current"><fmt:message key="en_language" /> </a>
+                        <div class="langs-block-others-wrapper"><div class="langs-block-others">
+                          <a href="/shop/FrontController?command=change_locale&locale=ru"><fmt:message key="ru_language" /></a>
+                        </div></div>
+                    </li>
+                    <!-- END LANGS -->
                 </ul>
             </div>
-              <!-- END TOP BAR MENU -->
-          </div>
-      </div>        
+            <!-- END TOP BAR LEFT PART -->
+            <!-- BEGIN TOP BAR MENU -->
+            <div class="col-md-6 col-sm-6 additional-nav">
+                <ul class="list-unstyled list-inline pull-right">
+                    <li><a href="/shop/FrontController?command=to_my_account"><fmt:message key="my_account" /></a></li>
+                    <li><a href="/shop/FrontController?command=to_log_in"><fmt:message key="log_in" /></a></li>
+                    <li><a href="/shop/FrontController?command=to_registration"><fmt:message key="registr" /></a></li>
+                    <li><a href="/shop/FrontController?command=to_log_out"><fmt:message key="log_out" /></a></li>
+                </ul>
+            </div>
+            <!-- END TOP BAR MENU -->
+        </div>
+    </div>        
   </div>
   <!-- END TOP BAR -->
 
@@ -106,27 +109,27 @@
           <c:choose> 
             <c:when test="${sessionScope.shopCart.getQuantityProducts() == 0}">
               <div class="col-md-12 col-sm-12">
-                <h1>Shopping cart</h1>
+                <h1><fmt:message key="shopping_cart" /></h1>
                 <div class="shopping-cart-page">
                   <div class="shopping-cart-data clearfix">
-                    <p>Your shopping cart is empty!</p>
+                    <p><fmt:message key="empty_cart" /></p>
                   </div>
                 </div>
               </div>
             </c:when>
             <c:when test="${sessionScope.shopCart.getQuantityProducts() != 0}">
             <div class="col-md-12 col-sm-12">
-              <h1>Shopping cart</h1>
+              <h1><fmt:message key="shopping_cart" /></h1>
               <div class="goods-page">
                 <div class="goods-data clearfix">
                   <div class="table-wrapper-responsive">
                   <table summary="Shopping cart">
                     <tr>
-                      <th class="goods-page-image">Image</th>
-                      <th class="goods-page-description">Description</th>
-                      <th class="goods-page-quantity">Quantity</th>
-                      <th class="goods-page-price">Unit price</th>
-                      <th class="goods-page-total" colspan="2">Total</th>
+                      <th class="goods-page-image"><fmt:message key="image" /></th>
+                      <th class="goods-page-description"><fmt:message key="description" /></th>
+                      <th class="goods-page-quantity"><fmt:message key="quantity" /></th>
+                      <th class="goods-page-price"><fmt:message key="unit_price" /></th>
+                      <th class="goods-page-total" colspan="2"><fmt:message key="total" /></th>
                     </tr>
                     <c:forEach items="${sessionScope.shopCart.getProducts()}" var="entry">
                       <tr>
@@ -171,8 +174,9 @@
                   </div>
                 </div>
                 <form name = "сheckout" action="FrontController" method="GET">
-                  <input type="hidden" name="command" value="create_order" />
-                  <input type="submit" value="Checkout" class="btn btn-primary"/>
+                  <button class="btn btn-primary" type="submit" name="command" value="create_order">
+                    <fmt:message key="checkout" />
+                   </button>  
                 </form>  
               </div>
             </div>

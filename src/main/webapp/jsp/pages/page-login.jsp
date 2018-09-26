@@ -1,8 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="Resource"/>
 
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <!--<![endif]-->
 
 <!-- Head BEGIN -->
@@ -54,8 +57,8 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li><a href="/shop/FrontController?command=to_log_in">Log In</a></li>
-                        <li><a href="/shop/FrontController?command=to_registration">Registration</a></li>
+                        <li><a href="/shop/FrontController?command=to_log_in"><fmt:message key="log_in" /></a></li>
+                        <li><a href="/shop/FrontController?command=to_registration"><fmt:message key="registr" /></a></li>
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -90,22 +93,24 @@
                 <div class="col-md-7 col-sm-7">
                   
                     <form name = "LogIn" action="FrontController" method="POST" class="form-horizontal form-without-legend">
-                      <input type="hidden" name="command" value="log_in" />
                       <div class="form-group">
-                        <label for="text" class="col-lg-4 control-label">Login <span class="require">*</span></label>
+                        <label for="text" class="col-lg-4 control-label"><fmt:message key="login" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="login" class="form-control" id="email">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
+                        <label for="password" class="col-lg-4 control-label"><fmt:message key="password" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="password" name="password" class="form-control" id="password">
                         </div>
                       </div>
                       <div class="row">
                         
-                          <input type="submit" class="btn btn-primary" align="right" value="Login">
+                       
+                          <button class="btn btn-primary"  align="right" type="submit" name="command" value="log_in">
+                            <fmt:message key="log_in" />
+                          </button>
                         
                       </div>
                     </form>  

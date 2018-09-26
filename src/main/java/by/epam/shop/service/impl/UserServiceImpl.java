@@ -7,6 +7,7 @@ import by.epam.shop.domain.Product;
 import by.epam.shop.domain.User;
 import by.epam.shop.service.UserService;
 import by.epam.shop.service.exception.ServiceException;
+import by.epam.shop.service.util.PasswordEncryptor;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -61,7 +62,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByLoginPassword(String login, String password) throws ServiceException {
-        return userDao.getUserByLoginPassword(login, password);
+        validateInputParamNotNull(login, password);
+        return userDao.getUserByLoginPassword(login, PasswordEncryptor.md5Apache(password));
     }
 
     @Override

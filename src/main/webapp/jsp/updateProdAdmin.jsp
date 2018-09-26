@@ -1,38 +1,13 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="Resource"/>
+
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/resources/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>Admin: Update product</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Bootstrap core CSS     -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Animation library for notifications   -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/animate.min.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/paper-dashboard.css" rel="stylesheet"/>
-
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/demo.css" rel="stylesheet" />
-
-
-    <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
+	<c:import url="../jsp/head_admin.jsp" />
 
     <style type="text/css">
         body {font-size:14px;}
@@ -48,31 +23,37 @@
 
     <div class="container-fluid">
 
-            <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar bar1"></span>
-                                <span class="icon-bar bar2"></span>
-                                <span class="icon-bar bar3"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Admin</a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                
-                                <li>
-                                    <a href="/shop/FrontController?command=to_log_out">
-                                        <i class="ti-settings"></i>
-                                        <p>LogOut</p>
-                                    </a>
-                                </li>
-                            </ul>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><fmt:message key="admin" /></a>
+                </div>
+                <div class="col text-right align-self-end">
+                    <a href="/shop/FrontController?command=change_locale&locale=en" 
+                    class="btn btn-link text-white btn-sm px-0" role="button">EN</a>
+                    <a href="/shop/FrontController?command=change_locale&locale=ru" 
+                    class="btn btn-link text-white btn-sm px-0 mr-2" role="button">RU</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        <li>
+                            <a href="/shop/FrontController?command=to_log_out">
+                                <i class="ti-settings"></i>
+                                <p><fmt:message key="log_out" /></p>
+                            </a>
+                        </li>
+                    </ul>
         
-                        </div>
-                    </div>
-                </nav>
+                </div>
+            </div>
+        </nav>   
         
 
 
@@ -87,14 +68,14 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">Products</div>
+                                        <div class="huge"><fmt:message key="products" /></div>
                                         <div></div>
                                     </div>
                                 </div>
                             </div>
                             <a href="/shop/FrontController?command=to_products">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><fmt:message key="view_details" /></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -109,14 +90,14 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">Categories</div>
+                                        <div class="huge"><fmt:message key="categories" /></div>
                                         <div></div>
                                     </div>
                                 </div>
                             </div>
                             <a href="/shop/FrontController?command=to_categories">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><fmt:message key="view_details" /></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -131,38 +112,37 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">Orders</div>
+                                        <div class="huge"><fmt:message key="orders" /></div>
                                         <div></div>
                                     </div>
                                 </div>
                             </div>
                             <a href="/shop/FrontController?command=to_orders">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><fmt:message key="view_details" /></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
                             </a>
                         </div>
                     </div>
-                   
+                
                 </div>
                 <div class="row">
                         <div class="container">
-                            <legend><strong >Update Product</strong></legend>
+                            <legend><strong ><fmt:message key="update_product" /></strong></legend>
                                     
                             <form name="updateProduct" action="FrontController" method="POST">
-                                    <input type="hidden" name="command" value="update_product" />
                                     <input type="hidden" name="product_id" value = <c:out value="${product.getId()}"/>  
                                     <div class="field" style="margin: 0px auto; text-align: left;">
                                 <table>  
                                     <tr> 
-                                        <td align="right"><label>Name</label></td>
+                                        <td align="right"><label><fmt:message key="entity_name" />:</label></td>
                                         <td align="left"><input type="text" name="product_name" value="<c:out value="${product.getName()}"/>"></td>
                                         <span class="help-block"></span>
                                     </tr>
                                     <tr>
-                                        <td align="right"><label >Category:</label></td>
+                                        <td align="right"><label ><fmt:message key="category" />:</label></td>
                                         <td align="left"><select name="category_id">
                                             <option selected value="<c:out value="${product.getIdCategory()}"/>">${product.getName()}</option>
                                             <c:forEach items="${categoriesAdmin}" var="category">
@@ -171,28 +151,29 @@
                                         </select></td>
                                     </tr>
                                     <tr>
-                                        <td align="right"><label >Description:</label></td>
+                                        <td align="right"><label ><fmt:message key="description" />:</label></td>
                                         <td align="left"><textarea type="text" name="description" value="<c:out value="${product.getDescription()}"/>"></textarea></td>
                                         <span class="help-block"></span>
                                     </tr>
                                     <tr>
-                                        <td align="right"><label >Quantity:</label></td>
+                                        <td align="right"><label ><fmt:message key="quantity" />:</label></td>
                                         <td align="left"><input type="text" name="quantity" value="<c:out value="${product.getQuantity()}"/>"></td>
                                         <span class="help-block"></span>
                                     </tr>
                                     <tr>
-                                        <td align="right"><label >Picture:</label></td>
+                                        <td align="right"><label ><fmt:message key="picture" />:</label></td>
                                         <td align="left"><input type="text" name="picture" value="<c:out value="${product.getPicture()}"/>"></td>
                                         <span class="help-block"></span>
                                     </tr>
                                     <tr>
-                                        <td align="right"><label >Price:</label></td>
+                                        <td align="right"><label ><fmt:message key="price" />:</label></td>
                                         <td align="left"><input type="text" name="price" value="<c:out value="${product.getPrice()}"/>"></td>
                                         <span class="help-block"></span>
                                     </tr>
                                 </table>
-                               <input type="submit" class="btn btn-outline btn-default" value="Update">
-                              <!--<button type="submit" class="btn btn-inverse">Add Book</button>-->
+                               <button class="btn btn-outline btn-default" type="submit" name="command" value="update_product">
+                                     <fmt:message key="update" />
+                               </button>
                             </form>	
                         </div>                        
                     </div>

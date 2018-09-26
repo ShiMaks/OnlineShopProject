@@ -133,6 +133,9 @@ public class ActionManager {
             case "to_pagin": //all
                 command = new PagePaginationCommandImpl();
                 break;
+            case "change_locale": //all
+                command = new ChangeLocaleCommandImpl();
+                break;
             default:
                 //command = new StartPageCommandImpl();
                 break;

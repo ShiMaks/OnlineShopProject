@@ -39,7 +39,7 @@ public class PagePaginationCommandImpl implements BaseCommand{
             request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
             request.setAttribute("position", (startPosition + 1));
             request.setAttribute("page", page = page + stepPage);
-            System.out.println("Return page: " + page);      
+            System.out.println("Return page: " + page);
             return PAGE_SHOP_MAIN_PAGE;
         } else if(action.equals("perv") & (page - stepPage) <= 1){
             System.out.println("Enter page 1");

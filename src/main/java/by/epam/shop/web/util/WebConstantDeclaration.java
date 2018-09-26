@@ -23,7 +23,6 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_SHOPPING_CART = "shopCart";
     public static final String REQUEST_PARAM_LIST_PRODUCT = "listProduct";
 
-
     public static final String REQUEST_PARAM_USER = "user";
     public static final String REQUEST_PARAM_PASS = "password";
     public static final String REQUEST_PARAM_LOGIN = "login";
@@ -45,10 +44,10 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_USER_ORDER = "userOrders";
     public static final String REQUEST_PARAM_LIST_ORDERS = "listOrders";
 
-
     public static final String REQUEST_PARAM_COMMAND = "command";
-
     public static final String REQUEST_PARAM_MESSAGE = "message";
+    public static final String REQUEST_PARAM_INFO_MESSAGE = "info_message";
+    public static final String REQUEST_PARAM_LOCALE = "locale";
 
     public static final String REQUEST_PARAM_INVALID_LOGIN = "invalid_login";
     public static final String REQUEST_PARAM_INVALID_PASS = "invalid_password";

@@ -1,38 +1,13 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="Resource"/>
+
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/resources/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>Admin: Orders</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Bootstrap core CSS     -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Animation library for notifications   -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/animate.min.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/paper-dashboard.css" rel="stylesheet"/>
-
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/demo.css" rel="stylesheet" />
-
-
-    <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
+	<c:import url="../jsp/head_admin.jsp" />
 
     <style type="text/css">
         body {font-size:14px;}
@@ -48,31 +23,37 @@
 
     <div class="container-fluid">
 
-            <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar bar1"></span>
-                                <span class="icon-bar bar2"></span>
-                                <span class="icon-bar bar3"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Admin</a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                
-                                <li>
-                                    <a href="/shop/FrontController?command=to_log_out">
-                                        <i class="ti-settings"></i>
-                                        <p>LogOut</p>
-                                    </a>
-                                </li>
-                            </ul>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Admin</a>
+                </div>
+                <div class="col text-right align-self-end">
+                    <a href="/shop/FrontController?command=change_locale&locale=en" 
+                    class="btn btn-link text-white btn-sm px-0" role="button">EN</a>
+                    <a href="/shop/FrontController?command=change_locale&locale=ru" 
+                    class="btn btn-link text-white btn-sm px-0 mr-2" role="button">RU</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        <li>
+                            <a href="/shop/FrontController?command=to_log_out">
+                                <i class="ti-settings"></i>
+                                <p><fmt:message key="log_out" /></p>
+                            </a>
+                        </li>
+                    </ul>
         
-                        </div>
-                    </div>
-                </nav>
+                </div>
+            </div>
+        </nav>   
         
 
 
@@ -87,14 +68,14 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">Products</div>
+                                        <div class="huge"><fmt:message key="products" /></div>
                                         <div></div>
                                     </div>
                                 </div>
                             </div>
                             <a href="/shop/FrontController?command=to_products">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><fmt:message key="view_details" /></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -109,14 +90,14 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">Categories</div>
+                                        <<div class="huge"><fmt:message key="categories" /></div>
                                         <div></div>
                                     </div>
                                 </div>
                             </div>
                             <a href="/shop/FrontController?command=to_categories">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><fmt:message key="view_details" /></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -127,18 +108,19 @@
                 </div>
                 <div class="row">
                     <div class="main">     
-                        <form name="sortOrder" action="FrontController" method="GET">
-                                <input type="hidden" name="command" value="sort_order_by_status" />  
+                        <form name="sortOrder" action="FrontController" method="GET">                        
                             <div class="field">                   
-                              <label >Sort by status:</label>
+                              <label ><fmt:message key="sort_status" />:</label>
                                     <select name="order_status">
-                                        <option selected="selected">Select a status</option>
+                                        <option selected="selected"><fmt:message key="select_status" /></option>
                                         <c:forEach items="<%= by.epam.shop.domain.OrderStatusEnum.values() %>" var="status">
                                             <option value="${status}">${status}</option>
                                         </c:forEach>
                                     </select> 
                                     <span class="help-block"></span>                                         
-                               <input type="submit" class="btn btn-outline btn-default" value="Show orders">
+                               <button class="btn btn-outline btn-default" type="submit" name="command" value="sort_order_by_status">
+                                <fmt:message key="sort" />
+                              </button>
                             </div>  
                         </form>
                     </div>
@@ -148,10 +130,10 @@
                         <table class="table table-striped">
                             <thead>
                                 <th>ID</th>
-                                <th>Client</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Coast</th>
+                                <th><fmt:message key="client" /></th>
+                                <th><fmt:message key="date" /></th>
+                                <th><fmt:message key="status" /></th>
+                                <th><fmt:message key="coast" /></th>
                             </thead>
                             <tbody>
                                 <c:forEach items="${listOrders}" var="order">
@@ -163,9 +145,10 @@
                                     <td>${order.getOrderCost()}$</td>
                                     <td>
                                     <form action="FrontController" method="GET">
-                                        <input type="hidden" name="command" value="show_detail_order" />
                                         <input type="hidden" name="order_id" value="${order.getId()}" />
-                                        <input type="submit" value="Details" class="btn btn-outline btn-default"/>
+                                        <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
+                                            <fmt:message key="details" />
+                                        </button>
                                     </form>
                                     </td>
                                 </tr>

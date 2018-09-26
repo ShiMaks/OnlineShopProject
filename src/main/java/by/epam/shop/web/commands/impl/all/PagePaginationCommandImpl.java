@@ -24,36 +24,44 @@ public class PagePaginationCommandImpl implements BaseCommand{
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         String action = request.getParameter("action");
-        int position = Integer.parseInt(request.getParameter("position"));
+        int startPosition = Integer.parseInt(request.getParameter("position"));
         int page = Integer.parseInt((request.getParameter("page")));
-        System.out.println(position);
-        System.out.println(page);
-        int step = 5;
+        System.out.println("Position: " + startPosition);
+        System.out.println("Page: " + page);
+        int stepPosition = 3;
+        int stepPage = 1;
         if(action.equals("next")){
-            List<Product> products = productService.getProductForPage(position);
+            System.out.println("Enter next");
+            startPosition = (startPosition + stepPosition) - 1;
+            List<Product> products = productService.getProductForPage(startPosition);
             List<Category> categories = categoryService.getCategories();
             request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
             request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
-            request.setAttribute("position", position = position + step);
-            request.setAttribute("page", page++);
+            request.setAttribute("position", (startPosition + 1));
+            request.setAttribute("page", page = page + stepPage);
+            System.out.println("Return page: " + page);      
             return PAGE_SHOP_MAIN_PAGE;
-        } else if(action.equals("perv") & page <=1){
-            System.out.println("1");
+        } else if(action.equals("perv") & (page - stepPage) <= 1){
+            System.out.println("Enter page 1");
             List<Category> categories = categoryService.getCategories();
             List<Product> products = productService.getProductForPage(0);
             request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
             request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
-            request.setAttribute("position", 4);
+            request.setAttribute("position", 0);
             request.setAttribute("page", 1);
             return PAGE_SHOP_MAIN_PAGE;
         } else if(action.equals("perv")){
-            position = position - step;
-            System.out.println(position);
+            System.out.println("Enter perv");
+            page = page - stepPage;
+            System.out.println(page);
+            startPosition = (startPosition - stepPosition) - 1;
+            System.out.println("Position pevr: " + startPosition);
             List<Category> categories = categoryService.getCategories();
-            List<Product> products = productService.getProductForPage(position);
+            List<Product> products = productService.getProductForPage(startPosition);
             request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
             request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
-            request.setAttribute("position", position);
+            request.setAttribute("position", (startPosition + 1));
+            request.setAttribute("page", page);
             return PAGE_SHOP_MAIN_PAGE;
         } else {
             return PAGE_ERROR;

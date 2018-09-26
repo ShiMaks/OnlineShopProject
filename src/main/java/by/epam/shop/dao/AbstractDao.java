@@ -65,6 +65,25 @@ public abstract class AbstractDao<E extends Entity> {
         return results;
     }
 
+    protected List<E> readAllByCondition(int condition, String sql) throws DaoException {
+        List<E> results = new ArrayList<>();
+        ResultSet resultSet = null;
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, condition);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                results.add(mapRow(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
+            closeResultSet(resultSet);
+        }
+        return results;
+    }
+
     protected void closeResultSet(ResultSet resultSet){
         if(resultSet != null) {
             try {

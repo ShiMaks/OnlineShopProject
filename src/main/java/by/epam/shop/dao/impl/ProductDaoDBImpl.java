@@ -116,41 +116,11 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
 
     @Override
     public List<Product> getProductsByCategory(int id) throws DaoException {
-        List<Product> products = new ArrayList<>();
-        ResultSet resultSet = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_BY_CATEGORY)){
-            statement.setInt(1, id);
-            resultSet = statement.executeQuery();
-            while(resultSet.next()) {
-                products.add(mapRow(resultSet));
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-            closeResultSet(resultSet);
-        }
-        return products;
+        return readAllByCondition(id, READ_PRODUCTS_BY_CATEGORY);
     }
 
     @Override
     public List<Product> getProductsForPage(int startPosition) throws DaoException {
-        List<Product> products = new ArrayList<>();
-        ResultSet resultSet = null;
-        Connection connection = dataBaseConnection.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(READ_PRODUCTS_FOR_PAGE)){
-            statement.setInt(1, startPosition);
-            resultSet = statement.executeQuery();
-            while(resultSet.next()) {
-                products.add(mapRow(resultSet));
-            }
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            dataBaseConnection.returnConnection(connection);
-            closeResultSet(resultSet);
-        }
-        return products;
+        return readAllByCondition(startPosition, READ_PRODUCTS_FOR_PAGE);
     }
 }

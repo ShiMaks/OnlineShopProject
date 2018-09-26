@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String createUser(User user) throws ServiceException{
         validateInputParamNotNull(user);
+        user.setPassword(PasswordEncryptor.md5Apache(user.getPassword()));
         int code = userDao.createUser(user);
         String message = SUCCESS;
         if (code == DUPLICATE_LOGIN_CODE) {

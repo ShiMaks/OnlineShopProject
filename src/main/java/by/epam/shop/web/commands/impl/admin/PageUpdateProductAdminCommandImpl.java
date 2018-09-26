@@ -14,9 +14,7 @@ import java.util.List;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
 import static by.epam.shop.web.util.PagePathConstant.PAGE_UPDATE_PRODUCT;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_CATEGORIES_ADMIN;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class PageUpdateProductAdminCommandImpl implements BaseCommand {
 
@@ -28,9 +26,11 @@ public class PageUpdateProductAdminCommandImpl implements BaseCommand {
         String idProduct = request.getParameter(REQUEST_PARAM_PRODUCT_ID);
         if(validatePositiveInt(idProduct)) {
             Product product = productService.getProduct(Integer.parseInt(idProduct));
+            Category category = categoryService.getCategory(product.getIdCategory());
             List<Category> categories = categoryService.getCategories();
             request.setAttribute(REQUEST_PARAM_PRODUCT, product);
             request.setAttribute(REQUEST_PARAM_LIST_CATEGORIES_ADMIN, categories);
+            request.setAttribute(REQUEST_PARAM_CATEGORY, category);
             return PAGE_UPDATE_PRODUCT;
         } else {
             return PAGE_ERROR;

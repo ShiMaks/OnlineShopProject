@@ -144,7 +144,7 @@
                                     <tr>
                                         <td align="right"><label ><fmt:message key="category" />:</label></td>
                                         <td align="left"><select name="category_id">
-                                            <option selected value="<c:out value="${product.getIdCategory()}"/>">${product.getName()}</option>
+                                            <option selected value="<c:out value="${product.getIdCategory()}"/>">${category.getName()}</option>
                                             <c:forEach items="${categoriesAdmin}" var="category">
                                                 <option value="${category.getId()}">${category.getName()}</option>
                                             </c:forEach>

@@ -138,7 +138,7 @@
                                 <input type="text" name="name_category" value="<c:out value="${category.getName()}"/>">
                                 <span class="help-block"></span>
                             </div>                        
-                            <input type="submit" class="btn btn-outline btn-default" value="Update">
+                           
                             <button class="btn btn-outline btn-default" type="submit" name="command" value="update_category">
                                 <fmt:message key="update" />
                             </button>

@@ -30,7 +30,7 @@ public final class TablesColumnNamesDeclaration {
     public static final String ORDER_PRICE = "price";
     public static final String ORDER_STATUS = "status";
     public static final String ORDER_PRODUCT_QUANTITY = "quantity";
-    
+
     public static final String USER_COLUMN_ID = "id";
     public static final String USER_COLUMN_NAME = "name";
     public static final String USER_COLUMN_SURNAME = "surname";

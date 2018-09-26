@@ -31,7 +31,6 @@ public class UpdateProductAdminCommandImpl implements BaseCommand {
         }
         if(validateProductInputData(request)) {
             Product product = createProduct(getRequestProductParamsMap(request));
-            productService.addProductToShop(product);
             productService.updateProductInfo(product);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
             request.getSession().setAttribute(REQUEST_PARAM_MESSAGE, "Product successfully updated");

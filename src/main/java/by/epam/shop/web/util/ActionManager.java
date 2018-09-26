@@ -130,6 +130,9 @@ public class ActionManager {
             case "create_order": //user
                 command = new CreateOrderCommandImpl();
                 break;
+            case "to_pagin": //all
+                command = new PagePaginationCommandImpl();
+                break;
             default:
                 //command = new StartPageCommandImpl();
                 break;

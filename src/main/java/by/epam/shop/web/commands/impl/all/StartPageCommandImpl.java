@@ -23,9 +23,12 @@ public class StartPageCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         List<Category> categories = categoryService.getCategories();
-        List<Product> products = productService.getProducts();
+//        List<Product> products = productService.getProducts();
+        List<Product> products = productService.getProductForPage(0);
         request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
         request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
+        request.setAttribute("position", 4);
+        request.setAttribute("page", 1);
         return PAGE_SHOP_MAIN_PAGE;
     }
 }

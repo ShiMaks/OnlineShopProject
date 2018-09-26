@@ -181,6 +181,16 @@
       </div>
     </div>
 
+    <div class="row">
+        <!--<div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>-->
+        <div class="col-md-8 col-sm-8">
+            <ul class="pagination pull-right">
+                <li><a href="/shop/FrontController?command=to_pagin&action=perv&position=${position}&page=${page}">&laquo;</a></li>
+                <li><a href="/shop/FrontController?command=to_pagin&action=next&position=${position}&page=${page}">&raquo;</a></li>
+            </ul>
+            </div>
+    </div>
+
     
 
     <!-- BEGIN FOOTER -->

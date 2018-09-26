@@ -38,7 +38,7 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
     private static final String READ_PRODUCTS_BY_CATEGORY = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
             "FROM product WHERE category_id = ?";
     private static final String READ_PRODUCTS_FOR_PAGE = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
-            " FROM product LIMIT ?, 9";
+            " FROM product LIMIT ?, 5";
 
     public ProductDaoDBImpl(ConnectionPool connectionPool) {
         super(connectionPool);

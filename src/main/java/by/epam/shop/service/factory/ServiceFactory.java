@@ -17,23 +17,28 @@ import by.epam.shop.service.impl.UserServiceImpl;
  */
 public class ServiceFactory {
 
+    private static final CategoryService categoryService = new CategoryServiceImpl();
+    private static final ProductService productService = new ProductServiceImpl();
+    private static final OrderService orderService = new OrderServiceImpl();
+    private static final UserService userService = new UserServiceImpl();
+
     private ServiceFactory(){
         throw new IllegalStateException("Utility class");
     }
 
     public static CategoryService getCategoryService(){
-        return new CategoryServiceImpl();
+        return categoryService;
     }
 
     public static ProductService getProductService(){
-        return new ProductServiceImpl();
+        return productService;
     }
 
     public static UserService getUserService(){
-        return new UserServiceImpl();
+        return userService;
     }
 
     public static OrderService getOrderService(){
-        return new OrderServiceImpl();
+        return orderService;
     }
 }

@@ -19,24 +19,28 @@ import by.epam.shop.dao.pool.ConnectionPool;
 public class DaoFactory {
 
     private static ConnectionPool connectionPool = ConnectionPool.getInstance();
+    private static final ProductDao productDao = new ProductDaoDBImpl(connectionPool);
+    private static final CategoryDao categoryDao = new CategoryDaoDBImpl(connectionPool);
+    private static final OrderDao orderDao = new OrderDaoDBImpl(connectionPool);
+    private static final UserDao userDao = new UserDaoDBImpl(connectionPool);
 
     private DaoFactory(){
         throw new IllegalStateException("Utility class");
     }
 
     public static ProductDao getProductDAO() {
-        return new ProductDaoDBImpl(connectionPool);
+        return productDao;
     }
 
     public static CategoryDao getCategoryDAO() {
-        return new CategoryDaoDBImpl(connectionPool);
+        return categoryDao;
     }
 
     public static OrderDao getOrderDAO() {
-        return new OrderDaoDBImpl(connectionPool);
+        return orderDao;
     }
 
     public static UserDao getUserDAO() {
-        return new UserDaoDBImpl(connectionPool);
+        return userDao;
     }
 }

@@ -21,7 +21,7 @@ public class UpdateOrderAdminCommandImpl implements BaseCommand{
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-        String idOrder = request.getParameter(REQUEST_PARAM_ORDER);
+        String idOrder = request.getParameter(REQUEST_PARAM_ORDER_ID);
         String status =request.getParameter(REQUEST_PARAM_ORDER_STATUS);
         validateParamNotNull(status);
         if(validatePositiveInt(idOrder)) {

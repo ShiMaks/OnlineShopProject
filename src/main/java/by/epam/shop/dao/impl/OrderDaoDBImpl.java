@@ -166,11 +166,10 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
     @Override
     public List<Order> getOrdersByStatus(String status) throws DaoException {
         List<Order> orders = new ArrayList<>();
-        ResultSet result = null;
         Connection connection = dataBaseConnection.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_STATUS)){
             statement.setString(1, status);
-            result = statement.executeQuery();
+            ResultSet result = statement.executeQuery();
             while(result.next()) {
                 orders.add(mapRow(result));
             }
@@ -178,7 +177,6 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
             throw new DaoException(e);
         }finally {
             dataBaseConnection.returnConnection(connection);
-            closeResultSet(result);
         }
         return orders;
     }
@@ -186,11 +184,10 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
     @Override
     public List<Order> getUserOrders(int idUser) throws DaoException {
         List<Order> orders = new ArrayList<>();
-        ResultSet result = null;
         Connection connection = dataBaseConnection.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(READ_ALL_ORDERS_USER)){
             statement.setInt(1, idUser);
-            result = statement.executeQuery();
+            ResultSet result = statement.executeQuery();
             while(result.next()) {
                 orders.add(mapRow(result));
             }
@@ -198,7 +195,6 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
             throw new DaoException(e);
         }finally {
             dataBaseConnection.returnConnection(connection);
-            closeResultSet(result);
         }
 //        OrderStatusEnum.valueOf("sdfsdf".toUpperCase());
         return orders;

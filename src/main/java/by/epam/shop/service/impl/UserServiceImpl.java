@@ -79,6 +79,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeUserPassword(User user) throws ServiceException {
+        validateInputParamNotNull(user);
+        user.setPassword(PasswordEncryptor.md5Apache(user.getPassword()));
         userDao.updateUserPassword(user);
     }
 

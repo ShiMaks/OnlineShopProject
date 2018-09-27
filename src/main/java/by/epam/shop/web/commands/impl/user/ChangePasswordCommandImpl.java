@@ -4,6 +4,7 @@ import by.epam.shop.domain.User;
 import by.epam.shop.service.UserService;
 import by.epam.shop.service.exception.ServiceException;
 import by.epam.shop.service.factory.ServiceFactory;
+import by.epam.shop.service.util.PasswordEncryptor;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 import by.epam.shop.web.exception.ValidateNullRequestParamException;
@@ -44,7 +45,7 @@ public class ChangePasswordCommandImpl implements BaseCommand{
     private String changePassMainLogic(String oldPass, String newPass, String confirmNewPass,
                                        HttpServletRequest request) throws ServiceException {
         User sessionUser = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
-        String sessionUserPass = userService.getUserPassword(sessionUser.getId());
+        String sessionUserPass = sessionUser.getPassword();                  //userService.getUserPassword(sessionUser.getId());
         if (checkPassword(sessionUserPass, oldPass, newPass, confirmNewPass, request)) {
             User user = new User(sessionUser.getId());
             user.setPassword(newPass);
@@ -61,12 +62,14 @@ public class ChangePasswordCommandImpl implements BaseCommand{
 
     private boolean checkPassword(String sessionUserPass, String oldPass, String newPass, String confirmNewPass,
                                       HttpServletRequest request) {
-        if (!sessionUserPass.equals(oldPass)) {
+        if (!sessionUserPass.equals(PasswordEncryptor.md5Apache(oldPass))) {
+            System.out.println("Не совпадают пароли старые");
 //            request.getSession().setAttribute(SESSION_ATR_SESSION_PAGE_TYPE, PAGE_TYPE_CHANGE_PASS);
 //            request.getSession().setAttribute(SESSION_ATR_SESSION_MESSAGE,
 //                    Resource.getStrLocale(MESSAGE_WRONG_OLD_PASS, request));
             return false;
         } else if (!newPass.equals(confirmNewPass)) {
+            System.out.println("Не совпадают пароли новые");
 //            request.getSession().setAttribute(SESSION_ATR_SESSION_PAGE_TYPE, PAGE_TYPE_CHANGE_PASS);
 //            request.getSession().setAttribute(SESSION_ATR_SESSION_MESSAGE,
 //                    Resource.getStrLocale(MESSAGE_WRONG_CONFIRMATION, request));

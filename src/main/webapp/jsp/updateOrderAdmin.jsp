@@ -162,8 +162,8 @@
                                   <input type="text" name="order_cost" disabled value="<c:out value="${order.getOrderCost()}"/>">
                                   <span class="help-block"></span>
                         </div>       
-                          <form name="updateOrder" action="FrontController" method="POST">
-                                <input type="hidden" name="order_id" value = <c:out value="${order.getId()}"/>  
+                        <form name="updateOrder" action="FrontController" method="POST">
+                            <input type="hidden" name="order_id" value="${order.getId()}" />
                             <div class="field">                   
                               <label ><fmt:message key="status" />:</label>
                                     <select name="order_status">

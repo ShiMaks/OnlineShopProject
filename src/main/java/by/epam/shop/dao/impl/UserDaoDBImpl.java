@@ -171,12 +171,11 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
     @Override
     public User getUserByLoginPassword(String login, String password) throws DaoException {
         User user = null;
-        ResultSet result = null;
         Connection connection = dataBaseConnection.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(READ_USER_BY_LOGIN_PASS)){
             statement.setString(1, login);
             statement.setString(2, password);
-            result = statement.executeQuery();
+            ResultSet result = statement.executeQuery();
             if(result.next()) {
                 user = new User();
                 user.setId(result.getInt(USER_COLUMN_ID));
@@ -188,7 +187,6 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
-            closeResultSet(result);
         }
         return user;
     }

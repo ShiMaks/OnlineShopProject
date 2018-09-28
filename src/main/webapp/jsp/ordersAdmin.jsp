@@ -90,7 +90,7 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <<div class="huge"><fmt:message key="categories" /></div>
+                                        <div class="huge"><fmt:message key="categories" /></div>
                                         <div></div>
                                     </div>
                                 </div>
@@ -125,39 +125,46 @@
                         </form>
                     </div>
                     <br>
-                    <br>  
-                    <div class="content table-responsive table-full-width">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>ID</th>
-                                <th><fmt:message key="client" /></th>
-                                <th><fmt:message key="date" /></th>
-                                <th><fmt:message key="status" /></th>
-                                <th><fmt:message key="coast" /></th>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${listOrders}" var="order">
-                                <tr>
-                                    <td>${order.getId()}</td>
-                                    <td>${order.getIdClient()}</td>
-                                    <td>${order.getDataOrder()}</td>
-                                    <td>${order.getStatus()}</td>
-                                    <td>${order.getOrderCost()}$</td>
-                                    <td>
-                                    <form action="FrontController" method="GET">
-                                        <input type="hidden" name="order_id" value="${order.getId()}" />
-                                        <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
-                                            <fmt:message key="details" />
-                                        </button>
-                                    </form>
-                                    </td>
-                                </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-
-                    </div>
+                    <br>
                     
+                        <div class="content table-responsive table-full-width">
+                           <c:choose>
+                                <c:when test="${listOrders.size() == 0}">
+                                     <fmt:message key="empty_orders_admin" />
+                                     
+                                </c:when>
+                            <c:when test="${listOrders.size() != 0}">    
+                            <table class="table table-striped">
+                                <thead>
+                                    <th>ID</th>
+                                    <th><fmt:message key="client" /></th>
+                                    <th><fmt:message key="date" /></th>
+                                    <th><fmt:message key="status" /></th>
+                                    <th><fmt:message key="coast" /></th>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${listOrders}" var="order">
+                                    <tr>
+                                        <td>${order.getId()}</td>
+                                        <td>${order.getIdClient()}</td>
+                                        <td>${order.getDataOrder()}</td>
+                                        <td>${order.getStatus()}</td>
+                                        <td>${order.getOrderCost()}$</td>
+                                        <td>
+                                        <form action="FrontController" method="GET">
+                                            <input type="hidden" name="order_id" value="${order.getId()}" />
+                                            <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
+                                                <fmt:message key="details" />
+                                            </button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            </c:when>
+                          </c:choose>  
+                        </div>
                 </div>
                 
             </div>

@@ -163,22 +163,29 @@
           </div>
         </div>
         <div class="col-md-8 products">
-          <div class="row">
-           <c:forEach items="${listProduct}" var="product"> 
-            <div class="col-sm-4">
-              <div class="product">
-                <div class="product-img">
-                  <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}"><img src="${product.getPicture()}" alt=""></a>
+            <c:choose>
+                <c:when test="${listProduct.size() == 0}">
+                    <p><fmt:message key="empty_products" /></p>
+                </c:when> 
+                <c:when test="${listProduct.size() != 0}">
+                <div class="row">
+                    <c:forEach items="${listProduct}" var="product"> 
+                        <div class="col-sm-4">
+                        <div class="product">
+                            <div class="product-img">
+                            <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}"><img src="${product.getPicture()}" alt=""></a>
+                            </div>
+                            <p class="product-title">
+                            <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}">${product.getName()}</a>
+                            </p>
+                            <p class="product-desc">${product.getDescription()}</p>
+                            <p class="product-price">Price: € ${product.getPrice()}</p>
+                        </div>
+                        </div>
+                    </c:forEach> 
                 </div>
-                <p class="product-title">
-                  <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}">${product.getName()}</a>
-                </p>
-                <p class="product-desc">${product.getDescription()}</p>
-                <p class="product-price">Price: € ${product.getPrice()}</p>
-              </div>
-            </div>
-           </c:forEach> 
-          </div>
+                </c:when>
+            </c:choose>    
         </div>
       </div>
     </div>

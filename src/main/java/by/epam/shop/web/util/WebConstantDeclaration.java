@@ -45,7 +45,6 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_LIST_ORDERS = "listOrders";
 
     public static final String REQUEST_PARAM_COMMAND = "command";
-    public static final String REQUEST_PARAM_MESSAGE = "message";
     public static final String REQUEST_PARAM_SESSION_MESSAGE = "session_message";
     public static final String REQUEST_PARAM_INFO_MESSAGE = "info_message";
     public static final String REQUEST_PARAM_LOCALE = "locale";

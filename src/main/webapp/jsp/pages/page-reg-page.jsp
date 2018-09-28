@@ -12,7 +12,7 @@
   <meta charset="utf-8">
   <title>Create new account</title>
 
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon.ico">
 
   <!-- Fonts START -->
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">

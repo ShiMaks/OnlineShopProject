@@ -51,6 +51,7 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_INVALID_LOGIN = "invalid_login";
     public static final String REQUEST_PARAM_INVALID_PASS = "invalid_password";
     public static final String REQUEST_PARAM_INVALID_CONFIRM_PASS = "invalid_confirm_password";
+    public static final String REQUEST_PARAM_INVALID_OLD_PASS = "invalid_old_password";
     public static final String REQUEST_PARAM_INVALID_NAME = "invalid_name";
     public static final String REQUEST_PARAM_INVALID_SURNAME = "invalid_surname";
     public static final String REQUEST_PARAM_INVALID_EMAIL = "invalid_email";

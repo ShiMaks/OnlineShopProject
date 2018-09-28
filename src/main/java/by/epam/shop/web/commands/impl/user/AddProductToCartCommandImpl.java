@@ -34,7 +34,7 @@ public class AddProductToCartCommandImpl implements BaseCommand{
             request.getSession().setAttribute(REQUEST_PARAM_SHOPPING_CART, cart);
 
             User user = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
-            LOGGER.info("user {} added product {} to cart", user.getName(), product);
+            LOGGER.info("user {} added product {} to cart", user.getLogin(), product);
             return PAGE_CART;
         } else {
             return PAGE_ERROR;

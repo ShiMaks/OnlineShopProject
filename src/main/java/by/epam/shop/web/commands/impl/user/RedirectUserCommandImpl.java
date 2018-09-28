@@ -35,13 +35,19 @@ public class RedirectUserCommandImpl implements BaseCommand{
                 List<Order> userOrders;
                 userOrders = orderService.getUserOrders(user.getId());
                 request.setAttribute(REQUEST_PARAM_USER_ORDER, userOrders);
+                request.setAttribute(REQUEST_PARAM_INFO_MESSAGE,
+                        request.getSession().getAttribute(REQUEST_PARAM_SESSION_MESSAGE));
                 return PAGE_SHOP_ACCOUNT;
             case PAGE_TYPE_USER_CART:
+                request.setAttribute(REQUEST_PARAM_INFO_MESSAGE,
+                        request.getSession().getAttribute(REQUEST_PARAM_SESSION_MESSAGE));
                 return PAGE_CART;
             case PAGE_TYPE_USER_INFO:
                 User sessionUser = (User) request.getSession().getAttribute(REQUEST_PARAM_USER);
                 User userInfo = userService.getUser(sessionUser.getId());
                 request.setAttribute(REQUEST_PARAM_USERS_INFO, userInfo);
+                request.setAttribute(REQUEST_PARAM_INFO_MESSAGE,
+                        request.getSession().getAttribute(REQUEST_PARAM_SESSION_MESSAGE));
                 return PAGE_SHOP_USER_INFORMATION;
             case PAGE_TYPE_USER_MAIN:
                 List<Category> categories = categoryService.getCategories();

@@ -145,19 +145,34 @@
                             <div class="col-lg-8">
                               <input type="password" name="old_password" class="form-control" id="password">
                             </div>
+                        </div>
+                        <c:if test="${not empty invalid_old_password}">                                    
+                          <div class="alert alert-danger" role="alert">
+                            <fmt:message key="${invalid_old_password}" />
                           </div>
+                        </c:if>   
                         <div class="form-group">
                           <label for="password" class="col-lg-4 control-label"><fmt:message key="new_password" /> <span class="require">*</span></label>
                           <div class="col-lg-8">
                             <input type="password"  name="new_password"class="form-control" id="password">
                           </div>
                         </div>
+                        <c:if test="${not empty invalid_password}">                                    
+                          <div class="alert alert-danger" role="alert">
+                            <fmt:message key="${invalid_password}" />
+                          </div>
+                        </c:if>   
                         <div class="form-group">
                           <label for="confirm-password" class="col-lg-4 control-label"><fmt:message key="confirm_password" /> <span class="require">*</span></label>
                           <div class="col-lg-8">
                             <input type="password" name="confirm_password" class="form-control" id="confirm-password">
                           </div>
                         </div>
+                        <c:if test="${not empty invalid_confirm_password}">                                    
+                          <div class="alert alert-danger" role="alert">
+                            <fmt:message key="${invalid_confirm_password}" />
+                          </div>
+                        </c:if> 
                       </fieldset>
                       
                       <div class="row">

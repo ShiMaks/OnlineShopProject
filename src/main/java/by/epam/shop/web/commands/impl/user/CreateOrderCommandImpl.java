@@ -16,6 +16,9 @@ import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class CreateOrderCommandImpl implements BaseCommand{
 
+    private static final String MESSAGE_SUCCESS = "success_create_order";
+    private static final String MESSAGE_NOT_SUCCESS = "not_success_create_order";
+
     private OrderService orderService = ServiceFactory.getOrderService();
 
     @Override
@@ -28,9 +31,11 @@ public class CreateOrderCommandImpl implements BaseCommand{
             orderService.createOrder(order, orderItems);
             shopCart.cleanCart();
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_ORDERS);
+            request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_SUCCESS);
             return REDIRECT_USER_URL;
         } catch (ServiceException e){
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_CART);
+            request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_NOT_SUCCESS);
             return REDIRECT_USER_URL;
         }
     }

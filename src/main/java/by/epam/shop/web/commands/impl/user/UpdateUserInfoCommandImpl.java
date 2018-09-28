@@ -20,6 +20,8 @@ import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_SURNAME
 
 public class UpdateUserInfoCommandImpl implements BaseCommand{
 
+    private static final String MESSAGE_VALUE = "success_update_information";
+
     private UserService userService = ServiceFactory.getUserService();
 
     @Override
@@ -28,6 +30,7 @@ public class UpdateUserInfoCommandImpl implements BaseCommand{
         if (validateNewUser(user, request)) {
             userService.updateUserInfo(user);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_INFO);
+            request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_VALUE);
             return REDIRECT_USER_URL;
         } else {
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_INFO);
@@ -44,21 +47,17 @@ public class UpdateUserInfoCommandImpl implements BaseCommand{
     }
 
     protected boolean validateNewUser(User user, HttpServletRequest request) throws ValidateNullRequestParamException {
-
         boolean result = true;
         if (!validateName(user.getName())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_NAME, "");
-            System.out.println("error name");
+            request.setAttribute(REQUEST_PARAM_INVALID_NAME, REQUEST_PARAM_INVALID_NAME);
             result = false;
         }
         if (!validateSurname(user.getSurname())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_SURNAME, "");
-            System.out.println("error surname");
+            request.setAttribute(REQUEST_PARAM_INVALID_SURNAME, REQUEST_PARAM_INVALID_SURNAME);
             result = false;
         }
         if (!validatePhone(user.getPhone())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_EMAIL, "");
-            System.out.println("error phone");
+            request.setAttribute(REQUEST_PARAM_INVALID_PHONE, REQUEST_PARAM_INVALID_PHONE);
             result = false;
         }
         return result;

@@ -116,6 +116,16 @@
     
     <div class="main">
       <div class="container">
+
+        <c:if test="${not empty info_message}">
+            <div class="alert alert-success" role="alert">
+                <h4>
+                    <strong>
+                        <fmt:message key="${info_message}" />
+                    </strong>
+                </h4>
+            </div>
+        </c:if> 
         
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
@@ -140,7 +150,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12"><fmt:message key="login" /></label>
                                     <div class="col-md-12">
-                                        <input type="text" disabled="disabled" class="form-control form-control-line" name="surname" value="<c:out value="${userInform.getLogin()}"/>">
+                                        <input type="text" disabled="disabled" class="form-control form-control-line" name="login" value="<c:out value="${userInform.getLogin()}"/>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -149,12 +159,22 @@
                                         <input type="text" class="form-control form-control-line" name="name" value="<c:out value="${userInform.getName()}"/>">
                                     </div>
                                 </div>
+                                <c:if test="${not empty invalid_name}">                                    
+                                    <div class="alert alert-danger" role="alert">
+                                        <fmt:message key="${invalid_name}" />
+                                    </div>
+                                </c:if>   
                                 <div class="form-group">
                                     <label class="col-md-12"><fmt:message key="surname" /></label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="surname" value="<c:out value="${userInform.getSurname()}"/>">
                                     </div>
                                 </div>
+                                <c:if test="${not empty invalid_surname}">                                    
+                                    <div class="alert alert-danger" role="alert">
+                                        <fmt:message key="${invalid_surname}" />
+                                    </div>
+                                </c:if>   
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12"><fmt:message key="email" /></label>
                                     <div class="col-md-12">
@@ -167,6 +187,11 @@
                                         <input type="text" class="form-control form-control-line" name="phone" value="<c:out value="${userInform.getPhone()}"/>">
                                     </div>
                                 </div>
+                                <c:if test="${not empty invalid_phone}">                                    
+                                    <div class="alert alert-danger" role="alert">
+                                        <fmt:message key="${invalid_phone}" />
+                                    </div>
+                                </c:if>   
                                 <div class="form-group">
                                 </div>
                                 <div class="form-group">

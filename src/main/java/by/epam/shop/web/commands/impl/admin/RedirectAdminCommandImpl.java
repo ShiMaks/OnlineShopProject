@@ -20,7 +20,7 @@ import static by.epam.shop.web.util.PagePathConstant.*;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class RedirectAdminCommandImpl implements BaseCommand{
-
+    
     private CategoryService categoryService = ServiceFactory.getCategoryService();
     private ProductService productService = ServiceFactory.getProductService();
     private UserService userService = ServiceFactory.getUserService();
@@ -34,13 +34,15 @@ public class RedirectAdminCommandImpl implements BaseCommand{
                List<Category> categories;
                categories = categoryService.getCategories();
                request.setAttribute(REQUEST_PARAM_LIST_CATEGORIES_ADMIN, categories);
+               request.setAttribute(REQUEST_PARAM_INFO_MESSAGE,
+                       request.getSession().getAttribute(REQUEST_PARAM_SESSION_MESSAGE));
                return PAGE_CATEGORY_ADMIN;
             case PAGE_TYPE_ADMIN_PRODUCT:
                List<Product> products;
                products = productService.getProducts();
                request.setAttribute(REQUEST_PARAM_LIST_PRODUCTS_ADMIN, products);
-               String message = (String) request.getSession().getAttribute(REQUEST_PARAM_MESSAGE);
-               request.setAttribute(REQUEST_PARAM_MESSAGE, message);
+               request.setAttribute(REQUEST_PARAM_INFO_MESSAGE,
+                       request.getSession().getAttribute(REQUEST_PARAM_SESSION_MESSAGE));
                return PAGE_PRODUCTS_ADMIN;
             case PAGE_TYPE_ADMIN_ORDERS:
                List<Order> orders = orderService.getAllOrders();

@@ -20,6 +20,7 @@ import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class AddProductCommandImpl implements BaseCommand {
 
+    private static final String MESSAGE_VALUE = "success_add_product";
     private ProductService productService = ServiceFactory.getProductService();
 
     @Override
@@ -32,6 +33,7 @@ public class AddProductCommandImpl implements BaseCommand {
             Product product = createProduct(getRequestProductParamsMap(request));
             productService.addProductToShop(product);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
+            request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_VALUE);
             return REDIRECT_ADMIN_URL;
         } else {
             return PAGE_CREATE_PRODUCT;
@@ -39,28 +41,28 @@ public class AddProductCommandImpl implements BaseCommand {
     }
 
     private boolean validateProductInputData(HttpServletRequest request) throws ValidateNullRequestParamException {
-
         boolean result = true;
         if (!validateProductNameOrCategory(request.getParameter(REQUEST_PARAM_PRODUCT_NAME))) {
-           result = false;
-            System.out.println("error name");
+            request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_NAME, REQUEST_PARAM_INVALID_PRODUCT_NAME);
+            result = false;
         } else {
 
         }
         if (!validatePositiveInt(request.getParameter(REQUEST_PARAM_QUANTITY))) {
-           result = false;
-            System.out.println("error quantity");
+            request.setAttribute(REQUEST_PARAM_INVALID_QUANTITY, REQUEST_PARAM_INVALID_QUANTITY);
+            result = false;
         } else {
 
         }
         if (!validatePrice(request.getParameter(REQUEST_PARAM_PRODUCT_PRICE))) {
+            request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_PRICE, REQUEST_PARAM_INVALID_PRODUCT_PRICE);
             result = false;
         } else {
 
         }
         if (!validateImageLink(request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE))) {
+            request.setAttribute(REQUEST_PARAM_INVALID_PICTURE_PATH, REQUEST_PARAM_INVALID_PICTURE_PATH);
             result = false;
-            System.out.println("error picture");
         } else {
 
         }

@@ -140,6 +140,11 @@
                                         <td align="right"><label><fmt:message key="entity_name" />:</label></td>
                                         <td align="left"><input type="text" name="product_name" value="<c:out value="${product.getName()}"/>"></td>
                                         <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_product_name}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_product_name}" />
+                                            </div>
+                                        </c:if>
                                     </tr>
                                     <tr>
                                         <td align="right"><label ><fmt:message key="category" />:</label></td>
@@ -159,16 +164,31 @@
                                         <td align="right"><label ><fmt:message key="quantity" />:</label></td>
                                         <td align="left"><input type="text" name="quantity" value="<c:out value="${product.getQuantity()}"/>"></td>
                                         <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_quantity}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_quantity}" />
+                                            </div>
+                                        </c:if>
                                     </tr>
                                     <tr>
                                         <td align="right"><label ><fmt:message key="picture" />:</label></td>
                                         <td align="left"><input type="text" name="picture" value="<c:out value="${product.getPicture()}"/>"></td>
                                         <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_picture_path}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_picture_path}" />
+                                            </div>
+                                        </c:if>
                                     </tr>
                                     <tr>
                                         <td align="right"><label ><fmt:message key="price" />:</label></td>
                                         <td align="left"><input type="text" name="price" value="<c:out value="${product.getPrice()}"/>"></td>
                                         <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_product_price}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_product_price}" />
+                                            </div>
+                                        </c:if>
                                     </tr>
                                 </table>
                                <button class="btn btn-outline btn-default" type="submit" name="command" value="update_product">

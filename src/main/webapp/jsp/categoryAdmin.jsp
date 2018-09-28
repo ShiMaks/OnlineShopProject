@@ -47,6 +47,17 @@
         </nav>
 
         <div class="content">
+
+            <c:if test="${not empty info_message}">
+                <div class="alert alert-success" role="alert">
+                    <h4>
+                        <strong>
+                            <fmt:message key="${info_message}" />
+                        </strong>
+                    </h4>
+                </div>
+            </c:if>    
+          
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">

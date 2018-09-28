@@ -137,6 +137,11 @@
                                     <input type="text" name="product_name" placeholder="Name of product…">
                                     <span class="help-block"></span>
                             </div>
+                            <c:if test="${not empty invalid_product_name}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_product_name}" />
+                                </div>
+                            </c:if>
                             <div class="field">        
                                     <label ><fmt:message key="category" />:</label>
                                     <select name="category_id">
@@ -155,17 +160,32 @@
                                 <label ><fmt:message key="quantity" />:</label>
                                     <input type="text" name="quantity" placeholder="Quantity…">
                                     <span class="help-block"></span>
-                            </div>   
+                            </div>
+                            <c:if test="${not empty invalid_quantity}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_quantity}" />
+                                </div>
+                            </c:if>   
                             <div class="field">             
                                 <label ><fmt:message key="price" />:</label>
                                     <input type="text" name="price" placeholder="Price…">
                                     <span class="help-block"></span> 
                             </div>
+                            <c:if test="${not empty invalid_product_price}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_product_price}" />
+                                </div>
+                            </c:if>   
                             <div class="field">        
                                 <label ><fmt:message key="picture" />:</label>
                                     <input type="text" name="picture" placeholder="Picture…">
                                     <span class="help-block"></span>                         
                             </div>
+                            <c:if test="${not empty invalid_picture_path}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_picture_path}" />
+                                </div>
+                            </c:if>   
                             <button class="btn btn-outline btn-default" type="submit" name="command" value="create_product">
                                 <fmt:message key="create" />
                             </button>

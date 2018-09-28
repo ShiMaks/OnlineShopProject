@@ -18,8 +18,6 @@ public class PageCreateProductCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
-//        List<Category> categories = categoryService.getCategories();
-//        request.setAttribute(REQUEST_PARAM_LIST_CATEGORIES_ADMIN, categories);
         return PAGE_CREATE_PRODUCT;
     }
 }

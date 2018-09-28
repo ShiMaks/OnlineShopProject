@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.PagePathConstant.*;
 import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
-import static by.epam.shop.web.util.WebConstantDeclaration.PAGE_TYPE_ADMIN_PRODUCT;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_PRODUCT_ID;
-import static by.epam.shop.web.util.WebConstantDeclaration.SESSION_PAGE_TYPE;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class DeleteProductAdminCommandImpl implements BaseCommand {
 
+    private static final String MESSAGE_VALUE = "success_delete_product";
     private ProductService productService = ServiceFactory.getProductService();
 
     @Override
@@ -23,6 +22,7 @@ public class DeleteProductAdminCommandImpl implements BaseCommand {
         if(validatePositiveInt(idProduct)) {
             productService.deleteProduct(Integer.parseInt(idProduct));
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
+            request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_VALUE);
             return REDIRECT_ADMIN_URL;
         } else {
             return PAGE_ERROR;

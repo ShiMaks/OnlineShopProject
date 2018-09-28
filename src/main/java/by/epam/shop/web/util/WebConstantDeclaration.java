@@ -46,6 +46,7 @@ public final class WebConstantDeclaration {
 
     public static final String REQUEST_PARAM_COMMAND = "command";
     public static final String REQUEST_PARAM_MESSAGE = "message";
+    public static final String REQUEST_PARAM_SESSION_MESSAGE = "session_message";
     public static final String REQUEST_PARAM_INFO_MESSAGE = "info_message";
     public static final String REQUEST_PARAM_LOCALE = "locale";
 
@@ -54,6 +55,11 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_INVALID_NAME = "invalid_name";
     public static final String REQUEST_PARAM_INVALID_SURNAME = "invalid_surname";
     public static final String REQUEST_PARAM_INVALID_EMAIL = "invalid_email";
+    public static final String REQUEST_PARAM_INVALID_CATEGORY_NAME = "invalid_category_name";
+    public static final String REQUEST_PARAM_INVALID_PRODUCT_NAME = "invalid_product_name";
+    public static final String REQUEST_PARAM_INVALID_QUANTITY = "invalid_quantity";
+    public static final String REQUEST_PARAM_INVALID_PRODUCT_PRICE = "invalid_product_price";
+    public static final String REQUEST_PARAM_INVALID_PICTURE_PATH = "invalid_picture_path";
 
     public static final String SESSION_PAGE_TYPE = "session_page_type";
     public static final String PAGE_TYPE_ADMIN_CATEGORY = "categories_page";

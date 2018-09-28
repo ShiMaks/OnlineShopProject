@@ -50,6 +50,15 @@
 
 
         <div class="content">
+
+            <c:if test="${not empty invalid_category_name}">                                    
+                <div class="alert alert-danger" role="alert">
+                   <fmt:message key="${invalid_category_name}" />
+                </div>
+            </c:if>
+            
+
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">

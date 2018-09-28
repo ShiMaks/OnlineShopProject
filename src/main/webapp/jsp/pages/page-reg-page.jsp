@@ -99,34 +99,58 @@
                       <div class="form-group">
                           <label for="login" class="col-lg-4 control-label"><fmt:message key="login" /> <span class="require">*</span></label>
                           <div class="col-lg-8">
-                            <input type="text" name="login" class="form-control" id="email">
+                            <input type="text" name="login" class="form-control" id="login">
                           </div>
                       </div>
+                      <c:if test="${not empty invalid_login}">                                    
+                        <div class="alert alert-danger" role="alert">
+                          <fmt:message key="${invalid_login}" />
+                        </div>
+                      </c:if>   
                       <div class="form-group">
                         <label for="firstname" class="col-lg-4 control-label"><fmt:message key="name" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="name" class="form-control" id="firstname">
                         </div>
                       </div>
+                      <c:if test="${not empty invalid_name}">                                    
+                        <div class="alert alert-danger" role="alert">
+                          <fmt:message key="${invalid_name}" />
+                        </div>
+                      </c:if>   
                       <div class="form-group">
                         <label for="lastname" class="col-lg-4 control-label"><fmt:message key="surname" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="surname" class="form-control" id="lastname">
                         </div>
                       </div>
+                      <c:if test="${not empty invalid_surname}">                                    
+                        <div class="alert alert-danger" role="alert">
+                          <fmt:message key="${invalid_surname}" />
+                        </div>
+                      </c:if>   
                       <div class="form-group">
                         <label for="email" class="col-lg-4 control-label"><fmt:message key="email" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="email" class="form-control" id="email">
                         </div>
                       </div>
+                      <c:if test="${not empty invalid_email}">                                    
+                        <div class="alert alert-danger" role="alert">
+                          <fmt:message key="${invalid_email}" />
+                        </div>
+                      </c:if>   
                       <div class="form-group">
                         <label for="email" class="col-lg-4 control-label"><fmt:message key="phone" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="text" name="phone" class="form-control" id="email">
                         </div>
                       </div>
-                      
+                      <c:if test="${not empty invalid_phone}">                                    
+                        <div class="alert alert-danger" role="alert">
+                          <fmt:message key="${invalid_phone}" />
+                        </div>
+                      </c:if>   
                     </fieldset>
                     <fieldset>
                       <legend><fmt:message key="your_password" /> </legend>
@@ -136,12 +160,22 @@
                           <input type="password" name="password" class="form-control" id="password">
                         </div>
                       </div>
+                      <c:if test="${not empty invalid_password}">                                    
+                        <div class="alert alert-danger" role="alert">
+                          <fmt:message key="${invalid_password}" />
+                        </div>
+                      </c:if>   
                       <div class="form-group">
                         <label for="confirm-password" class="col-lg-4 control-label"><fmt:message key="confirm_password" /> <span class="require">*</span></label>
                         <div class="col-lg-8">
                           <input type="password" name="confirm_password" class="form-control" id="confirm-password">
                         </div>
                       </div>
+                      <c:if test="${not empty invalid_confirm_password}">                                    
+                        <div class="alert alert-danger" role="alert">
+                          <fmt:message key="${invalid_confirm_password}" />
+                        </div>
+                      </c:if> 
                     </fieldset>
                     
                     <div class="row">

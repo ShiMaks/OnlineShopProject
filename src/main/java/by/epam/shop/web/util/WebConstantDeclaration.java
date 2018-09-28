@@ -31,7 +31,6 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_EMAIL = "email";
     public static final String REQUEST_PARAM_PHONE = "phone";
     public static final String REQUEST_PARAM_USER_ROLE = "user_type";
-    public static final String REQUEST_PARAM_NEW_USER = "new_user";
     public static final String REQUEST_PARAM_USERS = "users";
     public static final String REQUEST_PARAM_USERS_INFO = "userInform";
     public static final String REQUEST_PARAM_OLD_PASS = "old_password";
@@ -51,9 +50,11 @@ public final class WebConstantDeclaration {
 
     public static final String REQUEST_PARAM_INVALID_LOGIN = "invalid_login";
     public static final String REQUEST_PARAM_INVALID_PASS = "invalid_password";
+    public static final String REQUEST_PARAM_INVALID_CONFIRM_PASS = "invalid_confirm_password";
     public static final String REQUEST_PARAM_INVALID_NAME = "invalid_name";
     public static final String REQUEST_PARAM_INVALID_SURNAME = "invalid_surname";
     public static final String REQUEST_PARAM_INVALID_EMAIL = "invalid_email";
+    public static final String REQUEST_PARAM_INVALID_PHONE = "invalid_phone";
     public static final String REQUEST_PARAM_INVALID_CATEGORY_NAME = "invalid_category_name";
     public static final String REQUEST_PARAM_INVALID_PRODUCT_NAME = "invalid_product_name";
     public static final String REQUEST_PARAM_INVALID_QUANTITY = "invalid_quantity";

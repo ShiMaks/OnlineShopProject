@@ -80,7 +80,15 @@
 
     <div class="main">
       <div class="container">
-
+          <c:if test="${not empty info_message}">
+              <div class="alert alert-danger" role="alert">
+                  <h4>
+                      <strong>
+                          <fmt:message key="${info_message}" />
+                      </strong>
+                  </h4>
+              </div>
+          </c:if>    
       
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">

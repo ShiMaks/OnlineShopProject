@@ -37,6 +37,7 @@ public class AuthorizationCommandImpl implements BaseCommand {
             request.getSession().setAttribute(REQUEST_PARAM_SHOPPING_CART, new ShopCart());
             return identifyUserRole(user, request);
         } else {
+            request.setAttribute(REQUEST_PARAM_INFO_MESSAGE, MESSAGE_VALUE);
             return PAGE_SIGN_IN;
         }
     }

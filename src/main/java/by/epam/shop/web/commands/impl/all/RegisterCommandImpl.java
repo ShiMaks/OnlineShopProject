@@ -26,9 +26,8 @@ public class RegisterCommandImpl implements BaseCommand {
         User user = createNewUser(request);
         if (validateNewUser(user, request)) {
             String message = userService.createUser(user);
-            return resultPage(message, user, request);
+            return resultPage(message);
         } else {
-            request.setAttribute(REQUEST_PARAM_NEW_USER, user);
             return PAGE_REGISTRATION;
         }
     }
@@ -43,47 +42,45 @@ public class RegisterCommandImpl implements BaseCommand {
         return new User(login, password, name, surname, email, phone);
     }
 
-    private String resultPage(String message, User user, HttpServletRequest request) {
+    private String resultPage(String message) {
         if (SUCCESS.equals(message)) {
             return PAGE_SHOP_MAIN_PAGE;
         } else {
-//            request.setAttribute(REQUEST_PARAM_DUPLICATE_MESSAGE, message);
             return PAGE_REGISTRATION;
         }
     }
 
     protected boolean validateNewUser(User user, HttpServletRequest request) throws ValidateNullRequestParamException {
-
         boolean result = true;
         if (!validateLogin(user.getLogin())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_LOGIN, "");
-            System.out.println("error login");
+            request.setAttribute(REQUEST_PARAM_INVALID_LOGIN, REQUEST_PARAM_INVALID_LOGIN);
             result = false;
         }
         if (!validatePassword(user.getPassword())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_PASS, "");
-            System.out.println("error pass");
+            request.setAttribute(REQUEST_PARAM_INVALID_PASS, REQUEST_PARAM_INVALID_PASS);
             result = false;
         }
         if (!validateName(user.getName())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_NAME, "");
-            System.out.println("error name");
+            request.setAttribute(REQUEST_PARAM_INVALID_NAME, REQUEST_PARAM_INVALID_NAME);
             result = false;
         }
         if (!validateSurname(user.getSurname())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_SURNAME, "");
-            System.out.println("error surname");
+            request.setAttribute(REQUEST_PARAM_INVALID_SURNAME, REQUEST_PARAM_INVALID_SURNAME);
             result = false;
         }
         if (!validateEmail(user.getEmail())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_EMAIL, "");
-            System.out.println("error email");
+            request.setAttribute(REQUEST_PARAM_INVALID_EMAIL, REQUEST_PARAM_INVALID_EMAIL);
             result = false;
         }
         if (!validatePhone(user.getPhone())) {
-//            request.setAttribute(REQUEST_PARAM_INVALID_EMAIL, "");
-            System.out.println("error phone");
+            request.setAttribute(REQUEST_PARAM_INVALID_PHONE, REQUEST_PARAM_INVALID_PHONE);
             result = false;
+        }
+        if (!user.getPassword().equals(request.getParameter(REQUEST_PARAM_CONFIRM_NEW_PASS))) {
+            request.setAttribute(REQUEST_PARAM_INVALID_CONFIRM_PASS, REQUEST_PARAM_INVALID_CONFIRM_PASS);
+            result = false;
+        } else {
+
         }
         return result;
     }

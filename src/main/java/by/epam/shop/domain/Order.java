@@ -64,4 +64,38 @@ public class Order extends Entity {
     public void setOrderCost(int orderCost) {
         this.orderCost = orderCost;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        if (!super.equals(o)) return false;
+
+        Order order = (Order) o;
+
+        if (idClient != order.idClient) return false;
+        if (orderCost != order.orderCost) return false;
+        if (status != order.status) return false;
+        return dataOrder != null ? dataOrder.equals(order.dataOrder) : order.dataOrder == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + idClient;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (dataOrder != null ? dataOrder.hashCode() : 0);
+        result = 31 * result + orderCost;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Order:" +
+                " id=" + getId() +
+                " , idClient=" + idClient +
+                " , status=" + status +
+                " , dataOrder=" + dataOrder +
+                " , orderCost=" + orderCost;
+    }
 }

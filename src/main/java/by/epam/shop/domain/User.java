@@ -151,4 +151,17 @@ public class User extends Entity {
         result = 31 * result + (isAdmin ? 1 : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "User:" +
+                " id=" + getId() +
+                ", login=" + login +
+                ", password=" + password +
+                ", name=" + name +
+                ", surname=" + surname +
+                ", phone=" + phone +
+                ", email=" + email +
+                ", isAdmin=" + isAdmin;
+    }
 }

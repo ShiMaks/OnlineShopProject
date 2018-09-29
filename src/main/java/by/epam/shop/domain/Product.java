@@ -138,4 +138,17 @@ public class Product extends Entity {
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Product:" +
+                " id=" + getId() +
+                " , name=" + name +
+                ", idCategory=" + idCategory +
+                ", description='" + description +
+                ", inStock=" + inStock +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", picture='" + picture;
+    }
 }

@@ -86,4 +86,14 @@ public class OrderItem extends Entity {
         result = 31 * result + price;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "OrderItem: " +
+                " id=" + getId() +
+                " , idOrder=" + idOrder +
+                " , idProduct=" + idProduct +
+                " , quantity=" + quantity +
+                " , price=" + price;
+    }
 }

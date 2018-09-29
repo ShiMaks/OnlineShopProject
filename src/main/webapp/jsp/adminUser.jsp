@@ -7,7 +7,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../jsp/head_admin.jsp" />
+    <c:import url="../jsp/head_admin.jsp" />
+    
+    <style type="text/css">
+        body {font-size:14px;}
+        label {float:left; padding-right:10px;}
+        .field {clear:both; text-align:right; line-height:25px;}
+        .main {float:left;}
+    </style>
 </head>
 <body>
 
@@ -119,32 +126,66 @@
                 
                 </div>
                 <div class="row">
-                   
+                    <div class="main"> 
+                        <legend><strong ><fmt:message key="client_information" />:</strong></legend>
+                        <div class="field">        
+                              <label ><fmt:message key="client_name" />:</label>
+                                  <input type="text" name="name_client" disabled value="<c:out value="${user.getName()}"/>">
+                                  <span class="help-block"></span>
+                        </div>
+                        <div class="field">        
+                                <label ><fmt:message key="client_surname" />:</label>
+                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getSurname()}"/>">
+                                    <span class="help-block"></span>
+                        </div>
+                        <div class="field">        
+                                <label ><fmt:message key="email" />:</label>
+                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getEmail()}"/>">
+                                    <span class="help-block"></span>
+                        </div>  
+                        <div class="field">        
+                                <label ><fmt:message key="phone" />:</label>
+                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getPhone()}"/>">
+                                    <span class="help-block"></span>
+                        </div>     
+                    </div>  
+
                     <div class="content table-responsive table-full-width">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>ID</th>
-                                <th><fmt:message key="login" /></th>
-                                <th><fmt:message key="name" /></th>
-                                <th><fmt:message key="surname" /></th>
-                                <th><fmt:message key="email" /></th>
-                                <th><fmt:message key="phone" /></th>
-                            </thead>
-                            <tbody>
-                              <c:forEach items="${users}" var="user" >    
-                                <tr>
-                                    <td>${user.getId()}</td>
-                                    <td>${user.getLogin()}</td>
-                                    <td>${user.getName()}</td>
-                                    <td>${user.getSurname()}</td>
-                                    <td>${user.getEmail()}</td>
-                                    <td>${user.getPhone()}</td>
-                                    <td><button type="button" class="btn btn-outline btn-default"><fmt:message key="details" /></button></td>
-                                </tr>
-                              </c:forEach>  
-                            </tbody>
-                        </table>
-                    </div>
+                        <c:choose>
+                             <c:when test="${listOrders.size() == 0}">
+                                  <fmt:message key="empty_orders_admin" />
+                                  
+                             </c:when>
+                         <c:when test="${listOrders.size() != 0}">    
+                         <table class="table table-striped">
+                             <thead>
+                                 <th>ID</th>
+                                 <th><fmt:message key="date" /></th>
+                                 <th><fmt:message key="status" /></th>
+                                 <th><fmt:message key="coast" /></th>
+                             </thead>
+                             <tbody>
+                                 <c:forEach items="${listOrders}" var="order">
+                                 <tr>
+                                     <td>${order.getId()}</td>
+                                     <td>${order.getDataOrder()}</td>
+                                     <td>${order.getStatus()}</td>
+                                     <td>${order.getOrderCost()}$</td>
+                                     <td>
+                                     <form action="FrontController" method="GET">
+                                         <input type="hidden" name="order_id" value="${order.getId()}" />
+                                         <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
+                                             <fmt:message key="details" />
+                                         </button>
+                                     </form>
+                                     </td>
+                                 </tr>
+                                 </c:forEach>
+                             </tbody>
+                         </table>
+                         </c:when>
+                       </c:choose>  
+                     </div>                  
                 </div>  
             </div>
         </div>

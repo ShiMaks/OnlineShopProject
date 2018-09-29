@@ -24,6 +24,7 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_LIST_PRODUCT = "listProduct";
 
     public static final String REQUEST_PARAM_USER = "user";
+    public static final String REQUEST_PARAM_USER_ID = "user_id";
     public static final String REQUEST_PARAM_PASS = "password";
     public static final String REQUEST_PARAM_LOGIN = "login";
     public static final String REQUEST_PARAM_NAME = "name";

@@ -119,15 +119,13 @@
                 
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-outline btn-default">Create Admin</button>
+                    
 
                     <div class="content table-responsive table-full-width">
                         <table class="table table-striped">
                             <thead>
                                 <th>ID</th>
                                 <th><fmt:message key="login" /></th>
-                                <th><fmt:message key="name" /></th>
-                                <th><fmt:message key="surname" /></th>
                                 <th><fmt:message key="email" /></th>
                                 <th><fmt:message key="phone" /></th>
                             </thead>
@@ -136,11 +134,15 @@
                                 <tr>
                                     <td>${user.getId()}</td>
                                     <td>${user.getLogin()}</td>
-                                    <td>${user.getName()}</td>
-                                    <td>${user.getSurname()}</td>
                                     <td>${user.getEmail()}</td>
                                     <td>${user.getPhone()}</td>
-                                    <td><button type="button" class="btn btn-outline btn-default"><fmt:message key="details" /></button></td>
+                                    <td><form action="FrontController" method="GET">
+                                        <input type="hidden" name="user_id" value="${user.getId()}" />
+                                        <button class="btn btn-outline btn-default" type="submit" name="command" value="show_user_detail">
+                                            <fmt:message key="details" />
+                                        </button>
+                                    </form>
+                                    </td>
                                 </tr>
                               </c:forEach>  
                             </tbody>

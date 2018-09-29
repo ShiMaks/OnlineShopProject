@@ -61,6 +61,9 @@ public class ActionManager {
             case COMMAND_PREPARE_UPDATE_PRODUCT:
                 command = new PageUpdateProductAdminCommandImpl();
                 break;
+            case "show_user_detail": //admin
+                command = new PageUserDetailCommandImpl();
+                break;
             case "update_product": //admin
                 command = new UpdateProductAdminCommandImpl();
                 break;

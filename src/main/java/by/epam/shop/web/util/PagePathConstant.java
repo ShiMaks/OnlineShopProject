@@ -28,6 +28,7 @@ public final class PagePathConstant {
     public static final String PAGE_CREATE_PRODUCT = "/jsp/creatProdAdmin.jsp";
     public static final String PAGE_ORDERS_ADMIN = "/jsp/ordersAdmin.jsp";
     public static final String PAGE_ORDER_DETAIL = "jsp/updateOrderAdmin.jsp";
+    public static final String PAGE_USER_DETAIL = "jsp/adminUser.jsp";
 
     public static final String REDIRECT_ADMIN_URL = "/FrontController?command=redirect_admin";
     public static final String REDIRECT_USER_URL = "/FrontController?command=redirect_user";

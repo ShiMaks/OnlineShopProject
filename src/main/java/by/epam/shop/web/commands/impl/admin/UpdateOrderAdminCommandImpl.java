@@ -27,26 +27,13 @@ public class UpdateOrderAdminCommandImpl implements BaseCommand{
         if(validatePositiveInt(idOrder)) {
             Order order = new Order();
             order.setId(Integer.parseInt(idOrder));
-            order.setStatus(valueOf(status));
+            order.setStatus(OrderStatusEnum.valueOf(status.toUpperCase()));
+            //        OrderStatusEnum.valueOf("sdfsdf".toUpperCase());
             orderService.updateStatusOrder(order);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_ORDERS);
             return REDIRECT_ADMIN_URL;
         } else {
             return PAGE_ERROR;
-        }
-    }
-
-    private OrderStatusEnum valueOf(String value){
-        if(value.toUpperCase().equals(OrderStatusEnum.NEW.toString())){
-            return OrderStatusEnum.NEW;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.CANCELLED.toString())){
-            return OrderStatusEnum.CANCELLED;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.PAYED.toString())){
-            return OrderStatusEnum.PAYED;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.DELIVERED.toString())){
-            return OrderStatusEnum.DELIVERED;
-        } else {
-            return null;
         }
     }
 }

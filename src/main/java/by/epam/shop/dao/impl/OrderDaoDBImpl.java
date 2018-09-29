@@ -196,23 +196,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
         }finally {
             dataBaseConnection.returnConnection(connection);
         }
-//        OrderStatusEnum.valueOf("sdfsdf".toUpperCase());
         return orders;
-    }
-
-
-    private OrderStatusEnum valueOf(String value){
-        if(value.toUpperCase().equals(OrderStatusEnum.NEW.toString())){
-            return OrderStatusEnum.NEW;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.CANCELLED.toString())){
-            return OrderStatusEnum.CANCELLED;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.PAYED.toString())){
-            return OrderStatusEnum.PAYED;
-        } else if(value.toUpperCase().equals(OrderStatusEnum.DELIVERED.toString())){
-            return OrderStatusEnum.DELIVERED;
-        } else {
-            return null;
-        }
     }
 
     private String getDateTime(Date date) {

@@ -1,12 +1,15 @@
 package by.epam.shop.domain;
 
+import java.io.Serializable;
+
 /**
  * Class parent for all  application entities
  *
  * @author Maksim Shilvian
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable{
 
+    private static final long serialVersionUID = 8196397299359287215L;
     /**
      * Common ID field for all entities
      */

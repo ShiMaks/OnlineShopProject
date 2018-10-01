@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class Order extends Entity {
 
+    private static final long serialVersionUID = -2492805031350769803L;
     /**
      * Id of user who made the order
      */

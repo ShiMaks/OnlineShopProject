@@ -7,6 +7,7 @@ package by.epam.shop.domain;
  */
 public class Category extends Entity {
 
+    private static final long serialVersionUID = -3385004261121645360L;
     /**
      * Name of category
      */

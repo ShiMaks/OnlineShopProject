@@ -7,6 +7,7 @@ package by.epam.shop.domain;
  */
 public class OrderItem extends Entity {
 
+    private static final long serialVersionUID = -4609639502532581148L;
     /**
      * Id of order in which enter a product
      */

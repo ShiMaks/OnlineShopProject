@@ -159,6 +159,7 @@
                         <div class="col-lg-8">
                           <input type="password" name="password" class="form-control" id="password">
                         </div>
+                        <span class="help-block"><fmt:message key="password_inform" /></span>
                       </div>
                       <c:if test="${not empty invalid_password}">                                    
                         <div class="alert alert-danger" role="alert">

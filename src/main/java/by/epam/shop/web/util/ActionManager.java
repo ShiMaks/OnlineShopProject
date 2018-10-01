@@ -8,6 +8,7 @@ import by.epam.shop.web.commands.impl.user.*;
 import javax.servlet.http.HttpServletRequest;
 
 import static by.epam.shop.web.util.CommandDeclaration.*;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_COMMAND;
 
 public class ActionManager {
 
@@ -17,18 +18,21 @@ public class ActionManager {
 
     public static BaseCommand defineCommand(HttpServletRequest request) {
         BaseCommand command = null;
-        String inputCommand =  request.getParameter("command");
+        String inputCommand =  request.getParameter(REQUEST_PARAM_COMMAND);
+        if(inputCommand == null || inputCommand.isEmpty()) {
+            inputCommand = COMMAND_TO_START_PAGE;
+        }
         switch(inputCommand) {
-            case "start_page": //all
+            case COMMAND_TO_START_PAGE:
                 command = new StartPageCommandImpl();
                 break;
-            case "start_page_admin":
+            case COMMAND_TO_START_PAGE_ADMIN:
                 command = new PageAdminCommandImpl();
                 break;
-            case "redirect_admin":
+            case COMMAND_TO_REDIRECT_ADMIN:
                 command = new RedirectAdminCommandImpl();
                 break;
-            case "redirect_user":
+            case COMMAND_TO_REDIRECT_USER:
                 command = new RedirectUserCommandImpl();
                 break;
             case COMMAND_TO_PRODUCTS:
@@ -61,86 +65,86 @@ public class ActionManager {
             case COMMAND_PREPARE_UPDATE_PRODUCT:
                 command = new PageUpdateProductAdminCommandImpl();
                 break;
-            case "show_user_detail": //admin
+            case COMMAND_SHOW_USER_DETAIL:
                 command = new PageUserDetailCommandImpl();
                 break;
-            case "update_product": //admin
+            case COMMAND_UPDATE_PRODUCT:
                 command = new UpdateProductAdminCommandImpl();
                 break;
-            case "prepare_create_product": //admin
+            case COMMAND_PREPARE_CREATE_PRODUCT:
                 command = new PageCreateProductCommandImpl();
                 break;
-            case "create_product": //admin
+            case COMMAND_CREATE_PRODUCT:
                 command = new AddProductCommandImpl();
                 break;
-            case "show_detail_order": //admin
+            case COMMAND_SHOW_DETAIL_ORDER:
                 command = new ShowDetailOrderCommandImpl();
                 break;
-            case "update_order": //admin
+            case COMMAND_UPDATE_ORDER:
                 command = new UpdateOrderAdminCommandImpl();
                 break;
-            case "sort_order_by_status": //admin
+            case COMMAND_SORT_BY_STATUS:
                 command = new SortOrderByStatusAdnibCommandImpl();
                 break;
-            case COMMAND_TO_LOG_IN: //all
+            case COMMAND_TO_LOG_IN:
                 command = new SingInPageCommandImpl();
                 break;
-            case "log_in": //all
+            case COMMAND_LOG_IN:
                 command = new AuthorizationCommandImpl();
                 break;
-            case "to_registration": //all
+            case COMMAND_TO_REGISTRATION:
                 command = new PageRegistrationCommandImpl();
                 break;
-            case "register": //all
+            case COMMAND_REGISTER:
                 command = new RegisterCommandImpl();
                 break;
-            case "to_log_out": //all
+            case COMMAND_LOG_OUT:
                 command = new LogOutCommandImpl();
                 break;
-            case "show_products_category": //all
+            case COMMAND_SHOW_PRODUCTS_CATEGORY:
                 command = new PageCategoryProductsCommandImpl();
                 break;
-            case "show_products_info": //all
+            case COMMAND_PRODUCT_INFO:
                 command = new PageProductInfoCommandImpl();
                 break;
-            case "to_cart": //user
+            case COMMAND_TO_CART:
                 command = new PageShopCartCommandImpl();
                 break;
-            case "add_product_to_cart": //user
+            case COMMAND_ADD_PRODUCT_TO_CART:
                command = new AddProductToCartCommandImpl();
                break;
-            case "remove_from_cart": //user
+            case COMMAND_REMOVE_PRODUCT_FROM_CART:
                 command = new DeleteProductFromCartCommandImpl();
                 break;
             case COMMAND_TO_MY_ACCOUNT:
                 command = new PageUserOrdersCommandImpl();
                 break;
-            case "show_details": //user
+            case COMMAND_SHOW_DETAILS:
                 command = new PageUserOrderDetailsCommandImpl();
                 break;
-            case "to_change_password": //user
+            case COMMAND_TO_CHANGE_PASSWORD:
                 command = new PageChangePassCommandInformation();
                 break;
-            case "to_my_information": //user
+            case COMMAND_TO_USER_INFORMATION:
                 command = new PageUserInformCommandImpl();
                 break;
-            case "update_user_inform": //user
+            case COMMAND_UPDATE_USER_INFORMATION:
                 command = new UpdateUserInfoCommandImpl();
                 break;
-            case "update_user_password": //user
+            case COMMAND_UPDATE_USER_PASSWORD:
                 command = new ChangePasswordCommandImpl();
                 break;
-            case "create_order": //user
+            case COMMAND_CREATE_ORDER:
                 command = new CreateOrderCommandImpl();
                 break;
-            case "to_pagin": //all
+            case COMMAND_PAGINATION:
                 command = new PagePaginationCommandImpl();
                 break;
-            case "change_locale": //all
+            case COMMAND_LOCALE:
                 command = new ChangeLocaleCommandImpl();
                 break;
             default:
-                //command = new StartPageCommandImpl();
+                command = new StartPageCommandImpl();
                 break;
         }
         return command;

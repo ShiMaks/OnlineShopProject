@@ -7,28 +7,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../jsp/head_admin.jsp" />
-
-    <style type="text/css">
-        body {font-size:14px;}
-        label {float:left; padding-right:10px;}
-        .field {clear:both; text-align:right; line-height:25px;}
-        .main {float:left;}
-    </style>
-
+    <title>Admin: List Categories</title>
+    <c:import url="/WEB-INF/pages/admin/head_admin.jsp" />
 </head>
 <body>
 
 <div class="wrapper">
-
-    <c:if test="${not empty invalid_category_name}">                                    
-        <div class="alert alert-danger" role="alert">
-            <fmt:message key="${invalid_category_name}" />
-        </div>
-    </c:if>
-
     <div class="container-fluid">
-
+            
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -59,11 +45,20 @@
         
                 </div>
             </div>
-        </nav>   
-        
-
+        </nav>
 
         <div class="content">
+
+            <c:if test="${not empty info_message}">
+                <div class="alert alert-success" role="alert">
+                    <h4>
+                        <strong>
+                            <fmt:message key="${info_message}" />
+                        </strong>
+                    </h4>
+                </div>
+            </c:if>    
+          
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -88,28 +83,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><fmt:message key="categories" /></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="/shop/FrontController?command=to_categories">
-                                <div class="panel-footer">
-                                    <span class="pull-left"><fmt:message key="view_details" /></span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                   
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -132,26 +106,68 @@
                             </a>
                         </div>
                     </div>
-                
+                   
                 </div>
-                <div class="row">
-                    <div class="main">
-                        <form name="updaCategory" action="FrontController" method="POST">
-                            <input type="hidden" name="category_id" value = <c:out value="${category.getId()}"/>
-                            <legend><strong ><fmt:message key="update_category" /></strong></legend>
-                            <div class="field">
-                            <label ><fmt:message key="entity_name" />:</label>
-                                <input type="text" name="name_category" value="<c:out value="${category.getName()}"/>">
-                                <span class="help-block"></span>
-                            </div>                        
-                           
-                            <button class="btn btn-outline btn-default" type="submit" name="command" value="update_category">
-                                <fmt:message key="update" />
-                            </button>
-                        </form>	
-                    </div>                        
-                </div>
-                
+
+                <form action="FrontController" method="GET">
+                    <!--<input type="hidden" name="command" value="prepare_create_category" />
+                    <input type="submit" value="Create Category" class="btn btn-outline btn-default"/>-->
+                    <button class="btn btn-outline btn-default" type="submit" name="command" value="prepare_create_category">
+                        <fmt:message key="create_category" />
+                    </button>
+                </form>        
+
+                <div class="content">
+                        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h4 class="title"><fmt:message key="categories" /></h4>
+                                            <p class="category"></p>
+                                        </div>
+                                        <div class="content table-responsive table-full-width">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th>ID</th>
+                                                    <th><fmt:message key="entity_name" /></th>
+                                                    <th><fmt:message key="update" /></th>
+                                                    <th><fmt:message key="delete" /></th>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${categoriesAdmin}" var="category" >
+                                                    <tr>
+
+                                                        <td>${category.getId()}</td>
+                                                        <td>${category.getName()}</td>
+                                                        <td>
+                                                            <form action="FrontController" method="GET">
+                                                                 <!--<input type="hidden" name="command" value="prepare_update_category" />-->
+                                                                 <input type="hidden" name="category_id" value="${category.getId()}" />
+                                                                 <!--<input type="submit" value="Update" class="btn btn-outline btn-default"/>-->
+                                                                 <button class="btn btn-outline btn-default" type="submit" name="command" value="prepare_update_category">
+                                                                    <fmt:message key="update_category" />
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="FrontController" method="POST">
+                                                                <!--<input type="hidden" name="command" value="delete_category" />-->
+                                                                <input type="hidden" name="category_id" value="${category.getId()}" />
+                                                                <!--<input type="submit" value="Delete" class="btn btn-outline btn-default"/>-->
+                                                                <button class="btn btn-outline btn-default" type="submit" name="command" value="delete_category">
+                                                                    <fmt:message key="delete_category" />
+                                                                </button>
+                                                             </form>
+                                                        </td>
+                                                    </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
             </div>
         </div>
 
@@ -184,7 +200,5 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>
-
-	
 
 </html>

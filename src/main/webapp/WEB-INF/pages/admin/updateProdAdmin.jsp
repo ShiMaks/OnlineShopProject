@@ -7,7 +7,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../jsp/head_admin.jsp" />
+    <title>Admin: Update Product</title>
+    <c:import url="/WEB-INF/pages/admin/head_admin.jsp" />
+
+    <style type="text/css">
+        body {font-size:14px;}
+        label {float:left; padding-right:10px;}
+        .field {clear:both; text-align:right; line-height:25px;}
+        .main {float:left;}
+    </style>
+
 </head>
 <body>
 
@@ -24,7 +33,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Admin</a>
+                    <a class="navbar-brand" href="#"><fmt:message key="admin" /></a>
                 </div>
                 <div class="col text-right align-self-end">
                     <a href="/shop/FrontController?command=change_locale&locale=en" 
@@ -50,15 +59,6 @@
 
 
         <div class="content">
-
-            <c:if test="${not empty invalid_category_name}">                                    
-                <div class="alert alert-danger" role="alert">
-                   <fmt:message key="${invalid_category_name}" />
-                </div>
-            </c:if>
-            
-
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -127,27 +127,80 @@
                             </a>
                         </div>
                     </div>
-                   
+                
                 </div>
                 <div class="row">
-                    <form name = "createCategory" action="FrontController" method="POST">
-                          <legend><strong ><fmt:message key="create_category" /></strong></legend>
-                          <label ><fmt:message key="entity_name" />:</label>
-                              <input type="text" name="name_category" placeholder="Name category…">
-                              <span class="help-block"></span>
-                                                
-                          <button class="btn btn-outline btn-default" type="submit" name="command" value="create_category">
-                            <fmt:message key="create" />
-                        </button> 
-                        </form>	
-                                            
-                </div>
+                        <div class="container">
+                            <legend><strong ><fmt:message key="update_product" /></strong></legend>
+                                    
+                            <form name="updateProduct" action="FrontController" method="POST">
+                                    <input type="hidden" name="product_id" value = <c:out value="${product.getId()}"/>  
+                                    <div class="field" style="margin: 0px auto; text-align: left;">
+                                <table>  
+                                    <tr> 
+                                        <td align="right"><label><fmt:message key="entity_name" />:</label></td>
+                                        <td align="left"><input type="text" name="product_name" value="<c:out value="${product.getName()}"/>"></td>
+                                        <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_product_name}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_product_name}" />
+                                            </div>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label ><fmt:message key="category" />:</label></td>
+                                        <td align="left"><select name="category_id">
+                                            <option selected value="<c:out value="${product.getIdCategory()}"/>">${category.getName()}</option>
+                                            <c:forEach items="${categoriesAdmin}" var="category">
+                                                <option value="${category.getId()}">${category.getName()}</option>
+                                            </c:forEach>
+                                        </select></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label ><fmt:message key="description" />:</label></td>
+                                        <td align="left"><textarea type="text" name="description" value="<c:out value="${product.getDescription()}"/>"></textarea></td>
+                                        <span class="help-block"></span>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label ><fmt:message key="quantity" />:</label></td>
+                                        <td align="left"><input type="text" name="quantity" value="<c:out value="${product.getQuantity()}"/>"></td>
+                                        <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_quantity}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_quantity}" />
+                                            </div>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label ><fmt:message key="picture" />:</label></td>
+                                        <td align="left"><input type="text" name="picture" value="<c:out value="${product.getPicture()}"/>"></td>
+                                        <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_picture_path}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_picture_path}" />
+                                            </div>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><label ><fmt:message key="price" />:</label></td>
+                                        <td align="left"><input type="text" name="price" value="<c:out value="${product.getPrice()}"/>"></td>
+                                        <span class="help-block"></span>
+                                        <c:if test="${not empty invalid_product_price}">                                    
+                                            <div class="alert alert-danger" role="alert">
+                                                <fmt:message key="${invalid_product_price}" />
+                                            </div>
+                                        </c:if>
+                                    </tr>
+                                </table>
+                               <button class="btn btn-outline btn-default" type="submit" name="command" value="update_product">
+                                     <fmt:message key="update" />
+                               </button>
+                            </form>	
+                        </div>                        
+                    </div>
                 
             </div>
         </div>
-
-
-
     </div>
 </div>
 
@@ -174,8 +227,6 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>
-
-	
+	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>	
 
 </html>

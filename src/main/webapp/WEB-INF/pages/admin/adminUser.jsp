@@ -7,23 +7,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../jsp/head_admin.jsp" />
-
+    <title>Admin: User Detail</title>
+    <c:import url="/WEB-INF/pages/admin/head_admin.jsp" />
+    
     <style type="text/css">
         body {font-size:14px;}
         label {float:left; padding-right:10px;}
         .field {clear:both; text-align:right; line-height:25px;}
         .main {float:left;}
     </style>
-        
-
 </head>
 <body>
 
 <div class="wrapper">
 
     <div class="container-fluid">
-
+                 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -55,8 +54,6 @@
                 </div>
             </div>
         </nav>   
-        
-
 
         <div class="content">
             <div class="container-fluid">
@@ -129,9 +126,9 @@
                     </div>
                 
                 </div>
-                <div class="row">   
+                <div class="row">
                     <div class="main"> 
-                        <legend><strong ><fmt:message key="order_details" />:</strong></legend>
+                        <legend><strong ><fmt:message key="client_information" />:</strong></legend>
                         <div class="field">        
                               <label ><fmt:message key="client_name" />:</label>
                                   <input type="text" name="name_client" disabled value="<c:out value="${user.getName()}"/>">
@@ -151,72 +148,45 @@
                                 <label ><fmt:message key="phone" />:</label>
                                     <input type="text" name="name_client" disabled value="<c:out value="${user.getPhone()}"/>">
                                     <span class="help-block"></span>
-                        </div>  
-                        <div class="field">          
-                              <label ><fmt:message key="date_order" />:</label>
-                                  <input type="text" name="date_order" disabled value="<c:out value="${order.getDataOrder()}"/>">
-                                  <span class="help-block"></span>
-                        </div>
-                        <div class="field">          
-                              <label ><fmt:message key="coast" />:</label>
-                                  <input type="text" name="order_cost" disabled value="<c:out value="${order.getOrderCost()}"/>">
-                                  <span class="help-block"></span>
-                        </div>       
-                        <form name="updateOrder" action="FrontController" method="POST">
-                            <input type="hidden" name="order_id" value="${order.getId()}" />
-                            <c:choose>
-                                <c:when test="${order.getStatus() == 'DELIVERED'}">
-                                    <div class="field">          
-                                        <label ><fmt:message key="status" />:</label>
-                                        <input type="text" name="order_cost" disabled value="<c:out value="${order.getStatus()}"/>">
-                                        <span class="help-block"></span>
-                                  </div>       
-                                </c:when>
-                                <c:when test="${order.getStatus() != ''}">
-                                <div class="field">                   
-                                    <label ><fmt:message key="status" />:</label>
-                                    <select name="order_status">
-                                        <option selected="selected" value="<c:out value="${order.getStatus()}"/>">${order.getStatus()}</option>
-                                        <c:forEach items="<%= by.epam.shop.domain.OrderStatusEnum.values() %>" var="status">
-                                            <option value="${status}">${status}</option>
-                                        </c:forEach>
-                                    </select> 
-                                    <span class="help-block"></span>                                         
-                                    <button class="btn btn-outline btn-default" type="submit" name="command" value="update_order">
-                                        <fmt:message key="update" />
-                                    </button>
-                                 </div>  
-                                </c:when>
-                            </c:choose>   
-                        </form>
-                    </div>    	
+                        </div>     
+                    </div>  
 
-
-                            <div class="content table-responsive table-full-width">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <th>ID</th>
-                                            <th><fmt:message key="picture" /></th>
-                                            <th><fmt:message key="entity_name" /></th>
-                                            <th><fmt:message key="description" /></th>
-                                            <th><fmt:message key="quantity" /></th>
-                                            <th><fmt:message key="price" /></th>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${listProduct}" var="product">
-                                            <tr>
-                                                <td>${product.getId()}</td>
-                                                <td><img src="${product.getPicture()}" width="190" height="220" alt="Product"></td>
-                                                <td>${product.getName()}</td>
-                                                <td>${product.getDescription()}</td>
-                                                <td>${product.getQuantity()}</td>
-                                                <td>${product.getPrice()}$</td>
-                                                <td></td>
-                                            </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                            </div>                                            
+                    <div class="content table-responsive table-full-width">
+                        <c:choose>
+                             <c:when test="${listOrders.size() == 0}">
+                                  <fmt:message key="empty_orders_admin" />
+                                  
+                             </c:when>
+                         <c:when test="${listOrders.size() != 0}">    
+                         <table class="table table-striped">
+                             <thead>
+                                 <th>ID</th>
+                                 <th><fmt:message key="date" /></th>
+                                 <th><fmt:message key="status" /></th>
+                                 <th><fmt:message key="coast" /></th>
+                             </thead>
+                             <tbody>
+                                 <c:forEach items="${listOrders}" var="order">
+                                 <tr>
+                                     <td>${order.getId()}</td>
+                                     <td>${order.getDataOrder()}</td>
+                                     <td>${order.getStatus()}</td>
+                                     <td>${order.getOrderCost()}$</td>
+                                     <td>
+                                     <form action="FrontController" method="GET">
+                                         <input type="hidden" name="order_id" value="${order.getId()}" />
+                                         <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
+                                             <fmt:message key="details" />
+                                         </button>
+                                     </form>
+                                     </td>
+                                 </tr>
+                                 </c:forEach>
+                             </tbody>
+                         </table>
+                         </c:when>
+                       </c:choose>  
+                     </div>                  
                 </div>  
             </div>
         </div>
@@ -231,7 +201,7 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="${pageContext.request.contextPath}resources/assets/js/bootstrap-checkbox-radio.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-checkbox-radio.js"></script>
 
 	<!--  Charts Plugin -->
 	<script src="${pageContext.request.contextPath}/resources/assets/js/chartist.min.js"></script>

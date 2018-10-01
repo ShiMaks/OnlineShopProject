@@ -7,21 +7,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <c:import url="../jsp/head_admin.jsp" />
-    
-    <style type="text/css">
-        body {font-size:14px;}
-        label {float:left; padding-right:10px;}
-        .field {clear:both; text-align:right; line-height:25px;}
-        .main {float:left;}
-    </style>
+    <title>Admin: List Products</title>
+    <c:import url="/WEB-INF/pages/admin/head_admin.jsp" />
 </head>
 <body>
 
 <div class="wrapper">
 
     <div class="container-fluid">
-                 
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -53,32 +47,24 @@
                 </div>
             </div>
         </nav>   
+        
+
 
         <div class="content">
+
+            <c:if test="${not empty info_message}">
+                <div class="alert alert-success" role="alert">
+                    <h4>
+                        <strong>
+                            <fmt:message key="${info_message}" />
+                        </strong>
+                    </h4>
+                </div>
+            </c:if> 
+
+
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><fmt:message key="products" /></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="/shop/FrontController?command=to_products">
-                                <div class="panel-footer">
-                                    <span class="pull-left"><fmt:message key="view_details" /></span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">
@@ -101,6 +87,7 @@
                             </a>
                         </div>
                     </div>
+                   
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -123,72 +110,80 @@
                             </a>
                         </div>
                     </div>
-                
+                   
                 </div>
-                <div class="row">
-                    <div class="main"> 
-                        <legend><strong ><fmt:message key="client_information" />:</strong></legend>
-                        <div class="field">        
-                              <label ><fmt:message key="client_name" />:</label>
-                                  <input type="text" name="name_client" disabled value="<c:out value="${user.getName()}"/>">
-                                  <span class="help-block"></span>
-                        </div>
-                        <div class="field">        
-                                <label ><fmt:message key="client_surname" />:</label>
-                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getSurname()}"/>">
-                                    <span class="help-block"></span>
-                        </div>
-                        <div class="field">        
-                                <label ><fmt:message key="email" />:</label>
-                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getEmail()}"/>">
-                                    <span class="help-block"></span>
-                        </div>  
-                        <div class="field">        
-                                <label ><fmt:message key="phone" />:</label>
-                                    <input type="text" name="name_client" disabled value="<c:out value="${user.getPhone()}"/>">
-                                    <span class="help-block"></span>
-                        </div>     
-                    </div>  
 
-                    <div class="content table-responsive table-full-width">
-                        <c:choose>
-                             <c:when test="${listOrders.size() == 0}">
-                                  <fmt:message key="empty_orders_admin" />
-                                  
-                             </c:when>
-                         <c:when test="${listOrders.size() != 0}">    
-                         <table class="table table-striped">
-                             <thead>
-                                 <th>ID</th>
-                                 <th><fmt:message key="date" /></th>
-                                 <th><fmt:message key="status" /></th>
-                                 <th><fmt:message key="coast" /></th>
-                             </thead>
-                             <tbody>
-                                 <c:forEach items="${listOrders}" var="order">
-                                 <tr>
-                                     <td>${order.getId()}</td>
-                                     <td>${order.getDataOrder()}</td>
-                                     <td>${order.getStatus()}</td>
-                                     <td>${order.getOrderCost()}$</td>
-                                     <td>
-                                     <form action="FrontController" method="GET">
-                                         <input type="hidden" name="order_id" value="${order.getId()}" />
-                                         <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
-                                             <fmt:message key="details" />
-                                         </button>
-                                     </form>
-                                     </td>
-                                 </tr>
-                                 </c:forEach>
-                             </tbody>
-                         </table>
-                         </c:when>
-                       </c:choose>  
-                     </div>                  
-                </div>  
+                <c:if test="${message != null}">
+                    <div class="alert alert-success" role="alert">
+                        <h6><c:out value="${message}" /></h6>
+                    </div>
+                </c:if>
+
+                <form action="FrontController" method="GET">
+                    <button class="btn btn-outline btn-default" type="submit" name="command" value="prepare_create_product">
+                        <fmt:message key="create_product" />
+                    </button>
+                </form>
+
+                <div class="content">
+                        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h4 class="title"><fmt:message key="products" /></h4>
+                                            <p class="category"></p>
+                                        </div>
+                                        <div class="content table-responsive table-full-width">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th>ID</th>
+                                                    <th><fmt:message key="picture" /></th>
+                                                    <th><fmt:message key="entity_name" /></th>
+                                                    <th><fmt:message key="quantity" /></th>
+                                                    <th><fmt:message key="price" /></th>
+                                                    <th><fmt:message key="update" /></th>
+                                                    <th><fmt:message key="delete" /></th>
+                                                </thead>
+                                                <tbody>
+                                                <c:forEach items="${productsAdmin}" var="product" >
+                                                    <tr>
+                                                        <td>${product.getId()}</td>
+                                                        <td><img src="${product.getPicture()}" width="190" height="220" alt="Product"></td>
+                                                        <td>${product.getName()}</td>
+                                                        <td>${product.getQuantity()}</td>
+                                                        <td>${product.getPrice()}</td>
+                                                        <td>
+                                                            <form action="FrontController" method="GET">
+                                                                <input type="hidden" name="product_id" value="${product.getId()}" />
+                                                                <button class="btn btn-outline btn-default" type="submit" name="command" value="prepare_update_product">
+                                                                    <fmt:message key="update" />
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="FrontController" method="POST">
+                                                                <input type="hidden" name="product_id" value="${product.getId()}" />
+                                                                <button class="btn btn-outline btn-default" type="submit" name="command" value="delete_product">
+                                                                    <fmt:message key="delete" />
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                            </table>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                           
+                
             </div>
         </div>
+
+
+
     </div>
 </div>
 

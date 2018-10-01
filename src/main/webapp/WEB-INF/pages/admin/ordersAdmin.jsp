@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../jsp/head_admin.jsp" />
+    <title>Admin: List orders</title>
+    <c:import url="/WEB-INF/pages/admin/head_admin.jsp" />
 
     <style type="text/css">
         body {font-size:14px;}
@@ -32,7 +33,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><fmt:message key="admin" /></a>
+                    <a class="navbar-brand" href="#">Admin</a>
                 </div>
                 <div class="col text-right align-self-end">
                     <a href="/shop/FrontController?command=change_locale&locale=en" 
@@ -104,97 +105,74 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><fmt:message key="orders" /></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="/shop/FrontController?command=to_orders">
-                                <div class="panel-footer">
-                                    <span class="pull-left"><fmt:message key="view_details" /></span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                                      
                 </div>
                 <div class="row">
-                    <div class="main"> 
-                        <legend><strong ><fmt:message key="create_product" /></strong></legend>
-                        <form name = "createProduct" action="FrontController" method="POST">
-                            <!--<input type="hidden" name="command" value="create_product" />-->
-                            <div class="field">
-                                <label ><fmt:message key="entity_name" />:</label>
-                                    <input type="text" name="product_name" placeholder="Name of product…">
-                                    <span class="help-block"></span>
-                            </div>
-                            <c:if test="${not empty invalid_product_name}">                                    
-                                <div class="alert alert-danger" role="alert">
-                                <fmt:message key="${invalid_product_name}" />
-                                </div>
-                            </c:if>
-                            <div class="field">        
-                                    <label ><fmt:message key="category" />:</label>
-                                    <select name="category_id">
-                                        <option selected><fmt:message key="select_category" /></option>
-                                        <c:forEach items="${categoriesAdmin}" var="category">
-                                            <option value="${category.getId()}">${category.getName()}</option>
+                    <div class="main">     
+                        <form name="sortOrder" action="FrontController" method="GET">                        
+                            <div class="field">                   
+                              <label ><fmt:message key="sort_status" />:</label>
+                                    <select name="order_status">
+                                        <option selected="selected"><fmt:message key="select_status" /></option>
+                                        <c:forEach items="<%= by.epam.shop.domain.OrderStatusEnum.values() %>" var="status">
+                                            <option value="${status}">${status}</option>
                                         </c:forEach>
-                                    </select>
+                                    </select> 
+                                    <span class="help-block"></span>                                         
+                               <button class="btn btn-outline btn-default" type="submit" name="command" value="sort_order_by_status">
+                                <fmt:message key="sort" />
+                              </button>
                             </div>  
-                            <div class="field">          
-                                <label ><fmt:message key="description" />:</label>
-                                    <textarea type="text" name="description" placeholder="Description of product…"></textarea>
-                                    <span class="help-block"></span>
-                            </div>    
-                            <div class="field">     
-                                <label ><fmt:message key="quantity" />:</label>
-                                    <input type="text" name="quantity" placeholder="Quantity…">
-                                    <span class="help-block"></span>
-                            </div>
-                            <c:if test="${not empty invalid_quantity}">                                    
-                                <div class="alert alert-danger" role="alert">
-                                <fmt:message key="${invalid_quantity}" />
-                                </div>
-                            </c:if>   
-                            <div class="field">             
-                                <label ><fmt:message key="price" />:</label>
-                                    <input type="text" name="price" placeholder="Price…">
-                                    <span class="help-block"></span> 
-                            </div>
-                            <c:if test="${not empty invalid_product_price}">                                    
-                                <div class="alert alert-danger" role="alert">
-                                <fmt:message key="${invalid_product_price}" />
-                                </div>
-                            </c:if>   
-                            <div class="field">        
-                                <label ><fmt:message key="picture" />:</label>
-                                    <input type="text" name="picture" placeholder="Picture…">
-                                    <span class="help-block"></span>                         
-                            </div>
-                            <c:if test="${not empty invalid_picture_path}">                                    
-                                <div class="alert alert-danger" role="alert">
-                                <fmt:message key="${invalid_picture_path}" />
-                                </div>
-                            </c:if>   
-                            <button class="btn btn-outline btn-default" type="submit" name="command" value="create_product">
-                                <fmt:message key="create" />
-                            </button>
-                        </form>	
-                    </div>                        
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    
+                        <div class="content table-responsive table-full-width">
+                           <c:choose>
+                                <c:when test="${listOrders.size() == 0}">
+                                     <fmt:message key="empty_orders_admin" />
+                                     
+                                </c:when>
+                            <c:when test="${listOrders.size() != 0}">    
+                            <table class="table table-striped">
+                                <thead>
+                                    <th>ID</th>
+                                    <th><fmt:message key="client" /></th>
+                                    <th><fmt:message key="date" /></th>
+                                    <th><fmt:message key="status" /></th>
+                                    <th><fmt:message key="coast" /></th>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${listOrders}" var="order">
+                                    <tr>
+                                        <td>${order.getId()}</td>
+                                        <td>${order.getIdClient()}</td>
+                                        <td>${order.getDataOrder()}</td>
+                                        <td>${order.getStatus()}</td>
+                                        <td>${order.getOrderCost()}$</td>
+                                        <td>
+                                        <form action="FrontController" method="GET">
+                                            <input type="hidden" name="order_id" value="${order.getId()}" />
+                                            <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
+                                                <fmt:message key="details" />
+                                            </button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            </c:when>
+                          </c:choose>  
+                        </div>
                 </div>
                 
             </div>
         </div>
+
+
+
     </div>
 </div>
 
@@ -221,6 +199,8 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>	
+	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>
+
+	
 
 </html>

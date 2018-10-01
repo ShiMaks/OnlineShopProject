@@ -7,15 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../jsp/head_admin.jsp" />
-
-    <style type="text/css">
-        body {font-size:14px;}
-        label {float:left; padding-right:10px;}
-        .field {clear:both; text-align:right; line-height:25px;}
-        .main {float:left;}
-    </style>
-
+    <title>Admin: Create Category</title>
+    <c:import url="/WEB-INF/pages/admin/head_admin.jsp" />
 </head>
 <body>
 
@@ -58,6 +51,15 @@
 
 
         <div class="content">
+
+            <c:if test="${not empty invalid_category_name}">                                    
+                <div class="alert alert-danger" role="alert">
+                   <fmt:message key="${invalid_category_name}" />
+                </div>
+            </c:if>
+            
+
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -104,67 +106,42 @@
                             </a>
                         </div>
                     </div>
-                                      
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><fmt:message key="orders" /></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/shop/FrontController?command=to_orders">
+                                <div class="panel-footer">
+                                    <span class="pull-left"><fmt:message key="view_details" /></span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                   
                 </div>
                 <div class="row">
-                    <div class="main">     
-                        <form name="sortOrder" action="FrontController" method="GET">                        
-                            <div class="field">                   
-                              <label ><fmt:message key="sort_status" />:</label>
-                                    <select name="order_status">
-                                        <option selected="selected"><fmt:message key="select_status" /></option>
-                                        <c:forEach items="<%= by.epam.shop.domain.OrderStatusEnum.values() %>" var="status">
-                                            <option value="${status}">${status}</option>
-                                        </c:forEach>
-                                    </select> 
-                                    <span class="help-block"></span>                                         
-                               <button class="btn btn-outline btn-default" type="submit" name="command" value="sort_order_by_status">
-                                <fmt:message key="sort" />
-                              </button>
-                            </div>  
-                        </form>
-                    </div>
-                    <br>
-                    <br>
-                    
-                        <div class="content table-responsive table-full-width">
-                           <c:choose>
-                                <c:when test="${listOrders.size() == 0}">
-                                     <fmt:message key="empty_orders_admin" />
-                                     
-                                </c:when>
-                            <c:when test="${listOrders.size() != 0}">    
-                            <table class="table table-striped">
-                                <thead>
-                                    <th>ID</th>
-                                    <th><fmt:message key="client" /></th>
-                                    <th><fmt:message key="date" /></th>
-                                    <th><fmt:message key="status" /></th>
-                                    <th><fmt:message key="coast" /></th>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${listOrders}" var="order">
-                                    <tr>
-                                        <td>${order.getId()}</td>
-                                        <td>${order.getIdClient()}</td>
-                                        <td>${order.getDataOrder()}</td>
-                                        <td>${order.getStatus()}</td>
-                                        <td>${order.getOrderCost()}$</td>
-                                        <td>
-                                        <form action="FrontController" method="GET">
-                                            <input type="hidden" name="order_id" value="${order.getId()}" />
-                                            <button class="btn btn-outline btn-default" type="submit" name="command" value="show_detail_order">
-                                                <fmt:message key="details" />
-                                            </button>
-                                        </form>
-                                        </td>
-                                    </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                            </c:when>
-                          </c:choose>  
-                        </div>
+                    <form name = "createCategory" action="FrontController" method="POST">
+                          <legend><strong ><fmt:message key="create_category" /></strong></legend>
+                          <label ><fmt:message key="entity_name" />:</label>
+                              <input type="text" name="name_category" placeholder="Name category…">
+                              <span class="help-block"></span>
+                                                
+                          <button class="btn btn-outline btn-default" type="submit" name="command" value="create_category">
+                            <fmt:message key="create" />
+                        </button> 
+                        </form>	
+                                            
                 </div>
                 
             </div>

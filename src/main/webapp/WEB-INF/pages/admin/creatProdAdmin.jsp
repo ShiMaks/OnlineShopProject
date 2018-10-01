@@ -7,14 +7,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../jsp/head_admin.jsp" />
+    <title>Admin: Create Product</title>
+    <c:import url="/WEB-INF/pages/admin/head_admin.jsp" />
+
+    <style type="text/css">
+        body {font-size:14px;}
+        label {float:left; padding-right:10px;}
+        .field {clear:both; text-align:right; line-height:25px;}
+        .main {float:left;}
+    </style>
+
 </head>
 <body>
 
 <div class="wrapper">
 
     <div class="container-fluid">
-                 
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -46,6 +55,8 @@
                 </div>
             </div>
         </nav>   
+        
+
 
         <div class="content">
             <div class="container-fluid">
@@ -116,39 +127,73 @@
                             </a>
                         </div>
                     </div>
-                
                 </div>
                 <div class="row">
-                    
-
-                    <div class="content table-responsive table-full-width">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>ID</th>
-                                <th><fmt:message key="login" /></th>
-                                <th><fmt:message key="email" /></th>
-                                <th><fmt:message key="phone" /></th>
-                            </thead>
-                            <tbody>
-                              <c:forEach items="${users}" var="user" >    
-                                <tr>
-                                    <td>${user.getId()}</td>
-                                    <td>${user.getLogin()}</td>
-                                    <td>${user.getEmail()}</td>
-                                    <td>${user.getPhone()}</td>
-                                    <td><form action="FrontController" method="GET">
-                                        <input type="hidden" name="user_id" value="${user.getId()}" />
-                                        <button class="btn btn-outline btn-default" type="submit" name="command" value="show_user_detail">
-                                            <fmt:message key="details" />
-                                        </button>
-                                    </form>
-                                    </td>
-                                </tr>
-                              </c:forEach>  
-                            </tbody>
-                        </table>
-                    </div>
-                </div>  
+                    <div class="main"> 
+                        <legend><strong ><fmt:message key="create_product" /></strong></legend>
+                        <form name = "createProduct" action="FrontController" method="POST">
+                            <!--<input type="hidden" name="command" value="create_product" />-->
+                            <div class="field">
+                                <label ><fmt:message key="entity_name" />:</label>
+                                    <input type="text" name="product_name" placeholder="Name of product…">
+                                    <span class="help-block"></span>
+                            </div>
+                            <c:if test="${not empty invalid_product_name}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_product_name}" />
+                                </div>
+                            </c:if>
+                            <div class="field">        
+                                    <label ><fmt:message key="category" />:</label>
+                                    <select name="category_id">
+                                        <option selected><fmt:message key="select_category" /></option>
+                                        <c:forEach items="${categoriesAdmin}" var="category">
+                                            <option value="${category.getId()}">${category.getName()}</option>
+                                        </c:forEach>
+                                    </select>
+                            </div>  
+                            <div class="field">          
+                                <label ><fmt:message key="description" />:</label>
+                                    <textarea type="text" name="description" placeholder="Description of product…"></textarea>
+                                    <span class="help-block"></span>
+                            </div>    
+                            <div class="field">     
+                                <label ><fmt:message key="quantity" />:</label>
+                                    <input type="text" name="quantity" placeholder="Quantity…">
+                                    <span class="help-block"></span>
+                            </div>
+                            <c:if test="${not empty invalid_quantity}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_quantity}" />
+                                </div>
+                            </c:if>   
+                            <div class="field">             
+                                <label ><fmt:message key="price" />:</label>
+                                    <input type="text" name="price" placeholder="Price…">
+                                    <span class="help-block"></span> 
+                            </div>
+                            <c:if test="${not empty invalid_product_price}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_product_price}" />
+                                </div>
+                            </c:if>   
+                            <div class="field">        
+                                <label ><fmt:message key="picture" />:</label>
+                                    <input type="text" name="picture" placeholder="Picture…">
+                                    <span class="help-block"></span>                         
+                            </div>
+                            <c:if test="${not empty invalid_picture_path}">                                    
+                                <div class="alert alert-danger" role="alert">
+                                <fmt:message key="${invalid_picture_path}" />
+                                </div>
+                            </c:if>   
+                            <button class="btn btn-outline btn-default" type="submit" name="command" value="create_product">
+                                <fmt:message key="create" />
+                            </button>
+                        </form>	
+                    </div>                        
+                </div>
+                
             </div>
         </div>
     </div>
@@ -177,8 +222,6 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>
-
-	
+	<script src="${pageContext.request.contextPath}/resources/assets/js/demo.js"></script>	
 
 </html>

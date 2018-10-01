@@ -6,6 +6,8 @@ import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 import by.epam.shop.web.exception.ValidateNullRequestParamException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,8 @@ import static by.epam.shop.web.util.RequestParamValidator.validateProductNameOrC
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class UpdateCategoryAdminCommandImpl implements BaseCommand {
+
+    private static final Logger LOGGER = LogManager.getLogger(UpdateCategoryAdminCommandImpl.class);
 
     private static final String MESSAGE_VALUE = "success_update_category";
     private CategoryService categoryService = ServiceFactory.getCategoryService();
@@ -43,10 +47,11 @@ public class UpdateCategoryAdminCommandImpl implements BaseCommand {
     private boolean validateCategoryInputData(String nameCategory, HttpServletRequest request) throws ValidateNullRequestParamException {
         boolean result = true;
         if (!validateProductNameOrCategory(nameCategory)) {
+            LOGGER.error("An invalid category name has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_CATEGORY_NAME, REQUEST_PARAM_INVALID_CATEGORY_NAME);
             result = false;
         } else {
-
+            LOGGER.info("Name category: {}", nameCategory);
         }
         return result;
     }

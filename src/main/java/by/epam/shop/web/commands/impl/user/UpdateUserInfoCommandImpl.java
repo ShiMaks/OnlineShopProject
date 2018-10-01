@@ -6,6 +6,8 @@ import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 import by.epam.shop.web.exception.ValidateNullRequestParamException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +22,8 @@ import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_SURNAME
 
 public class UpdateUserInfoCommandImpl implements BaseCommand{
 
+    private static final Logger LOGGER = LogManager.getLogger(UpdateUserInfoCommandImpl.class);
+
     private static final String MESSAGE_VALUE = "success_update_information";
 
     private UserService userService = ServiceFactory.getUserService();
@@ -31,6 +35,7 @@ public class UpdateUserInfoCommandImpl implements BaseCommand{
             userService.updateUserInfo(user);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_INFO);
             request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_VALUE);
+            LOGGER.info("User login={} information successfully update", user.getLogin());
             return REDIRECT_USER_URL;
         } else {
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_INFO);
@@ -49,14 +54,17 @@ public class UpdateUserInfoCommandImpl implements BaseCommand{
     protected boolean validateNewUser(User user, HttpServletRequest request) throws ValidateNullRequestParamException {
         boolean result = true;
         if (!validateName(user.getName())) {
+            LOGGER.error("An invalid user name has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_NAME, REQUEST_PARAM_INVALID_NAME);
             result = false;
         }
         if (!validateSurname(user.getSurname())) {
+            LOGGER.error("An invalid user surname has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_SURNAME, REQUEST_PARAM_INVALID_SURNAME);
             result = false;
         }
         if (!validatePhone(user.getPhone())) {
+            LOGGER.error("An invalid user phone has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PHONE, REQUEST_PARAM_INVALID_PHONE);
             result = false;
         }

@@ -8,6 +8,8 @@ import by.epam.shop.service.util.PasswordEncryptor;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 import by.epam.shop.web.exception.ValidateNullRequestParamException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +19,8 @@ import static by.epam.shop.web.util.RequestParamValidator.validatePassword;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class ChangePasswordCommandImpl implements BaseCommand{
+
+    private static final Logger LOGGER = LogManager.getLogger(UpdateUserInfoCommandImpl.class);
 
     private static final String MESSAGE_VALUE = "success_update_password";
 
@@ -37,6 +41,7 @@ public class ChangePasswordCommandImpl implements BaseCommand{
     private boolean validateNewPassword(String newPass, HttpServletRequest request)
             throws ValidateNullRequestParamException {
         if (!validatePassword(newPass)) {
+            LOGGER.error("An invalid password has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PASS, REQUEST_PARAM_INVALID_PASS);
             return false;
         }
@@ -62,9 +67,11 @@ public class ChangePasswordCommandImpl implements BaseCommand{
     private boolean checkPassword(String sessionUserPass, String oldPass, String newPass, String confirmNewPass,
                                       HttpServletRequest request) {
         if (!sessionUserPass.equals(PasswordEncryptor.md5Apache(oldPass))) {
+            LOGGER.error("The password you entered is incorrect");
             request.setAttribute(REQUEST_PARAM_INVALID_OLD_PASS, REQUEST_PARAM_INVALID_OLD_PASS);
             return false;
         } else if (!newPass.equals(confirmNewPass)) {
+            LOGGER.error("The passwords you entered do not match");
             request.setAttribute(REQUEST_PARAM_INVALID_CONFIRM_PASS, REQUEST_PARAM_INVALID_CONFIRM_PASS);
             return false;
         } else {

@@ -38,7 +38,7 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
     private static final String READ_PRODUCTS_BY_CATEGORY = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
             "FROM product WHERE category_id = ?";
     private static final String READ_PRODUCTS_FOR_PAGE = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
-            " FROM product LIMIT ?, 3";
+            " FROM product LIMIT ?, 9";
 
     public ProductDaoDBImpl(ConnectionPool connectionPool) {
         super(connectionPool);
@@ -56,6 +56,7 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
             product.setPicture(resultSet.getString(PRODUCT_COLUMN_PICTURE));
             product.setQuantity(resultSet.getInt(PRODUCT_COLUMN_QUANTITY));
         } catch(SQLException e){
+            LOGGER.error("Error creating in maprow method", e);
             throw new DaoException(e);
         }
         return product;
@@ -74,6 +75,7 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
             statement.setInt(7, product.getQuantity());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Error while adding product to database", e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -98,6 +100,7 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
             statement.setInt(7, product.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Error while trying to edit product in database", e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);

@@ -29,11 +29,8 @@ public abstract class AbstractDao<E extends Entity> {
             if (resultSet.next()) {
                 return mapRow(resultSet);
             }
-            LOGGER.debug("read: {}, id={}", sql, id);
-            LOGGER.info("read: {}, id={}", sql, id);
-            LOGGER.error("read: {}, id={}", sql, id);
         } catch (SQLException e) {
-            //log
+            LOGGER.error("read: {}, id={}", sql, id);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -47,6 +44,7 @@ public abstract class AbstractDao<E extends Entity> {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("delete: {}, id={}", sql, id);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -62,6 +60,7 @@ public abstract class AbstractDao<E extends Entity> {
                 results.add(mapRow(resultSet));
             }
         } catch (SQLException e) {
+            LOGGER.error("read list: {}", sql);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -78,10 +77,8 @@ public abstract class AbstractDao<E extends Entity> {
             while(resultSet.next()) {
                 results.add(mapRow(resultSet));
             }
-            LOGGER.debug("read: {}, id={}", sql, condition);
-            LOGGER.info("read: {}, id={}", sql, condition);
-            LOGGER.error("read: {}, id={}", sql, condition);
         } catch (SQLException e) {
+            LOGGER.error("read list by condition: {}, condition={}", sql, condition);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);

@@ -51,13 +51,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
      * Error causes fields
      */
     private static final String ERROR_IN_CREATE_USER = "Error while adding user to database";
-    private static final String ERROR_IN_READ_USER = "Error while getting user from database";
-    private static final String ERROR_IN_UPDATE_USER = "Error while trying to update user in database";
-    private static final String ERROR_IN_DELETE_USER = "Error while deleting user from database";
-    private static final String ERROR_IN_LOGIN_METHOD = "Error while authorization";
     private static final String ERROR_IN_UPDATE_PASS = "Error while updating user password";
-    private static final String ERROR_IN_UPDATE_BALANCE = "Error while updating user balance";
-    private static final String ERROR_IN_READ_ALL_USERS = "Error while getting user list from database";
     private static final String ERROR_IN_READ_PASS = "Error while getting user's password from database";
 
     public UserDaoDBImpl(ConnectionPool connectionPool) {
@@ -75,6 +69,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
             user.setEmail(resultSet.getString(USER_COLUMN_EMAIL));
             user.setPhone(resultSet.getString(USER_COLUMN_PHONE));
         } catch(SQLException e){
+            LOGGER.error("Error creating in maprow method", e);
             throw new DaoException(e);
         }
         return user;
@@ -97,6 +92,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
             if (e.getErrorCode() == ER_DUP_ENTRY_CODE) {
                 code = identifyDuplicateField(e.getMessage());
             } else {
+                LOGGER.error("Error while adding user to database", e);
                 throw new DaoException(ERROR_IN_CREATE_USER, e);
             }
         } finally {
@@ -116,6 +112,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
                 pass = resultSet.getString(USER_COLUMN_PASSWORD);
             }
         } catch (SQLException e) {
+            LOGGER.error("Error while getting user's password from database", e);
             throw new DaoException(ERROR_IN_READ_PASS, e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -131,6 +128,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
             preparedStatement.setInt(2, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Error while updating user password", e);
             throw new DaoException(ERROR_IN_UPDATE_PASS, e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -157,6 +155,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
             statement.setInt(4, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Error while trying to update user in database", e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -184,6 +183,7 @@ public class UserDaoDBImpl extends AbstractDao<User> implements UserDao {
                 user.setPassword(result.getString(USER_COLUMN_PASSWORD));
             }
         } catch (SQLException e) {
+            LOGGER.error("Error while getting user's password and login from database", e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);

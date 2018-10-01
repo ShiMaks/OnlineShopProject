@@ -33,6 +33,13 @@ public class CategoryDaoDBImpl extends AbstractDao<Category> implements Category
     private static final String DELETE_CATEGORY_BY_ID = "DELETE FROM category WHERE id = ?";
     private static final String READ_ALL_CATEGORIES = "SELECT id, name FROM category";
 
+    /**
+     * Error causes fields
+     */
+    private static final String ERROR_IN_CREATE_CATEGORY = "Error while adding category to database";
+    private static final String ERROR_IN_UPDATE_CATEGORY = "Error while trying to edit category in database";
+    private static final String ERROR_MAP_ROW = "Error creating in maprow method";
+
     public CategoryDaoDBImpl(ConnectionPool connectionPool) {
         super(connectionPool);
     }
@@ -44,6 +51,7 @@ public class CategoryDaoDBImpl extends AbstractDao<Category> implements Category
             category.setId(resultSet.getInt(CATEGORY_COLUMN_ID));
             category.setName(resultSet.getString(CATEGORY_COLUMN_NAME));
         } catch(SQLException e){
+            LOGGER.error(ERROR_MAP_ROW, e);
             throw new DaoException(e);
         }
         return category;
@@ -56,6 +64,7 @@ public class CategoryDaoDBImpl extends AbstractDao<Category> implements Category
             statement.setString(1, entity.getName());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(ERROR_IN_CREATE_CATEGORY, e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -75,6 +84,7 @@ public class CategoryDaoDBImpl extends AbstractDao<Category> implements Category
             statement.setInt(2, entity.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(ERROR_IN_UPDATE_CATEGORY, e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);

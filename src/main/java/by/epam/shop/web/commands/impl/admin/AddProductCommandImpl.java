@@ -6,6 +6,8 @@ import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 import by.epam.shop.web.exception.ValidateNullRequestParamException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +21,8 @@ import static by.epam.shop.web.util.RequestParamValidator.*;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class AddProductCommandImpl implements BaseCommand {
+
+    private static final Logger LOGGER = LogManager.getLogger(AddProductCommandImpl.class);
 
     private static final String MESSAGE_VALUE = "success_add_product";
     private ProductService productService = ServiceFactory.getProductService();
@@ -34,6 +38,7 @@ public class AddProductCommandImpl implements BaseCommand {
             productService.addProductToShop(product);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_PRODUCT);
             request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_VALUE);
+            LOGGER.info("product {} added to database", product);
             return REDIRECT_ADMIN_URL;
         } else {
             return PAGE_CREATE_PRODUCT;
@@ -43,28 +48,32 @@ public class AddProductCommandImpl implements BaseCommand {
     private boolean validateProductInputData(HttpServletRequest request) throws ValidateNullRequestParamException {
         boolean result = true;
         if (!validateProductNameOrCategory(request.getParameter(REQUEST_PARAM_PRODUCT_NAME))) {
+            LOGGER.error("An invalid product name has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_NAME, REQUEST_PARAM_INVALID_PRODUCT_NAME);
             result = false;
         } else {
 
         }
         if (!validatePositiveInt(request.getParameter(REQUEST_PARAM_QUANTITY))) {
+            LOGGER.error("An invalid product quantity has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_QUANTITY, REQUEST_PARAM_INVALID_QUANTITY);
             result = false;
         } else {
 
         }
         if (!validatePrice(request.getParameter(REQUEST_PARAM_PRODUCT_PRICE))) {
+            LOGGER.error("An invalid product price has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_PRICE, REQUEST_PARAM_INVALID_PRODUCT_PRICE);
             result = false;
         } else {
 
         }
         if (!validateImageLink(request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE))) {
+            LOGGER.error("An invalid picture path has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PICTURE_PATH, REQUEST_PARAM_INVALID_PICTURE_PATH);
             result = false;
         } else {
-
+            LOGGER.info("Validation of product fields was successful");
         }
         return result;
     }

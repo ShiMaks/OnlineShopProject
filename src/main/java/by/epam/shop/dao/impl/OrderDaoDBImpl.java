@@ -61,6 +61,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
             order.setDataOrder(resultSet.getDate(ORDER_DATE));
             order.setOrderCost(resultSet.getInt(ORDER_PRICE));
         } catch(SQLException e){
+            LOGGER.error("Error creating in maprow method", e);
             throw new DaoException(e);
         }
         return order;
@@ -93,8 +94,10 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
                     orderItemPreparedStatement.executeUpdate();
                 }
                 connection.commit();
+                LOGGER.info("Transaction completed successfully");
             } catch (SQLException e) {
                 connection.rollback();
+                LOGGER.error("Transaction failed",e);
                 throw new DaoException(e);
             } finally {
                 connection.setAutoCommit(true);
@@ -126,6 +129,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
             statement.setInt(2, order.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Error while trying to edit order in database", e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -156,6 +160,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
                 orderItems.add(orderItem);
             }
         } catch (SQLException e) {
+            LOGGER.error("Error while building complete list of order products from database", e);
             throw new DaoException(e);
         } finally {
             dataBaseConnection.returnConnection(connection);
@@ -174,6 +179,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
                 orders.add(mapRow(result));
             }
         } catch (SQLException e) {
+            LOGGER.error("Error while building complete list of products by status from database", e);
             throw new DaoException(e);
         }finally {
             dataBaseConnection.returnConnection(connection);
@@ -192,6 +198,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
                 orders.add(mapRow(result));
             }
         } catch (SQLException e) {
+            LOGGER.error("Error while building complete list of customer orders from database", e);
             throw new DaoException(e);
         }finally {
             dataBaseConnection.returnConnection(connection);

@@ -81,7 +81,7 @@
     <div class="main">
       <div class="container">
           <c:if test="${not empty info_message}">
-              <div class="alert alert-danger" role="alert">
+              <div class="alert alert-info" role="alert">
                   <h4>
                       <strong>
                           <fmt:message key="${info_message}" />

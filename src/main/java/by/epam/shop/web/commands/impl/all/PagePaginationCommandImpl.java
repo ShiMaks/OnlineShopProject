@@ -26,12 +26,9 @@ public class PagePaginationCommandImpl implements BaseCommand{
         String action = request.getParameter("action");
         int startPosition = Integer.parseInt(request.getParameter("position"));
         int page = Integer.parseInt((request.getParameter("page")));
-        System.out.println("Position: " + startPosition);
-        System.out.println("Page: " + page);
-        int stepPosition = 3;
+        int stepPosition = 9;
         int stepPage = 1;
         if(action.equals("next")){
-            System.out.println("Enter next");
             startPosition = (startPosition + stepPosition) - 1;
             List<Product> products = productService.getProductForPage(startPosition);
             List<Category> categories = categoryService.getCategories();
@@ -39,10 +36,8 @@ public class PagePaginationCommandImpl implements BaseCommand{
             request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
             request.setAttribute("position", (startPosition + 1));
             request.setAttribute("page", page = page + stepPage);
-            System.out.println("Return page: " + page);
             return PAGE_SHOP_MAIN_PAGE;
         } else if(action.equals("perv") & (page - stepPage) <= 1){
-            System.out.println("Enter page 1");
             List<Category> categories = categoryService.getCategories();
             List<Product> products = productService.getProductForPage(0);
             request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
@@ -51,11 +46,8 @@ public class PagePaginationCommandImpl implements BaseCommand{
             request.setAttribute("page", 1);
             return PAGE_SHOP_MAIN_PAGE;
         } else if(action.equals("perv")){
-            System.out.println("Enter perv");
             page = page - stepPage;
-            System.out.println(page);
             startPosition = (startPosition - stepPosition) - 1;
-            System.out.println("Position pevr: " + startPosition);
             List<Category> categories = categoryService.getCategories();
             List<Product> products = productService.getProductForPage(startPosition);
             request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);

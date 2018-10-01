@@ -6,6 +6,8 @@ import by.epam.shop.service.OrderService;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,8 @@ import static by.epam.shop.web.util.RequestParamValidator.validatePositiveInt;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class UpdateOrderAdminCommandImpl implements BaseCommand{
+
+    private static final Logger LOGGER = LogManager.getLogger(AddProductCommandImpl.class);
 
     private OrderService orderService = ServiceFactory.getOrderService();
 
@@ -28,9 +32,9 @@ public class UpdateOrderAdminCommandImpl implements BaseCommand{
             Order order = new Order();
             order.setId(Integer.parseInt(idOrder));
             order.setStatus(OrderStatusEnum.valueOf(status.toUpperCase()));
-            //        OrderStatusEnum.valueOf("sdfsdf".toUpperCase());
             orderService.updateStatusOrder(order);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_ORDERS);
+            LOGGER.info("Order id={} status updated {}", idOrder, status.toUpperCase());
             return REDIRECT_ADMIN_URL;
         } else {
             return PAGE_ERROR;

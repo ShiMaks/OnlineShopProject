@@ -6,6 +6,8 @@ import by.epam.shop.service.exception.ServiceException;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +17,8 @@ import static by.epam.shop.web.util.PagePathConstant.REDIRECT_USER_URL;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class CreateOrderCommandImpl implements BaseCommand{
+
+    private static final Logger LOGGER = LogManager.getLogger(CreateOrderCommandImpl.class);
 
     private static final String MESSAGE_SUCCESS = "success_create_order";
     private static final String MESSAGE_NOT_SUCCESS = "not_success_create_order";
@@ -32,6 +36,7 @@ public class CreateOrderCommandImpl implements BaseCommand{
             shopCart.cleanCart();
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_ORDERS);
             request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_SUCCESS);
+            LOGGER.info("Order {} successfully created", order);
             return REDIRECT_USER_URL;
         } catch (ServiceException e){
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_CART);

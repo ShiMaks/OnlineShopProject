@@ -7,6 +7,8 @@ import by.epam.shop.service.UserService;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +19,8 @@ import static by.epam.shop.web.util.RequestParamValidator.validateParamNotNull;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class AuthorizationCommandImpl implements BaseCommand {
+
+    private static final Logger LOGGER = LogManager.getLogger(AuthorizationCommandImpl.class);
 
     private static final String MESSAGE_VALUE = "message_incorrect_login_password";
     private UserService userService = ServiceFactory.getUserService();
@@ -46,8 +50,10 @@ public class AuthorizationCommandImpl implements BaseCommand {
         if (user.isAdmin()) {
             request.getSession().setAttribute(REQUEST_PARAM_USER_ROLE, UserRoleEnum.ADMIN);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN);
+            LOGGER.info("Administrator login={} successfully authorized", user.getLogin());
             return REDIRECT_ADMIN_URL;
         } else {
+            LOGGER.info("User login={} successfully authorized", user.getLogin());
             request.getSession().setAttribute(REQUEST_PARAM_USER_ROLE, UserRoleEnum.USER);
             request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_USER_MAIN);
             return REDIRECT_USER_URL;

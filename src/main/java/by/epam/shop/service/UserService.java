@@ -65,7 +65,20 @@ public interface UserService {
      */
     List<User> getUsers() throws ServiceException;
 
+    /**
+     * Gets user's password
+     *
+     * @param idUser
+     * @return String password
+     * @throws ServiceException
+     */
     String getUserPassword(int idUser) throws ServiceException;
 
+    /**
+     * Changes user password
+     *
+     * @param user
+     * @throws ServiceException
+     */
     void changeUserPassword(User user) throws ServiceException;
 }

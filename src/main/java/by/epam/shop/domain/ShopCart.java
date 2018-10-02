@@ -64,6 +64,12 @@ public class ShopCart {
         return totalCost;
     }
 
+    /**
+     * Gets total number of products
+     * in the cart
+     *
+     * @return int quantity
+     */
     public int getQuantityProducts(){
         int quantity = 0;
         for(Map.Entry<Product, Integer> entry : products.entrySet()){

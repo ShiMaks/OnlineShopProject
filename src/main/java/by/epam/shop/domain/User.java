@@ -8,6 +8,7 @@ package by.epam.shop.domain;
 public class User extends Entity {
 
     private static final long serialVersionUID = -7011556018346904399L;
+
     /**
      * Login of user
      */

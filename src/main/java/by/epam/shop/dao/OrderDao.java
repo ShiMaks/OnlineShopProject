@@ -50,6 +50,13 @@ public interface OrderDao extends BaseDao<Order> {
      */
     List<Order> getUserOrders(int idUser) throws DaoException;
 
+    /**
+     * Adds order and orderItem to database
+     *
+     * @param order
+     * @param orderItemLis
+     * @throws DaoException
+     */
     void createOrder(Order order, List<OrderItem> orderItemLis) throws DaoException;
 
 }

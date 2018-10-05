@@ -40,7 +40,9 @@ public class UpdateCategoryAdminCommandImpl implements BaseCommand {
             request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, MESSAGE_VALUE);
             return REDIRECT_ADMIN_URL;
         } else {
-            return PAGE_UPDATE_CATEGORY;
+            request.getSession().setAttribute(REQUEST_PARAM_CATEGORY_ID, idCategory);
+            request.getSession().setAttribute(SESSION_PAGE_TYPE, PAGE_TYPE_ADMIN_UPDATE_CATEGORY);
+            return REDIRECT_ADMIN_URL;
         }
     }
 
@@ -48,10 +50,10 @@ public class UpdateCategoryAdminCommandImpl implements BaseCommand {
         boolean result = true;
         if (!validateProductNameOrCategory(nameCategory)) {
             LOGGER.error("An invalid category name has been entered.");
-            request.setAttribute(REQUEST_PARAM_INVALID_CATEGORY_NAME, REQUEST_PARAM_INVALID_CATEGORY_NAME);
+            request.getSession().setAttribute(REQUEST_PARAM_SESSION_MESSAGE, REQUEST_PARAM_INVALID_CATEGORY_NAME);
             result = false;
         } else {
-            LOGGER.info("Name category: {}", nameCategory);
+            LOGGER.info("entered category name: {}", nameCategory);
         }
         return result;
     }

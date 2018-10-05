@@ -67,6 +67,7 @@ public final class WebConstantDeclaration {
     public static final String PAGE_TYPE_ADMIN_CATEGORY = "categories_page";
     public static final String PAGE_TYPE_ADMIN_PRODUCT = "products_page";
     public static final String PAGE_TYPE_ADMIN_ORDERS = "orders_page";
+    public static final String PAGE_TYPE_ADMIN_UPDATE_CATEGORY = "update_category_page";
     public static final String PAGE_TYPE_ADMIN = "main_admin_page";
 
     public static final String PAGE_TYPE_USER_ORDERS = "user_orders_page";

@@ -147,7 +147,7 @@
                                     <label ><fmt:message key="category" />:</label>
                                     <select name="category_id">
                                         <option selected><fmt:message key="select_category" /></option>
-                                        <c:forEach items="${categoriesAdmin}" var="category">
+                                        <c:forEach items="${listCategory}" var="category">
                                             <option value="${category.getId()}">${category.getName()}</option>
                                         </c:forEach>
                                     </select>

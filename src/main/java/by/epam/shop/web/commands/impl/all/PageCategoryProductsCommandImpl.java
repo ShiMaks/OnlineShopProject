@@ -9,6 +9,7 @@ import by.epam.shop.web.commands.BaseCommand;
 import by.epam.shop.web.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;

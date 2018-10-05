@@ -30,6 +30,7 @@ public class AddProductCommandImpl implements BaseCommand {
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
         String idCategory = request.getParameter(REQUEST_PARAM_CATEGORY_ID);
+        System.out.println(idCategory);
         if (!validatePositiveInt(idCategory)) {
             return PAGE_ERROR;
         }
@@ -51,29 +52,21 @@ public class AddProductCommandImpl implements BaseCommand {
             LOGGER.error("An invalid product name has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_NAME, REQUEST_PARAM_INVALID_PRODUCT_NAME);
             result = false;
-        } else {
-
         }
         if (!validatePositiveInt(request.getParameter(REQUEST_PARAM_QUANTITY))) {
             LOGGER.error("An invalid product quantity has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_QUANTITY, REQUEST_PARAM_INVALID_QUANTITY);
             result = false;
-        } else {
-
         }
         if (!validatePrice(request.getParameter(REQUEST_PARAM_PRODUCT_PRICE))) {
             LOGGER.error("An invalid product price has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_PRICE, REQUEST_PARAM_INVALID_PRODUCT_PRICE);
             result = false;
-        } else {
-
         }
         if (!validateImageLink(request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE))) {
             LOGGER.error("An invalid picture path has been entered.");
             request.setAttribute(REQUEST_PARAM_INVALID_PICTURE_PATH, REQUEST_PARAM_INVALID_PICTURE_PATH);
             result = false;
-        } else {
-            LOGGER.info("Validation of product fields was successful");
         }
         return result;
     }

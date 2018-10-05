@@ -53,26 +53,10 @@ public class ConnectionPool {
     private LinkedBlockingQueue<Connection> freeСonnection = new LinkedBlockingQueue<Connection>();
 
     /**
-     * Singleton of connection pool
-     *
-     * @return instance
-     */
-    public static ConnectionPool getInstance() {
-        if (instance == null) {
-            synchronized (ConnectionPool.class) {
-                if (instance == null) {
-                    instance = new ConnectionPool();
-                }
-            }
-        }
-        return instance;
-    }
-
-    /**
      * The constructor creates an instance of the pool.
      * Initializes a constant number of connections = 10.
      */
-    private ConnectionPool() {
+    public ConnectionPool() {
         try {
             Class.forName(driverName);
         } catch (ClassNotFoundException e) {
@@ -84,7 +68,7 @@ public class ConnectionPool {
             } catch (SQLException e) {
                 LOGGER.error(e.getMessage(), e);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.error("InterruptedException in constructor in ConnectionPool class", e);
             }
         }
     }
@@ -137,7 +121,7 @@ public class ConnectionPool {
             try {
                 getConnection().close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LOGGER.error("SQLException in stop method in ConnectionPool class", e);
             }
         }
     }

@@ -53,12 +53,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(int id) throws ServiceException {
-        try {
-            return userDao.read(id);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return userDao.read(id);
     }
 
     @Override

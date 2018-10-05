@@ -29,7 +29,7 @@ public interface BaseDao<T extends Entity> {
      * @return T extends Entity object
      * @throws DaoException
      */
-    T read(int id) throws DaoException, InterruptedException;
+    T read(int id) throws DaoException;
 
     /**
      * Updates information about entity in database

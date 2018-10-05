@@ -47,15 +47,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategory(int id) throws ServiceException {
         try {
-            try {
-                return categoryDao.read(id);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+          return categoryDao.read(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-        return null;
     }
 
     @Override

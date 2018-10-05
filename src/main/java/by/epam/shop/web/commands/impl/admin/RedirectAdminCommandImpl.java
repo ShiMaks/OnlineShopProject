@@ -37,6 +37,13 @@ public class RedirectAdminCommandImpl implements BaseCommand{
                request.setAttribute(REQUEST_PARAM_INFO_MESSAGE,
                        request.getSession().getAttribute(REQUEST_PARAM_SESSION_MESSAGE));
                return PAGE_CATEGORY_ADMIN;
+            case PAGE_TYPE_ADMIN_UPDATE_CATEGORY:
+                int idCategory = Integer.parseInt((String) request.getSession().getAttribute(REQUEST_PARAM_CATEGORY_ID));
+                Category category = categoryService.getCategory(idCategory);
+                request.setAttribute(REQUEST_PARAM_CATEGORY, category);
+                request.setAttribute(REQUEST_PARAM_INVALID_CATEGORY_NAME,
+                        request.getSession().getAttribute(REQUEST_PARAM_SESSION_MESSAGE));
+                return PAGE_UPDATE_CATEGORY;
             case PAGE_TYPE_ADMIN_PRODUCT:
                List<Product> products;
                products = productService.getProducts();

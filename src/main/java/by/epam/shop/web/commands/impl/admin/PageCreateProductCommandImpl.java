@@ -11,6 +11,7 @@ import java.util.List;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_CREATE_PRODUCT;
 import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_CATEGORIES_ADMIN;
+import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_LIST_CATEGORY;
 
 public class PageCreateProductCommandImpl implements BaseCommand {
 
@@ -18,6 +19,8 @@ public class PageCreateProductCommandImpl implements BaseCommand {
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
+        List<Category> categories = categoryService.getCategories();
+        request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
         return PAGE_CREATE_PRODUCT;
     }
 }

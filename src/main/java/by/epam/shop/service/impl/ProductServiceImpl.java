@@ -50,10 +50,7 @@ public class ProductServiceImpl implements ProductService {
             return productDao.read(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-        return null;
     }
 
     @Override

@@ -196,28 +196,6 @@
       </div>
     </div>
 
-    
-
-    <!-- BEGIN FOOTER -->
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <!-- BEGIN COPYRIGHT -->
-          <div class="col-md-4 col-sm-4 padding-top-10">
-            2018 © Maksim Shilvian. ALL Rights Reserved. 
-          </div>
-          <!-- END COPYRIGHT -->
-          <!-- BEGIN PAYMENTS -->
-          
-          <!-- END PAYMENTS -->
-          <!-- BEGIN POWERED -->
-          
-          <!-- END POWERED -->
-        </div>
-      </div>
-    </div>
-    <!-- END FOOTER -->
-
     <!-- Load javascripts at bottom, this will reduce page load time -->
     <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
     <!--[if lt IE 9]>

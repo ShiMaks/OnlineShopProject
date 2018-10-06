@@ -86,6 +86,16 @@
 
     <div class="main">
       <div class="container">
+
+          <c:if test="${not empty info_message}">
+              <div class="alert alert-success" role="alert">
+                  <h4>
+                      <strong>
+                          <fmt:message key="${info_message}" />
+                      </strong>
+                  </h4>
+              </div>
+          </c:if> 
         
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-9">

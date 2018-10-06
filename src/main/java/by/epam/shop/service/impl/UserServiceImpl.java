@@ -19,8 +19,8 @@ public class UserServiceImpl implements UserService {
     private static final int DUPLICATE_LOGIN_CODE = 1;
     private static final int DUPLICATE_EMAIL_CODE = 2;
 
-    private static final String DUPLICATE_LOGIN_MESSAGE = "This username is taken. Try another";
-    private static final String DUPLICATE_EMAIL_MESSAGE = "This email is already in use. Try another";
+    private static final String DUPLICATE_LOGIN_MESSAGE = "duplicate_login";
+    private static final String DUPLICATE_EMAIL_MESSAGE = "duplicate_email";
 
     private static final String SUCCESS = "success";
 

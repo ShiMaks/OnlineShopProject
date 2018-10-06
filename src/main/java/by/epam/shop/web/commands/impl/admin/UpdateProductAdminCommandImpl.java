@@ -1,6 +1,8 @@
 package by.epam.shop.web.commands.impl.admin;
 
+import by.epam.shop.domain.Category;
 import by.epam.shop.domain.Product;
+import by.epam.shop.service.CategoryService;
 import by.epam.shop.service.ProductService;
 import by.epam.shop.service.factory.ServiceFactory;
 import by.epam.shop.web.commands.BaseCommand;
@@ -12,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
@@ -26,6 +29,7 @@ public class UpdateProductAdminCommandImpl implements BaseCommand {
 
     private static final String MESSAGE_VALUE = "success_update_product";
     private ProductService productService = ServiceFactory.getProductService();
+    private CategoryService categoryService = ServiceFactory.getCategoryService();
 
     @Override
     public String executeCommand(HttpServletRequest request) throws CommandException {
@@ -42,6 +46,12 @@ public class UpdateProductAdminCommandImpl implements BaseCommand {
             LOGGER.info("product id={} update product:{}",idProduct, product);
             return REDIRECT_ADMIN_URL;
         } else {
+            Product product = productService.getProduct(Integer.parseInt(idProduct));
+            Category category = categoryService.getCategory(product.getIdCategory());
+            List<Category> categories = categoryService.getCategories();
+            request.setAttribute(REQUEST_PARAM_PRODUCT, product);
+            request.setAttribute(REQUEST_PARAM_LIST_CATEGORIES_ADMIN, categories);
+            request.setAttribute(REQUEST_PARAM_CATEGORY, category);
             return PAGE_UPDATE_PRODUCT;
         }
     }
@@ -49,22 +59,26 @@ public class UpdateProductAdminCommandImpl implements BaseCommand {
     private boolean validateProductInputData(HttpServletRequest request) throws ValidateNullRequestParamException {
         boolean result = true;
         if (!validateProductNameOrCategory(request.getParameter(REQUEST_PARAM_PRODUCT_NAME))) {
-            LOGGER.error("An invalid product name has been entered.");
+            LOGGER.error("An invalid product name has been entered.Name: {}",
+                    request.getParameter(REQUEST_PARAM_PRODUCT_NAME));
             request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_NAME, REQUEST_PARAM_INVALID_PRODUCT_NAME);
             result = false;
         }
         if (!validatePositiveInt(request.getParameter(REQUEST_PARAM_QUANTITY))) {
-            LOGGER.error("An invalid product quantity has been entered.");
+            LOGGER.error("An invalid product quantity has been entered. Quantity: {}",
+                    request.getParameter(REQUEST_PARAM_QUANTITY));
             request.setAttribute(REQUEST_PARAM_INVALID_QUANTITY, REQUEST_PARAM_INVALID_QUANTITY);
             result = false;
         }
         if (!validatePrice(request.getParameter(REQUEST_PARAM_PRODUCT_PRICE))) {
-            LOGGER.error("An invalid product price has been entered.");
+            LOGGER.error("An invalid product price has been entered. Price: {}",
+                    request.getParameter(REQUEST_PARAM_PRODUCT_PRICE));
             request.setAttribute(REQUEST_PARAM_INVALID_PRODUCT_PRICE, REQUEST_PARAM_INVALID_PRODUCT_PRICE);
             result = false;
         }
         if (!validateImageLink(request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE))) {
-            LOGGER.error("An invalid picture path has been entered.");
+            LOGGER.error("An invalid picture path has been entered. Picture path: {}",
+                    request.getParameter(REQUEST_PARAM_PRODUCT_PICTURE));
             request.setAttribute(REQUEST_PARAM_INVALID_PICTURE_PATH, REQUEST_PARAM_INVALID_PICTURE_PATH);
             result = false;
         } else {

@@ -32,13 +32,13 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
             "FROM product WHERE id = ?";
     private static final String UPDATE_PRODUCT = "UPDATE product SET name = ?, category_id = ?, description = ?, inStock = ?," +
             " price = ?, picture = ?  WHERE id = ?";
-    private static final String DELETE_PRODUCT_BY_ID = "DELETE FROM product WHERE id = ?";
+    private static final String DELETE_PRODUCT_BY_ID = "UPDATE product SET deleted = ? WHERE id = ?";
     private static final String READ_ALL_PRODUCTS = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
-            "FROM product";
+            "FROM product WHERE deleted = 0";
     private static final String READ_PRODUCTS_BY_CATEGORY = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
-            "FROM product WHERE category_id = ?";
+            "FROM product WHERE category_id = ? AND deleted = 0";
     private static final String READ_PRODUCTS_FOR_PAGE = "SELECT id, name, category_id, description, inStock, price, picture, quantity " +
-            " FROM product LIMIT ?, 9";
+            " FROM product WHERE deleted = 0 LIMIT ?, 9";
 
     public ProductDaoDBImpl(ConnectionPool connectionPool) {
         super(connectionPool);
@@ -109,7 +109,18 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
 
     @Override
     public void delete(int id) throws DaoException {
-        delete(id, DELETE_PRODUCT_BY_ID);
+       // delete(id, DELETE_PRODUCT_BY_ID);
+        Connection connection = dataBaseConnection.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_BY_ID)){
+            statement.setBoolean(1, true);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error("Error while trying to edit product in database", e);
+            throw new DaoException(e);
+        } finally {
+            dataBaseConnection.returnConnection(connection);
+        }
     }
 
     @Override

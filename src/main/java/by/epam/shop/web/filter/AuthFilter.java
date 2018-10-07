@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static by.epam.shop.web.util.PagePathConstant.PAGE_ERROR;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_COMMAND;
-import static by.epam.shop.web.util.WebConstantDeclaration.REQUEST_PARAM_USER;
+import static by.epam.shop.web.util.PagePathConstant.PAGE_SIGN_IN;
+import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
 public class AuthFilter implements Filter {
 
@@ -46,8 +46,8 @@ public class AuthFilter implements Filter {
                 if (security.getRoles(inputCommand) == UserRoleEnum.ALL) {
                     chain.doFilter(request, response);
                 } else {
-                    //session.setAttribute("message", "You need to register");
-                    request.getRequestDispatcher(PAGE_ERROR).forward(request, response);
+                    request.setAttribute(REQUEST_PARAM_INFO_MESSAGE, REQUEST_PARAM_REGISTRATION);
+                    request.getRequestDispatcher(PAGE_SIGN_IN).forward(request, response);
                 }
             }
         } else {

@@ -48,6 +48,12 @@ public final class WebConstantDeclaration {
     public static final String REQUEST_PARAM_SESSION_MESSAGE = "session_message";
     public static final String REQUEST_PARAM_INFO_MESSAGE = "info_message";
     public static final String REQUEST_PARAM_LOCALE = "locale";
+    public static final String REQUEST_PARAM_REGISTRATION = "nessesary_registration";
+    public static final String REQUEST_PARAM_POSITION = "position";
+    public static final String REQUEST_PARAM_PAGE = "page";
+    public static final String REQUEST_PARAM_ACTION_PAGE = "action";
+    public static final String REQUEST_PARAM_ACTION_NEXT = "next";
+    public static final String REQUEST_PARAM_ACTION_PERV = "perv";
 
     public static final String REQUEST_PARAM_INVALID_LOGIN = "invalid_login";
     public static final String REQUEST_PARAM_INVALID_PASS = "invalid_password";

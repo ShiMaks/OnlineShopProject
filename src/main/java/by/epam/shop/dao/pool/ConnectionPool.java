@@ -22,11 +22,6 @@ public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     /**
-     * Singleton instance
-     */
-    private static volatile ConnectionPool instance;
-
-    /**
      * Configuration constants for the need to create a pool
      */
     private static final String DB_CONNECT_PROPERTY = "db_config";

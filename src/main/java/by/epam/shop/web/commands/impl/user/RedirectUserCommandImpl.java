@@ -51,9 +51,11 @@ public class RedirectUserCommandImpl implements BaseCommand{
                 return PAGE_SHOP_USER_INFORMATION;
             case PAGE_TYPE_USER_MAIN:
                 List<Category> categories = categoryService.getCategories();
-                List<Product> products = productService.getProducts();
+                List<Product> products = productService.getProductForPage(0);
                 request.setAttribute(REQUEST_PARAM_LIST_CATEGORY, categories);
                 request.setAttribute(REQUEST_PARAM_LIST_PRODUCT, products);
+                request.setAttribute(REQUEST_PARAM_POSITION, 0);
+                request.setAttribute(REQUEST_PARAM_PAGE, 1);
                 return PAGE_SHOP_MAIN_PAGE;
             default:
                 return PAGE_INDEX;

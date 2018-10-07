@@ -11,9 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static by.epam.shop.web.util.PagePathConstant.PAGE_REGISTRATION;
-import static by.epam.shop.web.util.PagePathConstant.PAGE_SHOP_MAIN_PAGE;
-import static by.epam.shop.web.util.PagePathConstant.REDIRECT_GUEST_URL;
+import static by.epam.shop.web.util.PagePathConstant.*;
 import static by.epam.shop.web.util.RequestParamValidator.*;
 import static by.epam.shop.web.util.WebConstantDeclaration.*;
 
@@ -48,7 +46,8 @@ public class RegisterCommandImpl implements BaseCommand {
 
     private String resultPage(String message, HttpServletRequest request) {
         if (SUCCESS.equals(message)) {
-            return PAGE_SHOP_MAIN_PAGE;
+            request.setAttribute(REQUEST_PARAM_INFO_MESSAGE, MESSAGE_VALUE);
+            return PAGE_SIGN_IN;
         } else {
             request.setAttribute(REQUEST_PARAM_INFO_MESSAGE, message);
             return PAGE_REGISTRATION;

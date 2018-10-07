@@ -54,6 +54,7 @@ public class SecurityManager {
         accessRights.put(COMMAND_CREATE_ORDER, UserRoleEnum.USER);
         accessRights.put(COMMAND_PAGINATION, UserRoleEnum.ALL);
         accessRights.put(COMMAND_LOCALE, UserRoleEnum.ALL);
+        accessRights.put(COMMAND_SORT_PRODUCTS, UserRoleEnum.ADMIN);
     }
 
     public SecurityManager(){

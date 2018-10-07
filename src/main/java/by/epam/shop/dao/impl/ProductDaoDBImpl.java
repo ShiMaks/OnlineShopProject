@@ -109,7 +109,6 @@ public class ProductDaoDBImpl extends AbstractDao<Product> implements ProductDao
 
     @Override
     public void delete(int id) throws DaoException {
-       // delete(id, DELETE_PRODUCT_BY_ID);
         Connection connection = dataBaseConnection.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_BY_ID)){
             statement.setBoolean(1, true);

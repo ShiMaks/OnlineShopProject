@@ -60,9 +60,9 @@
                         </strong>
                     </h4>
                 </div>
-            </c:if> 
-
-
+            </c:if>
+            
+           
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -125,6 +125,23 @@
                     </button>
                 </form>
 
+                <div align="right">
+                <form name="sortProduct" action="FrontController" method="GET">                        
+                        <div class="field">                   
+                        <label ><fmt:message key="sort_category" />:</label>
+                            <select name="category_id">
+                            <option selected><fmt:message key="select_category" /></option>
+                                <c:forEach items="${listCategory}" var="category">
+                                    <option value="${category.getId()}">${category.getName()}</option>
+                                </c:forEach>
+                            </select>
+                            <span class="help-block"></span>                                         
+                        <button class="btn btn-outline btn-default" type="submit" name="command" value="sort_product_by_category">
+                            <fmt:message key="sort" />
+                        </button>
+                        </div>  
+                </form>
+                </div>
                 <div class="content">
                         
                             <div class="row">

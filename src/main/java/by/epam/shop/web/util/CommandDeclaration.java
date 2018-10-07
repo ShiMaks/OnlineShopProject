@@ -46,5 +46,5 @@ public class CommandDeclaration {
     public static final String COMMAND_CREATE_ORDER = "create_order";
     public static final String COMMAND_PAGINATION = "to_pagin";
     public static final String COMMAND_LOCALE = "change_locale";
-
+    public static final String COMMAND_SORT_PRODUCTS = "sort_product_by_category";
 }

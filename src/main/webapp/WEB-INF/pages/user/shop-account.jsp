@@ -173,7 +173,7 @@
                                             <c:when test="${order.getStatus() == 'DELIVERED'}">
                                                     <td><span class="label label-success label-rounded">${order.getStatus()}</span></td>
                                             </c:when>
-                                            <c:when test="${order.getStatus() == 'PAYED'}">
+                                            <c:when test="${order.getStatus() == 'DELIVERY_PENDING'}">
                                                     <td><span class="label label-info label-rounded">${order.getStatus()}</span></td>
                                             </c:when>
                                       </c:choose>

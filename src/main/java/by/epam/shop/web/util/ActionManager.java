@@ -143,6 +143,9 @@ public class ActionManager {
             case COMMAND_LOCALE:
                 command = new ChangeLocaleCommandImpl();
                 break;
+            case COMMAND_SORT_PRODUCTS:
+                command = new SortProductAdminCommandImpl();
+                break;
             default:
                 command = new StartPageCommandImpl();
                 break;

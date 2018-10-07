@@ -179,7 +179,7 @@
                             <a href="/shop/FrontController?command=show_products_info&product_id=${product.getId()}">${product.getName()}</a>
                             </p>
                             <p class="product-desc">${product.getDescription()}</p>
-                            <p class="product-price">Price: € ${product.getPrice()}</p>
+                            <p class="product-price">Price: $ ${product.getPrice()}</p>
                         </div>
                         </div>
                     </c:forEach> 

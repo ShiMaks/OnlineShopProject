@@ -10,7 +10,7 @@ public final class PagePathConstant {
     public static final String PAGE_SIGN_IN = "/WEB-INF/pages/user/page-login.jsp";
     public static final String PAGE_REGISTRATION = "/WEB-INF/pages/user/page-reg-page.jsp";
     public static final String PAGE_CART = "/WEB-INF/pages/user/shop-cart.jsp";
-    public static final String PAGE_ERROR = "/WEB-INF/pages/user/error.jsp";
+    public static final String PAGE_ERROR = "/jsp/error.jsp";
     public static final String PAGE_SHOP_ITEM = "/WEB-INF/pages/user/shop-item.jsp";
     public static final String PAGE_SHOP_MAIN_PAGE = "/WEB-INF/pages/user/main-page.jsp";
     public static final String PAGE_SHOP_CHANGE_PASSWORD = "/WEB-INF/pages/user/change-password.jsp";

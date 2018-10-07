@@ -20,11 +20,11 @@ public final class PagePathConstant {
 
     public static final String PAGE_CATEGORY_ADMIN = "/WEB-INF/pages/admin/categoryAdmin.jsp";
     public static final String PAGE_ADMIN = "/WEB-INF/pages/admin/admin.jsp";
-    public static final String PAGE_CREATE_CATEGORY = "/WEB-INF/pages/admin/creatCatAdmin.jsp";
-    public static final String PAGE_UPDATE_CATEGORY = "/WEB-INF/pages/admin/updateCatAdmin.jsp";
+    public static final String PAGE_CREATE_CATEGORY = "/WEB-INF/pages/admin/createCategory.jsp";
+    public static final String PAGE_UPDATE_CATEGORY = "/WEB-INF/pages/admin/updateCategory.jsp";
     public static final String PAGE_PRODUCTS_ADMIN = "/WEB-INF/pages/admin/productsAdmin.jsp";
-    public static final String PAGE_UPDATE_PRODUCT = "/WEB-INF/pages/admin/updateProdAdmin.jsp";
-    public static final String PAGE_CREATE_PRODUCT = "/WEB-INF/pages/admin/creatProdAdmin.jsp";
+    public static final String PAGE_UPDATE_PRODUCT = "/WEB-INF/pages/admin/updateProduct.jsp";
+    public static final String PAGE_CREATE_PRODUCT = "/WEB-INF/pages/admin/createProduct.jsp";
     public static final String PAGE_ORDERS_ADMIN = "/WEB-INF/pages/admin/ordersAdmin.jsp";
     public static final String PAGE_ORDER_DETAIL = "/WEB-INF/pages/admin/updateOrderAdmin.jsp";
     public static final String PAGE_USER_DETAIL = "/WEB-INF/pages/admin/adminUser.jsp";

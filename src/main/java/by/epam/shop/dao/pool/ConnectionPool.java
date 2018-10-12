@@ -86,6 +86,7 @@ public class ConnectionPool {
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+            Thread.interrupted();
             throw new ConnectionPoolException(e);
         }
     }

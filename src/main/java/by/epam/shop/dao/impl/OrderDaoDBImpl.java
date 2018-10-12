@@ -101,6 +101,7 @@ public class OrderDaoDBImpl extends AbstractDao<Order> implements OrderDao {
                 throw new DaoException(e);
             } finally {
                 connection.setAutoCommit(true);
+                connection.close();
             }
         } catch (SQLException e) {
             throw new DaoException(e);

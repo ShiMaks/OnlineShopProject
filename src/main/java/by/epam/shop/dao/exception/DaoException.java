@@ -9,7 +9,7 @@ import by.epam.shop.service.exception.ServiceException;
  *         Exception class created specifically to describe the exceptional
  *         situation arises in the DAO layer application.
  */
-public class DaoException extends ServiceException {
+public class DaoException extends RuntimeException {
 
     public  DaoException(){
         super();

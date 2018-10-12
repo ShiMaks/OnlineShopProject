@@ -9,7 +9,7 @@ import by.epam.shop.web.exception.CommandException;
  *         Exception class created specifically to describe the exceptional
  *         situation arises in the service layer application.
  */
-public class ServiceException extends CommandException {
+public class ServiceException extends RuntimeException {
 
     public ServiceException() {
         super();
